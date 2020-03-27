@@ -1,0 +1,78 @@
+/* pages/details/wdyhq/wdyhq.wxss */
+.swiper-tab {
+  width: 100%;
+  line-height: 80rpx;
+  background: #fff;
+}
+
+.swiper-tab-list {
+  font-size: 32rpx;
+  display: inline-block;
+  width: 33.33%;
+  color: #9b9b9b;
+  text-align: center;
+}
+
+.on {
+  color: #E10004;
+  font-weight:bold;
+  height: 70rpx; 
+  border-bottom: 6rpx solid#E10004;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.box{
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+}
+.box image.bg{
+  width: 100%;
+}
+.preferential{
+  position: absolute;
+  left: 6%;
+  top:21%;
+  display: flex;
+  width: 90%;
+}
+.preferent{
+  color: #fff;
+}
+.preferent_title{
+  font-size: 36rpx;
+  display: block;
+}
+.preferent_type{
+  font-size:24rpx;
+}
+.box image.logo{
+  width: 100rpx;
+}
+.price{
+  color: #fff;
+  font-size: 28rpx;
+}
+.num{
+  font-size: 48rpx;
+  margin-right: 8rpx;
+}
+.time_box{
+  position: absolute;
+  left: 6%;
+  top:69%;
+  display: flex;
+  width: 84%;
+  font-size:24rpx;
+  color: #232323;
+  justify-content: space-between;
+}
+.use{
+  color: #FE4861;
+
+}

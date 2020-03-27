@@ -1,0 +1,43 @@
+<!--pages/dhzt/dhzt.wxml-->
+<view class="title">
+  <view class="top">
+    <view class="img">
+      <image src="/img/public/logo.png" mode="widthFix"></image>
+    </view>
+    <view class="message">
+      <text class="name">
+      紫薇花园州每一天店
+    </text>
+      <view class="qhdz_box">
+        <text class="qhdz">取货地址：</text>
+        <text class="address">陕西省西安市雁塔区小寨街道财富大厦201室</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="phone" style="background:{{color}}">
+    <image src="/img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
+    <text>团长：李自强</text>
+  </view>
+</view>
+<i-load-more tip="附近提货点" loading="{{ false }}" />
+<view class="box">
+  <view class="list">
+    <view class="img_box">
+      <image src="{{col=='0'?'/img/public/yingye.png':'/img/public/xiuxi.png'}}" mode="widthFix"></image>
+      <text>营业中</text>
+    </view>
+    <text class="dm_name">城市星钻超市</text>
+    <text class="address_detail">西安市雁塔区凤城九路陕西省,咸阳市,秦都区,渭滨街道杨家小学对面      </text>
+    <text class="distance">21km</text>
+  </view>
+  <view class="list">
+    <view class="img_box">
+      <image src="{{col=='1'?'/img/public/yingye.png':'/img/public/xiuxi.png'}}" mode="widthFix"></image>
+      <text>营业中</text>
+    </view>
+    <text class="dm_name">城市星钻超市</text>
+    <text class="address_detail">西安市雁塔区凤城九路陕西省,咸阳市,秦都区,渭滨街道杨家小学对面      </text>
+    <text class="distance">21km</text>
+  </view>
+</view>

@@ -1,0 +1,51 @@
+<!--pages/details/wdye/wdye.wxml-->
+<view class="bg_box">
+  <image src="/img/details/wdye_bg.png" mode="widthFix"></image>
+  <view class="assets">我的资产：￥185.95</view>
+  <view class="withdrawal">
+      <view class="ktx bot">
+        <text class="money">100</text>
+        <text>可提现(元)</text>
+      </view>
+      <view class="line"></view>
+      <view class="ktx">
+        <text class="money">100</text>
+        <text>可提现(元)</text>
+      </view>
+  </view>
+</view>
+<view class="button">
+  <view class="top-up" style="background:{{color}}">充值</view>
+  <view class="top-up tx">提现</view>
+</view>
+<view class="list_box">
+  <view class="list">
+    <view class="left">
+      <text class="ddh">订单号：8994004840004</text>
+      <text class="mon">+100.00</text>
+      <!-- <text class="mon">-100.00</text> -->
+      <text class="date">2020-02-14 14:30:35</text>
+    </view>
+    <view class="right">充值</view>
+  </view>
+  <view class="list">
+    <view class="left">
+      <text class="ddh">订单号：8994004840004</text>
+      <text class="mon">+100.00</text>
+      <!-- <text class="mon">-100.00</text> -->
+      <text class="date">2020-02-14 14:30:35</text>
+    </view>
+    <view class="right xf">消费</view>
+  </view>
+  <view class="list">
+    <view class="left">
+      <text class="ddh">订单号：8994004840004</text>
+      <text class="mon">+100.00</text>
+      <!-- <text class="mon">-100.00</text> -->
+      <text class="date">2020-02-14 14:30:35</text>
+    </view>
+    <!-- <view class="right">充值</view> -->
+    <view class="right tk">退款</view>
+    <!-- <view class="right xf">充值</view> -->
+  </view>
+</view>

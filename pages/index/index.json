@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "mp-searchbar": "../../module/searchbar/searchbar",
+    "i-notice-bar": "../../dist/notice-bar/index"
+  },
+  "navigationBarTitleText": "UI组件库"
 }
