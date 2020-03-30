@@ -1,2 +1,160 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<!-- 头部 -->
+<view class="head_box">
+  <image src="/img/my/my_bg.png" mode="widthFix"></image>
+  <view class="head">
+    <view class="head_pic">
+        <image src="/img/pic/head.png" mode="widthFix"></image>
+    </view>
+    <view class="grxx">
+      <text class="name">安安</text>
+      <text class="phone">15209098989</text>
+    </view>
+  </view>
+</view>
+<view class="section1 order_box">
+  <view class="wd">
+    <view class="my_order">我的订单</view>
+    <view class="all">
+      <text class="all_order">全部订单</text>
+      <image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+    </view>
+  </view>
+  <view class="icon_box">
+    <i-grid>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/1.png" />
+        </i-grid-icon>
+        <i-grid-label>待付款</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/2.png" />
+        </i-grid-icon>
+        <i-grid-label>备货中</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/3.png" />
+        </i-grid-icon>
+        <i-grid-label>配送中</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/5.png" />
+        </i-grid-icon>
+        <i-grid-label>待提货</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/4.png" />
+        </i-grid-icon>
+        <i-grid-label>已完成</i-grid-label>
+      </i-grid-item>
+    </i-grid>
+  </view>
+</view>
+<!-- 第二部分 -->
+<view class="section2 order_box">
+  <view class="icon_box">
+    <i-grid>
+      <navigator url="/pages/details/dhzt/dhzt">
+        <i-grid-item>
+          <i-grid-icon>
+            <image src="/img/my/a1.png" />
+          </i-grid-icon>
+          <i-grid-label>我的优惠券</i-grid-label>
+        </i-grid-item>
+      </navigator>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a2.png" />
+        </i-grid-icon>
+        <i-grid-label>我的余额</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a3.png" />
+        </i-grid-icon>
+        <i-grid-label>我要充值</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a4.png" />
+        </i-grid-icon>
+        <i-grid-label>收货地址</i-grid-label>
+      </i-grid-item>
+    </i-grid>
+  </view>
+  <view class="icon_box">
+    <i-grid>
+      <navigator url="/pages/details/dhzt/dhzt">
+        <i-grid-item>
+          <i-grid-icon>
+            <image src="/img/my/a5.png" />
+          </i-grid-icon>
+          <i-grid-label>切换提货点</i-grid-label>
+        </i-grid-item>
+      </navigator>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a6.png" />
+        </i-grid-icon>
+        <i-grid-label>积分商城</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a7.png" />
+        </i-grid-icon>
+        <i-grid-label>客服中心</i-grid-label>
+      </i-grid-item>
+      <i-grid-item>
+        <i-grid-icon>
+          <image src="/img/my/a8.png" />
+        </i-grid-icon>
+        <i-grid-label>系统设置</i-grid-label>
+      </i-grid-item>
+
+    </i-grid>
+  </view>
+</view>
+<!-- 第三部分 -->
+<view class="section3 order_box">
+  <view class="wd">
+    <view class="my_order">
+      <image src="/img/my/b1.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
+      <text>团长申请</text>
+    </view>
+    <view class="all">
+      <image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+    </view>
+  </view>
+  <view class="wd">
+    <view class="my_order">
+      <image src="/img/my/b2.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
+      <text>商家入驻</text>
+    </view>
+    <view class="all">
+      <image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+    </view>
+  </view>
+  <view class="wd">
+    <view class="my_order">
+      <image src="/img/my/b3.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
+      <text>供货商申请</text>
+    </view>
+    <view class="all">
+      <image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+    </view>
+  </view>
+  <view class="wd">
+    <view class="my_order">
+      <image src="/img/my/b4.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
+      <text>加盟商合作</text>
+    </view>
+    <view class="all">
+      <image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+    </view>
+  </view>
+</view>

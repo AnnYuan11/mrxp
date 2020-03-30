@@ -1,0 +1,29 @@
+<!--pages/details/address_list/addressList.wxml-->
+<view class="address_box">
+  <text class="address">陕西省西安市未央区汉城街道凤城八路运动公园号楼16楼</text>
+  <view class="contact">
+    <text class="name">梁浩洲</text>
+    <text class="phone">18291826695</text>
+  </view>
+  <view class="Setup">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <radio class="radio"  value="默认地址" checked="{{checked}}">
+        <text>默认地址</text>
+      </radio>
+    </radio-group>
+    <view class="set">
+      <view class="edit">
+        <image src="/img/details/address_edit.png" mode="widthFix"></image>
+        <text>编辑</text>
+      </view>
+      <view class="edit">
+        <image src="/img/details/address_del.png" mode="widthFix"></image>
+        <text>删除</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="add">
+  <image src="/img/details/address_add.png" mode="widthFix"></image>
+  <text>新增收货地址</text>
+</view>

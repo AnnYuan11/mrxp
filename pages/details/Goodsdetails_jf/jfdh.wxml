@@ -1,0 +1,31 @@
+<!--pages/details/Goodsdetails_jf/jfdh.wxml-->
+<view class="img_goods">
+  <image src="/img/pic/1.png"></image>
+</view>
+<view class="goods_introduce">
+  <image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
+  <view class="price_box">
+    <text class="font_xl">800积分兑换</text>
+    <text style="text-decoration: line-through;">￥32.58</text>
+  </view>
+  <view class="top_right">
+    <text class="font">2月28日</text>
+    <text class="font_sm">到店自取</text>
+  </view>
+  <view class="info_top">
+    <view class="title_info">
+      美珍香迷你金钱烧烤猪肉200g+迷你休闲烧烤猪肉200g小吃零食美食
+    </view>
+    <view class="gys_box">
+      <image src="/img/details/gys.png" mode="widthFix"></image>
+      <text>供应商：渭南宝鑫陇有限公司</text>
+    </view>
+  </view>
+</view>
+<view class="goods_xq">
+  <view class="spxq">商品详情</view>
+  <view class="img_box">
+    <image src="/img/pic/1.png"></image>
+  </view>
+</view>
+<view class="ljdh" style="background:{{color}}">立即兑换</view>

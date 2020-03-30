@@ -1,12 +1,11 @@
-// pages/dhzt/dhzt.js
+// pages/details/Integral/Integral.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    color: getApp().globalData.color,
-    col:0
+
   },
 
   /**

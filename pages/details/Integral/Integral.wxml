@@ -1,0 +1,39 @@
+<!--pages/details/Integral/Integral.wxml-->
+<view class="box">
+  <view class="goods">
+    <image src="/img/pic/1.png"></image>
+    <view class="introduce">
+      <text>原液补水内肤爽肤水保湿补水</text>
+      <text class="price">800积分兑换</text>
+    </view>
+  </view>
+  <view class="goods">
+    <image src="/img/pic/1.png"></image>
+    <view class="introduce">
+      <text>原液补水内肤爽肤水保湿补水</text>
+      <text class="price">800积分兑换</text>
+    </view>
+  </view>
+  <view class="goods">
+    <image src="/img/pic/1.png"></image>
+    <view class="introduce">
+      <text>原液补水内肤爽肤水保湿补水</text>
+      <text class="price">800积分兑换</text>
+    </view>
+  </view>
+   <view class="goods">
+    <image src="/img/pic/1.png"></image>
+    <view class="introduce">
+      <text>原液补水内肤爽肤水保湿补水</text>
+      <text class="price">800积分兑换</text>
+    </view>
+  </view>
+   <view class="goods">
+    <image src="/img/pic/1.png"></image>
+    <view class="introduce">
+      <text>原液补水内肤爽肤水保湿补水</text>
+      <text class="price">800积分兑换</text>
+    </view>
+  </view>
+  
+</view>

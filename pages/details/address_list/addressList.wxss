@@ -1,0 +1,100 @@
+/* pages/details/address_list/addressList.wxss */
+
+.address_box {
+  width: 92%;
+  height: 260rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  padding: 20rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.address {
+  font-size: 28rpx;
+  color: rgba(51, 51, 51, 1);
+}
+
+.contact {
+  margin-top: 10rpx;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 20rpx;
+}
+
+.contact text {
+  font-size: 28rpx;
+  color: rgba(155, 155, 155, 1);
+}
+
+.Setup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.set {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  margin-left: 20rpx;
+}
+
+.edit image {
+  width: 40rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.edit text {
+  font-size: 28rpx;
+  color: rgba(180, 180, 180, 1);
+}
+
+radio-group text {
+  font-size: 28rpx;
+  color: #e10004;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border-color: #f0302f !important;
+  background: #f0302f !important;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.add{
+  width:92%;
+  height:90rpx;
+  line-height: 90rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+  border-radius:2px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20rpx;
+}
+.add image {
+  width: 46rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}

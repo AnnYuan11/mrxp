@@ -1,1 +1,84 @@
 /* pages/my/my.wxss */
+/* 头部 */
+.head_box{
+  width: 100%;
+  position: relative;
+}
+.head_box image{
+  width: 100%;
+}
+.head{
+  position: absolute;
+  top:18%;
+  left: 32rpx;
+  display: flex;
+}
+.head_pic{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+.grxx{
+  color: #fff;
+  line-height: 65rpx;
+  margin-left: 20rpx;
+}
+.grxx text{
+  display: block;
+  font-size: 24rpx;
+}
+.grxx .name{
+  font-size: 30rpx;
+  font-weight:bold;
+}
+.order_box{
+  width: 90%;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 6rpx 20rpx rgba(0,0,0,0.16);
+  border-radius:20rpx;
+  padding: 24rpx 32rpx;
+  box-sizing: border-box;
+  margin:0 auto;
+}
+.section1{
+  margin-top: -20%;
+  position: relative;
+  z-index: 999;
+}
+.wd{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #E2E2E2;
+  padding-bottom: 24rpx;
+}
+.my_order{
+  font-size:32rpx;
+  font-weight:bold;
+  color:rgba(35,35,35,1);
+}
+.all_order{
+  font-size:24rpx;
+  color:rgba(144,144,144,1);
+}
+.icon_box{
+  padding: 32rpx 0 0 0;
+  box-sizing: border-box;
+}
+/* 第二部分 */
+.section2{
+  margin: 32rpx auto;
+}
+.section3 .my_order text{
+  font-size: 28rpx;
+  font-weight: 400;
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+.section3 .wd{
+  border-bottom: 1px solid #E2E2E2;
+  padding: 24rpx 0;
+  box-sizing: border-box;
+}
+.section3 .wd:last-child{
+  border:0px;
+}

@@ -1,0 +1,87 @@
+/* pages/details/chongzhi/chongzhi.wxss */
+.input_box{
+  width:92%;
+  height:100rpx;
+  line-height: 100rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 6rpx 20rpx rgba(0,0,0,0.16);
+  border-radius:20rpx;
+  margin: 32rpx auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+.input_box text{
+  font-size:28rpx;
+  color:rgba(144,144,144,1);
+}
+.tuo_up{
+  font-size:40rpx;
+  font-weight:bold;
+  color:rgba(225,0,4,1); 
+  height: 100rpx;
+  line-height: 115rpx;
+  display: inline-block;
+  width: 70%;
+  text-align: right;
+}
+.rules{
+  text-align: center;
+}
+.rules image{
+  width: 100%;
+}
+.rule{
+  font-size: 24rpx;
+  color: #fff;
+  position: absolute;
+  top: 18%;
+  left: 0;
+  z-index: 9999;
+  right: 0;
+
+}
+.amount{
+  width:92%;
+  height:180rpx;
+  margin:0 auto;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 10px rgba(0,0,0,0.16);
+  opacity:1;
+  border-radius:0 0 20rpx 20rpx;
+  margin-top: -7%;
+  display: flex;
+  justify-content: space-between;
+  padding: 44rpx 0 0 0;
+  box-sizing: border-box;
+}
+.cont{
+  font-size:40rpx;
+  font-weight:bold;
+  color:rgba(225,0,4,1);
+  line-height: 50rpx;
+  width: 33%;
+}
+.cont .ksy{
+  display: block;
+  font-size:22rpx;
+  color:rgba(144,144,144,1);
+  font-weight:400;
+}
+.line{
+  width: 1px;
+  height: 80rpx;
+  background: #E2E2E2;
+}
+.sure{
+  width:92%;
+  height:100rpx;
+  background:rgba(225,0,4,1);
+  box-shadow:0px 3px 10px rgba(225,0,4,0.15);
+  border-radius:50rpx;
+  margin:96rpx auto;
+  color: #fff;
+  text-align: center;
+  line-height: 100rpx;
+}

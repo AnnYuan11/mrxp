@@ -1,12 +1,18 @@
 {
   "pages": [
+    "pages/details/Goodsdetails_jf/jfdh",
+    "pages/details/Goodsdetails/details",
+    "pages/details/order_details/order_details",
+    "pages/details/Integral/Integral",
+    "pages/my/my",
+    "pages/details/address_list/addressList",
+    "pages/details/chongzhi/chongzhi",
+    "pages/details/dhzt/dhzt",
     "pages/details/wdye/wdye",
     "pages/index/index",
     "pages/details/wdyhq/wdyhq",
-    "pages/dhzt/dhzt",
     "pages/shop/shop",
-    "pages/classify/classify",
-    "pages/my/my"
+    "pages/classify/classify"
   ],
   "window": {
     "backgroundTextStyle": "light",

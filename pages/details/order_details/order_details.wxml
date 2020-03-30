@@ -1,0 +1,106 @@
+<!--pages/details/order_details/order_details.wxml-->
+<view class="section_box">
+  <view class="section">
+    <view class="type">到店自提</view>
+    <view class="type kd" wx:if="{{kd}}">快递到家</view>
+    <view class="message_kd">
+      <view class="top">
+        <view class="img">
+          <image src="/img/public/logo.png" mode="widthFix"></image>
+        </view>
+        <view class="message">
+          <text class="name">紫薇花园州每一天店</text>
+          <view class="qhdz_box">
+            <text class="phone">15229398888</text>
+          </view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="address">地 址：陕西省西安市未央区凤城十路海荣名城店</view>
+        <view class="thr">提货人：历二年 13245678989</view>
+      </view>
+    </view>
+  </view>
+  <view class="section section2">
+    <view class="order_num">
+      <text> 订单号：20031013403642018</text>
+      <text> 2020-02-13 13:12</text>
+    </view>
+    <view class="order">
+      <view class="img">
+        <image src="/img/pic/1.png"></image>
+      </view>
+      <view class="mess">
+        <text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
+        <view class="price">
+          <text class="jg">￥16.5</text>
+          <text class="num">×3</text>
+        </view>
+      </view>
+    </view>
+    <view class="order">
+      <view class="img">
+        <image src="/img/pic/1.png"></image>
+      </view>
+      <view class="mess">
+        <text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
+        <view class="price">
+          <text class="jg">￥16.5</text>
+          <text class="num">×3</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="section section2">
+    <view class="yhq yhqs">
+      <view class="left">
+        <image src="/img/details/dd1.png" mode="widthFix"></image>
+        <text>优惠券</text>
+      </view>
+      <view class="right">
+        <text>选择优惠券</text>
+        <image src="/img/public/right.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="yhq">
+      <view class="left">
+        <image src="/img/details/dd2.png" mode="widthFix"></image>
+        <text>满减优惠</text>
+      </view>
+      <view class="right">
+        <text class="pri">优惠￥32.45</text>
+      </view>
+    </view>
+  </view>
+  <!-- 支付 -->
+  <view class="section section2">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <view class="payType">
+        <view class="wechat">
+          <image src="/img/details/dd3.png" mode="widthFix"></image>
+          <radio class="radio" value="0" checked="checked">
+            <text>微信支付</text>
+          </radio>
+        </view>
+        <view class="wechat">
+          <image src="/img/details/dd4.png" mode="widthFix"></image>
+          <radio class="radio" value="0" checked="checked">
+            <text>余额支付</text>
+          </radio>
+        </view>
+      </view>
+    </radio-group>
+    <view class="instructions">
+      <text>1. 如果您在购物过程中有任何问题，请直接与购买的门店联系！</text>
+      <text>2. 如果您在平台使用中有任何疑问，可致电每日鲜品热线电话4003008000</text>
+    </view>
+  </view>
+</view>
+<!-- 底部 -->
+<view class="Tbottom">
+  <view class="jine">
+    <text class="sf">实付：￥25.67</text>
+    <text class="hj">(合计￥36.78)</text>
+  </view>
+  <view class="sub">提交订单</view>
+</view>

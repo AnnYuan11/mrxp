@@ -1,0 +1,32 @@
+/* pages/details/Integral/Integral.wxss */
+page{
+  background: #E3381F;
+}
+.box{
+  overflow: hidden;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+.goods{
+  width: 48%;
+  background:rgba(255,255,255,1);
+  border-radius:20rpx;
+  padding: 50rpx 32rpx 30rpx 32rpx;
+  box-sizing: border-box;
+  float: left;
+  margin-bottom: 32rpx;
+}
+.goods:nth-child(even){
+ float: right;
+}
+.goods image{
+  height: 264rpx;
+  width: 100%;
+}
+.introduce text{
+  font-size:28rpx;
+}
+.price{
+  display: block;
+  color: #E10004;
+}

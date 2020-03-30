@@ -1,12 +1,11 @@
-// pages/dhzt/dhzt.js
+// pages/details/order_details/order_details.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    color: getApp().globalData.color,
-    col:0
+
   },
 
   /**
