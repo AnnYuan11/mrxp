@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/details/Goodsdetails_jf/jfdh",
-    "pages/details/Goodsdetails/details",
+    "pages/details/order_list/order_list",
+    "pages/shop/shop",
     "pages/details/order_details/order_details",
+    "pages/details/Goodsdetails/details",
+    "pages/details/Goodsdetails_jf/jfdh",
     "pages/details/Integral/Integral",
     "pages/my/my",
     "pages/details/address_list/addressList",
@@ -11,7 +13,6 @@
     "pages/details/wdye/wdye",
     "pages/index/index",
     "pages/details/wdyhq/wdyhq",
-    "pages/shop/shop",
     "pages/classify/classify"
   ],
   "window": {

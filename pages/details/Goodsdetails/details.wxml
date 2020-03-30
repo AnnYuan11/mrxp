@@ -83,23 +83,19 @@
         </scroll-view>
         
     </view>
-    <!-- <swiper current="{{currentTab}}" class="swiper-box" duration="300"style="height:200rpx" bindchange="bindChange">  
-      <swiper-item>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-      </swiper-item>
-      <swiper-item>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-          222
-        </scroll-view>
-      </swiper-item>
-      <swiper-item>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-          333
-        </scroll-view>
-      </swiper-item>
-    </swiper> -->
+</view>
+<!-- 底部 -->
+<view class="bottom">
+<view class="icon_box">
+  <view class="index">
+    <image src="/img/details/sy.png" mode="widthFix"></image>
+    <text>首页</text>
+  </view>
+  <view class="index">
+   <image src="/img/details/gwc.png" mode="widthFix"></image>
+    <text>购物车</text>
+  </view>
+</view>
+  <view class="bot BuyNow">立即购买</view>
+  <view class="bot shoppingCart">加入购物车</view>
 </view>

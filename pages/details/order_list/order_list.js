@@ -1,14 +1,11 @@
-// pages/shop/shop.js
+// pages/details/order_list/order_list.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectAll: false,
-    value1:5,
-    min:1,
-    max:10
+
   },
 
   /**
@@ -65,10 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  handleChange1({ detail }) {
-    this.setData({
-      value1: detail.value
-    })
-  },
+  }
 })
