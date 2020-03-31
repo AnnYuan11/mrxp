@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cc02bee-2600-4ffb-943f-328cd8029315" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/input-number/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/input-number/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/details/Goodsdetails/details.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/Goodsdetails/details.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/details/Goodsdetails/details.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/Goodsdetails/details.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop/shop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shop/shop.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop/shop.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shop/shop.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop/shop.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shop/shop.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop/shop.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/details/order_list/order_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/order_list/order_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/details/order_list/order_list.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/order_list/order_list.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/details/order_list/order_list.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/order_list/order_list.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/details/wdyhq/wdyhq.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/details/wdyhq/wdyhq.wxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,7 +29,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="7" />
     <option name="y" value="200" />
     <option name="width" value="1400" />
@@ -77,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585325228066</updated>
-      <workItem from="1585325231066" duration="1522000" />
+      <workItem from="1585325231066" duration="1530000" />
     </task>
     <task id="LOCAL-00001" summary="20200328">
       <created>1585325377525</created>
@@ -97,10 +93,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1522000" />
+    <option name="totallyTimeSpent" value="1530000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17917548" />
       <window_info anchor="bottom" id="TODO" order="6" />
