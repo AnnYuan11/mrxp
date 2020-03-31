@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    winWidth: 0,
-    winHeight: 0,
+
     currentTab: 0,
   },
 
@@ -18,14 +17,6 @@ Page({
     /**
      * 获取当前设备的宽高
      */
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        });
-      }
-    });
   },
 
   /**
@@ -89,10 +80,4 @@ Page({
     }
   },
 
-  bindChange: function (e) {
-    console.log(e)
-    var that = this;
-    that.setData({ currentTab: e.detail.current });
-
-  }
 })

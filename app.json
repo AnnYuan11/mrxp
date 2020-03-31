@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/details/order_list/order_list",
     "pages/shop/shop",
     "pages/details/order_details/order_details",
@@ -11,15 +12,14 @@
     "pages/details/chongzhi/chongzhi",
     "pages/details/dhzt/dhzt",
     "pages/details/wdye/wdye",
-    "pages/index/index",
     "pages/details/wdyhq/wdyhq",
     "pages/classify/classify"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#E10004",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#C2C2C2",

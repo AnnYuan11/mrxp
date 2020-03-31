@@ -5,16 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current: 'homepage'
+    indicatorDots: true,
+    vertical: false,
+    autoplay: false,
+    duration: 500,
+    background:['/img/pic/1.png','/img/pic/2.png'],
+    content:[
+      {'name':1,'biaoti':'哈哈'},
+      {'name':2,'biaoti':'疫情期间政府防控卫生检查，配送车辆缓慢'}
+    ],
+    currentTab: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      search: this.search.bind(this)
-    })
+    
   },
 
   /**
@@ -37,11 +44,7 @@ Page({
   onHide: function () {
 
   },
-  handleChange({ detail }) {
-    this.setData({
-      current: detail.key
-    });
-  },
+ 
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -70,13 +73,19 @@ Page({
 
   },
   search: function (value) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve([{ text: '搜索结果', value: 1 }, { text: '搜索结果2', value: 2 }])
-      }, 200)
-    })
+   console.log(111)
   },
-  selectResult: function (e) {
-    console.log('select result', e.detail)
+  // 商品切换
+  swichNav: function (e) {
+    var that = this;
+    console.log(e)
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
   },
+ 
 })

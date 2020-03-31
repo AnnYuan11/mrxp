@@ -1,101 +1,101 @@
 <!--pages/details/Goodsdetails/details.wxml-->
 <view class="img_goods">
-  <image src="/img/pic/1.png"></image>
+	<image src="/img/pic/1.png"></image>
 </view>
 <view class="goods_introduce">
-  <image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
-  <view class="price_box">￥
-    <text class="font_xl">25.3</text>
-    <text style="text-decoration: line-through;">￥32.58</text>
-  </view>
-  <view class="top_right">
-    <text class="font">2月28日</text>
-    <text class="font_sm">到店自取</text>
-  </view>
-  <view class="info_top">
-    <view class="title_info">
-      美珍香迷你金钱烧烤猪肉200g+迷你休闲烧烤猪肉200g小吃零食美食
-    </view>
-    <view class="sales">
-      <view class="info_pros">
-        <text>今日已售209</text>
-        <text class="instructions">/限售300件</text>
-      </view>
-      <view class="fans">
-        粉丝：302人
-      </view>
+	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
+	<view class="price_box">￥
+		<text class="font_xl">25.3</text>
+		<text style="text-decoration: line-through;">￥32.58</text>
+	</view>
+	<view class="top_right">
+		<text class="font">2月28日</text>
+		<text class="font_sm">到店自取</text>
+	</view>
+	<view class="info_top">
+		<view class="title_info">
+			美珍香迷你金钱烧烤猪肉200g+迷你休闲烧烤猪肉200g小吃零食美食
+		</view>
+		<view class="sales">
+			<view class="info_pros">
+				<text>今日已售209</text>
+				<text class="instructions">/限售300件</text>
+			</view>
+			<view class="fans">
+				粉丝：302人
+			</view>
 
-    </view>
-    <view class="gys_box">
-      <image src="/img/details/gys.png" mode="widthFix"></image>
-      <text>供应商：渭南宝鑫陇有限公司</text>
-    </view>
-  </view>
+		</view>
+		<view class="gys_box">
+			<image src="/img/details/gys.png" mode="widthFix"></image>
+			<text>供应商：渭南宝鑫陇有限公司</text>
+		</view>
+	</view>
 </view>
 <!-- 供应商资质 -->
 <view class="gyszz_box">
-  <i></i>
-  <text>供应商资质</text>
+	<i></i>
+	<text>供应商资质</text>
 </view>
 <!-- 商品详情 -->
 <view class="details_box">
-   <view class="swiper-tab">
-      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">商品详情</view>
-      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">购买记录</view>
-      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">商品评价</view>
-    </view>
-    <view class="swiper-box" wx:if="{{currentTab=='0'}}">
-       <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-    </view>
-    <view class="swiper-box"wx:if="{{currentTab=='1'}}">
-       
-      
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-    </view>
-    <view class="swiper-box" wx:if="{{currentTab=='2'}}">
-       <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-        <scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-         <view class="img_goods">
-            <image src="/img/pic/1.png"></image>
-          </view>
-        </scroll-view>
-        
-    </view>
+	<view class="swiper-tab">
+		<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">商品详情</view>
+		<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">购买记录</view>
+		<view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">商品评价</view>
+	</view>
+	<view class="swiper-box" wx:if="{{currentTab=='0'}}">
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
+
+
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="swiper-box" wx:if="{{currentTab=='2'}}">
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+			<view class="img_goods">
+				<image src="/img/pic/1.png"></image>
+			</view>
+		</scroll-view>
+
+	</view>
 </view>
 <!-- 底部 -->
 <view class="bottom">
-<view class="icon_box">
-  <view class="index">
-    <image src="/img/details/sy.png" mode="widthFix"></image>
-    <text>首页</text>
-  </view>
-  <view class="index">
-   <image src="/img/details/gwc.png" mode="widthFix"></image>
-    <text>购物车</text>
-  </view>
-</view>
-  <view class="bot BuyNow">立即购买</view>
-  <view class="bot shoppingCart">加入购物车</view>
+	<view class="icon_box">
+		<view class="index">
+			<image src="/img/details/sy.png" mode="widthFix"></image>
+			<text>首页</text>
+		</view>
+		<view class="index">
+			<image src="/img/details/gwc.png" mode="widthFix"></image>
+			<text>购物车</text>
+		</view>
+	</view>
+	<view class="bot BuyNow">立即购买</view>
+	<view class="bot shoppingCart">加入购物车</view>
 </view>
