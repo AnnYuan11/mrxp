@@ -50,19 +50,64 @@
 	<view class="swiperBox">
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
 			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-				<view class="img_goods">
-					<image src="/img/pic/1.png"></image>
+				<view class="list_box">
+					<view class="img_goods">
+						<view class="type">到店自提</view>
+						<image src="/img/pic/1.png"></image>
+					</view>
+					<view class="bottom_box">
+						<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
+						<view class="thsj">
+							<view class="left">
+								<text>提货时间</text>
+								<text class="rq">2月30日</text>
+							</view>
+							<view class="right">
+								<text>今日已售<text class="num">100</text>份</text>
+								<text class="limited">限量3000份</text>
+							</view>
+						</view>
+						<view class="price_box">
+							<view class="price">
+								<text>￥32.99</text>
+								<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
+							</view>
+							<view class="jrgec">加入购物车</view>
+						</view>
+
+					</view>
 				</view>
-			</scroll-view>
-			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-				<view class="img_goods">
-					<image src="/img/pic/1.png"></image>
+			<!-- 视频 -->
+				<view class="list_box">
+					<view class="img_goods">
+						<view class="type">到店自提</view>
+						 <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"  object-fit="cover" poster="https://tyy16888.com/pages/index/assets/images/loop/banner1.jpg"controls></video>
+					</view>
+					<view class="bottom_box">
+						<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
+						<view class="thsj">
+							<view class="left">
+								<text>提货时间</text>
+								<text class="rq">2月30日</text>
+							</view>
+							<view class="right">
+								<text>今日已售<text class="num">100</text>份</text>
+								<text class="limited">限量3000份</text>
+							</view>
+						</view>
+						<view class="price_box">
+							<view class="price">
+								<text>￥32.99</text>
+								<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
+							</view>
+							<view class="jrgec">加入购物车</view>
+						</view>
+
+					</view>
 				</view>
 			</scroll-view>
 		</view>
 		<view class="swiper_box" wx:if="{{currentTab=='1'}}">
-
-
 			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
 				<view class="img_goods">
 					<image src="/img/pic/1.png"></image>

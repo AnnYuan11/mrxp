@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/details/selectAddress/selectAddress",
+    "pages/sjrz/sjrz",
     "pages/index/index",
     "pages/details/order_list/order_list",
     "pages/shop/shop",

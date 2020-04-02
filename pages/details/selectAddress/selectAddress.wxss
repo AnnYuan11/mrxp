@@ -1,0 +1,29 @@
+/* pages/selectAddress.wxss */
+.section{
+  width: 92%;
+  background: #fff;
+  margin:0 auto;
+  padding:30rpx 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  font-size:28rpx;
+  color:rgba(51,51,51,1);
+  margin-top: 32rpx;
+}
+.section picker{
+  width: 75%;
+}
+.input{
+  width: 75%;
+}
+.sub{
+  width: 92%;
+  height:80rpx;
+  line-height: 56rpx;
+  border-radius:40rpx;
+  color: #fff;
+  font-weight: 400;
+  font-size:28rpx;
+  margin: 100rpx auto;
+}
