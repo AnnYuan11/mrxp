@@ -115,6 +115,30 @@
 			</scroll-view>
 		</view>
 	</view>
+</view>
 
-
+<!-- 弹窗 -->
+<view class="flow" wx:if="{{show}}">
+	<view class="img_box">
+		<image src="/img/details/1.png" mode="widthFix"></image>
+		<view class="text">
+			<text>恭喜您</text>
+			<text class="preferential">获得一张30元优惠券</text>
+		</view>
+		<view class="yhq">
+			<image src="/img/details/3.png" mode="widthFix"></image>
+			<view class="left">
+				<text>￥</text>
+				<text class="num">30</text>
+			</view>
+			<view class="right">
+				<text class="yhqs">优惠券</text>
+				<text>只限于合作商家</text>
+			</view>
+		</view>
+		<view class="bottom">
+			<image src="/img/details/2.png" mode="widthFix"></image>
+		</view>
+		<view class="sure" bindtap="sure">确定</view>
+	</view>
 </view>

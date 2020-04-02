@@ -1,0 +1,85 @@
+<!--pages/details/orderDetailsck/ddxx.wxml-->
+
+<view class="section">
+	<view class="list">
+		<i></i>
+		<text>收货人：历二年 </text><text class="phone">15233336666</text>
+	</view>
+	<view class="list">
+		<i></i>
+		<text>自提点：紫薇花园每一天店</text>
+	</view>
+	<view class="list">
+		<i></i>
+		<text space="ensp">地  址：陕西省西安市未央区凤城十路海荣名城店</text>
+	</view>
+</view>
+<!-- 第二部分 -->
+<view class="section section2">
+	<view class="order_num">
+		<text> 订单号：20031013403642018</text>
+		<text> 2020-02-13 13:12</text>
+	</view>
+	<view class="order">
+		<view class="img">
+			<image src="/img/pic/1.png"></image>
+		</view>
+		<view class="mess">
+			<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
+			<view class="price">
+				<text class="jg">￥16.5</text>
+				<text class="num">×3</text>
+			</view>
+		</view>
+	</view>
+	<view class="order">
+		<view class="img">
+			<image src="/img/pic/1.png"></image>
+		</view>
+		<view class="mess">
+			<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
+			<view class="price">
+				<text class="jg">￥16.5</text>
+				<text class="num">×3</text>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- 第三部分 -->
+<view class="section">
+  <view class="lis">
+    <text>下单时间：</text>
+    <text class="rig">2020-02-15 15:32</text>
+  </view>
+  <view class="lis">
+    <text>支付时间：</text>
+    <text class="rig">2020-02-15 15:32</text>
+  </view>
+  <view class="lis">
+    <text>提货时间：</text>
+    <text  class="rig">2020-02-15 15:32</text>
+  </view>
+  <view class="lis">
+    <text>提货方式：</text>
+    <text  class="rig">到店自提</text>
+  </view>
+   <view class="lis">
+    <text>物流单号：</text>
+    <text  class="rig">中通89394985904849</text>
+  </view>
+</view>
+<!-- 第四部分 -->
+<view class="section">
+  <view class="lis">
+    <text>应付金额：</text>
+    <text class="rig">￥235.89</text>
+  </view>
+  <view class="lis">
+    <text>优惠券：</text>
+    <text class="rig">10元</text>
+  </view>
+  <view class="lis">
+    <text>实付金额：</text>
+    <text  class="jine">￥225.89</text>
+  </view>
+</view>

@@ -1,0 +1,97 @@
+/* pages/details/orderDetailsck/ddxx.wxss */
+.section{
+  width: 92%;
+  margin: 32rpx auto;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 10px rgba(0,0,0,0.16);
+  border-radius:20rpx;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+.list{
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.list:last-child{
+  margin-bottom: 0;
+}
+.list i{
+  width:18rpx;
+  height:18rpx;
+  background:rgba(255,63,49,1);
+  border-radius:50%;
+  margin-right: 10rpx;
+}
+.list text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1);
+}
+.phone{
+  margin-left: 30rpx;
+}
+/* 第二部分 */
+.section2{
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+.order_num{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #E2E2E2;
+  padding-bottom: 24rpx;
+  box-sizing: border-box;
+}
+
+.order_num text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1); 
+}
+.order{
+  display: flex;
+  margin-top: 24rpx;
+}
+.order .img{
+  width: 140rpx;
+  height: 140rpx;
+}
+.order .img image{
+  width: 100%;
+  height: 100%;
+}
+.mess{
+  margin-left: 20rpx;
+}
+.mess text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1);
+}
+.price{
+  display: flex;
+  justify-content: space-between;
+  margin-top:20rpx;
+}
+.price .jg{
+  font-size:28rpx;
+  color:rgba(225,11,9,1);
+}
+.price .num{
+  font-size:28rpx;
+  color:rgba(35,35,35,1);
+}
+/* 第三部分 */
+.lis{
+  display: flex;
+  justify-content: space-between;
+}
+.lis text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1);
+}
+.lis text.rig{
+  color: #909090;
+  margin-bottom: 20rpx;
+}
+.lis text.jine{
+  color: #E10B09;
+}

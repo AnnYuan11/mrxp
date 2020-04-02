@@ -15,13 +15,19 @@ Page({
       {'name':2,'biaoti':'疫情期间政府防控卫生检查，配送车辆缓慢'}
     ],
     currentTab: 0,
+    show:true//弹窗
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that=this;
+    if(that.data.show==true){
+      wx.hideTabBar({
+        animation: true,
+      })
+    }
   },
 
   /**
@@ -87,5 +93,14 @@ Page({
       })
     }
   },
- 
+//  关闭弹窗
+sure(){
+  var that= this;
+    that.setData({
+      show:false
+    })
+    wx.showTabBar({
+      animation: true,
+    })
+  }
 })

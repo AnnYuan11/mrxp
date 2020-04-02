@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cc02bee-2600-4ffb-943f-328cd8029315" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/details/selectAddress/selectAddress.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/details/selectAddress/selectAddress.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/details/selectAddress/selectAddress.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/details/selectAddress/selectAddress.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/sjrz/sjrz.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/sjrz/sjrz.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/sjrz/sjrz.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/sjrz/sjrz.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sjrz/sjrz.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sjrz/sjrz.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sjrz/sjrz.wxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sjrz/sjrz.wxss" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,7 +30,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="7" />
     <option name="y" value="200" />
     <option name="width" value="1400" />
@@ -82,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585325228066</updated>
-      <workItem from="1585325231066" duration="4661000" />
+      <workItem from="1585325231066" duration="5314000" />
     </task>
     <task id="LOCAL-00001" summary="20200328">
       <created>1585325377525</created>
@@ -112,14 +104,22 @@
       <option name="project" value="LOCAL" />
       <updated>1585645407882</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="20200402">
+      <created>1585791590068</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1585791590068</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4661000" />
+    <option name="totallyTimeSpent" value="5314000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17917548" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -150,6 +150,7 @@
     <MESSAGE value="20200328" />
     <MESSAGE value="20200330" />
     <MESSAGE value="20200331" />
-    <option name="LAST_COMMIT_MESSAGE" value="20200331" />
+    <MESSAGE value="20200402" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200402" />
   </component>
 </project>

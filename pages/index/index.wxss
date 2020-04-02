@@ -262,3 +262,97 @@ swiper image{
 video {
   width: 100%;
 }
+/* 弹窗 */
+.flow{
+  width: 100%;
+  height: 100vh;
+  background:rgba(0,0,0,0.6);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999999;
+}
+.img_box{
+  width: 90%;
+  margin:0 auto;
+  position: relative;
+  margin-top: 23%;
+}
+.img_box image{
+  width: 100%;
+}
+.text{
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
+}
+.text text{
+  color: #fff;
+  font-size: 48rpx;
+  display: block;
+}
+.text text.preferential{
+  font-size: 32rpx;
+}
+.yhq{
+  width: 75%;
+  margin:0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+}
+.yhq image{
+  width: 100%;
+}
+.yhq .left{
+  position: absolute;
+  top: 25%;
+  left: 14%;
+
+}
+.yhq .left text{
+  font-size:24rpx;
+  color:rgba(248,58,54,1);
+}
+.yhq .left text.num{
+  font-size: 48rpx;
+}
+.yhq .right{
+  position: absolute;
+  top: 25%;
+  right: 20%;
+  line-height: 48rpx;
+}
+.yhq .right text{
+  display: block;
+  font-size: 24rpx;
+  color: #919191;
+}
+.yhq .right text.yhqs{
+  font-size: 32rpx;
+  color: #000000;
+}
+.flow .bottom{
+  width: 90%;
+  position: absolute;
+  left: 4%;
+  right:0;
+  bottom: 0;
+}
+.flow .sure{
+  width:340rpx;
+  height:90rpx;
+  line-height: 90rpx;
+  background:linear-gradient(90deg,rgba(255,232,119,1) 0%,rgba(254,225,47,1) 100%);
+  box-shadow:0px 4px 10px rgba(0,0,0,0.16);
+  border-radius:46rpx;
+  text-align: center;
+  font-size:32rpx;
+  color:rgba(0,0,0,1);
+  position: absolute;
+  bottom: 8%;
+  left: 23%;
+}

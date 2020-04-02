@@ -1,0 +1,134 @@
+/* pages/details/orderdetails_jf/jfddxx.wxss */
+.section{
+  width:343px;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 10px rgba(0,0,0,0.16);
+  margin:20rpx auto;
+  border-radius:10px;
+}
+.type{
+  width:150rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background:rgba(255,217,54,1);
+  opacity:0.75;
+  border-radius:10px 0px 13px 0px;
+  color: #fff;
+  font-size:24rpx;
+}
+.kd{
+  background: #08D288;
+}
+.message_kd{
+  padding: 32rpx 26rpx;
+  box-sizing: border-box;
+}
+.top{
+  display: flex;
+  justify-content: space-between;
+}
+.img image{
+  width: 108rpx;
+  margin-top: 5%；
+}
+.message{
+  width: 80%;
+  line-height: 50rpx;
+}
+.message .name{
+  font-size:30rpx;
+  font-weight:bold;
+  color:rgba(35,35,35,1);
+}
+.qhdz_box .phone{
+  color: #909090;
+  font-size: 24rpx;
+}
+.bottom view{
+  font-size:24rpx;
+  color:rgba(35,35,35,1);
+}
+
+/* 订单 */
+.section2{
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+.order_num{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #E2E2E2;
+  padding-bottom: 24rpx;
+  box-sizing: border-box;
+}
+
+.order_num text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1); 
+}
+.order{
+  display: flex;
+  margin-top: 24rpx;
+}
+.order .img{
+  width: 140rpx;
+  height: 140rpx;
+}
+.order .img image{
+  width: 100%;
+  height: 100%;
+}
+.mess{
+  margin-left: 20rpx;
+}
+.mess text{
+  font-size:24rpx;
+  color:rgba(35,35,35,1);
+}
+.price{
+  display: flex;
+  justify-content: space-between;
+  margin-top:20rpx;
+}
+.price .jg{
+  font-size:28rpx;
+  color:rgba(225,11,9,1);
+}
+.price .num{
+  font-size:28rpx;
+  color:rgba(35,35,35,1);
+}
+.instructions text{
+  display: block;
+  font-size: 24rpx;
+  color: #909090;
+}
+/* 底部 */
+.Tbottom{
+  width:100%;
+  height:100rpx;
+  line-height: 100rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 0px 6px rgba(0,0,0,0.16);
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.sub{
+  width:250rpx;
+  height:100rpx;
+  background:rgba(225,0,4,1);
+  text-align: center;
+  color: #fff;
+  line-height: 100rpx;
+}
+.jine text{
+  font-size:24rpx;
+  color:rgba(225,0,4,1);
+  opacity:1;
+}
+.jine text.sf{
+  margin:0 32rpx;
+}
