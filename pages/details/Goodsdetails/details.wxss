@@ -178,3 +178,67 @@ i{
   color:rgba(194,194,194,1);
   display: block;
 }
+/* 购买记录 */
+.gmjl_title{
+  width: 100%;
+  background: #F7F7F7;
+  padding: 16rpx 32rpx;
+  box-sizing: border-box;
+}
+.gmjl_title text{
+  font-size:28rpx;
+  color:rgba(35,35,35,1);
+}
+
+.gmjl_title text.gmjl_num{
+  color: #E10004;
+}
+.gmjl_list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:32rpx 0;
+}
+.gmjl_list image{
+  width: 80rpx;
+  border-radius: 50%;
+}
+.gmjl_mess{
+  width: 70%;
+}
+.gmjl_mess text{
+  display: block;
+  font-size: 24rpx;
+  color: #232323;
+}
+.gmjl_mess text.mz{
+  font-size: 28rpx;
+  color: #9B9B9B;
+}
+.gmjl_shul{
+  font-size:32rpx;
+  color:rgba(35,35,35,1);
+}
+.gmjl_shul text{
+  color: #E10004;
+}
+/* 商品评价 */
+.gmjl_lists{
+  width: 100%;
+}
+.sppj{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sppj .head{
+  width: 80rpx;
+  margin-right: 20rpx;
+}
+.gmjl_lists .phnr{
+ width: 86%;
+ float: right;
+}
+.phnr .imgs_box image{
+  margin:16rpx 9rpx;
+}

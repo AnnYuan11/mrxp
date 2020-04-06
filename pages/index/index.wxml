@@ -50,33 +50,35 @@
 	<view class="swiperBox">
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
 			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-				<view class="list_box">
-					<view class="img_goods">
-						<view class="type">到店自提</view>
-						<image src="/img/pic/1.png"></image>
-					</view>
-					<view class="bottom_box">
-						<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
-						<view class="thsj">
-							<view class="left">
-								<text>提货时间</text>
-								<text class="rq">2月30日</text>
-							</view>
-							<view class="right">
-								<text>今日已售<text class="num">100</text>份</text>
-								<text class="limited">限量3000份</text>
-							</view>
+				<navigator url="/pages/details/Goodsdetails/details" hover-class="none">
+					<view class="list_box">
+						<view class="img_goods">
+							<view class="type">到店自提</view>
+							<image src="/img/pic/1.png"></image>
 						</view>
-						<view class="price_box">
-							<view class="price">
-								<text>￥32.99</text>
-								<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
+						<view class="bottom_box">
+							<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
+							<view class="thsj">
+								<view class="left">
+									<text>提货时间</text>
+									<text class="rq">2月30日</text>
+								</view>
+								<view class="right">
+									<text>今日已售<text class="num">100</text>份</text>
+									<text class="limited">限量3000份</text>
+								</view>
 							</view>
-							<view class="jrgec">加入购物车</view>
-						</view>
+							<view class="price_box">
+								<view class="price">
+									<text>￥32.99</text>
+									<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
+								</view>
+								<view class="jrgec">加入购物车</view>
+							</view>
 
+						</view>
 					</view>
-				</view>
+				</navigator>	
 			<!-- 视频 -->
 				<view class="list_box">
 					<view class="img_goods">

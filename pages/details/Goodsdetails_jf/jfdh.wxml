@@ -28,4 +28,6 @@
     <image src="/img/pic/1.png"></image>
   </view>
 </view>
-<view class="ljdh" style="background:{{color}}">立即兑换</view>
+<navigator url="/pages/details/orderdetails_jf/jfddxx" hover-class="none">
+  <view class="ljdh" style="background:{{color}}">立即兑换</view>
+</navigator>

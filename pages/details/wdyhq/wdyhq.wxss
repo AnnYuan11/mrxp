@@ -39,7 +39,8 @@
   left: 6%;
   top:21%;
   display: flex;
-  width: 90%;
+  width: 86%;
+  justify-content: space-between;
 }
 .preferent{
   color: #fff;

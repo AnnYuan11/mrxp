@@ -23,7 +23,9 @@
     </view>
   </view>
 </view>
-<view class="add">
-  <image src="/img/details/address_add.png" mode="widthFix"></image>
-  <text>新增收货地址</text>
-</view>
+<navigator url="/pages/details/selectAddress/selectAddress"hover-class="none">
+  <view class="add">
+    <image src="/img/details/address_add.png" mode="widthFix"></image>
+    <text>新增收货地址</text>
+  </view>
+</navigator>

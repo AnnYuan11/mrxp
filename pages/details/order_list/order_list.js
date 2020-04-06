@@ -8,13 +8,18 @@ Page({
     winWidth: 0,
     winHeight: 0,
     currentTab: 0,
+    scrollLeft:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that=this;
+    that.setData({
+      currentTab:options.currentTab
+    })
     /**
      * 获取当前设备的宽高
      */
@@ -38,8 +43,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function (options) {
+    
   },
 
   /**
@@ -93,4 +98,10 @@ Page({
     that.setData({ currentTab: e.detail.current });
 
   },
+  // 去评价
+  gopj(e){
+    wx.navigateTo({
+      url: '/pages/details/sppj/sppj',
+    })
+  }
 })

@@ -45,42 +45,76 @@
 		<view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">商品评价</view>
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='0'}}">
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+		<scroll-view scroll-y style="height: 100%">
 			<view class="img_goods">
 				<image src="/img/pic/1.png"></image>
 			</view>
-		</scroll-view>
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			<view class="img_goods">
-				<image src="/img/pic/1.png"></image>
-			</view>
-		</scroll-view>
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
 			<view class="img_goods">
 				<image src="/img/pic/1.png"></image>
 			</view>
 		</scroll-view>
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
-
-
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			<view class="img_goods">
-				<image src="/img/pic/1.png"></image>
+		<scroll-view scroll-y style="height: 100%">
+			<view class="gmjl_title">
+				<text>目前供</text><text class="gmjl_num">100</text><text>人参与购买，商品共销售</text>
+				<text class="gmjl_num">100</text><text>份</text>
+			</view>
+			<view class="gmjl_box">
+				<view class="gmjl_list">
+					<image src="/img/pic/4.png" mode="widthFix"></image>
+					<view class="gmjl_mess">
+						<text class="mz">王XX</text>
+						<text>2020-04-05 12:20:23</text>
+					</view>
+					<view class="gmjl_shul">
+						<text>2</text>份
+					</view>
+				</view>
+				<view class="gmjl_list">
+					<image src="/img/pic/4.png" mode="widthFix"></image>
+					<view class="gmjl_mess">
+						<text class="mz">王XX</text>
+						<text>2020-04-05 12:20:23</text>
+					</view>
+					<view class="gmjl_shul">
+						<text>2</text>份
+					</view>
+				</view>
+				<view class="gmjl_list">
+					<image src="/img/pic/4.png" mode="widthFix"></image>
+					<view class="gmjl_mess">
+						<text class="mz">王XX</text>
+						<text>2020-04-05 12:20:23</text>
+					</view>
+					<view class="gmjl_shul">
+						<text>2</text>份
+					</view>
+				</view>
 			</view>
 		</scroll-view>
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='2'}}">
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			<view class="img_goods">
-				<image src="/img/pic/1.png"></image>
+		<scroll-view scroll-y style="height: 100%">
+			<view class="gmjl_lists">
+				<view class="sppj">
+					<image src="/img/pic/4.png" mode="widthFix" class="head"></image>
+					<view class="gmjl_mess">
+						<text class="mz">王XX</text>
+						<text>2020-04-05 12:20:23</text>
+					</view>
+				</view>
+				<view class="phnr">
+					<text class="cons">很好很好很好很好很好很好很好很好很好很好很好很好</text>
+					<view class="imgs_box">
+						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+					</view>
+				</view>
 			</view>
 		</scroll-view>
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			<view class="img_goods">
-				<image src="/img/pic/1.png"></image>
-			</view>
-		</scroll-view>
+
 
 	</view>
 </view>

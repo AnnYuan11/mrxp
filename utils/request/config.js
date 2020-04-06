@@ -2,5 +2,5 @@ class Config {
     constructor() {
     }
 } 
-Config.baseUrl = "http://172.22.1.49:9992";
+Config.baseUrl = "http://139.155.113.100:8085";
 export { Config };

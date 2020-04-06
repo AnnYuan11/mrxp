@@ -67,6 +67,7 @@ Page({
 
   },
   handleChange1({ detail }) {
+    console.log(detail)
     this.setData({
       value1: detail.value
     })

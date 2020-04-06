@@ -31,6 +31,9 @@
   font-size: 30rpx;
   font-weight:bold;
 }
+.grxx .sq{
+  margin-top: 30rpx;
+}
 .order_box{
   width: 90%;
   background:rgba(255,255,255,1);
@@ -75,9 +78,12 @@
   margin-left: 20rpx;
 }
 .section3 .wd{
-  border-bottom: 1px solid #E2E2E2;
   padding: 24rpx 0;
   box-sizing: border-box;
+  border-bottom: 1px solid #E2E2E2;
+}
+.section3 navigator{
+  border-bottom: 1px solid #E2E2E2;
 }
 .section3 .wd:last-child{
   border:0px;

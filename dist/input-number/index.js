@@ -66,6 +66,7 @@ Component({
         },
 
         handlePlus(e) {
+            console.log(e)
             this.handleChangeStep(e, 'plus');
         },
 

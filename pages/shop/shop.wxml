@@ -29,7 +29,7 @@
             <text class="jg">￥16.5</text>
             <i-panel title="基础用法">
               <view>
-                <i-input-number value="{{ value1 }}" min="1" max="10" bindchange="handleChange1" />
+                <i-input-number value="{{ value1 }}" min="1" max="10" bindchange="handleChange1" data-aa="111"/>
               </view>
             </i-panel>
           </view>
@@ -70,5 +70,7 @@
   <view class="jine">
     <text class="sf">合计：￥25.67</text>
   </view>
-  <view class="sub">去结算</view>
+  <navigator url="/pages/details/order_details/order_details" hover-class="none">
+    <view class="sub">去结算</view>
+  </navigator>
 </view>

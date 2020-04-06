@@ -1,4 +1,6 @@
 // pages/details/wdyhq/wdyhq.js
+import { Base } from "../../../utils/request/base.js";
+var base = new Base();
 Page({
 
   /**
@@ -26,6 +28,7 @@ Page({
         });
       }
     });
+    that.list()
   },
 
   /**
@@ -93,4 +96,24 @@ Page({
     that.setData({ currentTab: e.detail.current });
 
   },
+  // 未使用列表
+  list(){
+    var that=this;
+    var params = {
+      url: '/app/market/listCouponInfo',
+      method: 'POST',
+      data: {
+        couponStatus:0,
+        pageIndex:1,
+        pageSize:10
+      },
+      sCallBack: function (data) {
+          console.log(data)
+         
+      },
+      eCallBack: function () {
+      }
+  }
+  base.request(params);
+  }
 })

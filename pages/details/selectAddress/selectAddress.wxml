@@ -1,4 +1,5 @@
 <!--pages/selectAddress.wxml-->
+<form bindsubmit="sub">
  <view class="section">
     <view class="section__title">收货地址：</view>
     <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
@@ -19,4 +20,5 @@
   <view class="section__title">手机号：</view>
   <input placeholder="请填写手机号" class="input"></input>
 </view>
-<button style="background:{{color}};width:92%" class="sub">保存</button>
+<button style="background:{{color}};width:92%" class="sub" formType="submit">保存</button>
+</form>

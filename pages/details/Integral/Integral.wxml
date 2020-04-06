@@ -1,5 +1,6 @@
 <!--pages/details/Integral/Integral.wxml-->
 <view class="box">
+	<navigator url="/pages/details/Goodsdetails_jf/jfdh" hover-class="none">
   <view class="goods">
     <image src="/img/pic/1.png"></image>
     <view class="introduce">
@@ -7,6 +8,7 @@
       <text class="price">800积分兑换</text>
     </view>
   </view>
+  </navigator>
   <view class="goods">
     <image src="/img/pic/1.png"></image>
     <view class="introduce">
