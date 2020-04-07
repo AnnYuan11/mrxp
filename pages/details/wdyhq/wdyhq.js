@@ -100,12 +100,14 @@ Page({
   list(){
     var that=this;
     var params = {
-      url: '/app/market/listCouponInfo',
+      url: '/app/user/listUserCouponInfo',
       method: 'POST',
       data: {
-        couponStatus:0,
-        pageIndex:1,
-        pageSize:10
+        'couponStatus':0,
+        'pageIndex':1,
+        'pageSize':10,
+        'userInfo.id':111,
+        'type':0
       },
       sCallBack: function (data) {
           console.log(data)

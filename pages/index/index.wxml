@@ -22,7 +22,7 @@
 		<input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
 	</view>
 	<!-- 轮播 -->
-	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}">
+	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:280rpx">
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
 				<image src="{{item}}"></image>

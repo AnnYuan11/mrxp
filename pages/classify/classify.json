@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "mp-vtabs": "../../module/vtabs/index",
-    "mp-vtabs-content": "../../module/vtabs-content/index"
-  }
+  "usingComponents": { },
+  "navigationBarTitleText": "商品分类"
 }

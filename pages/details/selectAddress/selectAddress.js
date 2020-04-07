@@ -68,9 +68,19 @@ Page({
  
   },
   bindMultiPickerChange: function(e) {
-    console.log(e);
+    var that=this;
+    var province= e.detail.value[0]
+    var city= e.detail.value[1]
+    var county= e.detail.value[2]
+    var village= e.detail.value[3]
+    console.log(that.data.multiArray[0][province])
+    console.log(that.data.multiArray[1][city])
+    console.log(that.data.multiArray[2][county])
+    console.log(that.data.multiArray[3][village])
+    
   },
   bindMultiPickerColumnChange: function(e) {
+    console.log(e)
     var move = e.detail;
     var index = move.column;
     var value = move.value;

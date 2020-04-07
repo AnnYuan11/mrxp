@@ -17,5 +17,9 @@ Page({
     page.setData({
       active: id
     });
-  }
+    
+  },
+  search: function (value) {
+    console.log(111)
+   },
  })

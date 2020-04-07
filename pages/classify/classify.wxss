@@ -1,13 +1,39 @@
 /* pages/classify/classify.wxss */
+/* 搜索 */
+.box{
+  background: #fff;
+  padding: 50rpx 0;
+}
+.search_Box{
+  width:90%;
+  background:rgba(243,243,243,1);
+  border-radius:32px;
+  padding: 16rpx 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 auto;
+  
+}
+.search_Box image{
+  width: 34rpx;
+  margin-top: 8rpx;
+}
+.serch{
+  font-size:24rpx;
+  color:rgba(194,194,194,1);
+}
+.search_Box input{
+  margin-left: 20rpx;
+}
+/* 分类 */
 .productNav{
   display: flex;
   flex-direction: row;
-  height: 100vh;
 }
 .left{
   width: 25%;
   font-size: 30rpx;
-  background-color: #f4f4f4;
+  background-color: #F5F5F5;
 }
 .left view{
   text-align: center;
@@ -20,15 +46,54 @@
   font-weight: bold;
   color: #E54847;
 }
-.normal{
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #f2f2f2;
-}
 .right{
   width:75%;
   margin: 0;
 }
 swiper{
-  height: 500px;
+  height:85vh;
 }
-
+.type{
+  background: #fff;
+}
+.all_goods{
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display:flex;
+  justify-content: space-between;
+}
+.all_img image{
+  width: 160rpx;
+}
+.all_details{
+  margin-left: 20rpx;
+}
+.all_details .all_title{
+  font-size:22rpx;
+  color:rgba(35,35,35,1);
+  display: block;
+}
+.all_details .porl{
+  font-size:20rpx;
+  color:rgba(35,35,35,1);
+}
+.all_num{
+  color: #FF6A6C;
+}
+.all_price{
+  margin-top: 10rpx;
+}
+.all_price .xj{
+  font-size:28rpx;
+  color:rgba(225,11,9,1);
+}
+.all_price .yj{
+  font-size:20rpx;
+  color:rgba(35,35,35,1);
+  text-decoration:line-through;
+}
+.all_price image{
+  width: 44rpx;
+  float: right;
+}

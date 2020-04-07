@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/gwc/gwc",
     "pages/classify/classify",
-    "pages/index/index",
     "pages/details/selectAddress/selectAddress",
+    "pages/index/index",
     "pages/details/Goodsdetails/details",
     "pages/my/my",
     "pages/details/sppj/sppj",
@@ -12,7 +13,6 @@
     "pages/details/Goodsdetails_jf/jfdh",
     "pages/details/orderDetailsck/ddxx",
     "pages/details/sjrz/sjrz",
-    "pages/shop/shop",
     "pages/details/order_details/order_details",
     "pages/details/Integral/Integral",
     "pages/details/address_list/addressList",
@@ -39,9 +39,9 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "img/tabbaricon/2_select.png",
+        "selectedIconPath": "img/tabbaricon/222.png",
         "iconPath": "img/tabbaricon/2.png",
-        "pagePath": "pages/shop/shop",
+        "pagePath": "pages/gwc/gwc",
         "text": "购物车"
       },
       {
