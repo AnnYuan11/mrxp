@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    imgUrl: "http://www.jlzn365.com:8585",
+    imgUrl: "http://139.155.113.100:8686/",
     color: '#E10004'
   },
   

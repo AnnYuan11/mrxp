@@ -1,4 +1,8 @@
 // pages/index/index.js
+import { Base } from "../../utils/request/base.js";
+var app = getApp();
+var base = new Base();
+
 Page({
 
   /**
@@ -9,13 +13,11 @@ Page({
     vertical: false,
     autoplay: false,
     duration: 500,
-    background:['/img/pic/1.png','/img/pic/2.png'],
-    content:[
-      {'name':1,'biaoti':'哈哈'},
-      {'name':2,'biaoti':'疫情期间政府防控卫生检查，配送车辆缓慢'}
-    ],
     currentTab: 0,
-    show:true//弹窗
+    show:true,//弹窗
+    imgUrl:app.globalData.imgUrl,
+    pageIndex:1,
+    pageSize:10
   },
 
   /**
@@ -23,11 +25,15 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
+    // tabbar的显示隐藏
     if(that.data.show==true){
       wx.hideTabBar({
         animation: true,
       })
     }
+    that.shopList()//今日售卖列表
+    that.lunbo()//轮播图
+    that.notice()//公告
   },
 
   /**
@@ -41,7 +47,55 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+     var that = this;
+    wx.getSetting({
+      success: (res) => {
+        console.log(res);
+        console.log(res.authSetting['scope.userLocation']);
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
+          wx.showModal({
+            title: '是否授权当前位置',
+            content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+            success: function (res) {
+              console.log(res)
+              if (res.cancel) {
+                wx.showToast({
+                  title: '拒绝授权',
+                  icon: 'none',
+                  duration: 1000
+                })
 
+              } else if (res.confirm) {
+                // debugger
+                wx.openSetting({
+                  success: function (data) {
+                    console.log(data);
+                    if (data.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 5000
+                      })
+                      //再次授权，调用getLocationt的API
+                      that.locations();
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'success',
+                        duration: 5000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.authSetting['scope.userLocation'] == undefined) {//初始化进入
+          that.locations();
+        }
+      }
+    })
+    // that.onLoad()
   },
 
   /**
@@ -78,7 +132,11 @@ Page({
   onShareAppMessage: function () {
 
   },
-  search: function (value) {
+  search: function (e) {
+    var that=this;
+    console.log(e)
+    var className=e.detail.value
+    that.shopList(className)
    console.log(111)
   },
   // 商品切换
@@ -102,5 +160,181 @@ sure(){
     wx.showTabBar({
       animation: true,
     })
+},
+ // 获取日期
+ getDateStr: function(today, addDayCount) {
+  var date;
+  var that=this;
+  if(today) {
+    date = new Date(today);
+  }else{
+    date = new Date();
   }
+  date.setDate(date.getDate() + addDayCount);//获取AddDayCount天后的日期 
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;//获取当前月份的日期 
+    var d = date.getDate();
+    if(m < 10){
+      m = '0' + m;
+    };
+    if(d < 10) {
+      d = '0' + d;
+    };
+    var tomorow=m + "月" + d+"日";
+    console.log(tomorow)
+    that.setData({
+      tomorow:tomorow
+    })
+},
+// 今日售卖列表
+shopList(className){
+  var that = this;
+  var params = {
+    url: '/app/commodity/listCommodityInfo',
+    method: 'POST',
+    data: {
+      'commodityName':className,
+      'pageIndex':1,
+      'pageSize':10
+    },
+    sCallBack: function (data) {
+      var listToday=data.data.result.datas
+      listToday.forEach((item,index) =>{
+        if(item.productInfo.sendType==1){
+          item.productInfo.sendType="到店自提"
+        }else{
+          item.productInfo.sendType="快递到家"
+        }
+        if(item.productInfo.pickDate==1){
+          var date = new Date();
+          item.productInfo.pickDate=date
+        }else if(item.productInfo.pickDate==2){
+          that.getDateStr(null,1)
+          var tomorow=that.data.tomorow
+          item.productInfo.pickDate=tomorow
+        }else{
+          that.getDateStr(null,2)
+          var ht=that.data.tomorow
+          item.productInfo.pickDate=ht
+        }
+        that.setData({
+          listToday:listToday
+        })
+      })
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 今日售卖列表加载
+bindscrolltolower(){
+  var that = this;
+    console.log(that.data.pageIndex)
+    // 显示加载图标
+    wx.showLoading({
+      title: '玩命加载中',
+    })
+    // 页数+1
+    var page = ++that.data.pageIndex;
+    var base = new Base();
+    var params = {
+      url: '/app/commodity/listCommodityInfo',
+      method: 'POST',
+      data: {
+        "pageIndex": page,
+        "pageSize": that.data.pageSize,
+      },
+      sCallBack: function (res) {
+        console.log(res);
+        // 回调函数
+
+        var moment_list = that.data.listToday;
+
+        for (var i = 0; i < res.data.result.datas.length; i++) {
+          moment_list.push(res.data.result.datas[i]);
+        }
+        // 设置数据
+        that.setData({
+          listToday: moment_list
+        })
+        // 隐藏加载框
+        wx.hideLoading();
+      },
+      eCallBack: function () {
+
+      }
+    }
+    base.request(params);
+},
+// 首页轮播图
+lunbo(){
+  var that = this;
+  var params = {
+    url: '/app/findAllBanner',
+    method: 'GET',
+    data: {
+      
+    },
+    sCallBack: function (data) {
+      that.setData({
+        background:data.data.result
+      })
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 首页公告
+notice(){
+  var that = this;
+  var params = {
+    url: '/app/information/listInformationInfo',
+    method: 'POST',
+    data: {
+      'pageIndex':1,
+      'pageSize':10
+    },
+    sCallBack: function (data) {
+      that.setData({
+        content:data.data.result.datas
+      })
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 定位授权
+locations: function () {
+  let that = this;
+  //1、获取当前位置坐标
+  wx.getLocation({
+    type: 'gcj02',
+    success: function (res) {
+      console.log(res);
+      that.setData({
+        latitude:res.latitude,
+        longitude:res.longitude
+      })
+      wx.setStorage({
+        key:"latitude",
+        data:res.latitude
+      });
+      wx.setStorage({
+        key:"longitude",
+        data:res.longitude
+      });
+    }
+  })
+},
+// 选择团长
+selectTZ(){
+  wx.navigateTo({
+    url: '/pages/details/dhzt/dhzt',
+  })
+}
 })

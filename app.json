@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/gwc/gwc",
     "pages/classify/classify",
     "pages/details/selectAddress/selectAddress",
-    "pages/index/index",
     "pages/details/Goodsdetails/details",
     "pages/my/my",
     "pages/details/sppj/sppj",
@@ -19,7 +19,8 @@
     "pages/details/chongzhi/chongzhi",
     "pages/details/dhzt/dhzt",
     "pages/details/wdye/wdye",
-    "pages/details/wdyhq/wdyhq"
+    "pages/details/wdyhq/wdyhq",
+    "pages/details/h/h"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -57,6 +58,11 @@
         "text": "我的 "
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

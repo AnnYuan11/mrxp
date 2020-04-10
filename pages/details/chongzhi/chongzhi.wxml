@@ -1,7 +1,7 @@
 <!--pages/details/chongzhi/chongzhi.wxml-->
 <view class="input_box">
     <text>充值金额</text>
-    <input class="tuo_up"></input>
+    <input class="tuo_up" bindconfirm="chongzhi"></input>
     <text class="yuan">元</text>
 </view>
 <view class="rules">

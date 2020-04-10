@@ -4,7 +4,7 @@
 		<view class="img">
 			<image src="/img/public/logo.png" mode="widthFix"></image>
 		</view>
-		<view class="message">
+		<view class="message" catchtap="selectTZ">
 			<text class="name">紫薇花园州每一天店</text>
 			<view class="qhdz_box">
 				<text class="address">选择团长</text>
@@ -25,17 +25,17 @@
 	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:280rpx">
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
-				<image src="{{item}}"></image>
+				<image src="{{imgUrl}}{{item.photo}}"></image>
 			</swiper-item>
 		</block>
 	</swiper>
 	<!-- 广播 -->
 	<view class='notice'>
-		<image style='width:62rpx;height:62rpx;margin-top:2%' src="/img/details/lb.png"></image>
+		<image style='width:62rpx;height:62rpx;' src="/img/details/lb.png"></image>
 		<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
 			<block wx:for="{{content}}">
 				<swiper-item>
-					<view class="swiper_item">{{item.biaoti}}</view>
+					<view class="swiper_item">{{item.title}}</view>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -49,64 +49,42 @@
 	</view>
 	<view class="swiperBox">
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
-			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-				<navigator url="/pages/details/Goodsdetails/details" hover-class="none">
-					<view class="list_box">
-						<view class="img_goods">
-							<view class="type">到店自提</view>
-							<image src="/img/pic/1.png"></image>
-						</view>
-						<view class="bottom_box">
-							<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
-							<view class="thsj">
-								<view class="left">
-									<text>提货时间</text>
-									<text class="rq">2月30日</text>
-								</view>
-								<view class="right">
-									<text>今日已售<text class="num">100</text>份</text>
-									<text class="limited">限量3000份</text>
-								</view>
+			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
+				<block wx:for="{{listToday}}">
+					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
+						<view class="list_box">
+							<view class="img_goods">
+								<view class="{{item.productInfo.sendType=='到店自提'?'type':'type2'}}">{{item.productInfo.sendType}}</view>
+								<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
+								
+								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 							</view>
-							<view class="price_box">
-								<view class="price">
-									<text>￥32.99</text>
-									<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
+							<view class="bottom_box">
+								<text class="spmc">{{item.productInfo.commodityName}}</text>
+								<view class="thsj">
+									<view class="left">
+										<text>提货时间</text>
+										<text class="rq">{{item.productInfo.pickDate}}</text>
+									</view>
+									<view class="right">
+										<text>今日已售<text class="num">{{item.productInfo.salesNumber}}</text>份</text>
+										<text class="limited">限量{{item.productInfo.totalBuyLimitNumbers}}份</text>
+									</view>
 								</view>
-								<view class="jrgec">加入购物车</view>
-							</view>
+								<view class="price_box">
+									<view class="price">
+										<text>￥{{item.productInfo.price}}</text>
+										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
+									</view>
+									<view class="jrgec">加入购物车</view>
+								</view>
 
-						</view>
-					</view>
-				</navigator>	
-			<!-- 视频 -->
-				<view class="list_box">
-					<view class="img_goods">
-						<view class="type">到店自提</view>
-						 <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"  object-fit="cover" poster="https://tyy16888.com/pages/index/assets/images/loop/banner1.jpg"controls></video>
-					</view>
-					<view class="bottom_box">
-						<text class="spmc">放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵放心早饭玉米粥烧饼套餐好吃不贵</text>
-						<view class="thsj">
-							<view class="left">
-								<text>提货时间</text>
-								<text class="rq">2月30日</text>
-							</view>
-							<view class="right">
-								<text>今日已售<text class="num">100</text>份</text>
-								<text class="limited">限量3000份</text>
 							</view>
 						</view>
-						<view class="price_box">
-							<view class="price">
-								<text>￥32.99</text>
-								<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥45.99</text>
-							</view>
-							<view class="jrgec">加入购物车</view>
-						</view>
-
-					</view>
-				</view>
+					</navigator>	
+				</block>
+	
+			
 			</scroll-view>
 		</view>
 		<view class="swiper_box" wx:if="{{currentTab=='1'}}">

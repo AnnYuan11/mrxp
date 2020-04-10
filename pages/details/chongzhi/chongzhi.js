@@ -1,18 +1,22 @@
 // pages/details/chongzhi/chongzhi.js
+import { Base } from "../../../utils/request/base.js";
+var base = new Base();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    color: getApp().globalData.color
+    color: getApp().globalData.color,
+    col:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this;
+    that.list()//列表
   },
 
   /**
@@ -62,5 +66,29 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  chongzhi(e){
+    console.log(e)
+  },
+  // 充值列表
+list(){
+  var that = this;
+  var params = {
+    url: '/app/order/listRechargeGiveInfo',
+    method: 'POST',
+    data: {
+      'pageIndex':1,
+      'pageSize':10
+    },
+    sCallBack: function (data) {
+      that.setData({
+       
+      })
+      
+    },
+    eCallBack: function () {
+    }
   }
+  base.request(params);
+},
 })

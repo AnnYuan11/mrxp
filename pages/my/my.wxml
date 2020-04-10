@@ -4,15 +4,19 @@
 	<image src="/img/my/my_bg.png" mode="widthFix"></image>
 	<view class="head">
 		<view class="head_pic">
-			<image src="/img/pic/head.png" mode="widthFix" wx:if="{{islogin==1}}"></image>
-			<image src="/img/my/head.png" mode="widthFix" wx:else></image>
+		<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:block;height:130rpx;" wx:if="{{islogin==1}}"></open-data>
+		<image src="/img/my/head.png" mode="widthFix" wx:else></image> 
 		</view>
 		<view class="grxx" wx:if="{{islogin==1}}">
-			<text class="name">安安</text>
-			<text class="phone">15209098989</text>
+			<text class="name"></text>
+			<text class="phone">{{phone}}</text>
 		</view>
 		<view class="grxx" wx:else>
-			<text class="name sq">授权登录</text>
+			<!-- <text class="name sq">授权登录</text> -->
+			  <!-- <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button> -->
+				<button class="name sq" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权登录</button>
 		</view>
 	</view>
 </view>
