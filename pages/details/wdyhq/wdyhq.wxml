@@ -7,51 +7,71 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 40}}px" bindchange="bindChange">
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
-			<view class="box">
-				<view class="preferential">
-					<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
-					<view class="preferent">
-						<text class="preferent_title">十字内优惠券标题</text>
-						<text class="preferent_type">全网通用</text>
+			<block wx:for="{{yhqlist}}">
+				<view class="box">
+					<view class="preferential">
+						<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
+						<view class="preferent">
+							<text class="preferent_title">{{item.couponInfo.name}}</text>
+							<text class="preferent_type">{{item.couponInfo.type}}</text>
+						</view>
+						<view class="price">
+							<text class="num">{{item.couponInfo.money}}</text><text>元</text>
+						</view>
 					</view>
-					<view class="price">
-						<text class="num">10</text><text>元</text>
+					<view class="time_box">
+						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
+						<text class="use">{{item.type}}</text>
 					</view>
+					<image src="/img/details/bg.png" class="bg" mode="widthFix"></image>
 				</view>
-				<view class="time_box">
-					<text class="time">有效期2020-02-10至2020-02-15</text>
-					<text class="use">未使用</text>
-				</view>
-				<image src="/img/details/bg.png" class="bg" mode="widthFix"></image>
-			</view>
-			<view class="box">
-				<view class="preferential">
-					<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
-					<view class="preferent">
-						<text class="preferent_title">十字内优惠券标题</text>
-						<text class="preferent_type">全网通用</text>
-					</view>
-					<view class="price">
-						<text class="num">10</text><text>元</text>
-					</view>
-				</view>
-				<view class="time_box">
-					<text class="time">有效期2020-02-10至2020-02-15</text>
-					<text class="use">未使用</text>
-				</view>
-				<image src="/img/details/bg.png" class="bg" mode="widthFix"></image>
-			</view>
-
+			</block>
 		</scroll-view>
 	</swiper-item>
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			qqqqq
+			<block wx:for="{{yhqysylist}}">
+				<view class="box">
+					<view class="preferential">
+						<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
+						<view class="preferent">
+							<text class="preferent_title">{{item.couponInfo.name}}</text>
+							<text class="preferent_type">{{item.couponInfo.type}}</text>
+						</view>
+						<view class="price">
+							<text class="num">{{item.couponInfo.money}}</text><text>元</text>
+						</view>
+					</view>
+					<view class="time_box">
+						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
+						<text class="use">{{item.type}}</text>
+					</view>
+					<image src="/img/details/bg.png" class="bg" mode="widthFix"></image>
+				</view>
+			</block>
 		</scroll-view>
 	</swiper-item>
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-			111
+		<block wx:for="{{yhqygqlist}}">
+				<view class="box">
+					<view class="preferential">
+						<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
+						<view class="preferent">
+							<text class="preferent_title">{{item.couponInfo.name}}</text>
+							<text class="preferent_type">{{item.couponInfo.type}}</text>
+						</view>
+						<view class="price">
+							<text class="num">{{item.couponInfo.money}}</text><text>元</text>
+						</view>
+					</view>
+					<view class="time_box">
+						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
+						<text class="use">{{item.type}}</text>
+					</view>
+					<image src="/img/details/bg.png" class="bg" mode="widthFix"></image>
+				</view>
+			</block>
 		</scroll-view>
 	</swiper-item>
 

@@ -31,6 +31,7 @@ Page({
         animation: true,
       })
     }
+   
     that.shopList()//今日售卖列表
     that.lunbo()//轮播图
     that.notice()//公告
@@ -95,6 +96,7 @@ Page({
         }
       }
     })
+    that.query()//查询用户切换店铺
     // that.onLoad()
   },
 
@@ -134,10 +136,8 @@ Page({
   },
   search: function (e) {
     var that=this;
-    console.log(e)
     var className=e.detail.value
     that.shopList(className)
-   console.log(111)
   },
   // 商品切换
   swichNav: function (e) {
@@ -181,7 +181,6 @@ sure(){
       d = '0' + d;
     };
     var tomorow=m + "月" + d+"日";
-    console.log(tomorow)
     that.setData({
       tomorow:tomorow
     })
@@ -336,5 +335,28 @@ selectTZ(){
   wx.navigateTo({
     url: '/pages/details/dhzt/dhzt',
   })
-}
+},
+// 查询用户切换店铺
+query(){
+  var that=this;
+  var userId = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/findUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo:{'id':userId}
+    },
+    sCallBack: function (data) {
+      that.setData({
+        defaultztd:data.data.result,
+        shopName:data.data.result.headInfo.shopName
+      })
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+
 })

@@ -154,4 +154,16 @@ Page({
       url: '/pages/details/order_details/order_details',
     })
   },
+  // 首页
+  toIndex(){
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+// 跳转到购物车
+toGwc(){
+  wx.switchTab({
+    url: '/pages/gwc/gwc',
+  })
+},
 })

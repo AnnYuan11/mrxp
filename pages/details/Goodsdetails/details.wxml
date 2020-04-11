@@ -121,11 +121,11 @@
 <!-- 底部 -->
 <view class="bottom">
 	<view class="icon_box">
-		<view class="index">
+		<view class="index" catchtap="toIndex">
 			<image src="/img/details/sy.png" mode="widthFix"></image>
 			<text>首页</text>
 		</view>
-		<view class="index">
+		<view class="index"  catchtap="toGwc">
 			<image src="/img/details/gwc.png" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>

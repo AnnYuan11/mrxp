@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     var that=this;
     that.list()//列表
-    // that.default()
+    that.query()//查询切换点
   },
 
   /**
@@ -134,14 +134,44 @@ default(){
 // 切换自提点
 change(e){
   var that=this;
-  console.log(e)
-  var list=e.currentTarget.dataset.item
-  var address=list.province+list.city+list.area+list.street+list.address
-  that.setData({
-    shopName:list.shopName,
-    address:address,
-    name:list.headName,
-    phone:list.phone
-  })
-}
+  var userId = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/addUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo:{'id':userId},
+      headInfo:{'id':e.currentTarget.dataset.item.id}
+    },
+    sCallBack: function (data) {
+      that.query()
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 查询用户切换店铺
+query(){
+  var that=this;
+  var userId = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/findUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo:{'id':userId}
+    },
+    sCallBack: function (data) {
+      that.setData({
+        defaultztd:data.data.result,
+        
+      })
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+
 })

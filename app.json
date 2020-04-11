@@ -20,7 +20,8 @@
     "pages/details/dhzt/dhzt",
     "pages/details/wdye/wdye",
     "pages/details/wdyhq/wdyhq",
-    "pages/details/h/h"
+    "pages/details/h/h",
+    "pages/details/address_edit/address_edit"
   ],
   "window": {
     "backgroundTextStyle": "light",

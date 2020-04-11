@@ -44,6 +44,7 @@
 }
 .preferent{
   color: #fff;
+  width: 60%;
 }
 .preferent_title{
   font-size: 36rpx;

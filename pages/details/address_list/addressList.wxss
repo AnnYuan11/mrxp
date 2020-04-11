@@ -53,35 +53,6 @@
   font-size: 28rpx;
   color: rgba(180, 180, 180, 1);
 }
-
-radio-group text {
-  font-size: 28rpx;
-  color: #e10004;
-}
-
-radio .wx-radio-input {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-}
-
-radio .wx-radio-input.wx-radio-input-checked {
-  border-color: #f0302f !important;
-  background: #f0302f !important;
-}
-
-radio .wx-radio-input.wx-radio-input-checked::before {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  font-size: 15px;
-  color: #fff;
-  background: transparent;
-  transform: translate(-50%, -50%) scale(1);
-  -webkit-transform: translate(-50%, -50%) scale(1);
-}
 .add{
   width:92%;
   height:90rpx;
@@ -97,4 +68,13 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   width: 46rpx;
   vertical-align: middle;
   margin-right: 10rpx;
+}
+.mordz image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+.mordz{
+  display: flex;
+  align-items: center;
 }

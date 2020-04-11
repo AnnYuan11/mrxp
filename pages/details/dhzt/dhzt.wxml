@@ -1,5 +1,5 @@
 <!--pages/dhzt/dhzt.wxml-->
-<view class="title">
+<view class="title" wx:if="{{defaultztd==''}}">
   <view class="top">
     <view class="img">
       <image src="/img/public/logo.png" mode="widthFix"></image>
@@ -18,6 +18,27 @@
   <view class="phone" style="background:{{color}}">
     <image src="/img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
     <text>团长：{{name}}</text>
+  </view>
+</view>
+<view class="title" wx:else>
+  <view class="top">
+    <view class="img">
+      <image src="/img/public/logo.png" mode="widthFix"></image>
+    </view>
+    <view class="message">
+      <text class="name">
+      {{defaultztd.headInfo.shopName}}
+    </text>
+      <view class="qhdz_box">
+        <text class="qhdz">取货地址：</text>
+        <text class="address">{{defaultztd.headInfo.address}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="phone" style="background:{{color}}">
+    <image src="/img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
+    <text>团长：{{defaultztd.headInfo.headName}}</text>
   </view>
 </view>
 <i-load-more tip="附近提货点" loading="{{ false }}" />

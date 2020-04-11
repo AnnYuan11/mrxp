@@ -29,6 +29,8 @@ Page({
       }
     });
     that.list()
+    that.ygqlist()
+    that.ysylist()
   },
 
   /**
@@ -98,24 +100,149 @@ Page({
   },
   // 未使用列表
   list(){
+    wx.show
     var that=this;
+    var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/user/listUserCouponInfo',
       method: 'POST',
       data: {
-        'couponStatus':0,
+        'couponInfo.type':0,
         'pageIndex':1,
         'pageSize':10,
-        'userInfo.id':111,
-        'type':0
+        'userInfo.id':id,
       },
       sCallBack: function (data) {
-          console.log(data)
+        var yhqlist=data.data.result;
+        yhqlist.forEach(item=>{
+          if(item.couponInfo.type=='0'){
+            item.couponInfo.type='全场通用'
+          }else{
+            item.couponInfo.type='部分可用'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          item.startTime=item.startTime.substring(0,10)
+          item.endTime=item.endTime.substring(0,10)
+        })
+          that.setData({
+            yhqlist:yhqlist
+          })
          
       },
       eCallBack: function () {
       }
   }
   base.request(params);
+  },
+  // 已使用列表
+  ysylist(){
+    wx.show
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/user/listUserCouponInfo',
+      method: 'POST',
+      data: {
+        'couponInfo.type':1,
+        'pageIndex':1,
+        'pageSize':10,
+        'userInfo.id':id,
+      },
+      sCallBack: function (data) {
+        var yhqysylist=data.data.result;
+        yhqysylist.forEach(item=>{
+          if(item.couponInfo.type=='0'){
+            item.couponInfo.type='全场通用'
+          }else{
+            item.couponInfo.type='部分可用'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          item.startTime=item.startTime.substring(0,10)
+          item.endTime=item.endTime.substring(0,10)
+        })
+          that.setData({
+            yhqysylist:yhqysylist
+          })
+         
+      },
+      eCallBack: function () {
+      }
   }
+  base.request(params);
+  },
+  // 已过期列表
+  ygqlist(){
+    wx.show
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/user/listUserCouponInfo',
+      method: 'POST',
+      data: {
+        'couponInfo.type':2,
+        'pageIndex':1,
+        'pageSize':10,
+        'userInfo.id':id,
+      },
+      sCallBack: function (data) {
+        var yhqygqlist=data.data.result;
+        yhqygqlist.forEach(item=>{
+          if(item.couponInfo.type=='0'){
+            item.couponInfo.type='全场通用'
+          }else{
+            item.couponInfo.type='部分可用'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          if(item.type=='0'){
+            item.type='未使用'
+          }else if(item.type=='1'){
+            item.type='已使用'
+          }else{
+            item.type='已过期'
+          }
+          item.startTime=item.startTime.substring(0,10)
+          item.endTime=item.endTime.substring(0,10)
+        })
+          that.setData({
+            yhqygqlist:yhqygqlist
+          })
+         
+      },
+      eCallBack: function () {
+      }
+  }
+  base.request(params);
+  },
 })

@@ -1,4 +1,4 @@
-// pages/selectAddress.js
+// pages/details/address_edit/address_edit.js
 import { Base } from "../../../utils/request/base.js";
 var base = new Base();
 Page({
@@ -18,7 +18,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getSiteData();
+    var that=this;
+    that.setData({
+      addressid:options.id,
+      isDefault:options.isDefault
+    })
+    that.getSiteData();
+    console.log(options)
+    that.showAddress()
   },
  
   /**
@@ -72,6 +79,9 @@ Page({
   bindMultiPickerChange: function(e) {
     console.log(e)
     var that=this;
+    that.setData({
+      address_dz:true
+    })
     var province= e.detail.value[0]
     var city= e.detail.value[1]
     var county= e.detail.value[2]
@@ -190,15 +200,16 @@ Page({
   // 提交接口
   sub(e){
     console.log(e)
+    console.log(e)
     var id = wx.getStorageSync('userId')
     var that=this;
-    if(e.detail.value.selectDZ[0]=="0"){
-      wx.showToast({
-        title: '请选择地址',
-        icon:'none',
-        duration:3000
+    if(that.data.address_dz==false){
+      that.setData({
+        province:that.data.lists.province,
+        city:that.data.lists.city,
+        area:that.data.lists.area,
+        street:that.data.lists.street
       })
-      return;
     }
     if(e.detail.value.address==''){
       wx.showToast({
@@ -235,6 +246,8 @@ Page({
         'address':e.detail.value.address,
         'name':e.detail.value.name,
         'phone':e.detail.value.phone,
+        'id':that.data.addressid,
+        'isDefault':that.data.isDefault,
         userInfo:{'id':id}
       },
       sCallBack: function (data) {
@@ -246,6 +259,29 @@ Page({
             delta: 1
           })
         },2000)
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 回显
+  showAddress(){
+    var that=this;
+    var params = {
+      url: '//app/user/findUserAddressInfo',
+      method: 'GET',
+      data: {
+        'id':that.data.addressid
+      },
+      sCallBack: function (data) {
+       that.setData({
+        lists: data.data.result,
+        address_dz:false
+       })
+          
+        
          
       },
       eCallBack: function () {

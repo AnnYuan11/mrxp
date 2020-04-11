@@ -18,6 +18,7 @@ Page({
   onLoad: function (options) {
     var that=this;
     that.getOpenId()
+    console.log(that.data.islogin)
    if(that.data.islogin=="0"){
        that.login()
    }
@@ -25,6 +26,7 @@ Page({
   getPhoneNumber: function(e) { 
         console.log(e)    
         var that=this;
+        // debugger
        wx.checkSession({
         success: function () { 
         var ency = e.detail.encryptedData;
@@ -34,7 +36,10 @@ Page({
         wx.showToast({
           title: '未授权',
           icon:'none'
-        })        
+        })  
+        that.setData({
+            islogin:0
+        })
         } else {//同意授权
         console.log(sessionk)
         wx.request({
@@ -60,12 +65,12 @@ Page({
             islogin:1
         })
         
-       that.wxlogin()
-        },
-         fail: function (res) {
-            console.log(res); 
-        }
-        })
+        that.wxlogin()
+            },
+            fail: function (res) {
+                console.log(res); 
+            }
+            })
         }
         },
         fail: function () {
@@ -92,7 +97,6 @@ Page({
                 if(data.data.errorCode=="0"){
                     that.setData({
                         phone:data.data.result.phone,
-                        islogin:1
                     })
                 }else{
                     that.setData({
@@ -118,11 +122,12 @@ Page({
                 'openId':that.data.openId
             },
             sCallBack: function (data) {
-             wx.setStorage({
-               data: id,
-               key: data.data.result.id,
-             })
-              
+                console.log(data.data.result.id)
+                wx.setStorage({
+                    key:"userId",
+                    data:data.data.result.id
+                  });
+            
             },
             eCallBack: function () {
             }
@@ -187,6 +192,7 @@ getOpenId: function () {
                 // 发起网络请求
                 wx.request({
                     url: baseUrl + '/app/getOpenId?code=' + res.code,
+                   
                     success: function (data) {
                         console.log(data);
                         that.setData({
@@ -194,7 +200,10 @@ getOpenId: function () {
                           sessionId:data.data.result.sessionKey,
                         //   islogin:1
                         })
-                       
+                        wx.setStorage({
+                            key:"sessionId",
+                            data:that.data.sessionId
+                          });
                     },
                     fail: function (data) {
                         console.log(data);
