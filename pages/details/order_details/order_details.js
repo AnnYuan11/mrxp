@@ -53,6 +53,7 @@ Page({
   onShow: function () {
     var that=this;
     if(that.data.options.sendType=="到店自提"){
+      that.orderMoney()
       that.list()//团长地址
       var aa=wx.getStorageSync('aa')
       if(aa=='0'){
@@ -206,6 +207,13 @@ Page({
   // 订单金额查询
   orderMoney(){
     var that = this;
+    if(that.data.mrdz==''){
+      wx.showToast({
+        title: '请选择地址',
+        icon:'none',
+      })
+      return
+    }
     var userId=wx.getStorageSync('userId')
     var ddid=that.data.ddid;
     var sendType
@@ -219,6 +227,13 @@ Page({
     }else{
       sendType='2'
     }
+    console.log(that.data.ztdid)
+    if(that.data.ztdid){
+      var ztdid=that.data.ztdid
+    }else{
+      var ztdid=that.data.ztdid2
+    }
+    
     console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
@@ -229,13 +244,17 @@ Page({
       }],
       "orderType":"1",
       "userInfo":{
-        "id":userId
+        "id":userId//用户id
       },
       "userAddressInfo":{
-        "id":that.data.dzid
+        "id":that.data.dzid//地址id
       },
       "userCouponInfo":{
-        "id":that.data.yhqid
+        "id":that.data.yhqid//优惠券id
+      },
+      "orderSendType":sendType,//配送方式
+      "headInfo":{
+        "id":ztdid//自提点id
       }
     }
     console.log(JSON.stringify(arg))
@@ -386,7 +405,8 @@ query(){
         that.setData({
          shopName:list[0].shopName,
          phones:list[0].phone,
-         ztdid2:list[0].id
+         ztdid2:list[0].id,
+         addressth:list[0].address
         })
         
       },
@@ -409,7 +429,8 @@ query(){
         that.setData({
           shopName:list.shopName,
           phones:list.phone,
-          ztdid2:list.id
+          ztdid2:list.id,
+          addressth:list.address
         })
         
       },

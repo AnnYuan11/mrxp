@@ -17,7 +17,8 @@
         </view>
       </view>
       <view class="bottom">
-        <view class="address">地 址：{{defaultztd.headInfo.address}}</view>
+        <view class="address" wx:if="{{defaultztd!=''}}">地 址：{{addressth}}</view>
+        <view class="address" wx:else>地 址：{{defaultztd.headInfo.address}}</view>
         <view class="thr">提货人：<open-data type="userNickName"></open-data> {{phone}}</view>
       </view>
     </view>

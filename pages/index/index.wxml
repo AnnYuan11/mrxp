@@ -77,7 +77,7 @@
 										<text>￥{{item.productInfo.price}}</text>
 										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
 									</view>
-									<view class="jrgec">加入购物车</view>
+									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.productInfo.sendType}}">加入购物车</view>
 								</view>
 
 							</view>
