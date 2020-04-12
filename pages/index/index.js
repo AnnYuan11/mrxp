@@ -17,7 +17,8 @@ Page({
     show:true,//弹窗
     imgUrl:app.globalData.imgUrl,
     pageIndex:1,
-    pageSize:10
+    pageSize:10,
+    aa:1
   },
 
   /**
@@ -35,6 +36,7 @@ Page({
     that.shopList()//今日售卖列表
     that.lunbo()//轮播图
     that.notice()//公告
+    // that.list()//团长地址
   },
 
   /**
@@ -49,6 +51,7 @@ Page({
    */
   onShow: function () {
      var that = this;
+     that.list()//团长地址
     wx.getSetting({
       success: (res) => {
         console.log(res);
@@ -96,22 +99,33 @@ Page({
         }
       }
     })
-    that.query()//查询用户切换店铺
-    // that.onLoad()
+    // wx.removeStorageSync('aa')
+    var aa=wx.getStorageSync('aa')
+    console.log(aa)
+    if(aa=='0'){
+      that.query()//查询用户切换店铺
+    }else {
+      return
+    }
+   
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+   
   },
  
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var that=this;
+    wx.removeStorage('aa')
+    that.setData({
+      aa:1
+    })
   },
 
   /**
@@ -337,6 +351,7 @@ selectTZ(){
   })
 },
 // 查询用户切换店铺
+
 query(){
   var that=this;
   var userId = wx.getStorageSync('userId')
@@ -358,5 +373,53 @@ query(){
   }
   base.request(params);
 },
-
+  // 团长地址
+  list(){
+    var that = this;
+    var myLat = wx.getStorageSync('latitude');
+    var myLng = wx.getStorageSync('longitude');
+    console.log(myLat)
+    var params = {
+      url: '/app/head/findAllHeadInfoByDistance',
+      method: 'POST',
+      data: {
+        myLat:myLat,
+        myLng:myLng
+      },
+      sCallBack: function (data) {
+        var list= data.data.result;
+        if(list.length==0){
+          that.default()
+        }
+        that.setData({
+         shopName:list[0].shopName,
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 默认自提点
+  default(){
+    var that=this;
+    var params = {
+      url: '/app/head/findHeadInfoProperty',
+      method: 'GET',
+      data: {
+       
+      },
+      sCallBack: function (data) {
+        var list= data.data.result;
+        that.setData({
+          shopName:list.shopName,
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
 })

@@ -150,8 +150,14 @@ Page({
   },
   // 立即购买
   buyNow(){
+    var that=this;
+    // console.log(that.data.list.productInfo.id)
+    var ddid = that.data.list.productInfo.id;
+    var ddpic = that.data.list.productInfo.photo;
+    var ddname = that.data.list.productInfo.commodityName;
+    var ddjg = that.data.list.productInfo.crossedPrice;
     wx.navigateTo({
-      url: '/pages/details/order_details/order_details',
+      url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg,
     })
   },
   // 首页

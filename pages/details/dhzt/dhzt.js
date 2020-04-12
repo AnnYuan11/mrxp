@@ -135,6 +135,10 @@ default(){
 change(e){
   var that=this;
   var userId = wx.getStorageSync('userId')
+  wx.setStorage({
+    data: 0,
+    key: 'aa',
+  })
   var params = {
     url: '/app/user/addUserHeadInfo',
     method: 'POST',
@@ -173,5 +177,12 @@ query(){
   }
   base.request(params);
 },
-
+// 拨打电话
+phone(e){
+  console.log(e)
+  var that=this;
+  wx.makePhoneCall({
+    phoneNumber: e.currentTarget.dataset.phone
+  })
+}
 })

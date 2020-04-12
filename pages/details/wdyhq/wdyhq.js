@@ -17,9 +17,12 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    /**
-     * 获取当前设备的宽高
-     */
+    console.log(options)
+    that.setData({
+      toddxq:options.toddxq,
+      datas:options.datas,
+      options:options
+    })
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -107,7 +110,7 @@ Page({
       url: '/app/user/listUserCouponInfo',
       method: 'POST',
       data: {
-        'couponInfo.type':0,
+        'type':0,
         'pageIndex':1,
         'pageSize':10,
         'userInfo.id':id,
@@ -115,7 +118,7 @@ Page({
       sCallBack: function (data) {
         var yhqlist=data.data.result;
         yhqlist.forEach(item=>{
-          if(item.couponInfo.type=='0'){
+          if(item.couponInfo.type=='1'){
             item.couponInfo.type='全场通用'
           }else{
             item.couponInfo.type='部分可用'
@@ -156,7 +159,7 @@ Page({
       url: '/app/user/listUserCouponInfo',
       method: 'POST',
       data: {
-        'couponInfo.type':1,
+        'type':1,
         'pageIndex':1,
         'pageSize':10,
         'userInfo.id':id,
@@ -205,7 +208,7 @@ Page({
       url: '/app/user/listUserCouponInfo',
       method: 'POST',
       data: {
-        'couponInfo.type':2,
+        'type':2,
         'pageIndex':1,
         'pageSize':10,
         'userInfo.id':id,
@@ -245,4 +248,17 @@ Page({
   }
   base.request(params);
   },
+  // 跳转到订单详情页面
+  Toddxq(e){
+    var that=this;
+    if(that.data.toddxq=="1"){
+      var options=that.data.options
+      wx.redirectTo({
+        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&list='+that.data.datas+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg,
+      })
+    }else{
+      return
+    }
+    
+  }
 })

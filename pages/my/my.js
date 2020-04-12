@@ -204,6 +204,10 @@ getOpenId: function () {
                             key:"sessionId",
                             data:that.data.sessionId
                           });
+                        wx.setStorage({
+                            key:"openId",
+                            data:that.data.openId
+                        });
                     },
                     fail: function (data) {
                         console.log(data);

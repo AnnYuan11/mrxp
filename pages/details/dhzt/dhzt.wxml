@@ -15,7 +15,7 @@
     </view>
   </view>
 
-  <view class="phone" style="background:{{color}}">
+  <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{phone}}">
     <image src="/img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
     <text>团长：{{name}}</text>
   </view>
@@ -36,7 +36,7 @@
     </view>
   </view>
 
-  <view class="phone" style="background:{{color}}">
+  <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{defaultztd.headInfo.phone}}">
     <image src="/img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
     <text>团长：{{defaultztd.headInfo.headName}}</text>
   </view>

@@ -22,43 +22,31 @@
     </view>
   </view>
   <view class="section section2">
-    <view class="order_num">
-      <text> 订单号：20031013403642018</text>
-      <text> 2020-02-13 13:12</text>
-    </view>
+    <!-- <view class="order_num">
+      <text> 订单号：{{money.orderNumber}}</text>
+      <text> {{money.orderTime}}</text>
+    </view> -->
     <view class="order">
       <view class="img">
-        <image src="/img/pic/1.png"></image>
+        <image src="{{imgUrl}}{{options.ddpic}}"></image>
       </view>
       <view class="mess">
-        <text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
+        <text>{{options.ddname}}</text>
         <view class="price">
-          <text class="jg">￥16.5</text>
-          <text class="num">×3</text>
-        </view>
-      </view>
-    </view>
-    <view class="order">
-      <view class="img">
-        <image src="/img/pic/1.png"></image>
-      </view>
-      <view class="mess">
-        <text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
-        <view class="price">
-          <text class="jg">￥16.5</text>
-          <text class="num">×3</text>
+          <text class="jg">￥{{options.ddjg}}</text>
+          <text class="num">×1</text>
         </view>
       </view>
     </view>
   </view>
   <view class="section section2">
-    <view class="yhq yhqs">
+    <view class="yhq yhqs" bindtap="selectYhq">
       <view class="left">
         <image src="/img/details/dd1.png" mode="widthFix"></image>
         <text>优惠券</text>
       </view>
       <view class="right">
-        <text>选择优惠券</text>
+        <text>{{yhqmoney}}</text>
         <image src="/img/public/right.png" mode="widthFix"></image>
       </view>
     </view>
@@ -68,7 +56,7 @@
         <text>满减优惠</text>
       </view>
       <view class="right">
-        <text class="pri">优惠￥32.45</text>
+        <text class="pri">优惠￥{{money.fullReductionInfo.fullMoney}}</text>
       </view>
     </view>
   </view>
@@ -78,13 +66,13 @@
       <view class="payType">
         <view class="wechat">
           <image src="/img/details/dd3.png" mode="widthFix"></image>
-          <radio class="radio" value="0" checked="checked">
+          <radio class="radio" value="2" checked="checked">
             <text>微信支付</text>
           </radio>
         </view>
         <view class="wechat">
           <image src="/img/details/dd4.png" mode="widthFix"></image>
-          <radio class="radio" value="0" checked="checked">
+          <radio class="radio" value="1">
             <text>余额支付</text>
           </radio>
         </view>
@@ -99,8 +87,8 @@
 <!-- 底部 -->
 <view class="Tbottom">
   <view class="jine">
-    <text class="sf">实付：￥25.67</text>
-    <text class="hj">(合计￥36.78)</text>
+    <text class="sf">实付：￥{{money.paymentMoney}}</text>
+    <text class="hj">(合计￥{{money.needMoney}})</text>
   </view>
-  <view class="sub">提交订单</view>
+  <view class="sub" bindtap="pay">提交订单</view>
 </view>

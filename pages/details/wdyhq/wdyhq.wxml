@@ -8,7 +8,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
 			<block wx:for="{{yhqlist}}">
-				<view class="box">
+				<view class="box" bindtap="Toddxq" data-id="{{item.id}}" data-yhqmoney="{{item.couponInfo.money}}">
 					<view class="preferential">
 						<image src="/img/details/logo.png" class="logo" mode="widthFix"></image>
 						<view class="preferent">
