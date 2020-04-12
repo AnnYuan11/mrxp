@@ -14,7 +14,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log(options)
+    var that=this;
+    that.setData({
+      options:options
+    })
   },
 
   /**
@@ -157,5 +161,17 @@ Page({
       }
     }
     base.request(params);
+  },
+  // 跳转到订单详情
+  Toddxq(e){
+    var that=this;
+    if(that.data.options.toddxq=="1"){
+      var options=that.data.options
+      wx.redirectTo({
+        url: '/pages/details/order_details/order_details?dzid='+e.currentTarget.dataset.dzid+'&ddid='+options.ddid+'&yhqmoney='+options.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid,
+      })
+    }else{
+      return
+    }
   }
 })

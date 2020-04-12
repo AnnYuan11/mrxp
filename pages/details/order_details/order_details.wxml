@@ -1,6 +1,6 @@
 <!--pages/details/order_details/order_details.wxml-->
 <view class="section_box">
-  <view class="section">
+  <view class="section" wx:if="{{options.sendType=='到店自提'}}">
     <view class="type">到店自提</view>
     <view class="type kd" wx:if="{{kd}}">快递到家</view>
     <view class="message_kd">
@@ -20,6 +20,16 @@
         <view class="thr">提货人：历二年 13245678989</view>
       </view>
     </view>
+  </view>
+  <view class="section" wx:else bindtap="Todz">
+    <view class="type kd">快递到家</view>
+    <view class="message_kd">
+      <view class="bottom">
+        <view class="address">地 址：{{mrdz.province}}{{mrdz.city}}{{mrdz.area}}{{mrdz.province}}{{mrdz.address}}</view>
+        <view class="thr">收货人：{{mrdz.name}} {{mrdz.phone}}</view>
+      </view>
+    </view>
+    <!-- <view class="message_kd">请选择地址</view> -->
   </view>
   <view class="section section2">
     <!-- <view class="order_num">
@@ -56,7 +66,7 @@
         <text>满减优惠</text>
       </view>
       <view class="right">
-        <text class="pri">优惠￥{{money.fullReductionInfo.fullMoney}}</text>
+        <text class="pri">优惠￥{{yhje}}</text>
       </view>
     </view>
   </view>

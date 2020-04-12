@@ -152,12 +152,13 @@ Page({
   buyNow(){
     var that=this;
     // console.log(that.data.list.productInfo.id)
-    var ddid = that.data.list.productInfo.id;
+    var ddid = that.data.list.id;
     var ddpic = that.data.list.productInfo.photo;
     var ddname = that.data.list.productInfo.commodityName;
     var ddjg = that.data.list.productInfo.crossedPrice;
+    var sendType =that.data.list.productInfo.sendType
     wx.navigateTo({
-      url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg,
+      url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg+'&sendType='+sendType,
     })
   },
   // 首页

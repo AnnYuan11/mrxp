@@ -1,6 +1,6 @@
 <!--pages/details/address_list/addressList.wxml-->
 <block wx:for="{{list}}">
-  <view class="address_box">
+  <view class="address_box" bindtap="Toddxq" data-dzid="{{item.id}}">
     <text class="address">{{item.province}}{{item.city}}{{item.area}}{{item.street}}{{item.address}}</text>
     <view class="contact">
       <text class="name">{{item.name}}</text>

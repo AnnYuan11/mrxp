@@ -20,7 +20,7 @@ Page({
     console.log(options)
     that.setData({
       toddxq:options.toddxq,
-      datas:options.datas,
+      ddid:options.ddid,
       options:options
     })
     wx.getSystemInfo({
@@ -254,7 +254,7 @@ Page({
     if(that.data.toddxq=="1"){
       var options=that.data.options
       wx.redirectTo({
-        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&list='+that.data.datas+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg,
+        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType,
       })
     }else{
       return

@@ -2,23 +2,25 @@
 <!-- 头部 -->
 <view class="head_box">
 	<image src="/img/my/my_bg.png" mode="widthFix"></image>
-	<view class="head">
+	<view class="head" wx:if="{{phone==''}}">
 		<view class="head_pic">
-		<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:block;height:130rpx;" wx:if="{{islogin==1}}"></open-data>
-		<image src="/img/my/head.png" mode="widthFix" wx:else></image> 
+		<image src="/img/my/head.png" mode="widthFix"></image> 
 		</view>
-		<view class="grxx" wx:if="{{islogin==1}}">
-			<text class="name"></text>
+		<navigator url="/pages/login/login"> 
+			<text class="phone">授权登录</text>
+		</navigator>
+	</view>
+	<view class="head" wx:else>
+		<view class="head_pic">
+		<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:block;height:130rpx;"></open-data>
+		</view>
+		<view class="grxx">
+			<open-data type="userNickName"></open-data>
 			<text class="phone">{{phone}}</text>
 		</view>
-		<view class="grxx" wx:else>
-			<!-- <text class="name sq">授权登录</text> -->
-			  <!-- <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-            授权登录
-        </button> -->
-				<button class="name sq" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权登录</button>
-		</view>
+		
 	</view>
+	
 </view>
 <view class="section1 order_box">
 	<view class="wd">

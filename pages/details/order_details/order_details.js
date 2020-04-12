@@ -10,7 +10,8 @@ Page({
   data: {
     imgUrl:app.globalData.imgUrl,
     yhqmoney:'选择优惠券',
-    payType:2//默认微信支付
+    payType:2,//默认微信支付
+    yhje:0
   },
 
   /**
@@ -19,9 +20,15 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that=this;
+    if(options.yhqid=='undefined'){
+      options.yhqid=''
+    }
+    if(options.yhqmoney=='undefined'){
+      options.yhqmoney=''
+    }
     that.setData({
       options:options,
-      datas:options.ddid,//页面详情传入的订单id
+      ddid:options.ddid,//页面详情传入的订单id
       yhqid:options.yhqid,//优惠券id
       yhqmoney:options.yhqmoney//优惠券钱数
     })
@@ -40,8 +47,8 @@ Page({
    */
   onShow: function () {
     var that=this;
+    that.selectDz()//查询用户地址
    
-    that.orderMoney()//查询订单金额
   },
 
   /**
@@ -78,13 +85,49 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 商品信息
+  // 查询用户默认地址
+  selectDz(){
+    var that = this;
+    var userId=wx.getStorageSync('userId')
+    console.log(userId)
+  
+    var arg={
+      "userInfo":{
+        "id":userId
+      },
+    }
+    console.log(JSON.stringify(arg))
+    var params = {
+      url: '/app/user/findUserAddressInfoIsDefault',
+      method: 'POST',
+       
+      data: JSON.stringify(arg),
+      sCallBack: function (data) {
+        console.log(data)
+          that.setData({
+            mrdz:data.data.result,
+            dzid:data.data.result.id
+        })
+        that.orderMoney()//查询订单金额
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 添加商品
   orderMessage(){
     var that = this;
     var userId=wx.getStorageSync('userId')
-    console.log(that.data.datas)
-    var ddid=that.data.datas
+    console.log(that.data.ddid)
+    var ddid=that.data.ddid
     console.log(ddid)
+    if(that.data.options.sendType=="到店自提"){
+      that.data.dzid=''
+    }else if(that.data.options.dzid){
+      that.data.dzid=that.data.options.dzid
+    }
+   
     var arg={
       "commoditySubOrderInfoList":[{
         'commodityNumber':1,
@@ -97,7 +140,7 @@ Page({
         "id":userId//用户id
       },
       "userAddressInfo":{
-        "id":""//地址id
+        "id":that.data.dzid//地址id
       },
       "userCouponInfo":{
         "id":that.data.yhqid//优惠券id
@@ -125,9 +168,13 @@ Page({
   orderMoney(){
     var that = this;
     var userId=wx.getStorageSync('userId')
-    console.log(userId)
-    var ddid=that.data.datas
-    console.log(ddid)
+    var ddid=that.data.ddid
+    if(that.data.options.sendType=="到店自提"){
+      that.data.dzid=''
+    }else if(that.data.options.dzid){
+      that.data.dzid=that.data.options.dzid
+    }
+    console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
         'commodityNumber':1,
@@ -140,7 +187,7 @@ Page({
         "id":userId
       },
       "userAddressInfo":{
-        "id":""
+        "id":that.data.dzid
       },
       "userCouponInfo":{
         "id":that.data.yhqid
@@ -154,8 +201,12 @@ Page({
       data: JSON.stringify(arg),
       sCallBack: function (data) {
         console.log(data)
+        if(data.data.result.fullReductionInfo.fullMoney==''){
+          data.data.result.fullReductionInfo.fullMoney=0
+        }
         that.setData({
-          money:data.data.result
+          money:data.data.result,
+          yhje:data.data.result.fullReductionInfo.fullMoney
         })
         
       },
@@ -227,7 +278,16 @@ radioChange: function (e) {
     var that=this;
     var options=that.data.options
    wx.redirectTo({
-     url:'/pages/details/wdyhq/wdyhq?toddxq=1&datas='+that.data.datas+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg
+     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType
    })
-  }
+  },
+//  跳转到选择地址
+Todz(){
+  var that=this;
+  var options=that.data.options
+  wx.redirectTo({
+    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType
+  })
+},
+  
 })
