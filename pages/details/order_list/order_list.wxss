@@ -95,6 +95,7 @@
 
 .mess {
   margin-left: 20rpx;
+  width: 70%;
 }
 
 .mess text {

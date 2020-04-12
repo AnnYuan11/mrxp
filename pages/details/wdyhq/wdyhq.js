@@ -10,6 +10,12 @@ Page({
     winWidth: 0,
     winHeight: 0,
     currentTab: 0,
+    currentPage: 1,//请求数据的页码
+    size: 10,//每页数据条数
+    totalCount: 0,//总是数据条数
+    pagecount: 0,//总的页数
+
+
   },
 
   /**
@@ -103,7 +109,6 @@ Page({
   },
   // 未使用列表
   list(){
-    wx.show
     var that=this;
     var id = wx.getStorageSync('userId')
     var params = {
@@ -111,12 +116,12 @@ Page({
       method: 'POST',
       data: {
         'type':0,
-        'pageIndex':1,
-        'pageSize':10,
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
         'userInfo.id':id,
       },
       sCallBack: function (data) {
-        var yhqlist=data.data.result;
+         var yhqlist=data.data.result.datas;
         yhqlist.forEach(item=>{
           if(item.couponInfo.type=='1'){
             item.couponInfo.type='全场通用'
@@ -140,10 +145,24 @@ Page({
           item.startTime=item.startTime.substring(0,10)
           item.endTime=item.endTime.substring(0,10)
         })
+       
+        var temlist = that.data.yhqlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
           that.setData({
-            yhqlist:yhqlist
+            currentPage: currentPage,
+            yhqlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
           })
-         
+          console.log(that.data.pagecount)         
       },
       eCallBack: function () {
       }
@@ -165,7 +184,7 @@ Page({
         'userInfo.id':id,
       },
       sCallBack: function (data) {
-        var yhqysylist=data.data.result;
+        var yhqysylist=data.data.result.datas;
         yhqysylist.forEach(item=>{
           if(item.couponInfo.type=='0'){
             item.couponInfo.type='全场通用'
@@ -214,7 +233,7 @@ Page({
         'userInfo.id':id,
       },
       sCallBack: function (data) {
-        var yhqygqlist=data.data.result;
+        var yhqygqlist=data.data.result.datas;
         yhqygqlist.forEach(item=>{
           if(item.couponInfo.type=='0'){
             item.couponInfo.type='全场通用'
@@ -254,11 +273,33 @@ Page({
     if(that.data.toddxq=="1"){
       var options=that.data.options
       wx.redirectTo({
-        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType,
+        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'元'+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+options.dzid,
       })
     }else{
       return
     }
     
+  },
+  // 未使用加载更多
+  bindscrolltolower: function () {
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.list();
+    } else {
+      //没有更多数据
+     this.nomore_showToast();
+    }
+  },
+ 
+     /**
+ * 没有更多数据
+ * */
+  nomore_showToast :function () {
+    wx.showToast({
+      title: '没有更多数据',
+      icon: 'none',
+      duration: 1500,
+      mask: true
+    })
   }
 })

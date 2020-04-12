@@ -8,32 +8,40 @@ App({
     this.getOpenId()
   },
      //获取openID
-getOpenId: function () {
-  var that = this;
-  wx.login({
-      success: function (res) {
-          console.log(res)
-          if (res.code) {
-              // 发起网络请求
-              wx.request({
-                  url: 'http://139.155.113.100:8085/app/getOpenId?code=' + res.code,
-                  success: function (data) {
-                      console.log(data);
-                      wx.setStorage({
-                          key:"sessionId",
-                          data:data.data.result.sessionKey
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+        success: function (res) {
+            console.log(res)
+            if (res.code) {
+                // 发起网络请求
+                wx.request({
+                    url: 'http://139.155.113.100:8085/app/getOpenId?code=' + res.code,
+                    success: function (data) {
+                        console.log(data);
+                        wx.setStorage({
+                            key:"sessionId",
+                            data:data.data.result.sessionKey
+                          });
+                        wx.setStorage({
+                            key:"openId",
+                            data:data.data.result.openId
                         });
-                      wx.setStorage({
-                          key:"openId",
-                          data:data.data.result.openId
-                      });
-                  },
-                  fail: function (data) {
-                      console.log(data);
-                  }
-              })
-          }
-      }
-  })
-},
+                    },
+                    fail: function (data) {
+                        console.log(data);
+                    }
+                })
+            }
+        }
+    })
+  },
+  nomore_showToast :function () {
+    wx.showToast({
+      title: '没有更多数据',
+      icon: 'none',
+      duration: 1500,
+      mask: true
+    })
+  }
 })

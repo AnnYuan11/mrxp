@@ -52,7 +52,7 @@
 		</scroll-view>
 	</swiper-item>
 	<swiper-item>
-		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower3">
 		<block wx:for="{{yhqygqlist}}">
 				<view class="box">
 					<view class="preferential">

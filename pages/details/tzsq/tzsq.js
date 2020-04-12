@@ -1,4 +1,8 @@
 // pages/details/tzsq/tzsq.js
+import WxValidate from '../../../utils/WxValidate'
+import { Base } from "../../../utils/request/base.js";
+var app = getApp();
+var base = new Base();
 Page({
 
   /**
@@ -9,15 +13,20 @@ Page({
     multiArray: [],
     multiIndex: [0, 0, 0, 0],
     chinaData: [],
-    address:'请填写地址'
+    address: '请选择详细地址',
+    supervisorInfo: {
+      phone: ''
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
+    var that = this;
     that.getSiteData()
+    that.initValidate()
+    // console.log(that.WxValidate)
   },
 
   /**
@@ -68,16 +77,27 @@ Page({
   onShareAppMessage: function () {
 
   },
-  bindMultiPickerChange: function(e) {
+  bindMultiPickerChange: function (e) {
     console.log(e);
+    var that = this;
+    var province = e.detail.value[0]
+    var city = e.detail.value[1]
+    var county = e.detail.value[2]
+    var village = e.detail.value[3]
+    that.setData({
+      province: that.data.multiArray[0][province],
+      city: that.data.multiArray[1][city],
+      area: that.data.multiArray[2][county],
+      street: that.data.multiArray[3][village]
+    })
   },
-  bindMultiPickerColumnChange: function(e) {
+  bindMultiPickerColumnChange: function (e) {
     var move = e.detail;
     var index = move.column;
     var value = move.value;
     if (index == 0) {
       this.setData({
-        multiIndex: [value,0,0,0]
+        multiIndex: [value, 0, 0, 0]
       })
       this.getCity();
     }
@@ -93,7 +113,7 @@ Page({
       this.setData({
         "multiIndex[2]": value,
         "multiIndex[3]": 0,
- 
+
       })
       this.getZhen();
     }
@@ -104,13 +124,15 @@ Page({
       this.getZhen();
     }
   },
-  getSiteData: function() {
+  getSiteData: function () {
     var that = this;
     wx.request({
       url: 'http://139.155.113.100:8585/upload/city.json',
-      success: res=> {
-        console.log(res);
+      success: res => {
         var chinaData = res.data;
+        var qxz={'name':"请选择",'children':[{'name':'','children':[{'name':'','children':[{'name':''}]}]}]}
+        chinaData.unshift(qxz)
+        console.log(chinaData)
         this.data.chinaData = chinaData;
         var sheng = []; //  设置省数组
         for(var i = 0; i < chinaData.length; i++) {
@@ -119,11 +141,12 @@ Page({
         this.setData({
           "multiArray[0]": sheng
         })
+        console.log(that.data.multiArray[0][0])
         that.getCity(); // 得到市
       }
     })
   },
-  getCity: function() { //  得到市
+  getCity: function () { //  得到市
     var shengNum = this.data.multiIndex[0];
     var chinaData = this.data.chinaData;
     var cityData = chinaData[shengNum].children;
@@ -132,11 +155,12 @@ Page({
       city.push(cityData[i].name)
     }
     this.setData({
-      "multiArray[1]": city
+      "multiArray[1]": city,
+      // city: city
     })
     this.getXian();
   },
-  getXian: function(e) { //  得到县
+  getXian: function (e) { //  得到县
     var shengNum = this.data.multiIndex[0];
     var cityNum = this.data.multiIndex[1];
     var chinaData = this.data.chinaData;
@@ -146,11 +170,12 @@ Page({
       xian.push(xianData[i].name)
     }
     this.setData({
-      "multiArray[2]": xian
+      "multiArray[2]": xian,
+      // area: xian
     })
     this.getZhen();
   },
-  getZhen: function() { //  得到镇
+  getZhen: function () { //  得到镇
     var shengNum = this.data.multiIndex[0];
     var cityNum = this.data.multiIndex[1];
     var xianNum = this.data.multiIndex[2];
@@ -161,20 +186,129 @@ Page({
       zhen.push(zhenData[i].name)
     }
     this.setData({
-      "multiArray[3]" : zhen
+      "multiArray[3]": zhen,
+      // street: zhen
     })
   },
   getCenterLocation: function () {
-    var that=this;
+    var that = this;
     wx.chooseLocation({
-      success: function(res) {
+      success: function (res) {
         console.log(res)
         that.setData({
           'address': res.address,
         })
-        
+
       }
     })
   },
+  // 信息提示
+  showModal(error) {
+    wx.showModal({
+      content: error.msg,
+      showCancel: false,
+    })
+  },
+  // 提交
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const Deparams = e.detail.value;
+    if (!this.WxValidate.checkForm(Deparams)) {
+      const error = this.WxValidate.errorList[0]
+      this.showModal(error)
+      return false
+    } else {
+      var that = this;
+      var params = {
+        url: '/app/head/addHeadInfo',
+        method: 'POST',
+        data: {
+          'province': that.data.province,
+          'city': that.data.city,
+          'area': that.data.area,
+          'street': that.data.street,
+          'address': e.detail.value.address,
+          'headName': e.detail.value.headName,
+          'phone': e.detail.value.phone,
+          'shopName': e.detail.value.shopName,
+          'supervisorInfo': {
+            'phone': e.detail.value.supervisorInfo
+          }
+        },
+        sCallBack: function (data) {
+          if(data.data.errorCode == 0) {
+            wx.showToast({
+              title: data.data.result
+            })
+            setTimeout(function(){
+              wx.navigateBack({
+                delta: 1
+              })
+            },2000)
+          } else {
+            wx.showToast({
+              title: data.data.errorMsg
+            })
+          }
+        },
+        eCallBack: function () {
+        }
+      }
+      base.request(params);
+    }
+  },
+  // 必填校验
+  initValidate() {
+    // 验证字段的规则
+    const rules = {
+      headName: {
+        required: true,
+      },
+      phone: {
+        required: true,
+        tel: true,
+      },
+      address: {
+        required: true,
+      },
+      shopName: {
+        required: true,
+      },
+      supervisorInfo: {
+        required: true,
+        tel: true,
+      },
+      street: {
+        required: true,
+      }
+    }
 
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      headName: {
+        required: '请填写申请人姓名'
+      },
+      phone: {
+        required: '请填写申请人手机号',
+        tel: '请输入正确的手机号',
+      },
+      address: {
+        required: '请选择团长详细地址',
+      },
+      shopName: {
+        required: '请填写店铺名称',
+      },
+      supervisorInfo: {
+        required: '请填写推荐人的电话',
+        tel: '请输入正确的手机号',
+      },
+      street: {
+        required: '请选择团长地址',
+      }
+    }
+
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
+  },
 })

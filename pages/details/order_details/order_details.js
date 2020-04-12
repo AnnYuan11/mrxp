@@ -20,11 +20,16 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that=this;
+    var phone=wx.getStorageSync('phone')
+    that.setData({
+      phone:phone
+    })
+    console.log(phone)
     if(options.yhqid=='undefined'){
       options.yhqid=''
     }
-    if(options.yhqmoney=='undefined'){
-      options.yhqmoney=''
+    if(options.yhqmoney=='undefined元'){
+      options.yhqmoney='请选择优惠券'
     }
     that.setData({
       options:options,
@@ -47,8 +52,17 @@ Page({
    */
   onShow: function () {
     var that=this;
-    that.selectDz()//查询用户地址
-   
+    if(that.data.options.sendType=="到店自提"){
+      that.list()//团长地址
+      var aa=wx.getStorageSync('aa')
+      if(aa=='0'){
+        that.query()//查询用户切换店铺
+      }else {
+        return
+      }
+    }else{
+      that.selectDz()//查询用户地址
+    }
   },
 
   /**
@@ -89,9 +103,12 @@ Page({
   selectDz(){
     var that = this;
     var userId=wx.getStorageSync('userId')
-    console.log(userId)
-  
+    console.log(that.data.options.dzid)
+    if(that.data.options.dzid==undefined){
+      that.data.options.dzid=''
+    }
     var arg={
+      "id":that.data.options.dzid,
       "userInfo":{
         "id":userId
       },
@@ -103,7 +120,7 @@ Page({
        
       data: JSON.stringify(arg),
       sCallBack: function (data) {
-        console.log(data)
+        console.log(data.data.result)
           that.setData({
             mrdz:data.data.result,
             dzid:data.data.result.id
@@ -118,16 +135,34 @@ Page({
   // 添加商品
   orderMessage(){
     var that = this;
+    if(that.data.mrdz==''){
+      wx.showToast({
+        title: '请选择地址',
+        icon:'none',
+      })
+      return
+    }
     var userId=wx.getStorageSync('userId')
-    console.log(that.data.ddid)
-    var ddid=that.data.ddid
-    console.log(ddid)
+    var ddid=that.data.ddid;
+    var sendType
     if(that.data.options.sendType=="到店自提"){
       that.data.dzid=''
     }else if(that.data.options.dzid){
       that.data.dzid=that.data.options.dzid
     }
-   
+    if(that.data.options.sendType=="到店自提"){
+      sendType='1'
+    }else{
+      sendType='2'
+    }
+    console.log(that.data.ztdid)
+    if(that.data.ztdid){
+      var ztdid=that.data.ztdid
+    }else{
+      var ztdid=that.data.ztdid2
+    }
+    
+    console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
         'commodityNumber':1,
@@ -144,6 +179,10 @@ Page({
       },
       "userCouponInfo":{
         "id":that.data.yhqid//优惠券id
+      },
+      "orderSendType":sendType,//配送方式
+      "headInfo":{
+        "id":ztdid//自提点id
       }
     }
     console.log(JSON.stringify(arg))
@@ -157,7 +196,7 @@ Page({
         that.setData({
           message:data.data.result
         })
-        
+        that.pay()
       },
       eCallBack: function () {
       }
@@ -168,11 +207,17 @@ Page({
   orderMoney(){
     var that = this;
     var userId=wx.getStorageSync('userId')
-    var ddid=that.data.ddid
+    var ddid=that.data.ddid;
+    var sendType
     if(that.data.options.sendType=="到店自提"){
       that.data.dzid=''
     }else if(that.data.options.dzid){
       that.data.dzid=that.data.options.dzid
+    }
+    if(that.data.options.sendType=="到店自提"){
+      sendType='1'
+    }else{
+      sendType='2'
     }
     console.log(that.data.dzid)
     var arg={
@@ -224,12 +269,12 @@ radioChange: function (e) {
   // 支付
   pay(){
     var that = this;
-    that.orderMessage()//商品信息
+    
     var openId=wx.getStorageSync('openId')
     console.log(that.data.message)
     var arg={
       id: that.data.message.id,
-      name:that.data.money.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
+      name:that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
       payType:that.data.payType,
       type:'1',
       openId:openId
@@ -276,9 +321,15 @@ radioChange: function (e) {
   // 选择优惠券跳转
   selectYhq(){
     var that=this;
+    var dzid
     var options=that.data.options
+    if(options.dzid){
+      dzid=options.dzid
+    }else{
+      dzid=that.data.dzid
+    }
    wx.redirectTo({
-     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType
+     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+dzid
    })
   },
 //  跳转到选择地址
@@ -286,8 +337,85 @@ Todz(){
   var that=this;
   var options=that.data.options
   wx.redirectTo({
-    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType
+    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&yhqmoney='+options.sendType.yhqmoney+'元'
   })
 },
-  
+  // 自提点的地址
+  // 查询用户切换店铺
+
+query(){
+  var that=this;
+  var userId = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/findUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo:{'id':userId}
+    },
+    sCallBack: function (data) {
+      that.setData({
+        defaultztd:data.data.result,
+        shopName:data.data.result.headInfo.shopName,
+        ztdid:data.data.result.headInfo.id
+      })
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+  // 团长地址
+  list(){
+    var that = this;
+    var myLat = wx.getStorageSync('latitude');
+    var myLng = wx.getStorageSync('longitude');
+    console.log(myLat)
+    var params = {
+      url: '/app/head/findAllHeadInfoByDistance',
+      method: 'POST',
+      data: {
+        myLat:myLat,
+        myLng:myLng
+      },
+      sCallBack: function (data) {
+        var list= data.data.result;
+        if(list.length==0){
+          that.default()
+        }
+        that.setData({
+         shopName:list[0].shopName,
+         phones:list[0].phone,
+         ztdid2:list[0].id
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 默认自提点
+  default(){
+    var that=this;
+    var params = {
+      url: '/app/head/findHeadInfoProperty',
+      method: 'GET',
+      data: {
+       
+      },
+      sCallBack: function (data) {
+        var list= data.data.result;
+        that.setData({
+          shopName:list.shopName,
+          phones:list.phone,
+          ztdid2:list.id
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
 })

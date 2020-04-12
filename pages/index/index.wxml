@@ -5,8 +5,8 @@
 			<image src="/img/public/logo.png" mode="widthFix"></image>
 		</view>
 		<view class="message" catchtap="selectTZ">
-			<text class="name" wx:if="{{defaultztd==''}}">{{defaultztd.headInfo.shopName}}</text>
-			<text class="name" wx:else>{{shopName}}</text>
+			<text class="name" wx:if="{{defaultztd!=''}}">{{shopName}}</text>
+			<text class="name" wx:else>{{defaultztd.headInfo.shopName}}</text>
 			<view class="qhdz_box">
 				<text class="address">选择团长</text>
 			</view>

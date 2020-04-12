@@ -135,6 +135,7 @@ default(){
 change(e){
   var that=this;
   var userId = wx.getStorageSync('userId')
+  console.log(userId)
   wx.setStorage({
     data: 0,
     key: 'aa',

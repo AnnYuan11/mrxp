@@ -36,7 +36,6 @@ Page({
     that.shopList()//今日售卖列表
     that.lunbo()//轮播图
     that.notice()//公告
-    // that.list()//团长地址
   },
 
   /**
@@ -51,7 +50,7 @@ Page({
    */
   onShow: function () {
      var that = this;
-     that.list()//团长地址
+    
     wx.getSetting({
       success: (res) => {
         console.log(res);
@@ -75,6 +74,7 @@ Page({
                   success: function (data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
+                      
                       wx.showToast({
                         title: '授权成功',
                         icon: 'success',
@@ -99,7 +99,7 @@ Page({
         }
       }
     })
-    // wx.removeStorageSync('aa')
+    that.list()//团长地址
     var aa=wx.getStorageSync('aa')
     console.log(aa)
     if(aa=='0'){
@@ -333,6 +333,7 @@ locations: function () {
         latitude:res.latitude,
         longitude:res.longitude
       })
+     
       wx.setStorage({
         key:"latitude",
         data:res.latitude
@@ -341,6 +342,7 @@ locations: function () {
         key:"longitude",
         data:res.longitude
       });
+      that.list()
     }
   })
 },
@@ -353,6 +355,7 @@ selectTZ(){
 // 查询用户切换店铺
 
 query(){
+  console.log('调用了自提')
   var that=this;
   var userId = wx.getStorageSync('userId')
   var params = {
@@ -362,6 +365,7 @@ query(){
       userInfo:{'id':userId}
     },
     sCallBack: function (data) {
+      console.log(data.data.result)
       that.setData({
         defaultztd:data.data.result,
         shopName:data.data.result.headInfo.shopName
@@ -375,10 +379,10 @@ query(){
 },
   // 团长地址
   list(){
+    console.log('调用了团长')
     var that = this;
     var myLat = wx.getStorageSync('latitude');
     var myLng = wx.getStorageSync('longitude');
-    console.log(myLat)
     var params = {
       url: '/app/head/findAllHeadInfoByDistance',
       method: 'POST',
@@ -403,6 +407,7 @@ query(){
   },
   // 默认自提点
   default(){
+    console.log('调用了默认')
     var that=this;
     var params = {
       url: '/app/head/findHeadInfoProperty',

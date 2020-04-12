@@ -185,8 +185,8 @@ getPhoneNumber: function(e) { 
     
     that.wxlogin()
     setTimeout(function(){
-     wx.switchTab({
-       url: '/pages/my/my',
+     wx.navigateBack({
+       delta:1
      })
      },2000)
         },

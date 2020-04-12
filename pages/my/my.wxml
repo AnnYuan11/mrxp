@@ -6,7 +6,7 @@
 		<view class="head_pic">
 		<image src="/img/my/head.png" mode="widthFix"></image> 
 		</view>
-		<navigator url="/pages/login/login"> 
+		<navigator url="/pages/login/login" style="margin-top: 45rpx;margin-left: 20rpx;color: #fff;"> 
 			<text class="phone">授权登录</text>
 		</navigator>
 	</view>

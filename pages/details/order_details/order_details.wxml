@@ -2,34 +2,36 @@
 <view class="section_box">
   <view class="section" wx:if="{{options.sendType=='到店自提'}}">
     <view class="type">到店自提</view>
-    <view class="type kd" wx:if="{{kd}}">快递到家</view>
     <view class="message_kd">
       <view class="top">
         <view class="img">
           <image src="/img/public/logo.png" mode="widthFix"></image>
         </view>
         <view class="message">
-          <text class="name">紫薇花园州每一天店</text>
+          <text class="name" wx:if="{{defaultztd!=''}}">{{shopName}}</text>
+			    <text class="name" wx:else>{{defaultztd.headInfo.shopName}}</text>
           <view class="qhdz_box">
-            <text class="phone">15229398888</text>
+            <text class="phone"wx:if="{{defaultztd!=''}}">{{phones}}</text>
+            <text class="phone"wx:else>{{defaultztd.headInfo.phone}}</text>
           </view>
         </view>
       </view>
       <view class="bottom">
-        <view class="address">地 址：陕西省西安市未央区凤城十路海荣名城店</view>
-        <view class="thr">提货人：历二年 13245678989</view>
+        <view class="address">地 址：{{defaultztd.headInfo.address}}</view>
+        <view class="thr">提货人：<open-data type="userNickName"></open-data> {{phone}}</view>
       </view>
     </view>
   </view>
   <view class="section" wx:else bindtap="Todz">
     <view class="type kd">快递到家</view>
-    <view class="message_kd">
+    <view class="message_kd" wx:if="{{mrdz!=''}}">
       <view class="bottom">
         <view class="address">地 址：{{mrdz.province}}{{mrdz.city}}{{mrdz.area}}{{mrdz.province}}{{mrdz.address}}</view>
         <view class="thr">收货人：{{mrdz.name}} {{mrdz.phone}}</view>
+        <image src="/img/public/right.png" mode="widthFix" style="width:40rpx;float:right;margin-top: -10%"></image>
       </view>
     </view>
-    <!-- <view class="message_kd">请选择地址</view> -->
+    <view class="message_kd" wx:else>请选择地址</view>
   </view>
   <view class="section section2">
     <!-- <view class="order_num">
@@ -100,5 +102,5 @@
     <text class="sf">实付：￥{{money.paymentMoney}}</text>
     <text class="hj">(合计￥{{money.needMoney}})</text>
   </view>
-  <view class="sub" bindtap="pay">提交订单</view>
+  <view class="sub" bindtap="orderMessage">提交订单</view>
 </view>
