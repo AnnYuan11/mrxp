@@ -114,6 +114,9 @@ Page({
   initValidate() {
     // 验证字段的规则
     const rules = {
+      gysmc:{
+        required: true,
+      },
       name: {
         required: true,
       },
@@ -125,6 +128,9 @@ Page({
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
+      gysmc:{
+        required: '请填写供应商名称',
+      },
       name: {
         required: '请填写申请人姓名'
       },

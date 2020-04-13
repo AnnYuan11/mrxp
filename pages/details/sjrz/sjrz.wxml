@@ -7,6 +7,11 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="sqr">
     <text class="important">*</text>
+    <text>供应商名称</text>
+    <input placeholder="请填写供应商名称" class="input" name="gysmc"></input>
+  </view>
+  <view class="sqr">
+    <text class="important">*</text>
     <text>申请人</text>
     <input placeholder="请填写姓名" class="input" name="name"></input>
   </view>
