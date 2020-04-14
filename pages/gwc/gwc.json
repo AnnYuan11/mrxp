@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "shopList": "/components/shopList/index"
+  },
   "navigationBarTitleText": "购物车"
 }

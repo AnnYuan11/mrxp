@@ -1,62 +1,15 @@
-<!--pages/gwc/gwc.wxml-->
-
-<view class="pages">
-	<view wx:if="{{hasList}}">
-  <view class="box">
-    <view class="top">
-			<view class="all_select">
-				<!-- 全选ICON -->
-				<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='/img/public/select.png'></image>
-				<image wx:else class="total-select" bindtap="selectAll" src='/img/public/sec.png'></image>
-				<!-- 全选标题 -->
-				<text class='sel_count_name'>全选</text>
-			</view>
-			<!-- 编辑 -->
-			<view class='edit'>
-				<label class='edit_btn' bindtap='btn_edit'>{{edit_name}}</label>
-			</view>
-		</view>
-		<!-- 列表 -->
-		<view class="list" wx:for="{{list}}" wx:key="{{index}}">
-			<image class='dele_edit' bindtap='deletes' data-index='{{index}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
-			<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/public/select.png'></image>
-			<image wx:else src='/img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
-			<!-- 列表标题 -->
-			<text class="list_name">{{item.title}}</text>
-			<!-- 列表商品图片 -->
-			<image class="list_img" src="{{item.image}}"></image>
-			<!-- 价格 -->
-			<text class="list_price">￥{{item.price}}</text>
-			<!-- 商品数量加减  style='display:{{show_edit}}'-->
-			<view style='display:{{show_edit}}'>
-				<view class="carts-num">
-					<!--减按钮  -->
-					<lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}">
-						<image src='/img/public/jian.png' style="width:44rpx;height:44rpx"></image>
-					</lable>
-					<!-- 文本框值 -->
-					<label class="view_text_center" bindinput='input_num' data-index="{{index}}">{{item.num}}</label>
-					<!-- 加按钮-->
-					<lable class="plus" bindtap="btn_add" data-index="{{index}}">
-						<image src='/img/public/add.png' style="width:44rpx;height:44rpx"></image>
-					</lable>
-				</view>
-			</view>
-			<!-- 删除 -->
-			<!-- <text class="list_del" bindtap="deleteList" data-index="{{index}}">×</text> -->
-		</view>
-  </view>
-		<!-- 固定底部 -->
-		<view class="cont_bot">
-			<!-- 合计金额 -->
-			<lable class="count_price">合计：<text>￥{{totalPrice}}</text></lable>
-			<!-- 提交订单 -->
-			<label class='submit' bindtap='btn_submit_order'>提交订单</label>
-		</view>
-
-	</view>
-	<view wx:else>
-		<view class="list_none">购物车是空的哦~</view>
-	</view>
-  
+<view>
+    <!-- 选项卡 -->
+    <view class="tabBox">
+        <view class="tabContent {{select == index ?  'activeClass' : ''}}" wx:for="{{tabList}}" wx:key="index" bindtap="selectTab" data-index="{{index}}">
+            {{item}}
+        </view>
+    </view>
+    <!-- 选项卡内容 -->
+    <view class="pickUp" wx:if="{{select == 0}}">
+        <shopList shopping-type="1"></shopList>
+    </view>
+    <view class="courier" wx:else>
+        <shopList shopping-type="2"></shopList>
+    </view>
 </view>

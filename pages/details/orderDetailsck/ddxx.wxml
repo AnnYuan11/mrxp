@@ -51,15 +51,15 @@
 <view class="section">
 	<view class="lis">
 		<text>下单时间：</text>
-		<text class="rig">2020-02-15 15:32</text>
+		<text class="rig">{{item.orderTime}}</text>
 	</view>
 	<view class="lis">
 		<text>支付时间：</text>
-		<text class="rig">2020-02-15 15:32</text>
+		<text class="rig">{{item.paymentTime}}</text>
 	</view>
 	<view class="lis">
 		<text>提货时间：</text>
-		<text  class="rig">2020-02-15 15:32</text>
+		<text  class="rig">{{}}</text>
 	</view>
 	<view class="lis">
 		<text>提货方式：</text>
