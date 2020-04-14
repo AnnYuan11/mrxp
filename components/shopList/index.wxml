@@ -18,7 +18,7 @@
       </view>
       <!-- 列表 -->
       <view class="list" wx:for="{{list}}" wx:key="{{index}}">
-        <image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.commodityInfo.id}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
+        <image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
         <image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/public/select.png'></image>
         <image wx:else src='/img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
         <!-- 列表标题 -->

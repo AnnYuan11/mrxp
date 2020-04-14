@@ -51,15 +51,15 @@
 <view class="section">
 	<view class="lis">
 		<text>下单时间：</text>
-		<text class="rig">{{item.orderTime}}</text>
+		<text class="rig">{{list.orderTime}}</text>
 	</view>
 	<view class="lis">
 		<text>支付时间：</text>
-		<text class="rig">{{item.paymentTime}}</text>
+		<text class="rig">{{list.paymentTime}}</text>
 	</view>
 	<view class="lis">
 		<text>提货时间：</text>
-		<text  class="rig">{{}}</text>
+		<text  class="rig">{{list.pickupTime}}</text>
 	</view>
 	<view class="lis">
 		<text>提货方式：</text>
@@ -67,7 +67,7 @@
 	</view>
 	<view class="lis">
 		<text>物流单号：</text>
-		<text  class="rig">中通89394985904849</text>
+		<text  class="rig">{{list.deliverNam}}{{list.deliverNumber}}</text>
 	</view>
 </view>
 <!-- 第四部分 -->
