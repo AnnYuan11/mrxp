@@ -1,5 +1,5 @@
 <!--pages/details/chongzhi/chongzhi.wxml-->
-<view class="input_box">
+<!-- <view class="input_box">
     <text>充值金额</text>
     <input class="tuo_up" bindconfirm="chongzhi"></input>
     <text class="yuan">元</text>
@@ -23,5 +23,10 @@
       <text class="ksy">优惠赠送(元)</text>
     </view>
   </view>
-</view>
+</view> -->
+<!-- 充值规则 -->
+<view ></view>
+
+
+
 <view class="sure" style="background:{{color}}">确定充值</view>

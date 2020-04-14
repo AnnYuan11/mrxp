@@ -151,7 +151,7 @@ Component({
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
             wx.showToast({
-              title: data.data.result
+              title: data.data.result.datas
             })
             that.getShopList()
             that.count_price()
@@ -356,18 +356,18 @@ Component({
           'pageIndex': that.data.currentPage,
           'pageSize': that.data.size,
           'userInfo.id': id,
-          // 'shoppingType': shoppingType
+          'shoppingCarType': shoppingType
         },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
-            if (data.data.result.length == 0) {
+            if (data.data.result.datas.length == 0) {
               that.setData({
                 hasList: false
               })
               return false;
             }
             that.setData({
-              list: data.data.result, //初始化数据列表
+              list: data.data.result.datas, //初始化数据列表
             })
             if (that.data.list.length != 0) {
               wx.setTabBarBadge({
@@ -457,7 +457,7 @@ Component({
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
             wx.showToast({
-              title: data.data.result
+              title: data.data.result.datas
             })
             that.getShopList()
             that.count_price()
