@@ -93,6 +93,42 @@ Page({
   swichNav: function (e) {
     var that = this;
     console.log(e)
+    if(e.target.dataset.current=='0'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+       that.Allorder()//全部
+     }
+    if(e.target.dataset.current=='1'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+       that.dfkorder()//待付款
+     }
+    else if(e.target.dataset.current=='2'){
+       that.data.currentPage=1,
+       that.data.totalCount= 0,//总是数据条数
+       that.data.pagecount= 0,//总的页数
+       that.bhz()//备货中
+     }
+     else if(e.target.dataset.current=='3'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.psz()//配送中
+    }
+    else if(e.target.dataset.current=='4'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.dth()//待提货
+    }
+    else if(e.target.dataset.current=='5'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.yth()//已提货
+    }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -138,6 +174,8 @@ Page({
             item.orderStatus='待提货'
           }else if(item.orderStatus=='5'){
             item.orderStatus='已收货'
+          }else if(item.orderStatus=='6'){
+            item.orderStatus='已完成'
           }
           item.orderTime=item.orderTime.substring(0,10)
         })
@@ -165,8 +203,8 @@ Page({
       },
       eCallBack: function () {
       }
-  }
-  base.request(params);
+    }
+    base.request(params);
   },
   // 全部订单的加载
   Allqbdd(){
@@ -177,5 +215,476 @@ Page({
       //没有更多数据
       app.nomore_showToast();
     }
+  },
+  // 待付款
+  dfkorder(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'orderStatus':1,
+        'userInfo.id':id,
+      },
+      sCallBack: function (data) {
+         var dfklist=data.data.result.datas;
+         dfklist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.dfklist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            dfklist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 待付款的加载更多
+  dfkmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.dfkorder();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
+  // 备货中
+  bhz(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo.id':id,
+        'orderStatus':2,
+      },
+      sCallBack: function (data) {
+         var bhzlist=data.data.result.datas;
+         bhzlist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.bhzlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            bhzlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 备货中加载更多
+  bhzmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.bhz();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
+  // 配送中
+  psz(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo.id':id,
+        'orderStatus':3,
+      },
+      sCallBack: function (data) {
+         var phzlist=data.data.result.datas;
+         phzlist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.phzlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            phzlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+   // 配送中加载更多
+  pszmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.psz();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
+  // 待提货
+  dth(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo.id':id,
+        'orderStatus':4,
+      },
+      sCallBack: function (data) {
+         var dthlist=data.data.result.datas;
+         dthlist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.dthlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            dthlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 待提货加载更多
+  dthmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.dth();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
+  // 已提货
+  yth(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo.id':id,
+        'orderStatus':5,
+      },
+      sCallBack: function (data) {
+         var ythlist=data.data.result.datas;
+         ythlist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.ythlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            ythlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 已提货加载更多
+  ythmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.yth();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
+  // // 售后中
+  // shz(){
+  //   var that=this;
+  //   var id = wx.getStorageSync('userId')
+  //   var params = {
+  //     url: '/app/order/listCommodityOrderInfo',
+  //     method: 'POST',
+  //     data: {
+  //       'pageIndex':that.data.currentPage,
+  //       'pageSize':that.data.size,
+  //       'userInfo.id':id,
+  //       'isAfterOrder':1,
+  //     },
+  //     sCallBack: function (data) {
+  //        var shzlist=data.data.result.datas;
+  //        shzlist.forEach(item=>{
+  //         if(item.orderStatus=='1'){
+  //           item.orderStatus='待支付'
+  //         }else if(item.orderStatus=='2'){
+  //           item.orderStatus='备货中'
+  //         }else if(item.orderStatus=='3'){
+  //           item.orderStatus='配送中'
+  //         }else if(item.orderStatus=='4'){
+  //           item.orderStatus='待提货'
+  //         }else if(item.orderStatus=='5'){
+  //           item.orderStatus='已提货'
+  //         }
+  //         item.orderTime=item.orderTime.substring(0,10)
+  //       })
+       
+  //       var temlist = that.data.shzlist; //原始的数据集合
+  //       var currentPage = that.data.currentPage; //获取当前页码
+  //       if (currentPage == 1) {
+  //           temlist = data.data.result.datas; //初始化数据列表
+  //           currentPage = 1;
+  //       }
+  //       else {
+  //           temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+  //           // currentPage = currentPage + 1;
+  //         }
+  //         that.setData({
+  //           currentPage: currentPage,
+  //           shzlist: temlist,
+  //           totalCount: data.data.result.rowCount, //总的数据条数
+  //           pagecount: data.data.result.totalPages //总页数
+  //         })
+  //         console.log(that.data.pagecount)
+       
+
+         
+  //     },
+  //     eCallBack: function () {
+  //     }
+  //   }
+  //   base.request(params);
+  // },
+  //  // 售后中加载更多
+  // shzmore(){
+  //   if (this.data.currentPage < this.data.pagecount) {
+  //     this.data.currentPage++;
+  //     this.shz();
+  //   } else {
+  //     //没有更多数据
+  //     app.nomore_showToast();
+  //   }
+  // },
+  // // 已结束
+  // yjs(){
+  //   var that=this;
+  //   var id = wx.getStorageSync('userId')
+  //   var params = {
+  //     url: '/app/order/listCommodityOrderInfo',
+  //     method: 'POST',
+  //     data: {
+  //       'pageIndex':that.data.currentPage,
+  //       'pageSize':that.data.size,
+  //       'userInfo.id':id,
+  //       'orderStatus':6,
+  //     },
+  //     sCallBack: function (data) {
+  //        var yjslist=data.data.result.datas;
+  //        yjslist.forEach(item=>{
+  //         if(item.orderStatus=='1'){
+  //           item.orderStatus='待支付'
+  //         }else if(item.orderStatus=='2'){
+  //           item.orderStatus='备货中'
+  //         }else if(item.orderStatus=='3'){
+  //           item.orderStatus='配送中'
+  //         }else if(item.orderStatus=='4'){
+  //           item.orderStatus='待提货'
+  //         }else if(item.orderStatus=='5'){
+  //           item.orderStatus='已提货'
+  //         }else if(item.orderStatus=='6'){
+  //           item.orderStatus='已结束'
+  //         }
+  //         item.orderTime=item.orderTime.substring(0,10)
+  //       })
+       
+  //       var temlist = that.data.yjslist; //原始的数据集合
+  //       var currentPage = that.data.currentPage; //获取当前页码
+  //       if (currentPage == 1) {
+  //           temlist = data.data.result.datas; //初始化数据列表
+  //           currentPage = 1;
+  //       }
+  //       else {
+  //           temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+  //           // currentPage = currentPage + 1;
+  //         }
+  //         that.setData({
+  //           currentPage: currentPage,
+  //           yjslist: temlist,
+  //           totalCount: data.data.result.rowCount, //总的数据条数
+  //           pagecount: data.data.result.totalPages //总页数
+  //         })
+  //         console.log(that.data.pagecount)
+       
+
+         
+  //     },
+  //     eCallBack: function () {
+  //     }
+  //   }
+  //   base.request(params);
+  // },
+  // // 已结束加载更多
+  // yjsmore(){
+  //   if (this.data.currentPage < this.data.pagecount) {
+  //     this.data.currentPage++;
+  //     this.yjs();
+  //   } else {
+  //     //没有更多数据
+  //     app.nomore_showToast();
+  //   }
+  // },
+  // 跳转到商品详情
+  Todetails(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/details/orderDetailsck/ddxx?id='+e.currentTarget.dataset.id,
+    })
   }
 })

@@ -1,93 +1,26 @@
 <!--pages/details/order_list/order_list.wxml-->
+
 <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-	<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待付款</view>
-	<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">备货中</view>
-	<view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">配送中</view>
-	<view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">待提货</view>
-	<view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">已完成</view>
-	<view class="swiper-tab-list {{currentTab==5 ? 'on' : ''}}" data-current="5" bindtap="swichNav">全部</view>
+	<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>
+	<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">待付款</view>
+	<view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">备货中</view>
+	<view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">配送中</view>
+	<view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">待提货</view>
+	<view class="swiper-tab-list {{currentTab==5 ? 'on' : ''}}" data-current="5" bindtap="swichNav">已提货</view>
+	<!-- <view class="swiper-tab-list {{currentTab==6 ? 'on' : ''}}" data-current="6" bindtap="swichNav">售后中</view>
+	<view class="swiper-tab-list {{currentTab==7 ? 'on' : ''}}" data-current="7" bindtap="swichNav">已结束</view> -->
+
 </scroll-view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 40}}px" bindchange="bindChange">
-	<swiper-item>
-		<scroll-view scroll-y style="height: 100%">
-			<view class="box">
-				<view class="section">
-					<view class="order_num">
-						<text> 团长：紫薇花园州每一天</text>
-						<text class="state">未付款</text>
-					</view>
-					<view class="order-box">
-						<view class="order">
-							<view class="img">
-								<image src="/img/pic/1.png"></image>
-							</view>
-							<view class="mess">
-								<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
-								<view class="price">
-									<text class="jg">￥16.5</text>
-									<text class="num">×3</text>
-								</view>
-							</view>
-						</view>
-						<view class="order">
-							<view class="img">
-								<image src="/img/pic/1.png"></image>
-							</view>
-							<view class="mess">
-								<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
-								<view class="price">
-									<text class="jg">￥16.5</text>
-									<text class="num">×3</text>
-								</view>
-							</view>
-						</view>
-					</view>
-					<view class="order_num">
-						<text>订单号：20031013403642018</text>
-						<text>2020-02-13 13:12</text>
-					</view>
-					<view class="order_num">
-						<view class="combined">
-							<text> 合计：</text>
-							<text class="state">￥123.39</text>
-						</view>
-						<view class="button">
-							<view class="sub">取消订单</view>
-							<view class="sub buy">去付款</view>
-						</view>
-					</view>
-				</view>
-			</view>
-
-		</scroll-view>
-	</swiper-item>
-	<swiper-item>
-		<scroll-view scroll-y style="height: 100%">
-			qqqqq
-		</scroll-view>
-	</swiper-item>
-	<swiper-item>
-		<scroll-view scroll-y style="height: 100%">
-			111
-		</scroll-view>
-	</swiper-item>
-	<swiper-item>
-		<scroll-view scroll-y style="height: 100%">
-			333
-		</scroll-view>
-	</swiper-item>
-	<swiper-item>
-		<scroll-view scroll-y style="height: 100%">
-			444
-		</scroll-view>
-	</swiper-item>
+	<!-- 全部订单 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="Allqbdd">
 			<block wx:for="{{Alllist}}">
-				<view class="box">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
-							<text> 团长：紫薇花园州每一天</text>
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
 							<text class="state">{{item.orderStatus}}</text>
 						</view>
 						<view class="order-box">
@@ -105,19 +38,61 @@
 									</view>
 								</view>
 							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待支付'}}">
+								<view class="sub buy" bindtap="cancel">取消订单</view>
+							</view>
+							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待支付'}}">
+								<view class="sub buy" bindtap="gopj">去付款</view>
+							</view>
+							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
+								<view class="sub buy" bindtap="gopj">申请售后</view>
+							</view>
+							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待提货'}}">
+								<view class="sub buy" bindtap="gopj">我的提货码</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
 
-							<!-- <view class="order">
-								<view class="img">
-									<image src="/img/pic/1.png"></image>
-								</view>
-								<view class="mess">
-									<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
-									<view class="price">
-										<text class="jg">￥16.5</text>
-										<text class="num">×3</text>
+		</scroll-view>
+	</swiper-item>
+	<!-- 待付款 -->
+	<swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dfkmore">
+			<block wx:for="{{dfklist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
 									</view>
 								</view>
-							</view> -->
+							</block>
 						</view>
 						<view class="order_num">
 							<text>订单号：{{item.orderNumber}}</text>
@@ -129,13 +104,287 @@
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
 							<view class="button" style="width:30%">
-								<view class="sub buy" bindtap="gopj">去评价</view>
+								<view class="sub buy" bindtap="cancel">取消订单</view>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="gopj">去付款</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</block>
-
 		</scroll-view>
 	</swiper-item>
+	<!-- 备货中 -->
+	<swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bhzmore">
+			<block wx:for="{{bhzlist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item>
+	<!-- 配送中 -->
+	<swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="pszmore">
+			<block wx:for="{{phzlist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item>
+	<!-- 待提货 -->
+	<swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dthmore">
+			<block wx:for="{{dthlist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="gopj">我的提货码</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item>
+	<!-- 已提货 -->
+	<swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="ythmore">
+			<block wx:for="{{ythlist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="cancel">申请售后</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item>
+	<!-- 售后中 -->
+	<!-- <swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="shzmore">
+			<block wx:for="{{shzlist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="cancel">取消订单</view>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="gopj">去付款</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item> -->
+	<!-- 已结束 -->
+	<!-- <swiper-item>
+		<scroll-view scroll-y style="height: 100%" bindscrolltolower="yjsmore">
+			<block wx:for="{{yjslist}}">
+				<view class="box">
+					<view class="section">
+						<view class="order_num">
+							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+							<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+							<text class="state">{{item.orderStatus}}</text>
+						</view>
+						<view class="order-box">
+							<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+								<view class="order">
+									<view class="img">
+										<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+									</view>
+									<view class="mess">
+										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+										<view class="price">
+											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="num">×{{dditem.commodityNumber}}</text>
+										</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<view class="order_num">
+							<text>订单号：{{item.orderNumber}}</text>
+							<text>{{item.orderTime}}</text>
+						</view>
+						<view class="order_num">
+							<view class="combined">
+								<text> 合计：</text>
+								<text class="state">￥{{item.paymentMoney}}</text>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="cancel">取消订单</view>
+							</view>
+							<view class="button" style="width:30%">
+								<view class="sub buy" bindtap="gopj">去付款</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</swiper-item> -->
 </swiper>

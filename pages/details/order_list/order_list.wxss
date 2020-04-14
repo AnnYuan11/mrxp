@@ -45,6 +45,7 @@
 
 }
 
+
 .section {
   width: 100%;
   margin: 32rpx 0;
@@ -64,8 +65,17 @@
 .order_num text {
   font-size: 24rpx;
   color: rgba(35, 35, 35, 1);
+  /* overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap; */
 }
+.order_num text.orderdz{
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
+}
 .order_num text.state {
   color: #E10B09;
 }

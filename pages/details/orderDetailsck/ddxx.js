@@ -1,18 +1,29 @@
 // pages/details/orderDetailsck/ddxx.js
+import { Base } from "../../../utils/request/base.js";
+var base = new Base();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    var phone=wx.getStorageSync('phone')
+    var that=this;
+    that.setData({
+      options:options,
+      phone:phone
+    })
+    var that=this;
+    that.details()
   },
 
   /**
@@ -62,5 +73,33 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  details(){
+    var that=this;
+    var params = {
+      url: '/app/order/findCommodityOrderInfo',
+      method: 'GET',
+      data: {
+        'id':that.data.options.id,
+      },
+      sCallBack: function (data) {
+         console.log(data)
+         var list =data.data.result;
+          if(list.orderSendType=='1'){
+            list.orderSendType='到店自提'
+          }else if(list.orderSendType=='2'){
+            list.orderSendType='配送订单'
+          }
+        
+        that.setData({
+          list:list
+        })
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   }
 })

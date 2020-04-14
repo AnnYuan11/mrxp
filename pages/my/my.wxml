@@ -25,7 +25,7 @@
 <view class="section1 order_box">
 	<view class="wd">
 		<view class="my_order">我的订单</view>
-		<navigator url="/pages/details/order_list/order_list?currentTab=5" hover-class="none">
+		<navigator url="/pages/details/order_list/order_list?currentTab=0" hover-class="none">
 			<view class="all">
 				<text class="all_order">全部订单</text>
 				<image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
@@ -35,7 +35,7 @@
 	</view>
 	<view class="icon_box">
 		<i-grid>
-		<navigator url="/pages/details/order_list/order_list?currentTab=0" hover-class="none">
+		<navigator url="/pages/details/order_list/order_list?currentTab=1" hover-class="none">
 			<i-grid-item>
 				<i-grid-icon>
 					<image src="/img/my/1.png" />
@@ -43,7 +43,7 @@
 				<i-grid-label>待付款</i-grid-label>
 			</i-grid-item>
 		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=1" hover-class="none">
+		<navigator url="/pages/details/order_list/order_list?currentTab=2" hover-class="none">
 			<i-grid-item>
 				<i-grid-icon>
 					<image src="/img/my/2.png" />
@@ -51,28 +51,28 @@
 				<i-grid-label>备货中</i-grid-label>
 			</i-grid-item>
 		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=2" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="/img/my/3.png" />
-				</i-grid-icon>
-				<i-grid-label>配送中</i-grid-label>
-			</i-grid-item>
-		</navigator>
 		<navigator url="/pages/details/order_list/order_list?currentTab=3" hover-class="none">
 			<i-grid-item>
 				<i-grid-icon>
-					<image src="/img/my/5.png" />
+					<image src="/img/my/4.png" />
 				</i-grid-icon>
-				<i-grid-label>待提货</i-grid-label>
+				<i-grid-label>配送中</i-grid-label>
 			</i-grid-item>
 		</navigator>
 		<navigator url="/pages/details/order_list/order_list?currentTab=4" hover-class="none">
 			<i-grid-item>
 				<i-grid-icon>
-					<image src="/img/my/4.png" />
+					<image src="/img/my/3.png" />
 				</i-grid-icon>
-				<i-grid-label>已完成</i-grid-label>
+				<i-grid-label>待提货</i-grid-label>
+			</i-grid-item>
+		</navigator>
+		<navigator url="/pages/details/order_list/order_list?currentTab=5" hover-class="none">
+			<i-grid-item>
+				<i-grid-icon>
+					<image src="/img/my/5.png" />
+				</i-grid-icon>
+				<i-grid-label>已提货</i-grid-label>
 			</i-grid-item>
 		</navigator>
 		</i-grid>

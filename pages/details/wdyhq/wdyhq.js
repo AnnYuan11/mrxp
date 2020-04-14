@@ -12,11 +12,9 @@ Page({
     winHeight: 0,
     currentTab: 0,
     currentPage: 1,//请求数据的页码
-    size: 5,//每页数据条数
+    size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
-
-
   },
 
   /**
@@ -94,7 +92,13 @@ Page({
   swichNav: function (e) {
     var that = this;
     console.log(e)
-    if(e.target.dataset.current=='1'){
+    if(e.target.dataset.current=='0'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+       that.list()//已使用
+     }
+    else if(e.target.dataset.current=='1'){
      that.data.currentPage=1,
      that.data.totalCount= 0,//总是数据条数
      that.data.pagecount= 0,//总的页数
