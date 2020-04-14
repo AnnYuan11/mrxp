@@ -41,21 +41,26 @@ Component({
     pagecount: 0,//总的页数
     // shoppingCarType: 1,
     imgUrl: app.globalData.imgUrl,
-    ids: []
+    ids: [],
   },
   lifetimes: {
     attached: function () {
-      // 价格方法
-      // this.count_price();
       this.getShopList(this.data.shoppingType)
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            height: res.windowHeight + 20
+          })
+        }
+      })
     }
   },
   pageLifetimes: {
-    show: function() {
+    show: function () {
       // 页面被展示
-       // 价格方法
-       this.count_price();
-       this.getShopList(this.data.shoppingType)
+      // 价格方法
+      this.count_price();
+      this.getShopList(this.data.shoppingType)
     },
   },
   /**
@@ -91,7 +96,7 @@ Component({
       that.count_price();
     },
     // 编辑
-    btn_edit: function () {
+    btn_edit  () {
       var that = this;
       if (bool) {
         that.setData({
@@ -115,7 +120,7 @@ Component({
 
     },
     // 删除
-    deletes: function (e) {
+    deletes (e) {
       var that = this;
       const ids = [];
       const id = e.currentTarget.dataset.id;
@@ -135,7 +140,7 @@ Component({
         }
       })
     },
-    delItem: function (id) {
+    delItem (id) {
       let that = this
       var params = {
         url: '/app/commodity/deleteShoppingCartInfo',
@@ -161,7 +166,7 @@ Component({
       }
       base.request(params);
     },
-    deletrsTip: function() {
+    deletrsTip () {
       wx.showToast({
         title: '请选择要删除的订单',
         icon: 'warn',
@@ -194,6 +199,8 @@ Component({
      * 绑定加数量事件
      */
     btn_add(e) {
+      //获取商品id  
+      const id = e.currentTarget.dataset.id;
       // 获取点击的索引
       const index = e.currentTarget.dataset.index;
       // 获取商品数据
@@ -209,15 +216,16 @@ Component({
       });
       // 计算金额方法
       this.count_price();
+      this.setNum(id, num, this.data.shoppingType);
     },
     /**
      * 绑定减数量事件
      */
     btn_minus(e) {
-      //   // 获取点击的索引
+      //获取商品id  
+      const id = e.currentTarget.dataset.id;
+      // 获取点击的索引
       const index = e.currentTarget.dataset.index;
-      // const obj = e.currentTarget.dataset.obj;
-      // console.log(obj);
       // 获取商品数据
       let list = this.data.list;
       // 获取商品数量
@@ -235,6 +243,38 @@ Component({
       });
       // 调用计算金额方法
       this.count_price();
+      this.setNum(id, num, this.data.shoppingType);
+    },
+    /**
+    **修改订单数量接口调用 
+    */
+    setNum(spid, commodityNumber, sendtype) {
+      let that = this;
+      var userId = wx.getStorageSync('userId')
+      var params = {
+        url: '/app/commodity/addShoppingCartInfo',
+        method: 'POST',
+        data: {
+          'commodityInfo': {
+            'id': spid
+          },
+          'commodityNumber': commodityNumber,
+          'shoppingCarType': sendtype,
+          'userInfo': {
+            'id': userId
+          }
+        },
+        sCallBack: function (data) {
+          if (data.data.errorCode != 0) {
+            wx.showToast({
+              title: data.data.errorMsg
+            })
+          }
+        },
+        eCallBack: function () {
+        }
+      }
+      base.request(params);
     },
     /**
      * 计算总价
@@ -262,18 +302,6 @@ Component({
         totalPrice: total.toFixed(2),
         nums: nums.toString()
       });
-      // console.log(nums)
-      if (that.data.nums != '0') {
-        wx.setTabBarBadge({
-          index: 1,
-          text: that.data.nums
-        })
-      } else {
-        wx.removeTabBarBadge({
-          index: 1,
-          text: ''
-        })
-      }
 
     },
     /*
@@ -295,7 +323,7 @@ Component({
         const ids = [];
         for (let i = 0; i < list.length; i++) {
           if (list[i].selected) {
-            ids.push(list[i].commodityInfo.productInfo.id)
+            ids.push(list[i].commodityInfo.id)
           }
         }
         wx.showModal({
@@ -315,8 +343,8 @@ Component({
       }
     },
     /**
-   * *购物车列表获取
-   */
+    ** 购物车列表获取
+    */
     getShopList(shoppingType) {
       var that = this;
       var id = wx.getStorageSync('userId')
@@ -328,7 +356,7 @@ Component({
           'pageIndex': that.data.currentPage,
           'pageSize': that.data.size,
           'userInfo.id': id,
-          'shoppingType': shoppingType
+          // 'shoppingType': shoppingType
         },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
@@ -341,28 +369,17 @@ Component({
             that.setData({
               list: data.data.result, //初始化数据列表
             })
-            console.log(that.data.list)
-            // console.log(data.data.result.length)
-
-            // var currentPage = that.data.currentPage; //获取当前页码
-            // if (currentPage == 1) {
-            //   that.setData({
-            //     list: data.data.result, //初始化数据列表
-            //     currentPage: 1
-            //   })
-            //   console.log(that.data.list)
-            // }
-            // else {
-            //   that.data.temlist = that.data.list.concat(data.data.result); //请求的数据追加到原始数据集合里
-            //   // currentPage = currentPage + 1;
-            // }
-            // that.setData({
-            //   currentPage: currentPage,
-            //   list: that.data.temlist,
-            //   // totalCount: data.data.result.rowCount, //总的数据条数
-            //   // pagecount: data.data.result.totalPages //总页数
-            // })
-            // console.log(that.data.pagecount)
+            if (that.data.list.length != 0) {
+              wx.setTabBarBadge({
+                index: 1,
+                text: String(that.data.list.length)
+              })
+            } else {
+              wx.removeTabBarBadge({
+                index: 1,
+                text: ''
+              })
+            }
           } else {
             wx.showToast({
               title: data.data.errorMsg
@@ -376,9 +393,9 @@ Component({
       base.request(params);
     },
     /**
-   * *提交订单
-   */
-    btn_submit_order: function () {
+    **提交订单
+    */
+    btn_submit_order () {
 
       var that = this;
       // 获取商品数据
@@ -389,13 +406,13 @@ Component({
           icon: 'warn',
           duration: 2000
         })
-      } else { 
+      } else {
         let list = that.data.list;
         // 循环遍历判断列表中的数据是否选中
         const ids = [];
         for (let i = 0; i < list.length; i++) {
           if (list[i].selected) {
-            ids.push(list[i].commodityInfo.productInfo.id)
+            ids.push(list[i].commodityInfo.id)
           }
         }
         wx.showModal({
@@ -429,7 +446,7 @@ Component({
       //   })
     },
     //提交接口
-    submitItem: function (id) {
+    submitItem (id) {
       let that = this
       var params = {
         url: '/app/commodity/deleteShoppingCartInfo',
@@ -454,6 +471,33 @@ Component({
         }
       }
       base.request(params);
+    },
+    /**
+    * 分页滚动加载
+    */
+    scrollLower () {
+      var that = this
+      // wx.showLoading({
+      //   title: '数据加载中',
+      //   icon: 'loading',
+      // });
+      // that.setData({
+      //   pageNum: that.data.pageNum + 1,
+      // });
+      // if (that.data.tabListData.length >= that.data.total) {
+      //   wx.showToast({
+      //     title: '暂无更多数据了',
+      //     icon: 'success',
+      //     duration: 1000
+      //   });
+      //   return false;
+      // } else {
+      //   wx.showLoading({
+      //     title: '加载中',
+      //     icon: 'loading',
+      //   });
+
+      // }
     },
   }
 })

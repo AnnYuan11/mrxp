@@ -1,6 +1,7 @@
 <!-- pages/gwc/gwc.wxml -->
 <view class="pages">
   <view wx:if="{{hasList}}">
+  <scroll-view class="container" scroll-y='true' bindscrolltolower='scrollLower' style="height:{{height}}px;">
     <view class="box">
       <view class="top">
         <view class="all_select">
@@ -17,11 +18,11 @@
       </view>
       <!-- 列表 -->
       <view class="list" wx:for="{{list}}" wx:key="{{index}}">
-        <image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.commodityInfo.productInfo.id}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
+        <image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.commodityInfo.id}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
         <image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/public/select.png'></image>
         <image wx:else src='/img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
         <!-- 列表标题 -->
-        <text class="list_name" data-id="{{item.commodityInfo.productInfo.id}}">{{item.commodityInfo.productInfo.commodityName}}</text>
+        <text class="list_name" data-id="{{item.commodityInfo.id}}">{{item.commodityInfo.productInfo.commodityName}}</text>
         <!-- 列表商品图片 -->
         <image class="list_img" src="{{imgUrl}}{{item.commodityInfo.productInfo.photo}}"></image>
         <!-- 价格 -->
@@ -30,7 +31,7 @@
         <view style='display:{{show_edit}}'> 
           <view class="carts-num">
             <!-- 减按钮 -->
-            <lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}">
+            <lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
               <image src='/img/public/jian.png' style="width:44rpx;height:44rpx"></image>
             </lable>
             <!-- 文本框值 -->
@@ -38,13 +39,14 @@
               {{item.commodityNumber}}
             </label>
             <!-- 加按钮 -->
-            <lable class="plus" bindtap="btn_add" data-index="{{index}}">
+            <lable class="plus" bindtap="btn_add" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
               <image src='/img/public/add.png' style="width:44rpx;height:44rpx"></image>
             </lable>
           </view>
         </view>
       </view>
     </view>
+      </scroll-view>
     <!-- 固定底部 -->
     <view class="cont_bot">
       <!-- 合计金额 -->
