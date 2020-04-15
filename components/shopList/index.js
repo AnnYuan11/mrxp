@@ -270,6 +270,8 @@ Component({
             wx.showToast({
               title: data.data.errorMsg
             })
+          } else {
+            app.getShopNum()
           }
         },
         eCallBack: function () {
