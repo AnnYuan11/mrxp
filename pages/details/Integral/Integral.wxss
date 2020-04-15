@@ -1,6 +1,36 @@
 /* pages/details/Integral/Integral.wxss */
-page{
-  background: #E3381F;
+
+.top_box{
+  width: 100%;
+  position: relative;
+}
+.jfxx{
+  width: 80%;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  color: #fff;
+  right: 0;
+  margin: auto;
+}
+.num_jf{
+  font-size:52rpx;
+  font-weight:bold;
+  text-align: center;
+}
+.rule{
+  display: flex;
+  justify-content: space-between;
+}
+.rule view{
+  width:180rpx;
+  height:60rpx;
+  background:rgba(255,255,255,1);
+  opacity:0.7;
+  border-radius:15px;
+  color: #FF3F31;
+  text-align: center;
+  line-height: 60rpx;
 }
 .box{
   overflow: hidden;
