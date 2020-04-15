@@ -1,31 +1,32 @@
 <!--pages/details/Goodsdetails_jf/jfdh.wxml-->
+<import src="../../../utils/wxParse/wxParse.wxml"/>
 <view class="img_goods">
-  <image src="/img/pic/1.png"></image>
+  <image src="{{imgUrl}}{{list.photo}}"></image>
 </view>
 <view class="goods_introduce">
   <image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
   <view class="price_box">
-    <text class="font_xl">800积分兑换</text>
-    <text style="text-decoration: line-through;">￥32.58</text>
+    <text class="font_xl">{{list.integral}}积分兑换</text>
+    <text style="text-decoration: line-through;">￥{{list.price}}</text>
   </view>
   <view class="top_right">
-    <text class="font">2月28日</text>
-    <text class="font_sm">到店自取</text>
+    <text class="font">{{list.pickDate}}</text>
+    <text class="font_sm">{{list.sendType}}</text>
   </view>
   <view class="info_top">
     <view class="title_info">
-      美珍香迷你金钱烧烤猪肉200g+迷你休闲烧烤猪肉200g小吃零食美食
+      {{list.commodityName}}
     </view>
     <view class="gys_box">
       <image src="/img/details/gys.png" mode="widthFix"></image>
-      <text>供应商：渭南宝鑫陇有限公司</text>
+      <text>供应商：{{list.supplier}}</text>
     </view>
   </view>
 </view>
 <view class="goods_xq">
   <view class="spxq">商品详情</view>
   <view class="img_box">
-    <image src="/img/pic/1.png"></image>
+    <template is="wxParse" data="{{wxParseData:artice.nodes}}"/>
   </view>
 </view>
 <navigator url="/pages/details/orderdetails_jf/jfddxx" hover-class="none">

@@ -422,7 +422,7 @@ Component({
         }
         wx.showModal({
           title: '提示',
-          content: '确认删除吗',
+          content: '确认提交吗',
           success: function (res) {
             if (res.confirm) {
               // that.submitItem(ids)

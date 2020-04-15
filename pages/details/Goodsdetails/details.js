@@ -125,7 +125,8 @@ Page({
           data.data.result.productInfo.sendType="快递到家"
         }
         if(data.data.result.productInfo.pickDate==1){
-          var date = new Date();
+          that.getDateStr(null,0)
+          var date=that.data.tomorow
           data.data.result.productInfo.pickDate=date
         }else if(data.data.result.productInfo.pickDate==2){
           that.getDateStr(null,1)

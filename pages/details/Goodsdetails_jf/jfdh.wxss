@@ -1,4 +1,5 @@
 /* pages/details/Goodsdetails_jf/jfdh.wxss */
+@import "../../../utils/wxParse/wxParse.wxss";
 .img_goods{
   width: 100%;
   height: 400rpx;

@@ -326,7 +326,6 @@ Page({
   },
   // 未使用加载更多
   bindscrolltolower: function () {
-    console.log(this.data.currentPage+"....."+this.data.pagecount)
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.list();

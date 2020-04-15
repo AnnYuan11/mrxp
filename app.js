@@ -132,5 +132,5 @@ login(){
         }
     }
     base.request(params);
-  }
+  },
 })

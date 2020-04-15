@@ -11,43 +11,19 @@
   </view>
 </view>
 <view class="box">
+  <block wx:for="{{yhqlist}}"> 
   
-	<navigator url="/pages/details/Goodsdetails_jf/jfdh" hover-class="none">
-  <view class="goods">
-    <image src="/img/pic/1.png"></image>
+ 
+	<!-- <navigator url="/pages/details/Goodsdetails_jf/jfdh" hover-class="none"> -->
+  <view class="goods" bindtap="Todetails"data-id="{{item.id}}">
+    <image src="{{imgUrl}}{{item.photo}}"></image>
     <view class="introduce">
-      <text>原液补水内肤爽肤水保湿补水</text>
-      <text class="price">800积分兑换</text>
+      <text>{{item.commodityName}}</text>
+      <text class="price">{{item.integral}}积分兑换</text>
     </view>
   </view>
-  </navigator>
-  <view class="goods">
-    <image src="/img/pic/1.png"></image>
-    <view class="introduce">
-      <text>原液补水内肤爽肤水保湿补水</text>
-      <text class="price">800积分兑换</text>
-    </view>
-  </view>
-  <view class="goods">
-    <image src="/img/pic/1.png"></image>
-    <view class="introduce">
-      <text>原液补水内肤爽肤水保湿补水</text>
-      <text class="price">800积分兑换</text>
-    </view>
-  </view>
-   <view class="goods">
-    <image src="/img/pic/1.png"></image>
-    <view class="introduce">
-      <text>原液补水内肤爽肤水保湿补水</text>
-      <text class="price">800积分兑换</text>
-    </view>
-  </view>
-   <view class="goods">
-    <image src="/img/pic/1.png"></image>
-    <view class="introduce">
-      <text>原液补水内肤爽肤水保湿补水</text>
-      <text class="price">800积分兑换</text>
-    </view>
-  </view>
+  <!-- </navigator> -->
+ </block>
+  
   
 </view>

@@ -90,7 +90,14 @@ list(){
   }
   base.request(params);
 },
-// 充值
+Recharges(e){
+  var that = this;
+  console.log(e)
+  that.setData({
+    id:e.currentTarget.dataset.id
+  })
+},
+// 添加充值
 Recharge(e){
   var that = this;
   console.log(e)
@@ -100,18 +107,71 @@ Recharge(e){
       'id':userId
     },
     'rechargeGiveInfo':{
-      'id':e.currentTarget.dataset.id
+      'id':that.data.id
     }
   }
-  that.setData({
-    id:e.currentTarget.dataset.id
-  })
+  // that.setData({
+  //   id:e.currentTarget.dataset.id
+  // })
   var params = {
     url: '/app/order/addRechargeOrderInfo',
     method: 'POST',
     data:JSON.stringify(arg),
     sCallBack: data=>{
       console.log(data)
+       that.setData({
+        czid:data.data.result.id
+      })
+      that.surePay()
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 确认充值
+surePay(){
+  var that = this;
+  var openId=wx.getStorageSync('openId')
+  console.log(that.data.message)
+  var arg={
+    id: that.data.czid,
+    payType:'2',
+    type:'2',
+    openId:openId
+  }
+  console.log(JSON.stringify(arg))
+  var params = {
+    url: '/app/payment/getOrderStr',
+    method: 'POST',
+    data: arg,
+    sCallBack: function (data) {
+      console.log(data)  
+      wx.requestPayment({
+        appId: 'wx806b47b81b69c8bd',
+        timeStamp: data.data.result['timeStamp'],
+        nonceStr: data.data.result['nonceStr'],
+        package: data.data.result['packageValue'],
+        signType: 'MD5',
+        paySign: data.data.result['paySign'],
+        'success': function (res) {
+          console.log(res)
+          wx.showToast({
+            title: '充值成功！',
+            icon: 'none',
+            duration: 3000,
+            success: function () {
+              setTimeout(function () {
+                
+              }, 3000);
+
+            }
+          })
+        },
+        fail: function (e) {
+          console.log(e)
+        }
+      })      
     },
     eCallBack: function () {
     }

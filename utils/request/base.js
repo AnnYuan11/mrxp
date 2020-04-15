@@ -1,7 +1,4 @@
 import { Config } from "config.js";
-
-var app = getApp();
-
 class Base {
      constructor() {
        this.baseRequestUrl = Config.baseUrl;

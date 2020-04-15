@@ -10,7 +10,7 @@ Page({
   data: {
     imgUrl:app.globalData.imgUrl,
     yhqmoney:'选择优惠券',
-    payType:2,//默认微信支付
+    payTypes:2,//默认微信支付
     yhje:0
   },
 
@@ -197,7 +197,12 @@ Page({
         that.setData({
           message:data.data.result
         })
-        that.pay()
+        if(that.data.payTypes=='2'){
+          that.pay()
+        }else{
+          that.payYe(that.data.message.orderNumber)
+        }
+        
       },
       eCallBack: function () {
       }
@@ -283,18 +288,19 @@ Page({
 radioChange: function (e) {
   console.log(e)
   var that=this;
-  that.data.payType=e.detail.value
+  that.setData({
+    payTypes:e.detail.value
+  })
 },
-  // 支付
+  //微信支付
   pay(){
     var that = this;
-    
     var openId=wx.getStorageSync('openId')
     console.log(that.data.message)
     var arg={
       id: that.data.message.id,
       name:that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
-      payType:that.data.payType,
+      payType:2,
       type:'1',
       openId:openId
     }
@@ -336,6 +342,37 @@ radioChange: function (e) {
       }
     }
     base.request(params);
+  },
+
+  // 余额支付
+  payYe(orderNumber){
+    var that = this;
+    var userId=wx.getStorageSync('userId')
+    var arg={
+      'userInfo':{
+        'id': userId,
+      },
+      'orderNumber':orderNumber
+    }
+    var params = {
+      url: '/app/order/updateCommodityOrderInfoPaymentStatusYe',
+      method: 'POST',
+      data: JSON.stringify(arg),
+      sCallBack: function (data) {
+        console.log(data)  
+        if(data.data.errorCode=='-1'){
+          wx.showToast({
+            title: data.data.errorMsg,
+            icon:'none'
+          })
+        }
+           
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+
   },
   // 选择优惠券跳转
   selectYhq(){

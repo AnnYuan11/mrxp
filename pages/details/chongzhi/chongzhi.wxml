@@ -36,13 +36,13 @@
   <view class="qxz">请选择充值套餐</view>
   <!-- 套餐列表 -->
   <block wx:for="{{list}}">
-    <view class="combo {{item.id==id?'active':''}}" bindtap="Recharge" data-id="{{item.id}}">
+    <view class="combo {{item.id==id?'active':''}}" bindtap="Recharges" data-id="{{item.id}}">
       <view class="tc">套餐： 充{{item.rechargeMoney}}元送{{item.giveMoney}}元</view>
       <view class="xix">规则：充{{item.rechargeMoney}}元送{{item.giveMoney}}元，{{item.cashMoney}}可提现</view>
     </view>
   </block>
   
-  <view class="sure" style="background:{{color}}">确定充值</view>
+  <view class="sure" style="background:{{color}}" bindtap="Recharge">确定充值</view>
 </view>
 
 

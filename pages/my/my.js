@@ -38,7 +38,7 @@ Page({
       phone:wx.getStorageSync('phone')
     })
      
-    // this.login()          
+    app.refresh()       
   },
 
   /**
