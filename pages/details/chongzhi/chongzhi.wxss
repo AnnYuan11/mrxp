@@ -1,5 +1,5 @@
 /* pages/details/chongzhi/chongzhi.wxss */
-.input_box{
+/* .input_box{
   width:92%;
   height:100rpx;
   line-height: 100rpx;
@@ -73,6 +73,72 @@
   width: 1px;
   height: 80rpx;
   background: #E2E2E2;
+} */
+
+
+.box{
+  width: 100%;
+  margin: 0 auto;
+}
+.rules{
+  width: 100%;
+  position: relative;
+}
+.rules image{
+  width: 100%;
+}
+
+.rule_text{
+  width: 84%;
+  font-size: 28rpx;
+  color: #fff;
+  position: absolute;
+  top: 22%;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+}
+.rule_text text{
+  display: block;
+}
+.rule_text text.rules_title{
+  text-align: center;
+}
+.rule_text .con{
+  font-size: 24rpx;
+  margin-top: 18rpx;
+}
+.qxz{
+  font-size:28rpx;
+  color:rgba(35,35,35,1);
+  width: 92%;
+  margin: 32rpx auto;
+  margin-top: 0;
+}
+.combo{
+  width: 92%;
+  margin: 0 auto;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 10px rgba(0,0,0,0.16);
+  border-radius:20rpx;
+  padding: 20rpx 32rpx;
+  box-sizing: border-box;
+  margin-bottom: 30rpx;
+}
+.active{
+  border: 2px solid red;
+}
+.tc{
+  font-size:28rpx;
+  color:rgba(35,35,35,1);
+  border-bottom: 1px solid #E2E2E2;
+  padding-bottom: 20rpx;
+}
+.xix{
+  font-size:24rpx;
+  color:rgba(144,144,144,1);
+  padding-top: 20rpx;
 }
 .sure{
   width:92%;

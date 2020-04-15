@@ -8,7 +8,6 @@ Page({
    */
   data: {
     color: getApp().globalData.color,
-    col:0
   },
 
   /**
@@ -82,7 +81,7 @@ list(){
     },
     sCallBack: function (data) {
       that.setData({
-       
+       list:data.data.result
       })
       
     },
@@ -91,4 +90,32 @@ list(){
   }
   base.request(params);
 },
+// 充值
+Recharge(e){
+  var that = this;
+  console.log(e)
+  var userId=wx.getStorageSync('userId')
+  var arg={
+    'userInfo':{
+      'id':userId
+    },
+    'rechargeGiveInfo':{
+      'id':e.currentTarget.dataset.id
+    }
+  }
+  that.setData({
+    id:e.currentTarget.dataset.id
+  })
+  var params = {
+    url: '/app/order/addRechargeOrderInfo',
+    method: 'POST',
+    data:JSON.stringify(arg),
+    sCallBack: data=>{
+      console.log(data)
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+}
 })

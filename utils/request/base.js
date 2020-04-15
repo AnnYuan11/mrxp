@@ -15,7 +15,9 @@ class Base {
         wx.request({
             url: this.baseRequestUrl + params.url,
             data: params.data,
-            header:{Cookie:header},
+            // header:{Cookie:header},
+            //  header:{'Cookie':'SESSION='+ header},
+            header:{'token':header},
             method: params.method,
             success: function (res) {
                 params.sCallBack && params.sCallBack(res);

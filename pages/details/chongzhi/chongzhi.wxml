@@ -25,8 +25,25 @@
   </view>
 </view> -->
 <!-- 充值规则 -->
-<view ></view>
+<view class="box">
+	<view class="rules">
+		<image src="/img/details/wycz.png" mode="widthFix"></image>
+    <view class="rule_text">
+      <text class="rules_title">您的账户享受如下规则</text>
+      <text class="con">您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则</text>
+    </view>
+	</view>
+  <view class="qxz">请选择充值套餐</view>
+  <!-- 套餐列表 -->
+  <block wx:for="{{list}}">
+    <view class="combo {{item.id==id?'active':''}}" bindtap="Recharge" data-id="{{item.id}}">
+      <view class="tc">套餐： 充{{item.rechargeMoney}}元送{{item.giveMoney}}元</view>
+      <view class="xix">规则：充{{item.rechargeMoney}}元送{{item.giveMoney}}元，{{item.cashMoney}}可提现</view>
+    </view>
+  </block>
+  
+  <view class="sure" style="background:{{color}}">确定充值</view>
+</view>
 
 
 
-<view class="sure" style="background:{{color}}">确定充值</view>

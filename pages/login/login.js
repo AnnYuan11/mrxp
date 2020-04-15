@@ -1,6 +1,7 @@
 // pages/login/login.js
 import { Base } from "../../utils/request/base.js";
 var baseUrl = "http://139.155.113.100:8085";
+var util = require('../../utils/cache.js');
 var app = getApp();
 var base = new Base();
 Page({
@@ -28,7 +29,7 @@ Page({
             wx.getUserInfo({
               success: res => {
                 console.log(res.userInfo)
-                that.login()
+                // that.login()
               }
             })
           }else{
@@ -44,32 +45,7 @@ Page({
   onReady: function () {
 
   },
-  // 用户登陆接口
-  login(){
-    var that=this;
-    var openId=wx.getStorageSync('openId')
-    var params = {
-        url: '/app/user/weixinLogin',
-        method: 'POST',
-        data: {
-          'openId':openId
-        },
-        sCallBack: function (data) {
-            if(data.data.errorCode=="0"){
-                that.setData({
-                    phone:data.data.result.phone,
-                })
-            }else{
-                
-            }
-          
-          
-        },
-        eCallBack: function () {
-        }
-      }
-    base.request(params);
-},
+
   /**
    * 生命周期函数--监听页面显示
    */
@@ -225,7 +201,9 @@ wxlogin(){
                 key:"userId",
                 data:data.data.result.id
               });
-        
+              var value = { header: data.data.result.sessionId}
+              console.log(value)
+              util.put('loginData', value)
         },
         eCallBack: function () {
         }

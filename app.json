@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/chongzhi/chongzhi",
     "pages/details/order_list/order_list",
     "pages/details/order_details/order_details",
     "pages/my/my",
@@ -17,7 +18,6 @@
     "pages/details/sjrz/sjrz",
     "pages/details/Integral/Integral",
     "pages/details/address_list/addressList",
-    "pages/details/chongzhi/chongzhi",
     "pages/details/dhzt/dhzt",
     "pages/details/wdye/wdye",
     "pages/details/wdyhq/wdyhq",

@@ -1,4 +1,7 @@
 //app.js
+
+import { Base } from "/utils/request/base.js";
+var base = new Base();
 App({
   globalData: {
     imgUrl: "http://139.155.113.100:8686/",
@@ -6,6 +9,9 @@ App({
   },
   onLaunch (options) {
     this.getOpenId()
+  },
+  onShow: function () {
+    this.num()
   },
      //获取openID
   getOpenId: function () {
@@ -27,7 +33,9 @@ App({
                             key:"openId",
                             data:data.data.result.openId
                         });
-                    },
+                       
+                       that.login()
+                      },
                     fail: function (data) {
                         console.log(data);
                     }
@@ -35,6 +43,32 @@ App({
             }
         }
     })
+    
+  },
+    // 用户登陆接口
+  login(){
+      var that=this;
+      var openId=wx.getStorageSync('openId')
+      // debugger
+      var params = {
+          url: '/app/user/weixinLogin',
+          method: 'POST',
+          data: {
+            'openId':openId
+          },
+          sCallBack: function (data) {
+              if(data.data.errorCode=="0"){
+                  
+              }else{
+                  
+              }
+            
+            
+          },
+          eCallBack: function () {
+          }
+      }
+      base.request(params);
   },
   nomore_showToast :function () {
     wx.showToast({
@@ -43,5 +77,31 @@ App({
       duration: 1500,
       mask: true
     })
+  },
+  // 购物车数量
+  num(){
+    var that=this;
+    var userId=wx.getStorageSync('userId')
+    var arg={
+      'userInfo':{
+        'id':userId
+      }
+    }
+    var params = {
+        url: '/app/commodity/findShoppingCartInfoAllNumberByUserId',
+        method: 'POST',
+        data: JSON.stringify(arg),
+        sCallBack: function (data) {        
+          console.log(typeof(data.data.result))
+         var num=toString(data.data.result)
+          wx.setTabBarBadge({
+            index: 1,
+            text: num
+          })
+        },
+        eCallBack: function () {
+        }
+    }
+    base.request(params);
   }
 })
