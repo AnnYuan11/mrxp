@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    issq:true
+    // issq:true
   },
 
   /**
@@ -33,7 +33,9 @@ Page({
               }
             })
           }else{
-            
+            that.setData({
+              issq:true
+            })
           }
         }
       })
@@ -176,7 +178,7 @@ getPhoneNumber: function(e) { 
     
     console.log("session_key 已经失效，需要重新执行登录流程");
     
-    that.getOpenId(); //重新登录
+    app.getOpenId(); //重新登录
     
     }
     
@@ -200,6 +202,10 @@ wxlogin(){
             wx.setStorage({
                 key:"userId",
                 data:data.data.result.id
+              });
+              wx.setStorage({
+                key:"session",
+                data:data.data.result.sessionId
               });
               var value = { header: data.data.result.sessionId}
               console.log(value)

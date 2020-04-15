@@ -34,7 +34,7 @@ App({
                             data:data.data.result.openId
                         });
                        
-                       that.login()
+                      //  that.login()
                       },
                     fail: function (data) {
                         console.log(data);
@@ -45,31 +45,7 @@ App({
     })
     
   },
-    // 用户登陆接口
-  login(){
-      var that=this;
-      var openId=wx.getStorageSync('openId')
-      // debugger
-      var params = {
-          url: '/app/user/weixinLogin',
-          method: 'POST',
-          data: {
-            'openId':openId
-          },
-          sCallBack: function (data) {
-              if(data.data.errorCode=="0"){
-                  
-              }else{
-                  
-              }
-            
-            
-          },
-          eCallBack: function () {
-          }
-      }
-      base.request(params);
-  },
+  
   nomore_showToast :function () {
     wx.showToast({
       title: '没有更多数据',

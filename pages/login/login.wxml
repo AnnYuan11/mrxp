@@ -2,4 +2,4 @@
 <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo" wx:if="{{issq==true}}">
   授权登录
 </button> 
-<button class="name sq" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">登录</button>
+<button wx:else class="name sq" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">登录</button>

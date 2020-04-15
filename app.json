@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
     "pages/details/chongzhi/chongzhi",
     "pages/details/order_list/order_list",
     "pages/details/order_details/order_details",
     "pages/my/my",
     "pages/details/orderDetailsck/ddxx",
     "pages/details/Goodsdetails/details",
-    "pages/login/login",
     "pages/details/sppj/sppj",
     "pages/gwc/gwc",
     "pages/classify/classify",
