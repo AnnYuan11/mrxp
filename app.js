@@ -11,7 +11,7 @@ App({
     this.getOpenId()
   },
   onShow: function () {
-    this.num()
+    this.getShopNum()
   },
      //获取openID
   getOpenId: function () {
@@ -55,7 +55,7 @@ App({
     })
   },
   // 购物车数量
-  num(){
+  getShopNum(){
     var that=this;
     var userId=wx.getStorageSync('userId')
     var arg={
@@ -67,13 +67,18 @@ App({
         url: '/app/commodity/findShoppingCartInfoAllNumberByUserId',
         method: 'POST',
         data: JSON.stringify(arg),
-        sCallBack: function (data) {        
-          console.log(typeof(data.data.result))
-         var num=toString(data.data.result)
-          wx.setTabBarBadge({
-            index: 1,
-            text: num
-          })
+        sCallBack: function (data) {     
+       if (data.data.result != 0) {
+              wx.setTabBarBadge({
+                index: 1,
+                text: String(data.data.result)
+              })
+            } else {
+              wx.removeTabBarBadge({
+                index: 1,
+                text: ''
+              })
+            }
         },
         eCallBack: function () {
         }

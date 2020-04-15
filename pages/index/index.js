@@ -472,6 +472,11 @@ query(){
           wx.showToast({
             title: data.data.result,
           })
+          app.getShopNum()
+        } else {
+          wx.showToast({
+            title: data.data.result,
+          })
         }
         
       },

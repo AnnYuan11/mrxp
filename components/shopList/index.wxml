@@ -22,7 +22,7 @@
         <image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/public/select.png'></image>
         <image wx:else src='/img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
         <!-- 列表标题 -->
-        <text class="list_name" data-id="{{item.commodityInfo.id}}">{{item.commodityInfo.productInfo.commodityName}}</text>
+        <text class="list_name" data-id="{{item.id}}">{{item.commodityInfo.productInfo.commodityName}}</text>
         <!-- 列表商品图片 -->
         <image class="list_img" src="{{imgUrl}}{{item.commodityInfo.productInfo.photo}}"></image>
         <!-- 价格 -->

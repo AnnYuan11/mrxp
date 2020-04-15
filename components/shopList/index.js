@@ -151,10 +151,11 @@ Component({
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
             wx.showToast({
-              title: data.data.result.datas
+              title: data.data.result
             })
-            that.getShopList()
+            that.getShopList(that.data.shoppingType)
             that.count_price()
+            app.getShopNum()
           } else {
             wx.showToast({
               title: data.data.errorMsg
@@ -323,7 +324,7 @@ Component({
         const ids = [];
         for (let i = 0; i < list.length; i++) {
           if (list[i].selected) {
-            ids.push(list[i].commodityInfo.id)
+            ids.push(list[i].id)
           }
         }
         wx.showModal({
@@ -365,21 +366,23 @@ Component({
                 hasList: false
               })
               return false;
-            }
-            that.setData({
-              list: data.data.result.datas, //初始化数据列表
-            })
-            if (that.data.list.length != 0) {
-              wx.setTabBarBadge({
-                index: 1,
-                text: String(that.data.list.length)
-              })
             } else {
-              wx.removeTabBarBadge({
-                index: 1,
-                text: ''
+              that.setData({
+                hasList: true,
+                list: data.data.result.datas, //初始化数据列表
               })
             }
+            // if (that.data.list.length != 0) {
+            //   wx.setTabBarBadge({
+            //     index: 1,
+            //     text: String(that.data.list.length)
+            //   })
+            // } else {
+            //   wx.removeTabBarBadge({
+            //     index: 1,
+            //     text: ''
+            //   })
+            // }
           } else {
             wx.showToast({
               title: data.data.errorMsg
@@ -412,7 +415,7 @@ Component({
         const ids = [];
         for (let i = 0; i < list.length; i++) {
           if (list[i].selected) {
-            ids.push(list[i].commodityInfo.id)
+            ids.push(list[i].id)
           }
         }
         wx.showModal({
