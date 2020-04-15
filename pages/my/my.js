@@ -34,12 +34,11 @@ Page({
     var session=wx.getStorageSync('session')
     console.log(session)
     this.setData({
-      session:session
+      session:session,
+      phone:wx.getStorageSync('phone')
     })
      
-    this.login()
-    // this.wxlogin()
-          
+    // this.login()          
   },
 
   /**
@@ -48,60 +47,8 @@ Page({
   onHide: function () {
 
   },
-  // 是否存在用户
-  login(){
-    var that=this;
-    var openId=wx.getStorageSync('openId')
-    // debugger
-    var params = {
-        url: '/app/user/weixinLogin',
-        method: 'POST',
-        data: {
-          'openId':openId
-        },
-        sCallBack: function (data) {
-          that.wxlogin(data.data.result.phone)
-            if(data.data.errorCode=="0"){
-                that.setData({
-                  phone:data.data.result.phone
-                })
-            }else{
-              
-            }
-          
-          
-        },
-        eCallBack: function () {
-        }
-    }
-    base.request(params);
-},
-// 用户过期
-wxlogin(phone){
-  var that=this;
-  var openId=wx.getStorageSync('openId')
-  var params = {
-      url: '/app/user/login',
-      method: 'POST',
-      data: {
-          'phone':phone,
-          'openId':openId
-      },
-      sCallBack: function (data) {
-        console.log(data)
-        if(data.data.errorCode=='-200'){
-          wx.removeStorageSync('session')
-          that.setData({
-            session:''
-          })
-        } 
-          
-      },
-      eCallBack: function () {
-      }
-    }
-  base.request(params);
-},
+  
+
 
   /**
    * 生命周期函数--监听页面卸载

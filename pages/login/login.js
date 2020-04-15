@@ -183,7 +183,6 @@ getPhoneNumber: function(e) { 
     }
     
     });
-    
 },   
 
 // 登陆

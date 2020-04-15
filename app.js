@@ -9,9 +9,11 @@ App({
   },
   onLaunch (options) {
     this.getOpenId()
+   
   },
   onShow: function () {
     this.getShopNum()
+    this.refresh()
   },
      //获取openID
   getOpenId: function () {
@@ -34,7 +36,7 @@ App({
                             data:data.data.result.openId
                         });
                        
-                      //  that.login()
+                       that.login()
                       },
                     fail: function (data) {
                         console.log(data);
@@ -45,7 +47,53 @@ App({
     })
     
   },
-  
+  // 用户过期
+refresh(){
+  var that=this;
+  var userId=wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/refreshUserInfo',
+    method: 'GET',
+    data: {
+      'id':userId
+    },
+    sCallBack: function (data) {
+        if(data.data.errorCode=="-200"){
+            wx.removeStorageSync('session')
+        }      
+    },
+    eCallBack: function () {
+    }
+}
+base.request(params);
+},
+// 是否存在用户
+login(){
+  var that=this;
+  var openId=wx.getStorageSync('openId')
+  // debugger
+  var params = {
+      url: '/app/user/weixinLogin',
+      method: 'POST',
+      data: {
+        'openId':openId
+      },
+      sCallBack: function (data) {
+          if(data.data.errorCode=="0"){
+              // that.setData({
+              //   phone:data.data.result.phone
+              // })
+          }else{
+            
+          }
+        
+        
+      },
+      eCallBack: function () {
+      }
+  }
+  base.request(params);
+},
   nomore_showToast :function () {
     wx.showToast({
       title: '没有更多数据',
