@@ -414,68 +414,20 @@ Component({
       } else {
         let list = that.data.list;
         // 循环遍历判断列表中的数据是否选中
-        const ids = [];
+        const product = [];
+        const productItem = {};
         for (let i = 0; i < list.length; i++) {
+          // console.log(list[i].selected)
           if (list[i].selected) {
-            ids.push(list[i].id)
+            productItem['id'] = list[i].commodityInfo.id
+            productItem['name'] = list[i].commodityInfo.productInfo.commodityName
+            productItem['photo'] = list[i].commodityInfo.productInfo.photo
+            product.push(productItem)
           }
         }
-        wx.showModal({
-          title: '提示',
-          content: '确认提交吗',
-          success: function (res) {
-            if (res.confirm) {
-              // that.submitItem(ids)
-            } else {
-              // console.log(res);
-            }
-          },
-          fail: function (res) {
-            // console.log(res);
-          }
-        })
+        console.log(product)
+        console.log(that.data.totalPrice)
       }
-      // console.log(that.data.isBool)
-      // console.log(that.data.totalPrice);
-      // 调起支付
-      // wx.requestPayment(
-      //   {
-      //     'timeStamp': '',
-      //     'nonceStr': '',
-      //     'package': '',
-      //     'signType': 'MD5',
-      //     'paySign': '',
-      //     'success': function (res) { },
-      //     'fail': function (res) { },
-      //     'complete': function (res) { }
-      //   })
-    },
-    //提交接口
-    submitItem (id) {
-      let that = this
-      var params = {
-        url: '/app/commodity/deleteShoppingCartInfo',
-        method: 'GET',
-        data: {
-          'ids': id,
-        },
-        sCallBack: function (data) {
-          if (data.data.errorCode == 0) {
-            wx.showToast({
-              title: data.data.result.datas
-            })
-            that.getShopList()
-            that.count_price()
-          } else {
-            wx.showToast({
-              title: data.data.errorMsg
-            })
-          }
-        },
-        eCallBack: function () {
-        }
-      }
-      base.request(params);
     },
     /**
     * 分页滚动加载
@@ -503,6 +455,16 @@ Component({
       //   });
 
       // }
+    },
+    /**
+     * 带参数跳转列表详情
+     */
+    Details(e) {
+      console.log(e)
+      var id = e.currentTarget.dataset.id
+      wx.navigateTo({
+        url: `../../pages/details/Goodsdetails/details?id=${id}`
+      })
     },
   }
 })
