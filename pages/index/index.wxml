@@ -50,7 +50,7 @@
 	</view>
 	<view class="swiperBox">
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
-			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
+			<scroll-view scroll-y style="height: 100%">
 				<block wx:for="{{listToday}}">
 					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
 						<view class="list_box">
@@ -61,13 +61,20 @@
 								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 							</view>
 							<view class="bottom_box">
-								<text class="spmc">{{item.productInfo.commodityName}}</text>
+								<view class="thsj">
+									<text class="spmc">{{item.productInfo.commodityName}}</text>
+										<view class="right fsgz">
+											<text class="limited">666</text>
+											<text>粉丝关注</text>
+										</view>
+								</view>
+							
 								<view class="thsj">
 									<view class="left">
-										<text>提货时间</text>
-										<text class="rq">{{item.productInfo.pickDate}}</text>
+										<text>预售时间:{{item.productInfo.pickDate}}</text>
+										<text class="rq">提货时间:2月30日</text>
 									</view>
-									<view class="right">
+									<view class="right" style="line-height:50rpx">
 										<text>今日已售<text class="num">{{item.productInfo.salesNumber}}</text>份</text>
 										<text class="limited">限量{{item.productInfo.totalBuyLimitNumbers}}份</text>
 									</view>
@@ -84,15 +91,51 @@
 						</view>
 					</navigator>	
 				</block>
-	
-			
 			</scroll-view>
 		</view>
 		<view class="swiper_box" wx:if="{{currentTab=='1'}}">
 			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-				<view class="img_goods">
-					<image src="/img/pic/1.png"></image>
-				</view>
+					<block wx:for="{{listTomorow}}" wx:if='{{listTomorow!=""}}'>
+						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
+							<view class="list_box">
+								<view class="img_goods">
+									<view class="{{item.productInfo.sendType=='到店自提'?'type':'type2'}}">{{item.productInfo.sendType}}</view>
+									<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
+									
+									<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+								</view>
+								<view class="bottom_box">
+									<view class="thsj">
+										<text class="spmc">{{item.productInfo.commodityName}}</text>
+											<view class="right fsgz">
+												<text class="limited">666</text>
+												<text>粉丝关注</text>
+											</view>
+									</view>
+								
+									<view class="thsj">
+										<view class="left">
+											<text>预售时间:{{item.productInfo.pickDate}}</text>
+											<text class="rq">提货时间:2月30日</text>
+										</view>
+										<view class="right" style="line-height:50rpx">
+											<text>今日已售<text class="num">{{item.productInfo.salesNumber}}</text>份</text>
+											<text class="limited">限量{{item.productInfo.totalBuyLimitNumbers}}份</text>
+										</view>
+									</view>
+									<view class="price_box">
+										<view class="price">
+											<text>￥{{item.productInfo.price}}</text>
+											<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
+										</view>
+										<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.productInfo.sendType}}">加入购物车</view>
+									</view>
+
+								</view>
+							</view>
+						</navigator>	
+				</block>
+				<view wx:if='{{listTomorow==""}}'>暂无数据</view>
 			</scroll-view>
 		</view>
 	</view>

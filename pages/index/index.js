@@ -17,7 +17,7 @@ Page({
     show:true,//弹窗
     imgUrl:app.globalData.imgUrl,
     currentPage: 1,//请求数据的页码
-    size: 10,//每页数据条数
+    size: 2,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
     // aa:1
@@ -109,7 +109,7 @@ Page({
     }else {
       return
     }
-   
+    // app.getOpenId()
   },
 
   /**
@@ -141,7 +141,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.bindscrolltolower()
   },
 
   /**
@@ -159,6 +159,18 @@ Page({
   swichNav: function (e) {
     var that = this;
     console.log(e)
+    if(e.target.dataset.current=='0'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+       that.shopList()//已使用
+     }
+    else if(e.target.dataset.current=='1'){
+     that.data.currentPage=1,
+     that.data.totalCount= 0,//总是数据条数
+     that.data.pagecount= 0,//总的页数
+      that.shopListM()//已使用
+    }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -221,8 +233,8 @@ shopList(className){
           item.productInfo.sendType="快递到家"
         }
         if(item.productInfo.pickDate==1){
-          var date = new Date();
-          item.productInfo.pickDate=date
+          that.getDateStr(null,0)
+          item.productInfo.pickDate=that.data.tomorow
         }else if(item.productInfo.pickDate==2){
           that.getDateStr(null,1)
           var tomorow=that.data.tomorow
@@ -296,6 +308,65 @@ bindscrolltolower(){
     }
     base.request(params);
 },
+// 明日售卖
+shopListM(className){
+  var that = this;
+  var params = {
+    url: '/app/commodity/findProductListNextDay',
+    method: 'POST',
+    data: {
+      'commodityName':className,
+      'pageIndex':that.data.currentPage,
+      'pageSize':that.data.size,
+    },
+    sCallBack: function (data) {
+      var listTomorow=data.data.result.datas
+      listTomorow.forEach((item,index) =>{
+        if(item.productInfo.sendType==1){
+          item.productInfo.sendType="到店自提"
+        }else{
+          item.productInfo.sendType="快递到家"
+        }
+        if(item.productInfo.pickDate==1){
+          that.getDateStr(null,0)
+          item.productInfo.pickDate=that.data.tomorow
+        }else if(item.productInfo.pickDate==2){
+          that.getDateStr(null,1)
+          var tomorow=that.data.tomorow
+          item.productInfo.pickDate=tomorow
+        }else{
+          that.getDateStr(null,2)
+          var ht=that.data.tomorow
+          item.productInfo.pickDate=ht
+        }
+      })
+      var temlist = that.data.listTomorow; //原始的数据集合
+      var currentPage = that.data.currentPage; //获取当前页码
+      if (currentPage == 1) {
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+      }
+      else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
+        }
+        that.setData({
+          currentPage: currentPage,
+          listTomorow: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)         
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+
+
+
+
 // 首页轮播图
 lunbo(){
   var that = this;
@@ -496,4 +567,5 @@ query(){
      app.nomore_showToast();
     }
   },
+
 })

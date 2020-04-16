@@ -2,7 +2,7 @@
 <!-- 头部 -->
 <view class="head_box">
 	<image src="/img/my/my_bg.png" mode="widthFix"></image>
-	<view class="head" wx:if="{{session==''}}">
+	<view class="head" wx:if="{{session==''||phone==''}}">
 		<view class="head_pic">
 		<image src="/img/my/head.png" mode="widthFix"></image> 
 		</view>

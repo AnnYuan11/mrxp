@@ -2,6 +2,7 @@
 
 import { Base } from "/utils/request/base.js";
 var base = new Base();
+var util = require('/utils/cache.js');
 App({
   globalData: {
     imgUrl: "http://139.155.113.100:8686/",
@@ -80,11 +81,23 @@ login(){
       },
       sCallBack: function (data) {
           if(data.data.errorCode=="0"){
-              // that.setData({
-              //   phone:data.data.result.phone
-              // })
+            wx.setStorage({
+              key:"session",
+              data:data.data.result.sessionId
+            });
+            wx.setStorage({
+              data: data.data.result.phone,
+              key: 'phone',
+            })
+            wx.setStorage({
+              key:"userId",
+              data:data.data.result.id
+            });
+            var value = { header: data.data.result.sessionId}
+            console.log(value)
+            util.put('loginData', value)
           }else{
-            
+            wx.removeStorageSync('session')
           }
         
         
