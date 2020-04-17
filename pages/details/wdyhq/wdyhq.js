@@ -26,7 +26,8 @@ Page({
     that.setData({
       toddxq:options.toddxq,
       ddid:options.ddid,
-      options:options
+      options:options,
+      type: options.type
     })
     wx.getSystemInfo({
       success: function (res) {
@@ -298,7 +299,12 @@ Page({
       wx.redirectTo({
         url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'元'+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+options.dzid,
       })
-    }else{
+    }else if (that.data.type == 'shopSubmit'){
+      console.log(e.currentTarget.dataset.id)
+      wx.redirectTo({
+        url: '/pages/addOrder/add_order?couponsId='+e.currentTarget.dataset.id,
+      })
+    } else {
       return
     }
     
