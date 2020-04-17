@@ -10,7 +10,7 @@
       <view class="line"></view>
       <view class="ktx">
         <text class="money">100</text>
-        <text>可提现(元)</text>
+        <text>已提现(元)</text>
       </view>
   </view>
 </view>

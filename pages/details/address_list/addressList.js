@@ -94,15 +94,15 @@ Page({
         'userInfo.id':id,
       },
       sCallBack: function (data) {
-        var list=data.data.result;
+        var list=data.data.result.datas;
         var temlist = that.data.list; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result; //初始化数据列表
+            temlist = data.data.result.datas; //初始化数据列表
             currentPage = 1;
         }
         else {
-            temlist = temlist.concat(data.data.result); //请求的数据追加到原始数据集合里
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
             // currentPage = currentPage + 1;
           }
           that.setData({
