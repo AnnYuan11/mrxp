@@ -1,0 +1,105 @@
+<!--pages/details/order_details/order_details.wxml-->
+<view class="section_box">
+  <view class="section" wx:if="{{productInfo.sendType == 1}}">
+    <view class="type">到店自提</view>
+    <view class="message_kd">
+      <view class="top">
+        <view class="img">
+          <image src="/img/public/logo.png" mode="widthFix"></image>
+        </view>
+        <view class="message">
+          <!-- <text class="name" wx:if="{{defaultztd!=''}}">{{shopName}}</text>
+			    <text class="name" wx:else>{{defaultztd.headInfo.shopName}}</text> -->
+           <text class="name">{{defaultztd!='' ?  shopName : defaultztd.headInfo.shopName}}</text>
+          <view class="qhdz_box">
+            <!-- <text class="phone"wx:if="{{defaultztd!=''}}">{{phones}}</text>
+            <text class="phone"wx:else>{{defaultztd.headInfo.phone}}</text> -->
+            <text class="phone">{{defaultztd!='' ?  phones : defaultztd.headInfo.phone}}</text>
+          </view>
+        </view>
+      </view> 
+      <view class="bottom">
+        <view class="address" wx:if="{{defaultztd!=''}}">地 址：{{addressth}}</view>
+        <view class="address" wx:else>地 址：{{defaultztd.headInfo.address}}</view>
+        <view class="thr">提货人：<open-data type="userNickName"></open-data> {{phone}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="section" wx:else  bindtap="Todz">
+    <view class="type kd">快递到家</view>
+    <view class="message_kd" wx:if="{{mrdz!=''}}">
+      <view class="bottom">
+        <view class="address">地 址：{{mrdz.province}}{{mrdz.city}}{{mrdz.area}}{{mrdz.province}}{{mrdz.address}}</view>
+        <view class="thr">收货人：{{mrdz.name}} {{mrdz.phone}}</view>
+        <image src="/img/public/right.png" mode="widthFix" style="width:40rpx;float:right;margin-top: -10%"></image>
+      </view>
+    </view>
+    <view class="message_kd" wx:else>请选择地址</view>
+  </view>
+  <view class="section section2">
+    <view class="order" wx:for="{{productInfo.productList}}">
+      <view class="img">
+        <image src="{{imgUrl}}{{item.photo}}"></image>
+      </view>
+      <view class="mess">
+        <text>{{item.name}}</text>
+        <view class="price">
+          <text class="jg">￥{{item.price}}</text>
+          <text class="num">×{{item.number}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="section section2">
+    <view class="yhq yhqs" bindtap="selectCoupons">
+      <view class="left">
+        <image src="/img/details/dd1.png" mode="widthFix"></image>
+        <text>优惠券</text>
+      </view>
+      <view class="right">
+        <text>{{yhqmoney}}</text>
+        <image src="/img/public/right.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="yhq">
+      <view class="left">
+        <image src="/img/details/dd2.png" mode="widthFix"></image>
+        <text>满减优惠</text>
+      </view>
+      <view class="right">
+        <text class="pri">优惠￥{{yhje}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 支付 -->
+  <view class="section section2">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <view class="payType">
+        <view class="wechat">
+          <image src="/img/details/dd3.png" mode="widthFix"></image>
+          <radio class="radio" value="2" checked="checked">
+            <text>微信支付</text>
+          </radio>
+        </view>
+        <view class="wechat">
+          <image src="/img/details/dd4.png" mode="widthFix"></image>
+          <radio class="radio" value="1">
+            <text>余额支付</text>
+          </radio>
+        </view>
+      </view>
+    </radio-group>
+    <view class="instructions">
+      <text>1. 如果您在购物过程中有任何问题，请直接与购买的门店联系！</text>
+      <text>2. 如果您在平台使用中有任何疑问，可致电每日鲜品热线电话4003008000</text>
+    </view>
+  </view>
+</view>
+<!-- 底部 -->
+<view class="Tbottom">
+  <view class="jine">
+    <text class="sf">实付：￥{{money.paymentMoney}}</text>
+    <text class="hj">(合计￥{{productInfo.totalPrice}})</text>
+  </view>
+  <view class="sub" bindtap="orderMessage">提交订单</view>
+</view>

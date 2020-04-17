@@ -374,17 +374,6 @@ Component({
                 list: data.data.result.datas, //初始化数据列表
               })
             }
-            // if (that.data.list.length != 0) {
-            //   wx.setTabBarBadge({
-            //     index: 1,
-            //     text: String(that.data.list.length)
-            //   })
-            // } else {
-            //   wx.removeTabBarBadge({
-            //     index: 1,
-            //     text: ''
-            //   })
-            // }
           } else {
             wx.showToast({
               title: data.data.errorMsg
@@ -415,18 +404,26 @@ Component({
         let list = that.data.list;
         // 循环遍历判断列表中的数据是否选中
         const product = [];
-        const productItem = {};
+       
         for (let i = 0; i < list.length; i++) {
-          // console.log(list[i].selected)
           if (list[i].selected) {
+            const productItem = {};
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName
             productItem['photo'] = list[i].commodityInfo.productInfo.photo
+            productItem['price'] = list[i].commodityInfo.productInfo.price
+            productItem['number'] = list[i].commodityNumber
             product.push(productItem)
           }
-        }
-        console.log(product)
-        console.log(that.data.totalPrice)
+        } 
+        const productInfo = {};
+        productInfo['totalPrice'] =  that.data.totalPrice.split('.')[0]
+        productInfo['sendType'] = that.data.shoppingType
+        productInfo['productList'] = product
+        wx.setStorageSync('productInfo', productInfo)
+        wx.navigateTo({
+          url: `/pages/addOrder/add_order`
+        })
       }
     },
     /**
