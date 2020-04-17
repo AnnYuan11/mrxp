@@ -30,7 +30,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      phone:wx.getStorageSync('phone')
+    })
   },
 
   /**
@@ -85,7 +87,7 @@ Page({
     } else {
       var that = this;
       var params = {
-        url: '/app/head/addHeadInfo',
+        // url: '/app/head/addHeadInfo',
         method: 'POST',
         data: Deparams,
         sCallBack: function (data) {
@@ -114,30 +116,18 @@ Page({
   initValidate() {
     // 验证字段的规则
     const rules = {
-      gysmc:{
+      txjt:{
         required: true,
-      },
-      name: {
-        required: true,
-      },
-      phone: {
-        required: true,
-        tel: true,
+        min:100
       }
     }
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
-      gysmc:{
-        required: '请填写供应商名称',
+      txjt:{
+        required: '请填写提现金额',
+        min:'提现金额不能小于100元'
       },
-      name: {
-        required: '请填写申请人姓名'
-      },
-      phone: {
-        required: '请填写申请人手机号',
-        tel: '请输入正确的手机号',
-      }
     }
 
     // 创建实例对象

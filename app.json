@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/details/sqtx/sqtx",
     "pages/index/index",
+    "pages/details/sqtx/sqtx",
     "pages/details/Integral/Integral",
     "pages/login/login",
     "pages/details/chongzhi/chongzhi",
@@ -12,6 +12,7 @@
     "pages/details/Goodsdetails/details",
     "pages/details/sppj/sppj",
     "pages/gwc/gwc",
+    "pages/addOrder/add_order",
     "pages/classify/classify",
     "pages/details/orderdetails_jf/jfddxx",
     "pages/details/selectAddress/selectAddress",

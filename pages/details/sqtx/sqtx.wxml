@@ -3,15 +3,18 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="sqr">
     <text>提现金额</text>
-    <input placeholder="提现金额不低于100元" class="input" name="gysmc"></input>
+    <input placeholder="提现金额不低于100元" class="input" name="txjt"></input>
   </view>
   <view class="sqr">
     <text>绑定微信</text>
-    <input placeholder="请填写姓名" class="input" name="name"></input>
+    <view class="input">
+      	<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:inline-block;height: 50rpx;width: 50rpx;vertical-align: middle;margin-right: 20rpx"></open-data>
+      	<open-data type="userNickName"></open-data>
+    </view>
   </view>
   <view class="sqr">
     <text>绑定手机</text>
-    <view class="input">18435157593</view>
+    <view class="input">{{phone}}</view>
   </view>
   <view class="sqr">
     <text>提现方式</text>
