@@ -70,7 +70,7 @@
 	<!-- 待付款 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dfkmore">
-			<block wx:for="{{dfklist}}">
+			<block wx:for="{{dfklist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box">
 					<view class="section">
 						<view class="order_num">
@@ -118,7 +118,7 @@
 	<!-- 备货中 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bhzmore">
-			<block wx:for="{{bhzlist}}">
+			<block wx:for="{{bhzlist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box">
 					<view class="section">
 						<view class="order_num">
@@ -161,7 +161,7 @@
 	<!-- 配送中 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="pszmore">
-			<block wx:for="{{phzlist}}">
+			<block wx:for="{{phzlist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box">
 					<view class="section">
 						<view class="order_num">
@@ -205,7 +205,7 @@
 	<!-- 待提货 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dthmore">
-			<block wx:for="{{dthlist}}">
+			<block wx:for="{{dthlist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box">
 					<view class="section">
 						<view class="order_num">
@@ -250,7 +250,7 @@
 	<!-- 已提货 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="ythmore">
-			<block wx:for="{{ythlist}}">
+			<block wx:for="{{ythlist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box">
 					<view class="section">
 						<view class="order_num">

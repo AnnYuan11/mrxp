@@ -151,13 +151,6 @@ Page({
           }else{
             item.type='已过期'
           }
-          if(item.type=='0'){
-            item.type='未使用'
-          }else if(item.type=='1'){
-            item.type='已使用'
-          }else{
-            item.type='已过期'
-          }
           item.startTime=item.startTime.substring(0,10)
           item.endTime=item.endTime.substring(0,10)
         })
@@ -205,13 +198,6 @@ Page({
             item.couponInfo.type='全场通用'
           }else{
             item.couponInfo.type='部分可用'
-          }
-          if(item.type=='0'){
-            item.type='未使用'
-          }else if(item.type=='1'){
-            item.type='已使用'
-          }else{
-            item.type='已过期'
           }
           if(item.type=='0'){
             item.type='未使用'
@@ -269,13 +255,6 @@ Page({
             item.couponInfo.type='全场通用'
           }else{
             item.couponInfo.type='部分可用'
-          }
-          if(item.type=='0'){
-            item.type='未使用'
-          }else if(item.type=='1'){
-            item.type='已使用'
-          }else{
-            item.type='已过期'
           }
           if(item.type=='0'){
             item.type='未使用'

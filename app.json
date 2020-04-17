@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/sqtx/sqtx",
     "pages/details/Integral/Integral",
     "pages/login/login",
     "pages/details/chongzhi/chongzhi",
