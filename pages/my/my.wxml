@@ -174,7 +174,7 @@
 		</view>
 	</view>
 </navigator>
-	<view class="wd">
+	<!-- <view class="wd">
 		<view class="my_order">
 			<image src="/img/my/b3.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
 			<text>供货商申请</text>
@@ -182,7 +182,7 @@
 		<view class="all">
 			<image src="/img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
 		</view>
-	</view>
+	</view> -->
 	<view class="wd">
 		<view class="my_order">
 			<image src="/img/my/b4.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>

@@ -8,12 +8,12 @@
   <view class="sqr">
     <text class="important">*</text>
     <text>供应商名称</text>
-    <input placeholder="请填写供应商名称" class="input" name="gysmc"></input>
+    <input placeholder="请填写供应商名称" class="input" name="supplieName"></input>
   </view>
   <view class="sqr">
     <text class="important">*</text>
     <text>申请人</text>
-    <input placeholder="请填写姓名" class="input" name="name"></input>
+    <input placeholder="请填写姓名" class="input" name="contactName"></input>
   </view>
   <view class="sqr">
     <text class="important">*</text>
@@ -22,7 +22,7 @@
   </view>
   <view class="sqr">
     <text>提供货物</text>
-    <textarea placeholder="请输入内容" class="cons" name="tghw"/>
+    <textarea placeholder="请输入内容" class="cons" name="remark"/>
   </view>
   <button style="background:{{color}};width:100%" class="sub" formType="submit">提交申请</button>
   </form>

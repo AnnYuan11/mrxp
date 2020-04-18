@@ -61,6 +61,8 @@ refresh(){
     sCallBack: function (data) {
         if(data.data.errorCode=="-200"){
             wx.removeStorageSync('session')
+        }else{
+          that.globalData.personal=data.data.result//个人信息
         }      
     },
     eCallBack: function () {

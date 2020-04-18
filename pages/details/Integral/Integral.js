@@ -20,7 +20,11 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    that.list()
+    that.list();
+    app.refresh()
+    that.setData({
+      personal:app.globalData.personal
+    })
   },
 
   /**

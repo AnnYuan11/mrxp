@@ -53,7 +53,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    
+    var that=this;
+    if(that.data.currentTab=='1'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+       that.dfkorder()//待付款
+     }
+    else if(that.data.currentTab=='2'){
+       that.data.currentPage=1,
+       that.data.totalCount= 0,//总是数据条数
+       that.data.pagecount= 0,//总的页数
+       that.bhz()//备货中
+     }
+     else if(that.data.currentTab=='3'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.psz()//配送中
+    }
+    else if(that.data.currentTab=='4'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.dth()//待提货
+    }
+    else if(that.data.currentTab=='5'){
+      that.data.currentPage=1,
+      that.data.totalCount= 0,//总是数据条数
+      that.data.pagecount= 0,//总的页数
+      that.yth()//已提货
+    }
   },
 
   /**

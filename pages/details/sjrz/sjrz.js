@@ -85,7 +85,7 @@ Page({
     } else {
       var that = this;
       var params = {
-        url: '/app/head/addHeadInfo',
+        url: '/app/head/addSupplierInfo',
         method: 'POST',
         data: Deparams,
         sCallBack: function (data) {
@@ -114,10 +114,10 @@ Page({
   initValidate() {
     // 验证字段的规则
     const rules = {
-      gysmc:{
+      supplieName:{
         required: true,
       },
-      name: {
+      contactName: {
         required: true,
       },
       phone: {
@@ -128,7 +128,7 @@ Page({
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
-      gysmc:{
+      suppliecontactName:{
         required: '请填写供应商名称',
       },
       name: {

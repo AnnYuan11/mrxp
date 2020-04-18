@@ -3,7 +3,7 @@
   <image src="/img/details/jf.png" mode="widthFix" style="width:100%"></image>
   <view class="jfxx">
     <view>我的积分</view>
-    <view class="num_jf">4500分</view>
+    <view class="num_jf">{{personal.integral}}分</view>
     <view class="rule">
       <view>积分明细</view>
       <view>积分规则</view>
