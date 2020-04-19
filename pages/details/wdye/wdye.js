@@ -1,5 +1,4 @@
 // pages/details/wdye/wdye.js
-import WxValidate from '../../../utils/WxValidate'
 import { Base } from "../../../utils/request/base.js";
 var app = getApp();
 var base = new Base();
@@ -67,7 +66,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.list();
+    } else {
+      //没有更多数据
+     app.nomore_showToast();
+    }
   },
 
   /**

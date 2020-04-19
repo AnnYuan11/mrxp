@@ -166,7 +166,7 @@ Page({
     console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
-        'commodityNumber':1,
+        'commodityNumber':that.data.options.commodityNumber,
         "commodityInfo":{
           "id":ddid
         }
@@ -242,7 +242,7 @@ Page({
     console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
-        'commodityNumber':1,
+        'commodityNumber':that.data.options.commodityNumber,
         "commodityInfo":{
           "id":ddid
         }
@@ -385,7 +385,7 @@ radioChange: function (e) {
       dzid=that.data.dzid
     }
    wx.redirectTo({
-     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+dzid
+     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+dzid+'&commodityNumber='+options.commodityNumber
    })
   },
 //  跳转到选择地址
@@ -393,7 +393,7 @@ Todz(){
   var that=this;
   var options=that.data.options
   wx.redirectTo({
-    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&yhqmoney='+options.sendType.yhqmoney+'元'
+    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&yhqmoney='+options.sendType.yhqmoney+'元'+'&commodityNumber='+options.commodityNumber
   })
 },
   // 自提点的地址

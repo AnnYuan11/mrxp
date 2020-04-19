@@ -87,13 +87,16 @@ Page({
       return false
     } else {
       var that = this;
+      var arg={
+        'userInfo':{
+          'id':userId,
+        },
+        'money':e.detail.value.txjt
+      }
       var params = {
         url: '/app/order/addUserCashOrderInfo',
         method: 'POST',
-        data:{
-          'userInfo.id':userId,
-          'money':e.detail.value.txjt
-        },
+        data:JSON.stringify(arg),
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
             wx.showToast({

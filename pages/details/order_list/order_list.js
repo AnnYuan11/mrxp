@@ -173,12 +173,6 @@ Page({
     that.setData({ currentTab: e.detail.current });
 
   },
-  // 去评价
-  gopj(e){
-    wx.navigateTo({
-      url: '/pages/details/sppj/sppj',
-    })
-  },
   // 全部订单
   Allorder(){
     var that=this;
@@ -744,5 +738,27 @@ Page({
       }
     }
     base.request(params);
+  },
+  // 去付款
+  Topay(e){
+    console.log(e)
+    var list=e.currentTarget.dataset.item.commoditySubOrderInfoList
+    const product = [];
+        for (let i = 0; i < list.length; i++) {
+            const productItem = {};
+            productItem['id'] = list[i].commodityInfo.id
+            productItem['name'] = list[i].commodityInfo.productInfo.commodityName
+            productItem['photo'] = list[i].commodityInfo.productInfo.photo
+            productItem['price'] = list[i].commodityInfo.productInfo.price
+            productItem['number'] = list[i].commodityNumber
+            product.push(productItem)
+        } 
+        const productInfo = {};
+        productInfo['sendType'] = e.currentTarget.dataset.item.orderSendType
+        productInfo['productList'] = product
+        wx.setStorageSync('productInfo', productInfo)
+        wx.navigateTo({
+          url: `/pages/addOrder/add_order`
+        })
   }
 })

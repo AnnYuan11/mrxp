@@ -1,33 +1,44 @@
 <!--pages/details/orderdetails_jf/jfddxx.wxml-->
 <view class="section">
 	<view class="type">到店自提</view>
-	<view class="type kd" wx:if="{{kd}}">快递到家</view>
 	<view class="message_kd">
 		<view class="top">
 			<view class="img">
 				<image src="/img/public/logo.png" mode="widthFix"></image>
 			</view>
 			<view class="message">
-				<text class="name">紫薇花园州每一天店</text>
+				<text class="name">{{shopName}}</text>
 				<view class="qhdz_box">
-					<text class="phone">15229398888</text>
+					<text class="phone">{{phones}}</text>
 				</view>
 			</view>
 		</view>
 		<view class="bottom">
-			<view class="address">地 址：陕西省西安市未央区凤城十路海荣名城店</view>
-			<view class="thr">提货人：历二年 13245678989</view>
+			<view class="address">地 址：{{addressth}}</view>
+			<view class="thr">提货人：<open-data type="userNickName"></open-data> {{phone}}</view>
 		</view>
 	</view>
 </view>
 <view class="section section2">
 	<view class="order_num">
-		<text> 订单号：20031013403642018</text>
-		<text> 2020-02-13 13:12</text>
+		<!-- <text> 订单号：{{list}}</text> -->
+		<text> {{list.updateTime}}</text>
 	</view>
 	<view class="order">
 		<view class="img">
-			<image src="/img/pic/1.png"></image>
+			<image src="{{imgUrl}}{{list.photo}}"></image>
+		</view>
+		<view class="mess">
+			<text>{{list.commodityName}}</text>
+			<view class="price">
+				<text class="jg">￥{{list.price}}</text>
+				<text class="num">×{{list.totalBuyLimitNumbers}}</text>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="order">
+		<view class="img">
+			<image src="{{imgUrl}}{{list.photo}}"></image>
 		</view>
 		<view class="mess">
 			<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
@@ -36,19 +47,7 @@
 				<text class="num">×3</text>
 			</view>
 		</view>
-	</view>
-	<view class="order">
-		<view class="img">
-			<image src="/img/pic/1.png"></image>
-		</view>
-		<view class="mess">
-			<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯</text>
-			<view class="price">
-				<text class="jg">￥16.5</text>
-				<text class="num">×3</text>
-			</view>
-		</view>
-	</view>
+	</view> -->
 </view>
 <view class="section section2">
   <view class="instructions">
@@ -59,7 +58,7 @@
 <!-- 底部 -->
 <view class="Tbottom">
   <view class="jine">
-    <text class="sf">800积分</text>
+    <text class="sf">{{list.integral}}积分</text>
   </view>
-  <view class="sub">提交订单</view>
+  <view class="sub" bindtap="orderMessage">提交订单</view>
 </view>

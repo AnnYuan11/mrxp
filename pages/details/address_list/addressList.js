@@ -196,7 +196,7 @@ Page({
     if(that.data.options.toddxq=="1"){
       var options=that.data.options
       wx.redirectTo({
-        url: '/pages/details/order_details/order_details?dzid='+e.currentTarget.dataset.dzid+'&ddid='+options.ddid+'&yhqmoney='+options.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid,
+        url: '/pages/details/order_details/order_details?dzid='+e.currentTarget.dataset.dzid+'&ddid='+options.ddid+'&yhqmoney='+options.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&commodityNumber='+options.commodityNumber,
       })
     }else{
       return

@@ -1,19 +1,14 @@
 <!--pages/details/jfmx/jfmx.wxml-->
 <view class="list_box">
-  <view class="list">
-    <view class="left">
-      <text class="ddh">订单号：8994004840004</text>
-      <text class="mon">+100.00</text>
-      <text class="date">2020-02-14 14:30:35</text>
+  <block wx:for="{{expenseList}}">
+    <view class="list">
+      <view class="left">
+        <text class="ddh">订单号：{{item.orderNumber}}</text>
+        <text class="mon" wx:if="{{item.type=='1'}}">+{{item.integral}}</text>
+         <text class="mon"wx:else>-{{item.integral}}</text>
+        <text class="date">{{item.updateTime}}</text>
+      </view>
+      <view class="right xf">{{item.type}}</view>
     </view>
-    <view class="right xf">消费</view>
-  </view>
-  <view class="list">
-    <view class="left">
-      <text class="ddh">订单号：8994004840004</text>
-      <text class="mon">+100.00</text>
-      <text class="date">2020-02-14 14:30:35</text>
-    </view>
-    <view class="right">充值</view>
-  </view>
+  </block>
 </view>

@@ -47,7 +47,7 @@
         <text>{{options.ddname}}</text>
         <view class="price">
           <text class="jg">￥{{options.ddjg}}</text>
-          <text class="num">×1</text>
+          <text class="num">×{{options.commodityNumber}}</text>
         </view>
       </view>
     </view>

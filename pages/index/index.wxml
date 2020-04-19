@@ -86,8 +86,15 @@
 									</view>
 									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.productInfo.sendType}}">加入购物车</view>
 								</view>
-
+								<view class="buy_box">
+									<view class="figure">
+										<image src="/img/pic/1.png"></image>
+										<text>小朋友JK</text>
+									</view>
+									<text class="so">等购买了此产品</text>
+								</view>
 							</view>
+
 						</view>
 					</navigator>	
 				</block>

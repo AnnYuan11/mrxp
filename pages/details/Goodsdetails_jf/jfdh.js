@@ -129,7 +129,8 @@ Page({
         var artice = data.data.result.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
-          list:data.data.result
+          list:data.data.result,
+          lists:JSON.stringify(data.data.result)
         })
         
       },

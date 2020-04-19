@@ -391,3 +391,34 @@ video {
 .thsj .fsgz .limited{
   font-size: 28rpx;
 }
+/* 购买记录 */
+.buy_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.figure{
+  width: 150rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.figure image{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  vertical-align: middle
+}
+.figure text{
+  font-size: 20rpx;
+  margin-left: 8rpx;
+}
+.so{
+  font-size:24rpx;
+  color:rgba(144,144,144,1);
+  margin-top: 8rpx;
+}
