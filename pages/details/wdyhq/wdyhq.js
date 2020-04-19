@@ -302,7 +302,7 @@ Page({
     }else if (that.data.type == 'shopSubmit'){
       console.log(e.currentTarget.dataset.id)
       wx.redirectTo({
-        url: '/pages/addOrder/add_order?couponsId='+e.currentTarget.dataset.id,
+        url: '/pages/addOrder/add_order?couponsId='+e.currentTarget.dataset.id+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'元',
       })
     } else {
       return

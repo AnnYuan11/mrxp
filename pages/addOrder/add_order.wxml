@@ -25,7 +25,7 @@
       </view>
     </view>
   </view>
-  <view class="section" wx:else  bindtap="Todz">
+  <view class="section" wx:else  bindtap="selectDz">
     <view class="type kd">快递到家</view>
     <view class="message_kd" wx:if="{{mrdz!=''}}">
       <view class="bottom">
@@ -99,7 +99,7 @@
 <view class="Tbottom">
   <view class="jine">
     <text class="sf">实付：￥{{money.paymentMoney}}</text>
-    <text class="hj">(合计￥{{productInfo.totalPrice}})</text>
+    <text class="hj">(合计￥{{money.needMoney}})</text>
   </view>
-  <view class="sub" bindtap="orderMessage">提交订单</view>
+  <view class="sub" bindtap="orderSubmit">提交订单</view>
 </view>

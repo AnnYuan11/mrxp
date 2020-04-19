@@ -61,6 +61,9 @@ Component({
       // 价格方法
       this.count_price();
       this.getShopList(this.data.shoppingType)
+      this.setData({
+        selectAllStatus: false
+      })
     },
   },
   /**

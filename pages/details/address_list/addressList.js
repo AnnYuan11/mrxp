@@ -198,7 +198,14 @@ Page({
       wx.redirectTo({
         url: '/pages/details/order_details/order_details?dzid='+e.currentTarget.dataset.dzid+'&ddid='+options.ddid+'&yhqmoney='+options.yhqmoney+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&commodityNumber='+options.commodityNumber,
       })
-    }else{
+    }else if (that.data.options.type == 'shopSubmit') {
+      console.log(e.currentTarget.dataset.dzid)
+      wx.redirectTo({
+        url: '/pages/addOrder/add_order'
+      })
+      wx.setStorageSync('dzid',e.currentTarget.dataset.dzid)
+    }
+    else{
       return
     }
   },
