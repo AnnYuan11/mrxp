@@ -49,7 +49,7 @@
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待支付'}}">
-								<view class="sub buy" bindtap="cancel">取消订单</view>
+								<view class="sub buy" catchtap="cancel" data-id="{{item.id}}">取消订单</view>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待支付'}}">
 								<view class="sub buy" bindtap="gopj">去付款</view>
@@ -104,7 +104,7 @@
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
 							<view class="button" style="width:30%">
-								<view class="sub buy" bindtap="cancel">取消订单</view>
+								<view class="sub buy" catchtap="cancel" data-id="{{item.id}}">取消订单</view>
 							</view>
 							<view class="button" style="width:30%">
 								<view class="sub buy" bindtap="gopj">去付款</view>

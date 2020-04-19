@@ -5,7 +5,9 @@
     <view>我的积分</view>
     <view class="num_jf">{{personal.integral}}分</view>
     <view class="rule">
+    <navigator url="/pages/details/jfmx/jfmx" hover-class="none">
       <view>积分明细</view>
+    </navigator>
       <view>积分规则</view>
     </view>
   </view>

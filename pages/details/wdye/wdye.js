@@ -86,15 +86,15 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userId':id,
       },
       sCallBack: function (data) {
          var expenseList=data.data.result.datas;
         expenseList.forEach(item=>{
           if(item.orderType=='1'){
-            item.couponInfo.type='充值'
+            item.orderType='充值'
           }else{
-            item.couponInfo.type='消费'
+            item.orderType='消费'
           }
   
           item.paymentTime=item.paymentTime.substring(0,10)

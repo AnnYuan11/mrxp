@@ -78,7 +78,8 @@ Page({
   },
   // 提交
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    console.log(e)
+    var userId=wx.getStorageSync('userId')
     const Deparams = e.detail.value;
     if (!this.WxValidate.checkForm(Deparams)) {
       const error = this.WxValidate.errorList[0]
@@ -87,9 +88,12 @@ Page({
     } else {
       var that = this;
       var params = {
-        // url: '/app/head/addHeadInfo',
+        url: '/app/order/addUserCashOrderInfo',
         method: 'POST',
-        data: Deparams,
+        data:{
+          'userInfo.id':userId,
+          'money':e.detail.value.txjt
+        },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
             wx.showToast({
@@ -102,7 +106,8 @@ Page({
             }, 2000)
           } else {
             wx.showToast({
-              title: data.data.errorMsg
+              title: data.data.errorMsg,
+              icon:'none'
             })
           }
         },

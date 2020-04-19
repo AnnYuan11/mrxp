@@ -710,11 +710,39 @@ Page({
   //     app.nomore_showToast();
   //   }
   // },
+
+
+
   // 跳转到商品详情
   Todetails(e){
     console.log(e)
     wx.navigateTo({
       url: '/pages/details/orderDetailsck/ddxx?id='+e.currentTarget.dataset.id,
     })
+  },
+  // 取消订单
+  cancel(e){
+    var that=this;
+    console.log(e)
+    var params = {
+      url: '/app/order/deleteCommodityOrderInfo',
+      method: 'GET',
+      data: {
+        'id':e.currentTarget.dataset.id,//订单id
+      },
+      sCallBack: function (data) {
+        if(data.data.errorCode=="0"){
+          wx.showToast({
+            title: data.data.result,
+
+          })
+          that.Allorder()
+          that.dfkorder()
+        }
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   }
 })

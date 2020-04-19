@@ -24,7 +24,8 @@
     "pages/details/wdye/wdye",
     "pages/details/wdyhq/wdyhq",
     "pages/details/h/h",
-    "pages/details/address_edit/address_edit"
+    "pages/details/address_edit/address_edit",
+    "pages/details/jfmx/jfmx"
   ],
   "window": {
     "backgroundTextStyle": "light",

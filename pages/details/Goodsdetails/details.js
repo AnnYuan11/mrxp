@@ -151,10 +151,10 @@ Page({
   },
   // 立即购买
   buyNow(){
-    var userId=wx.getStorageSync("userId")
-    console.log(userId)
+    var session=wx.getStorageSync("session")
+    console.log(session)
     var that=this;
-    if(userId==''){
+    if(session==''){
       wx.navigateTo({
         url: '/pages/login/login',
       })
@@ -162,7 +162,7 @@ Page({
       var ddid = that.data.list.id;
       var ddpic = that.data.list.productInfo.photo;
       var ddname = that.data.list.productInfo.commodityName;
-      var ddjg = that.data.list.productInfo.crossedPrice;
+      var ddjg = that.data.list.productInfo.price;
       var sendType =that.data.list.productInfo.sendType
       wx.navigateTo({
         url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg+'&sendType='+sendType,
