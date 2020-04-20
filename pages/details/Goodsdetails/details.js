@@ -183,4 +183,47 @@ toGwc(){
     url: '/pages/gwc/gwc',
   })
 },
+// 加入购物车
+joinGwc(e){
+  var that=this;
+  console.log(e)
+  var userId = wx.getStorageSync('userId')
+  var spid=e.currentTarget.dataset.spid;
+  var sendtype=e.currentTarget.dataset.sendtype
+  if(sendtype=="到店自提"){
+    sendtype=1
+  }else{
+    sendtype=2
+  }
+  var params = {
+    url: '/app/commodity/addShoppingCartInfo',
+    method: 'POST',
+    data: {
+     'commodityInfo':{
+       'id':spid
+     },
+     'commodityNumber':'1',
+     'shoppingCarType':sendtype,
+     'userInfo':{
+       'id':userId
+     }
+    },
+    sCallBack: function (data) {
+      if(data.data.errorCode=='0'){
+        wx.showToast({
+          title: data.data.result,
+        })
+        app.getShopNum()
+      } else {
+        wx.showToast({
+          title: data.data.result,
+        })
+      }
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
 })

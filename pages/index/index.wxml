@@ -59,7 +59,12 @@
 								<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
 								
 								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+								<!-- 已售罄 -->
+								<view class="supernatant" wx:if="{{aas}}">
+									<image src="/img/public/fc.png"></image>
+								</view>
 							</view>
+						
 							<view class="bottom_box">
 								<view class="thsj">
 									<text class="spmc">{{item.productInfo.commodityName}}</text>

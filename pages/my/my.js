@@ -31,13 +31,13 @@ Page({
    */
   onShow: function () {
     var  that=this;
+    app.refresh()       
     var session=wx.getStorageSync('session')
     console.log(session)
     this.setData({
       session:session,
       phone:wx.getStorageSync('phone')
     })
-    app.refresh()       
   },
 
   /**

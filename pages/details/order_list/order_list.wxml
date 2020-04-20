@@ -107,7 +107,7 @@
 								<view class="sub buy" catchtap="cancel" data-id="{{item.id}}">取消订单</view>
 							</view>
 							<view class="button" style="width:30%">
-								<view class="sub buy" catchtap="Topay">去付款</view>
+								<view class="sub buy"  catchtap="Topay" data-item="{{item}}">去付款</view>
 							</view>
 						</view>
 					</view>

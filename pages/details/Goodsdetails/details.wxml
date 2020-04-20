@@ -131,5 +131,5 @@
 		</view>
 	</view>
 	<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
-	<view class="bot shoppingCart">加入购物车</view>
+	<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.productInfo.sendType}}">加入购物车</view>
 </view>

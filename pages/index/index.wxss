@@ -170,6 +170,13 @@ swiper image{
   height: 400rpx;
   border-radius: 8rpx;
 }
+.supernatant{
+  background: rgba(0,0,0,0.6);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+}
 .type{
   width:150rpx;
   height:40rpx;
@@ -286,6 +293,7 @@ swiper image{
 /* 视频 */
 video {
   width: 100%;
+  height: 400rpx;
 }
 /* 弹窗 */
 .flow{

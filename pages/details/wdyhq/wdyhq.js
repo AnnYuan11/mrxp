@@ -124,6 +124,8 @@ Page({
     that.setData({ currentTab: e.detail.current });
 
   },
+
+  
   // 未使用列表
   list(){
     var that=this;

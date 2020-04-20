@@ -324,11 +324,11 @@ radioChange: function (e) {
             wx.showToast({
               title: '已支付成功！',
               icon: 'none',
-              duration: 3000,
+              duration: 2000,
               success: function () {
                 setTimeout(function () {
                   
-                }, 3000);
+                }, 2000);
 
               }
             })
@@ -364,6 +364,25 @@ radioChange: function (e) {
           wx.showToast({
             title: data.data.errorMsg,
             icon:'none'
+          })
+        }else if(data.data.errorCode=='-200'){
+          wx.showToast({
+            title: data.data.errorMsg,
+            icon:'none'
+          })
+        }else{
+          wx.showToast({
+            title: data.data.result,
+            icon:'none',
+            duration: 2000,
+              success: function () {
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '/pages/details/order_list/order_list',
+                  })
+                }, 2000);
+
+              }
           })
         }
            
