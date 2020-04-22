@@ -151,3 +151,31 @@
   background: #E10B09;
   color: #fff;
 }
+/* 我的提货码 */
+.thm_box{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999999;
+
+}
+.thm_box .img_box{
+  position: relative;
+  top: 16%;
+  left: 0;
+  z-index: 9999;
+  text-align: center;
+}
+.thm_box .img_box image{
+  width: 400rpx;
+  height: 400rpx;
+}
+.thm_box .img_box text{
+  color: #fff;
+  display: block;
+  font-size: 40rpx;
+  margin-top: 20rpx;
+}

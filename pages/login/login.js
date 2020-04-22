@@ -96,7 +96,17 @@ bindGetUserInfo: function(e) {
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
       that.setData({
-        issq:false
+        issq:false,
+        nickName:e.detail.userInfo.nickName,
+        photo:e.detail.userInfo.avatarUrl
+      })
+      wx.setStorage({
+        data:e.detail.userInfo.nickName,
+        key: 'nickName',
+      })
+      wx.setStorage({
+        data:e.detail.userInfo.avatarUrl,
+        key: 'photo',
       })
       console.log("用户的信息如下：");
       console.log(e.detail.userInfo);
@@ -189,12 +199,16 @@ getPhoneNumber: function(e) { 
 wxlogin(){
     var that=this;
     var openId=wx.getStorageSync('openId')
+    var nickName=wx.getStorageSync('nickName')
+    var photo=wx.getStorageSync('photo')
     var params = {
         url: '/app/user/login',
         method: 'POST',
         data: {
             'phone':that.data.phone,
-            'openId':openId
+            'openId':openId,
+            'nickName':nickName,
+            'photo':photo
         },
         sCallBack: function (data) {
             console.log(data.data.result.id)

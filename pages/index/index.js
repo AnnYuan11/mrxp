@@ -141,7 +141,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.bindscrolltolower()
+    var that=this
+    if(that.data.currentTab=='0'){
+      that.bindscrolltolower()
+    }else{
+      that.bindscrolltolower2()
+    }
+    
   },
 
   /**
@@ -267,46 +273,6 @@ shopList(className){
     }
   }
   base.request(params);
-},
-// 今日售卖列表加载
-bindscrolltolower(){
-  var that = this;
-    console.log(that.data.pageIndex)
-    // 显示加载图标
-    wx.showLoading({
-      title: '玩命加载中',
-    })
-    // 页数+1
-    var page = ++that.data.pageIndex;
-    var base = new Base();
-    var params = {
-      url: '/app/commodity/listCommodityInfo',
-      method: 'POST',
-      data: {
-        "pageIndex": page,
-        "pageSize": that.data.pageSize,
-      },
-      sCallBack: function (res) {
-        console.log(res);
-        // 回调函数
-
-        var moment_list = that.data.listToday;
-
-        for (var i = 0; i < res.data.result.datas.length; i++) {
-          moment_list.push(res.data.result.datas[i]);
-        }
-        // 设置数据
-        that.setData({
-          listToday: moment_list
-        })
-        // 隐藏加载框
-        wx.hideLoading();
-      },
-      eCallBack: function () {
-
-      }
-    }
-    base.request(params);
 },
 // 明日售卖
 shopListM(className){
@@ -558,10 +524,21 @@ query(){
   },
   // 今日售卖下拉加载
   bindscrolltolower: function () {
-    console.log(this.data.currentPage+"....."+this.data.pagecount)
+    console.log('今天')
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.shopList();
+    } else {
+      //没有更多数据
+     app.nomore_showToast();
+    }
+  },
+  // 明日售卖下拉加载
+  bindscrolltolower2: function () {
+    console.log('ming天')
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.shopListM();
     } else {
       //没有更多数据
      app.nomore_showToast();

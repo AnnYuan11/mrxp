@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/setting/setting",
+    "pages/login/login",
     "pages/details/sqtx/sqtx",
     "pages/details/Integral/Integral",
-    "pages/login/login",
     "pages/details/chongzhi/chongzhi",
     "pages/details/order_list/order_list",
     "pages/details/order_details/order_details",

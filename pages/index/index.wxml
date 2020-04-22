@@ -50,7 +50,7 @@
 	</view>
 	<view class="swiperBox">
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
-			<scroll-view scroll-y style="height: 100%">
+			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
 				<block wx:for="{{listToday}}">
 					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
 						<view class="list_box">
@@ -147,7 +147,7 @@
 							</view>
 						</navigator>	
 				</block>
-				<view wx:if='{{listTomorow==""}}'>暂无数据</view>
+
 			</scroll-view>
 		</view>
 	</view>

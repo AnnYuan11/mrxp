@@ -1,6 +1,5 @@
-// pages/my/my.js
-import { Base } from "../../utils/request/base.js";
-var baseUrl = "http://139.155.113.100:8085";
+// pages/details/setting/setting.js
+import { Base } from "../../../utils/request/base.js";
 var app = getApp();
 var base = new Base();
 Page({
@@ -9,16 +8,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+    color: getApp().globalData.color,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -30,15 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var  that=this;
-    app.refresh()    
-    app.getOpenId()
-    var session=wx.getStorageSync('session')
-    console.log(session)
-    this.setData({
-      session:session,
-      phone:wx.getStorageSync('phone')
-    })
+
   },
 
   /**
@@ -47,8 +38,6 @@ Page({
   onHide: function () {
 
   },
-  
-
 
   /**
    * 生命周期函数--监听页面卸载
@@ -77,6 +66,25 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-
+  // 退出登录
+  exit(){
+    wx.showModal({
+      title: '提示',
+      content: '确认退出吗',
+      success (res) {
+        if (res.confirm) {
+          wx.clearStorageSync()
+          wx.navigateBack({
+            complete: (res) => {
+              delta: 1 
+            },
+          })
+        } else if (res.cancel) {
+          return;
+          
+        }
+      }
+    })
+    
+  }
 })

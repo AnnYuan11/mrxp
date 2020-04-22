@@ -760,5 +760,9 @@ Page({
         wx.navigateTo({
           url: `/pages/addOrder/add_order`
         })
+  },
+  // 我的提货码
+  thm(){
+
   }
 })

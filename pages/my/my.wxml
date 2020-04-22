@@ -140,13 +140,14 @@
 				</i-grid-icon>
 				<i-grid-label>客服中心</i-grid-label>
 			</i-grid-item>
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="/img/my/a8.png" />
-				</i-grid-icon>
-				<i-grid-label>系统设置</i-grid-label>
-			</i-grid-item>
-
+			<navigator url="/pages/details/setting/setting" hover-class="none">
+				<i-grid-item>
+					<i-grid-icon>
+						<image src="/img/my/a8.png" />
+					</i-grid-icon>
+					<i-grid-label>系统设置</i-grid-label>
+				</i-grid-item>
+			</navigator>
 		</i-grid>
 	</view>
 </view>

@@ -55,10 +55,10 @@
 								<view class="sub buy" catchtap="Topay" data-item="{{item}}">去付款</view>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
-								<view class="sub buy" catchtap="gopj">申请售后</view>
+								<view class="sub buy" catchtap="sqsh">申请售后</view>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待提货'}}">
-								<view class="sub buy" catchtap="gopj">我的提货码</view>
+								<view class="sub buy" catchtap="thm">我的提货码</view>
 							</view>
 						</view>
 					</view>
@@ -245,6 +245,7 @@
 					</view>
 				</view>
 			</block>
+		
 		</scroll-view>
 	</swiper-item>
 	<!-- 已提货 -->
@@ -388,4 +389,12 @@
 			</block>
 		</scroll-view>
 	</swiper-item> -->
+		
 </swiper>
+<view class="thm_box" wx:if="{{orderStatus=='1'}}">
+	<view class="img_box">
+		<image src="/img/pic/1.png"></image>
+		<text>提货码：12345</text>
+	</view>
+
+</view>
