@@ -60,11 +60,11 @@
 
 								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 								<!-- 已售罄 -->
-								<view class="supernatant" wx:if="{{aas}}">
+								<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
 									<image src="/img/public/fc.png"></image>
 								</view>
 								<!-- 活动已结束 -->
-								<view class="supernatant" wx:if="{{aas}}">
+								<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
 									<image src="/img/public/fc2.png"></image>
 								</view>
 							</view>
@@ -85,7 +85,7 @@
 									</view>
 									<view class="right" style="line-height:50rpx">
 										<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
-										<text class="limited">限量{{item.totalBuyLimitNumbers}}份</text>
+										<text class="limited">限量{{item.limitBuyNumbers}}份</text>
 									</view>
 								</view>
 								<view class="price_box">
@@ -93,14 +93,19 @@
 										<text>￥{{item.price}}</text>
 										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
 									</view>
-									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}">加入购物车</view>
-									<view class="jrgec over" wx:if="{{aas}}">活动已结束</view>
+									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
+									<view class="jrgec over" wx:else>{{item.isBuy}}</view>
 								</view>
 								<view class="buy_box">
-									<view class="figure">
-										<image src="/img/pic/1.png"></image>
-										<text>小朋友JK</text>
+									<view class="box_figure">
+									<block wx:for="{{item.orderRecord.orderList}}" wx:for-item="itemName"></block>
+										<view class="figure">
+											<image src="{{itemName.photo}}"></image>
+											<text>{{itemName.nick_name}}</text>
+										</view>
+										
 									</view>
+
 									<text class="so">等购买了此产品</text>
 								</view>
 							</view>
@@ -120,34 +125,53 @@
 								<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
 
 								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+								<!-- 已售罄 -->
+								<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
+									<image src="/img/public/fc.png"></image>
+								</view>
+								<!-- 活动已结束 -->
+								<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
+									<image src="/img/public/fc2.png"></image>
+								</view>
 							</view>
+
 							<view class="bottom_box">
 								<view class="thsj">
 									<text class="spmc">{{item.productInfo.commodityName}}</text>
 									<view class="right fsgz">
-										<text class="limited">666</text>
+										<text class="limited">{{item.viewNumber}}</text>
 										<text>粉丝关注</text>
 									</view>
 								</view>
+
 								<view class="thsj">
 									<view class="left">
-										<text>预售时间:{{item.productInfo.pickDate}}</text>
-										<text class="rq">提货时间:2月30日</text>
+										<text>预售时间:{{item.startTime}}</text>
+										<text class="rq">提货时间:{{item.pickDate}}</text>
 									</view>
 									<view class="right" style="line-height:50rpx">
-										<text>今日已售<text class="num">{{item.productInfo.salesNumber}}</text>份</text>
-										<text class="limited">限量{{item.productInfo.totalBuyLimitNumbers}}份</text>
+										<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+										<text class="limited">限量{{item.limitBuyNumbers}}份</text>
 									</view>
 								</view>
 								<view class="price_box">
 									<view class="price">
-										<text>￥{{item.productInfo.price}}</text>
-										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
+										<text>￥{{item.price}}</text>
+										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
 									</view>
-									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}">加入购物车</view>
+									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
+									<view class="jrgec over" wx:else>{{item.isBuy}}</view>
 								</view>
+								<view class="buy_box">
+									<view class="figure">
+										<image src="/img/pic/1.png"></image>
+										<text>小朋友JK</text>
+									</view>
 
+									<text class="so">等购买了此产品</text>
+								</view>
 							</view>
+
 						</view>
 					</navigator>
 				</block>

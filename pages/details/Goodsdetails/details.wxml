@@ -20,7 +20,7 @@
 		<view class="sales">
 			<view class="info_pros">
 				<text>今日已售{{list.salesNumber}}</text>
-				<text class="instructions">/限售{{list.totalBuyLimitNumbers}}件</text>
+				<text class="instructions">/限售{{list.limitBuyNumbers}}件</text>
 			</view>
 			<view class="fans">
 				粉丝：{{list.viewNumber}}人

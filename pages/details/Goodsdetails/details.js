@@ -253,11 +253,17 @@ buyRecord(e){
 // 修改粉丝数
 fanNum(){
   var that=this;
+  var userId = wx.getStorageSync('userId')
   var params = {
-    url: '/app/commodity/updateCommodityInfoView',
-    method: 'GET',
+    url: '/app/commodity/addCommodityInfoFan',
+    method: 'POST',
     data: {
-     id:that.data.id
+      'commodityInfo':{
+        'id':that.data.id
+      },
+      'userInfo':{
+        'id':userId
+      }
     },
     sCallBack: function (data) {
       

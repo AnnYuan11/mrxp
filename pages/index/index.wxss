@@ -419,6 +419,18 @@ video {
   display: flex;
   align-items: center;
 }
+.box_figure{
+  width: 73%;
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+}
+
 .figure{
   width: 150rpx;
   display: -webkit-box;

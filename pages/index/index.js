@@ -254,6 +254,14 @@ shopList(className){
             var ht=that.data.tomorow
             item.pickDate=ht
           }
+          if(item.isBuy==2){
+            item.isBuy="活动未开始"
+          }else if(item.isBuy==3){
+            item.isBuy="活动已结束"
+          }else if(item.isBuy==4){
+            item.isBuy="已售罄"
+          }
+          
         })
       }
       var temlist = that.data.listToday; //原始的数据集合
@@ -310,6 +318,13 @@ shopListM(className){
             that.getDateStr(null,2)
             var ht=that.data.tomorow
             item.pickDate=ht
+          }
+          if(item.isBuy==2){
+            item.isBuy="活动未开始"
+          }else if(item.isBuy==3){
+            item.isBuy="活动已结束"
+          }else if(item.isBuy==4){
+            item.isBuy="已售罄"
           }
         })
       }
