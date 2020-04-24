@@ -420,7 +420,7 @@ video {
   align-items: center;
 }
 .box_figure{
-  width: 73%;
+  max-width: 73%;
   display: flex;
   overflow: hidden;
   text-overflow: ellipsis;
