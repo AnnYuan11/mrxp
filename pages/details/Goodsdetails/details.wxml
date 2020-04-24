@@ -1,38 +1,38 @@
 <!--pages/details/Goodsdetails/details.wxml-->
-	<import src="../../../utils/wxParse/wxParse.wxml"/> 
-	<view class="img_goods">
-		<image src="{{imgUrl}}{{list.productInfo.photo}}"></image>
+<import src="../../../utils/wxParse/wxParse.wxml" />
+<view class="img_goods">
+	<image src="{{imgUrl}}{{list.productInfo.photo}}"></image>
+</view>
+<view class="goods_introduce">
+	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
+	<view class="price_box">￥
+		<text class="font_xl">{{list.price}}</text>
+		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
 	</view>
-	<view class="goods_introduce">
-		<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
-		<view class="price_box">￥
-			<text class="font_xl">{{list.price}}</text>
-			<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
+	<view class="top_right">
+		<text class="font">{{list.pickDate}}</text>
+		<text class="font_sm">{{list.sendType}}</text>
+	</view>
+	<view class="info_top">
+		<view class="title_info">
+			{{list.productInfo.commodityName}}
 		</view>
-		<view class="top_right">
-			<text class="font">{{list.pickDate}}</text>
-			<text class="font_sm">{{list.sendType}}</text>
-		</view>
-		<view class="info_top">
-			<view class="title_info">
-				{{list.productInfo.commodityName}}
+		<view class="sales">
+			<view class="info_pros">
+				<text>今日已售{{list.salesNumber}}</text>
+				<text class="instructions">/限售{{list.totalBuyLimitNumbers}}件</text>
 			</view>
-			<view class="sales">
-				<view class="info_pros">
-					<text>今日已售{{list.salesNumber}}</text>
-					<text class="instructions">/限售{{list.totalBuyLimitNumbers}}件</text>
-				</view>
-				<view class="fans">
-					粉丝：302人
-				</view>
+			<view class="fans">
+				粉丝：{{list.viewNumber}}人
+			</view>
 
-			</view>
-			<view class="gys_box">
-				<image src="/img/details/gys.png" mode="widthFix"></image>
-				<text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text>
-			</view>
+		</view>
+		<view class="gys_box">
+			<image src="/img/details/gys.png" mode="widthFix"></image>
+			<text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text>
 		</view>
 	</view>
+</view>
 
 <!-- 供应商资质 -->
 <view class="gyszz_box">
@@ -48,49 +48,31 @@
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='0'}}">
 		<scroll-view scroll-y style="height: 100%">
-		<view class="box">
-			<template is="wxParse" data="{{wxParseData:artice.nodes}}"/>
-		</view>
-			
+			<view class="box">
+				<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
+			</view>
+
 		</scroll-view>
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
 		<scroll-view scroll-y style="height: 100%">
 			<view class="gmjl_title">
-				<text>目前供</text><text class="gmjl_num">100</text><text>人参与购买，商品共销售</text>
-				<text class="gmjl_num">100</text><text>份</text>
+				<text>目前供</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
+				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
 			</view>
 			<view class="gmjl_box">
-				<view class="gmjl_list">
-					<image src="/img/pic/4.png" mode="widthFix"></image>
-					<view class="gmjl_mess">
-						<text class="mz">王XX</text>
-						<text>2020-04-05 12:20:23</text>
+				<block wx:for="{{RecordList.orderList}}">
+					<view class="gmjl_list">
+						<image src="{{item.photo}}" mode="widthFix"></image>
+						<view class="gmjl_mess">
+							<text class="mz">{{item.nick_name}}</text>
+							<text>{{item.order_time}}</text>
+						</view>
+						<view class="gmjl_shul">
+							<text>{{item.commodity_number}}</text>份
+						</view>
 					</view>
-					<view class="gmjl_shul">
-						<text>2</text>份
-					</view>
-				</view>
-				<view class="gmjl_list">
-					<image src="/img/pic/4.png" mode="widthFix"></image>
-					<view class="gmjl_mess">
-						<text class="mz">王XX</text>
-						<text>2020-04-05 12:20:23</text>
-					</view>
-					<view class="gmjl_shul">
-						<text>2</text>份
-					</view>
-				</view>
-				<view class="gmjl_list">
-					<image src="/img/pic/4.png" mode="widthFix"></image>
-					<view class="gmjl_mess">
-						<text class="mz">王XX</text>
-						<text>2020-04-05 12:20:23</text>
-					</view>
-					<view class="gmjl_shul">
-						<text>2</text>份
-					</view>
-				</view>
+				</block>
 			</view>
 		</scroll-view>
 	</view>
@@ -125,7 +107,7 @@
 			<image src="/img/details/sy.png" mode="widthFix"></image>
 			<text>首页</text>
 		</view>
-		<view class="index"  catchtap="toGwc">
+		<view class="index" catchtap="toGwc">
 			<image src="/img/details/gwc.png" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>

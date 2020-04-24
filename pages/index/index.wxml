@@ -63,21 +63,25 @@
 								<view class="supernatant" wx:if="{{aas}}">
 									<image src="/img/public/fc.png"></image>
 								</view>
+								<!-- 活动已结束 -->
+								<view class="supernatant" wx:if="{{aas}}">
+									<image src="/img/public/fc2.png"></image>
+								</view>
 							</view>
 
 							<view class="bottom_box">
 								<view class="thsj">
 									<text class="spmc">{{item.productInfo.commodityName}}</text>
 									<view class="right fsgz">
-										<text class="limited">666</text>
+										<text class="limited">{{item.viewNumber}}</text>
 										<text>粉丝关注</text>
 									</view>
 								</view>
 
 								<view class="thsj">
 									<view class="left">
-										<text>预售时间:{{item.pickDate}}</text>
-										<text class="rq">提货时间:2月30日</text>
+										<text>预售时间:{{item.startTime}}</text>
+										<text class="rq">提货时间:{{item.pickDate}}</text>
 									</view>
 									<view class="right" style="line-height:50rpx">
 										<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
@@ -90,6 +94,7 @@
 										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
 									</view>
 									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}">加入购物车</view>
+									<view class="jrgec over" wx:if="{{aas}}">活动已结束</view>
 								</view>
 								<view class="buy_box">
 									<view class="figure">
@@ -124,7 +129,6 @@
 										<text>粉丝关注</text>
 									</view>
 								</view>
-
 								<view class="thsj">
 									<view class="left">
 										<text>预售时间:{{item.productInfo.pickDate}}</text>

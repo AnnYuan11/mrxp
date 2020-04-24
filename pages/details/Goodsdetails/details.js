@@ -24,6 +24,8 @@ Page({
       id:options.id,
     })
     that.shop();//商品内容
+    that.buyRecord()//购买记录
+    that.fanNum()//修改粉丝数
   },
   // 获取日期
   getDateStr: function(today, addDayCount) {
@@ -226,4 +228,44 @@ joinGwc(e){
   }
   base.request(params);
 },
+// 购买记录
+buyRecord(e){
+  var that=this;
+  var params = {
+    url: '/app/commodity/findCommodityInfoOrderRecord',
+    method: 'GET',
+    data: {
+     id:that.data.id
+    },
+    sCallBack: function (data) {
+      if(data.data.errorCode=='0'){
+        that.setData({
+          RecordList:data.data.result
+        })
+      } 
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 修改粉丝数
+fanNum(){
+  var that=this;
+  var params = {
+    url: '/app/commodity/updateCommodityInfoView',
+    method: 'GET',
+    data: {
+     id:that.data.id
+    },
+    sCallBack: function (data) {
+      
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+}
 })

@@ -227,7 +227,7 @@ shopList(className){
     url: '/app/commodity/listCommodityInfo',
     method: 'POST',
     data: {
-      'commodityName':className,
+      'name':className,
       'pageIndex':that.data.currentPage,
       'pageSize':that.data.size,
     },
@@ -235,6 +235,8 @@ shopList(className){
       var listToday=data.data.result.datas
       if(listToday!=''){
         listToday.forEach((item,index) =>{
+          item.startTime=item.startTime.substring(5,7)+'月'+item.startTime.substring(8,10)+'日'
+
           if(item.sendType==1){
             item.sendType="到店自提"
           }else{
@@ -284,7 +286,6 @@ shopListM(className){
     url: '/app/commodity/findProductListNextDay',
     method: 'POST',
     data: {
-      'commodityName':className,
       'pageIndex':that.data.currentPage,
       'pageSize':that.data.size,
     },
