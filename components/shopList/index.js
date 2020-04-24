@@ -298,7 +298,7 @@ Component({
         if (list[i].selected) {
           console.log(list[i])
           // 所有价格加起来 count_money
-          total += list[i].commodityNumber * list[i].commodityInfo.productInfo.price;
+          total += list[i].commodityNumber * list[i].commodityInfo.price;
           nums += list[i].commodityNumber
         }
       }
@@ -414,7 +414,7 @@ Component({
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName
             productItem['photo'] = list[i].commodityInfo.productInfo.photo
-            productItem['price'] = list[i].commodityInfo.productInfo.price
+            productItem['price'] = list[i].commodityInfo.price
             productItem['number'] = list[i].commodityNumber
             product.push(productItem)
           }

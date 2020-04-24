@@ -26,7 +26,7 @@
 					<!-- 列表商品图片 -->
 					<image class="list_img" src="{{imgUrl}}{{item.commodityInfo.productInfo.photo}}" bindtap="Details" data-id='{{item.commodityInfo.id}}'></image>
 					<!-- 价格 -->
-					<text class="list_price">￥{{item.commodityInfo.productInfo.price}}</text>
+					<text class="list_price">￥{{item.commodityInfo.price}}</text>
 					<!-- 商品数量加减  style='display:{{show_edit}}' -->
 					<view style='display:{{show_edit}}'>
 						<view class="carts-num">

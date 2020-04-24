@@ -32,7 +32,6 @@ Page({
   onShow: function () {
     var  that=this;
     app.refresh()    
-    app.getOpenId()
     var session=wx.getStorageSync('session')
     console.log(session)
     this.setData({

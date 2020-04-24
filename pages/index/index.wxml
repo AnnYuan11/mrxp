@@ -55,25 +55,76 @@
 					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
 						<view class="list_box">
 							<view class="img_goods">
-								<view class="{{item.productInfo.sendType=='到店自提'?'type':'type2'}}">{{item.productInfo.sendType}}</view>
+								<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
 								<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
-								
-								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+
+								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 								<!-- 已售罄 -->
 								<view class="supernatant" wx:if="{{aas}}">
 									<image src="/img/public/fc.png"></image>
 								</view>
 							</view>
-						
+
 							<view class="bottom_box">
 								<view class="thsj">
 									<text class="spmc">{{item.productInfo.commodityName}}</text>
-										<view class="right fsgz">
-											<text class="limited">666</text>
-											<text>粉丝关注</text>
-										</view>
+									<view class="right fsgz">
+										<text class="limited">666</text>
+										<text>粉丝关注</text>
+									</view>
 								</view>
-							
+
+								<view class="thsj">
+									<view class="left">
+										<text>预售时间:{{item.pickDate}}</text>
+										<text class="rq">提货时间:2月30日</text>
+									</view>
+									<view class="right" style="line-height:50rpx">
+										<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+										<text class="limited">限量{{item.totalBuyLimitNumbers}}份</text>
+									</view>
+								</view>
+								<view class="price_box">
+									<view class="price">
+										<text>￥{{item.price}}</text>
+										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
+									</view>
+									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}">加入购物车</view>
+								</view>
+								<view class="buy_box">
+									<view class="figure">
+										<image src="/img/pic/1.png"></image>
+										<text>小朋友JK</text>
+									</view>
+									<text class="so">等购买了此产品</text>
+								</view>
+							</view>
+
+						</view>
+					</navigator>
+				</block>
+			</scroll-view>
+		</view>
+		<view class="swiper_box" wx:if="{{currentTab=='1'}}">
+			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+				<block wx:for="{{listTomorow}}" wx:if='{{listTomorow!=""}}'>11{{listTomorow}}
+					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
+						<view class="list_box">
+							<view class="img_goods">
+								<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
+								<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
+
+								<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+							</view>
+							<view class="bottom_box">
+								<view class="thsj">
+									<text class="spmc">{{item.productInfo.commodityName}}</text>
+									<view class="right fsgz">
+										<text class="limited">666</text>
+										<text>粉丝关注</text>
+									</view>
+								</view>
+
 								<view class="thsj">
 									<view class="left">
 										<text>预售时间:{{item.productInfo.pickDate}}</text>
@@ -89,65 +140,14 @@
 										<text>￥{{item.productInfo.price}}</text>
 										<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
 									</view>
-									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.productInfo.sendType}}">加入购物车</view>
+									<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}">加入购物车</view>
 								</view>
-								<view class="buy_box">
-									<view class="figure">
-										<image src="/img/pic/1.png"></image>
-										<text>小朋友JK</text>
-									</view>
-									<text class="so">等购买了此产品</text>
-								</view>
-							</view>
 
+							</view>
 						</view>
-					</navigator>	
+					</navigator>
 				</block>
-			</scroll-view>
-		</view>
-		<view class="swiper_box" wx:if="{{currentTab=='1'}}">
-			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
-					<block wx:for="{{listTomorow}}" wx:if='{{listTomorow!=""}}'>
-						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
-							<view class="list_box">
-								<view class="img_goods">
-									<view class="{{item.productInfo.sendType=='到店自提'?'type':'type2'}}">{{item.productInfo.sendType}}</view>
-									<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
-									
-									<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}"  object-fit="cover"  poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
-								</view>
-								<view class="bottom_box">
-									<view class="thsj">
-										<text class="spmc">{{item.productInfo.commodityName}}</text>
-											<view class="right fsgz">
-												<text class="limited">666</text>
-												<text>粉丝关注</text>
-											</view>
-									</view>
-								
-									<view class="thsj">
-										<view class="left">
-											<text>预售时间:{{item.productInfo.pickDate}}</text>
-											<text class="rq">提货时间:2月30日</text>
-										</view>
-										<view class="right" style="line-height:50rpx">
-											<text>今日已售<text class="num">{{item.productInfo.salesNumber}}</text>份</text>
-											<text class="limited">限量{{item.productInfo.totalBuyLimitNumbers}}份</text>
-										</view>
-									</view>
-									<view class="price_box">
-										<view class="price">
-											<text>￥{{item.productInfo.price}}</text>
-											<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.productInfo.crossedPrice}}</text>
-										</view>
-										<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.productInfo.sendType}}">加入购物车</view>
-									</view>
-
-								</view>
-							</view>
-						</navigator>	
-				</block>
-
+				<view wx:if='{{listTomorow==""}}'>{{listTomorow}}暂无数据</view>
 			</scroll-view>
 		</view>
 	</view>
@@ -159,22 +159,50 @@
 		<image src="/img/details/1.png" mode="widthFix"></image>
 		<view class="text">
 			<text>恭喜您</text>
-			<text class="preferential">获得一张30元优惠券</text>
+			<text class="preferential">获得以下优惠券</text>
 		</view>
-		<view class="yhq">
-			<image src="/img/details/3.png" mode="widthFix"></image>
-			<view class="left">
-				<text>￥</text>
-				<text class="num">30</text>
+		<view class="yhq_box">
+			<view class="yhq">
+				<image src="/img/details/3.png" mode="widthFix"></image>
+				<view class="left">
+					<text>￥</text>
+					<text class="num">30</text>
+				</view>
+				<view class="right">
+					<text class="yhqs">优惠券</text>
+					<text>只限于合作商家</text>
+				</view>
 			</view>
-			<view class="right">
-				<text class="yhqs">优惠券</text>
-				<text>只限于合作商家</text>
+			<view class="yhq">
+				<image src="/img/details/3.png" mode="widthFix"></image>
+				<view class="left">
+					<text>￥</text>
+					<text class="num">30</text>
+				</view>
+				<view class="right">
+					<text class="yhqs">优惠券</text>
+					<text>只限于合作商家</text>
+				</view>
+			</view>
+			<view class="yhq">
+				<image src="/img/details/3.png" mode="widthFix"></image>
+				<view class="left">
+					<text>￥</text>
+					<text class="num">30</text>
+				</view>
+				<view class="right">
+					<text class="yhqs">优惠券</text>
+					<text>只限于合作商家</text>
+				</view>
 			</view>
 		</view>
-		<view class="bottom">
+
+		<!-- <view class="bottom">
 			<image src="/img/details/2.png" mode="widthFix"></image>
+		</view> -->
+		<view class="sure" bindtap="sure">一键领取</view>
+		<view class="close">
+			<image src="/img/details/close.png" mode="widthFix" style="width:60rpx"></image>
 		</view>
-		<view class="sure" bindtap="sure">确定</view>
 	</view>
 </view>

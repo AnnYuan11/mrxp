@@ -56,6 +56,7 @@ Page({
     wx.getSetting({
       success: (res) => {
         console.log(res);
+        // debugger
         console.log(res.authSetting['scope.userLocation']);
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
           wx.showModal({
@@ -96,7 +97,7 @@ Page({
               }
             }
           })
-        } else if (res.authSetting['scope.userLocation'] == undefined) {//初始化进入
+        } else if (res.authSetting['scope.userLocation'] == undefined||res.authSetting['scope.userLocation']==true) {//初始化进入
           that.locations();
         }
       }
@@ -232,25 +233,27 @@ shopList(className){
     },
     sCallBack: function (data) {
       var listToday=data.data.result.datas
-      listToday.forEach((item,index) =>{
-        if(item.productInfo.sendType==1){
-          item.productInfo.sendType="到店自提"
-        }else{
-          item.productInfo.sendType="快递到家"
-        }
-        if(item.productInfo.pickDate==1){
-          that.getDateStr(null,0)
-          item.productInfo.pickDate=that.data.tomorow
-        }else if(item.productInfo.pickDate==2){
-          that.getDateStr(null,1)
-          var tomorow=that.data.tomorow
-          item.productInfo.pickDate=tomorow
-        }else{
-          that.getDateStr(null,2)
-          var ht=that.data.tomorow
-          item.productInfo.pickDate=ht
-        }
-      })
+      if(listToday!=''){
+        listToday.forEach((item,index) =>{
+          if(item.sendType==1){
+            item.sendType="到店自提"
+          }else{
+            item.sendType="快递到家"
+          }
+          if(item.pickDate==1){
+            that.getDateStr(null,0)
+            item.pickDate=that.data.tomorow
+          }else if(item.pickDate==2){
+            that.getDateStr(null,1)
+            var tomorow=that.data.tomorow
+            item.pickDate=tomorow
+          }else{
+            that.getDateStr(null,2)
+            var ht=that.data.tomorow
+            item.pickDate=ht
+          }
+        })
+      }
       var temlist = that.data.listToday; //原始的数据集合
       var currentPage = that.data.currentPage; //获取当前页码
       if (currentPage == 1) {
@@ -287,25 +290,29 @@ shopListM(className){
     },
     sCallBack: function (data) {
       var listTomorow=data.data.result.datas
-      listTomorow.forEach((item,index) =>{
-        if(item.productInfo.sendType==1){
-          item.productInfo.sendType="到店自提"
-        }else{
-          item.productInfo.sendType="快递到家"
-        }
-        if(item.productInfo.pickDate==1){
-          that.getDateStr(null,0)
-          item.productInfo.pickDate=that.data.tomorow
-        }else if(item.productInfo.pickDate==2){
-          that.getDateStr(null,1)
-          var tomorow=that.data.tomorow
-          item.productInfo.pickDate=tomorow
-        }else{
-          that.getDateStr(null,2)
-          var ht=that.data.tomorow
-          item.productInfo.pickDate=ht
-        }
-      })
+      // console.log(listTomorow)
+      if(listTomorow!=''){
+        listTomorow.forEach((item,index) =>{
+          if(item.sendType==1){
+            item.sendType="到店自提"
+          }else{
+            item.sendType="快递到家"
+          }
+          if(item.pickDate==1){
+            that.getDateStr(null,0)
+            item.pickDate=that.data.tomorow
+          }else if(item.pickDate==2){
+            that.getDateStr(null,1)
+            var tomorow=that.data.tomorow
+            item.pickDate=tomorow
+          }else{
+            that.getDateStr(null,2)
+            var ht=that.data.tomorow
+            item.pickDate=ht
+          }
+        })
+      }
+     
       var temlist = that.data.listTomorow; //原始的数据集合
       var currentPage = that.data.currentPage; //获取当前页码
       if (currentPage == 1) {
@@ -376,6 +383,7 @@ notice(){
 },
 // 定位授权
 locations: function () {
+  console.log("1111111")
   let that = this;
   //1、获取当前位置坐标
   wx.getLocation({
@@ -484,43 +492,50 @@ query(){
     var that=this;
     console.log(e)
     var userId = wx.getStorageSync('userId')
-    var spid=e.currentTarget.dataset.spid;
-    var sendtype=e.currentTarget.dataset.sendtype
-    if(sendtype=="到店自提"){
-      sendtype=1
+    if(userId==''){
+     wx.navigateTo({
+       url: '/pages/login/login',
+     })
     }else{
-      sendtype=2
-    }
-    var params = {
-      url: '/app/commodity/addShoppingCartInfo',
-      method: 'POST',
-      data: {
-       'commodityInfo':{
-         'id':spid
-       },
-       'commodityNumber':'1',
-       'shoppingCarType':sendtype,
-       'userInfo':{
-         'id':userId
-       }
-      },
-      sCallBack: function (data) {
-        if(data.data.errorCode=='0'){
-          wx.showToast({
-            title: data.data.result,
-          })
-          app.getShopNum()
-        } else {
-          wx.showToast({
-            title: data.data.result,
-          })
-        }
-        
-      },
-      eCallBack: function () {
+      var spid=e.currentTarget.dataset.spid;
+      var sendtype=e.currentTarget.dataset.sendtype
+      if(sendtype=="到店自提"){
+        sendtype=1
+      }else{
+        sendtype=2
       }
+      var params = {
+        url: '/app/commodity/addShoppingCartInfo',
+        method: 'POST',
+        data: {
+         'commodityInfo':{
+           'id':spid
+         },
+         'commodityNumber':'1',
+         'shoppingCarType':sendtype,
+         'userInfo':{
+           'id':userId
+         }
+        },
+        sCallBack: function (data) {
+          if(data.data.errorCode=='0'){
+            wx.showToast({
+              title: data.data.result,
+            })
+            app.getShopNum()
+          } else {
+            wx.showToast({
+              title: data.data.result,
+            })
+          }
+          
+        },
+        eCallBack: function () {
+        }
+      }
+      base.request(params);
     }
-    base.request(params);
+   
   },
   // 今日售卖下拉加载
   bindscrolltolower: function () {

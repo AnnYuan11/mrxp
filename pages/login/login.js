@@ -129,6 +129,7 @@ bindGetUserInfo: function(e) {
   }
 },
 getPhoneNumber: function(e) { 
+  app.getOpenId()
   var sessionId=wx.getStorageSync('sessionId')
     console.log(e)    
     var that=this;

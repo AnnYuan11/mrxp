@@ -6,12 +6,12 @@
 	<view class="goods_introduce">
 		<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
 		<view class="price_box">￥
-			<text class="font_xl">{{list.productInfo.price}}</text>
-			<text style="text-decoration: line-through;">￥{{list.productInfo.crossedPrice}}</text>
+			<text class="font_xl">{{list.price}}</text>
+			<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
 		</view>
 		<view class="top_right">
-			<text class="font">{{list.productInfo.pickDate}}</text>
-			<text class="font_sm">{{list.productInfo.sendType}}</text>
+			<text class="font">{{list.pickDate}}</text>
+			<text class="font_sm">{{list.sendType}}</text>
 		</view>
 		<view class="info_top">
 			<view class="title_info">
@@ -19,8 +19,8 @@
 			</view>
 			<view class="sales">
 				<view class="info_pros">
-					<text>今日已售{{list.productInfo.salesNumber}}</text>
-					<text class="instructions">/限售{{list.productInfo.totalBuyLimitNumbers}}件</text>
+					<text>今日已售{{list.salesNumber}}</text>
+					<text class="instructions">/限售{{list.totalBuyLimitNumbers}}件</text>
 				</view>
 				<view class="fans">
 					粉丝：302人
@@ -131,5 +131,5 @@
 		</view>
 	</view>
 	<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
-	<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.productInfo.sendType}}">加入购物车</view>
+	<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>
 </view>

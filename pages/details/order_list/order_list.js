@@ -54,6 +54,7 @@ Page({
    */
   onShow: function (options) {
     var that=this;
+    // that.jfList()
     if(that.data.currentTab=='1'){
       that.data.currentPage=1,
       that.data.totalCount= 0,//总是数据条数
@@ -749,7 +750,7 @@ Page({
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName
             productItem['photo'] = list[i].commodityInfo.productInfo.photo
-            productItem['price'] = list[i].commodityInfo.productInfo.price
+            productItem['price'] = list[i].commodityInfo.price
             productItem['number'] = list[i].commodityNumber
             product.push(productItem)
         } 
@@ -764,5 +765,61 @@ Page({
   // 我的提货码
   thm(){
 
+  },
+  // 积分订单
+  jfList(){
+    var that=this;
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listIntegralOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo.id':id
+      },
+      sCallBack: function (data) {
+         var ythlist=data.data.result.datas;
+         ythlist.forEach(item=>{
+          if(item.orderStatus=='1'){
+            item.orderStatus='待支付'
+          }else if(item.orderStatus=='2'){
+            item.orderStatus='备货中'
+          }else if(item.orderStatus=='3'){
+            item.orderStatus='配送中'
+          }else if(item.orderStatus=='4'){
+            item.orderStatus='待提货'
+          }else if(item.orderStatus=='5'){
+            item.orderStatus='已收货'
+          }
+          item.orderTime=item.orderTime.substring(0,10)
+        })
+       
+        var temlist = that.data.ythlist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            ythlist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
+       
+
+         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   }
 })

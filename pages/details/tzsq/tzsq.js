@@ -197,6 +197,8 @@ Page({
         console.log(res)
         that.setData({
           'address': res.address,
+          'latitude':res.latitude,
+          'longitude':res.longitude
         })
 
       }
@@ -231,6 +233,8 @@ Page({
           'headName': e.detail.value.headName,
           'phone': e.detail.value.phone,
           'shopName': e.detail.value.shopName,
+          'lat':that.data.latitude,
+          'lng':that.data.longitude,
           'supervisorInfo': {
             'phone': e.detail.value.supervisorInfo
           }

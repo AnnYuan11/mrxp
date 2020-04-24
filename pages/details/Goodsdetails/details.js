@@ -119,23 +119,23 @@ Page({
         'id':that.data.id, 
       },
       sCallBack: function (data) {
-        if(data.data.result.productInfo.sendType==1){
-          data.data.result.productInfo.sendType="到店自提"
+        if(data.data.result.sendType==1){
+          data.data.result.sendType="到店自提"
         }else{
-          data.data.result.productInfo.sendType="快递到家"
+          data.data.result.sendType="快递到家"
         }
-        if(data.data.result.productInfo.pickDate==1){
+        if(data.data.result.pickDate==1){
           that.getDateStr(null,0)
           var date=that.data.tomorow
-          data.data.result.productInfo.pickDate=date
-        }else if(data.data.result.productInfo.pickDate==2){
+          data.data.result.pickDate=date
+        }else if(data.data.result.pickDate==2){
           that.getDateStr(null,1)
           var tomorow=that.data.tomorow
-          data.data.result.productInfo.pickDate=tomorow
+          data.data.result.pickDate=tomorow
         }else{
           that.getDateStr(null,2)
           var ht=that.data.tomorow
-          data.data.result.productInfo.pickDate=ht
+          data.data.result.pickDate=ht
         }
         var artice = data.data.result.productInfo.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
@@ -162,8 +162,8 @@ Page({
       var ddid = that.data.list.id;
       var ddpic = that.data.list.productInfo.photo;
       var ddname = that.data.list.productInfo.commodityName;
-      var ddjg = that.data.list.productInfo.price;
-      var sendType =that.data.list.productInfo.sendType;
+      var ddjg = that.data.list.price;
+      var sendType =that.data.list.sendType;
       wx.navigateTo({
         url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg+'&sendType='+sendType+'&commodityNumber=1',
       })
