@@ -36,7 +36,7 @@ Component({
     submitBtn: '提交订单',
     isBool: true,
     currentPage: 1,//请求数据的页码
-    size: 10,//每页数据条数
+    size: 5,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
     // shoppingCarType: 1,
@@ -49,7 +49,7 @@ Component({
       wx.getSystemInfo({
         success: (res) => {
           this.setData({
-            height: res.windowHeight + 20
+            height: res.windowHeight 
           })
         }
       })
@@ -99,7 +99,7 @@ Component({
       that.count_price();
     },
     // 编辑
-    btn_edit  () {
+    btn_edit() {
       var that = this;
       if (bool) {
         that.setData({
@@ -123,7 +123,7 @@ Component({
 
     },
     // 删除
-    deletes (e) {
+    deletes(e) {
       var that = this;
       const ids = [];
       const id = e.currentTarget.dataset.id;
@@ -143,7 +143,7 @@ Component({
         }
       })
     },
-    delItem (id) {
+    delItem(id) {
       let that = this
       var params = {
         url: '/app/commodity/deleteShoppingCartInfo',
@@ -170,7 +170,7 @@ Component({
       }
       base.request(params);
     },
-    deletrsTip () {
+    deletrsTip() {
       wx.showToast({
         title: '请选择要删除的订单',
         icon: 'warn',
@@ -375,6 +375,8 @@ Component({
               that.setData({
                 hasList: true,
                 list: data.data.result.datas, //初始化数据列表
+                totalCount: data.data.result.rowCount, //总的数据条数
+                pagecount: data.data.result.totalPages //总页数
               })
             }
           } else {
@@ -382,7 +384,6 @@ Component({
               title: data.data.errorMsg
             })
           }
-          console.log(data)
         },
         eCallBack: function () {
         }
@@ -392,7 +393,7 @@ Component({
     /**
     **提交订单
     */
-    btn_submit_order () {
+    btn_submit_order() {
 
       var that = this;
       // 获取商品数据
@@ -407,7 +408,7 @@ Component({
         let list = that.data.list;
         // 循环遍历判断列表中的数据是否选中
         const product = [];
-       
+
         for (let i = 0; i < list.length; i++) {
           if (list[i].selected) {
             const productItem = {};
@@ -418,9 +419,9 @@ Component({
             productItem['number'] = list[i].commodityNumber
             product.push(productItem)
           }
-        } 
+        }
         const productInfo = {};
-        productInfo['totalPrice'] =  that.data.totalPrice.split('.')[0]
+        productInfo['totalPrice'] = that.data.totalPrice.split('.')[0]
         productInfo['sendType'] = that.data.shoppingType
         productInfo['productList'] = product
         wx.setStorageSync('productInfo', productInfo)
@@ -432,29 +433,65 @@ Component({
     /**
     * 分页滚动加载
     */
-    scrollLower () {
-      var that = this
-      // wx.showLoading({
-      //   title: '数据加载中',
-      //   icon: 'loading',
-      // });
-      // that.setData({
-      //   pageNum: that.data.pageNum + 1,
-      // });
-      // if (that.data.tabListData.length >= that.data.total) {
-      //   wx.showToast({
-      //     title: '暂无更多数据了',
-      //     icon: 'success',
-      //     duration: 1000
-      //   });
-      //   return false;
+    scrollLower() {
+      // if (this.data.currentPage < this.data.pagecount) {
+      //   this.data.currentPage++;
+      //   this.getShopList(this.data.shoppingType);
       // } else {
-      //   wx.showLoading({
-      //     title: '加载中',
-      //     icon: 'loading',
-      //   });
-
+      //   //没有更多数据
+      //   app.nomore_showToast();
       // }
+      var that = this
+      wx.showLoading({
+        title: '数据加载中',
+        icon: 'loading',
+      });
+      that.setData({
+        currentPage: that.data.currentPage + 1,
+      });
+      // console.log(that.data.total)
+      // console.log(that.data.tabListData.length)
+      if (that.data.list.length >= that.data.totalCount) {
+        wx.showToast({
+          title: '暂无更多数据了',
+          icon: 'success',
+          duration: 1000
+        });
+        return false;
+      } else {
+        wx.showLoading({
+          title: '加载中',
+          icon: 'loading',
+        });
+        var id = wx.getStorageSync('userId')
+        console.log(id)
+        var params = {
+          url: '/app/commodity/listShoppingCartInfo',
+          method: 'POST',
+          data: {
+            'pageIndex': that.data.currentPage,
+            'pageSize': that.data.size,
+            'userInfo.id': id,
+            'shoppingCarType': that.data.shoppingType
+          },
+          sCallBack: function (data) {
+            if (data.data.errorCode == 0) {
+              var cont = []
+              cont = [...that.data.list, ...data.data.result.datas]
+              that.setData({
+                list : cont
+              })
+            } else {
+              wx.showToast({
+                title: data.data.errorMsg
+              })
+            }
+          },
+          eCallBack: function () {
+          }
+        }
+        base.request(params);
+      }
     },
     /**
      * 带参数跳转列表详情
