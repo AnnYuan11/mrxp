@@ -26,7 +26,8 @@
     "pages/details/wdyhq/wdyhq",
     "pages/details/h/h",
     "pages/details/address_edit/address_edit",
-    "pages/details/jfmx/jfmx"
+    "pages/details/jfmx/jfmx",
+    "pages/details/ghszz/ghszz"
   ],
   "window": {
     "backgroundTextStyle": "light",

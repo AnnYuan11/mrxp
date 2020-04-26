@@ -1,0 +1,7 @@
+<!--pages/details/ghszz/ghszz.wxml-->
+<view class="imgbox">
+<block wx:for="{{img}}">
+    <image src="{{imgUrl}}{{item}}" ></image>
+</block>
+   
+</view>

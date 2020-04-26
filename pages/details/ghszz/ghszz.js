@@ -1,24 +1,28 @@
-// pages/my/my.js
-import { Base } from "../../utils/request/base.js";
-var baseUrl = "http://139.155.113.100:8085";
+// pages/details/ghszz/ghszz.js
 var app = getApp();
-var base = new Base();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-   
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var session=wx.getStorageSync('session')
+    console.log(options)
+    var imgs=options.img.split(",");
+    var that=this;
+    that.setData({
+      img:imgs
+    })
+
+    console.log(that.data.img)
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -30,14 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var  that=this;
-    app.refresh()    
-    var session=wx.getStorageSync('session')
-    console.log(session)
-    this.setData({
-      session:session,
-      phone:wx.getStorageSync('phone')
-    })
+
   },
 
   /**
@@ -46,8 +43,6 @@ Page({
   onHide: function () {
 
   },
-  
-
 
   /**
    * 生命周期函数--监听页面卸载
@@ -75,7 +70,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-
+  }
 })

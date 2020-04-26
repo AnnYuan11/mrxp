@@ -14,7 +14,7 @@ Page({
     autoplay: false,
     duration: 500,
     currentTab: 0,
-    show:true,//弹窗
+    // show:true,//弹窗
     imgUrl:app.globalData.imgUrl,
     currentPage: 1,//请求数据的页码
     size: 2,//每页数据条数
@@ -28,16 +28,11 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    // tabbar的显示隐藏
-    if(that.data.show==true){
-      wx.hideTabBar({
-        animation: true,
-      })
-    }
-   
     that.shopList()//今日售卖列表
     that.lunbo()//轮播图
     that.notice()//公告
+    that.yhqList()//优惠券列表
+    
   },
 
   /**
@@ -51,8 +46,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-     var that = this;
-    
+    var that = this;
+    that.list()//团长地址
     wx.getSetting({
       success: (res) => {
         console.log(res);
@@ -72,19 +67,20 @@ Page({
                 })
 
               } else if (res.confirm) {
-                // debugger
+               
                 wx.openSetting({
                   success: function (data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
-                      
+                      that.locations();
+                      that.list()
                       wx.showToast({
                         title: '授权成功',
                         icon: 'success',
                         duration: 5000
                       })
                       //再次授权，调用getLocationt的API
-                      that.locations();
+                      
                     } else {
                       wx.showToast({
                         title: '授权失败',
@@ -102,7 +98,7 @@ Page({
         }
       }
     })
-    that.list()//团长地址
+   
     var aa=wx.getStorageSync('aa')
     console.log(aa)
     if(aa=='0'){
@@ -157,10 +153,62 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 搜索
   search: function (e) {
     var that=this;
     var className=e.detail.value
-    that.shopList(className)
+    var that = this;
+    var params = {
+      url: '/app/commodity/listCommodityInfo',
+      method: 'POST',
+      data: {
+        'name':className,
+        'pageIndex':1,
+        'pageSize':1000,
+      },
+      sCallBack: function (data) {
+        var listToday=data.data.result.datas
+        if(listToday!=''){
+          listToday.forEach((item,index) =>{
+            item.startTime=item.startTime.substring(5,7)+'月'+item.startTime.substring(8,10)+'日'
+  
+            if(item.sendType==1){
+              item.sendType="到店自提"
+            }else{
+              item.sendType="快递到家"
+            }
+            if(item.pickDate==1){
+              that.getDateStr(null,0)
+              item.pickDate=that.data.tomorow
+            }else if(item.pickDate==2){
+              that.getDateStr(null,1)
+              var tomorow=that.data.tomorow
+              item.pickDate=tomorow
+            }else{
+              that.getDateStr(null,2)
+              var ht=that.data.tomorow
+              item.pickDate=ht
+            }
+            if(item.isBuy==2){
+              item.isBuy="活动未开始"
+            }else if(item.isBuy==3){
+              item.isBuy="活动已结束"
+            }else if(item.isBuy==4){
+              item.isBuy="已售罄"
+            }
+            
+          })
+        }
+          that.setData({
+            listToday: listToday,
+            currentPage:10000
+          })
+          
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   },
   // 商品切换
   swichNav: function (e) {
@@ -280,7 +328,7 @@ shopList(className){
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
-        console.log(that.data.pagecount)         
+        // console.log(that.data.pagecount)         
     },
     eCallBack: function () {
     }
@@ -384,7 +432,7 @@ notice(){
     method: 'POST',
     data: {
       'pageIndex':1,
-      'pageSize':10
+      'pageSize':100
     },
     sCallBack: function (data) {
       that.setData({
@@ -399,7 +447,6 @@ notice(){
 },
 // 定位授权
 locations: function () {
-  console.log("1111111")
   let that = this;
   //1、获取当前位置坐标
   wx.getLocation({
@@ -419,7 +466,7 @@ locations: function () {
         key:"longitude",
         data:res.longitude
       });
-      that.list()
+     
     }
   })
 },
@@ -555,7 +602,6 @@ query(){
   },
   // 今日售卖下拉加载
   bindscrolltolower: function () {
-    console.log('今天')
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.shopList();
@@ -566,7 +612,6 @@ query(){
   },
   // 明日售卖下拉加载
   bindscrolltolower2: function () {
-    console.log('ming天')
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.shopListM();
@@ -575,5 +620,116 @@ query(){
      app.nomore_showToast();
     }
   },
+  // 优惠券列表
+  yhqList(){
+    var that=this;
+    var userId = wx.getStorageSync('userId')
+    var ids=[];
+    var params = {
+      url: '/app/market/listCouponInfo',
+      method: 'POST',
+      data: {
+       'pageIndex':1,
+       'pageSize':100,
+       'userId':userId
+      },
+      sCallBack: function (data) {
+        console.log(data)
+        if(data.data.result.datas.length=='0'){
+          that.setData({
+            show:false
+          })
+        }else{
+          that.setData({
+            show:true
+          })
+           // tabbar的显示隐藏
+          wx.hideTabBar({
+            animation: true,
+          })
+        }
+        if(data.data.errorCode=='0'){
+          data.data.result.datas.forEach(item=>{
+            
+            ids.push(item.id)
+            if(item.type=='1'){
+              item.type='全场通用'
+            }else{
+              item.type='部分可用'
+            }
+          })
+          that.setData({
+            coupons:data.data.result.datas.slice(0,3),
+            ids:ids
+          })
+          // console.log(that.data.ids)
+        } else {
+          wx.showToast({
+            title: data.data.result,
+          })
+        }
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 领取优惠券
+  getAll(){
+    var that=this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/user/addUserCouponInfoIds',
+      method: 'POST',
+      data: {
+       'ids':that.data.ids,
+       'userInfo':{
+         'id':userId
+       }
+      },
+      sCallBack: function (data) {
+        console.log(data)
+        if(data.data.errorCode==0){
+          wx.showToast({
+            title:data.data.result,
+            duration: 3000,
+            success: function () {
+              setTimeout(function () {
+                that.setData({
+                  show:false
+                })
+                wx.showTabBar({
+                  animation: true,
+                })
+              }, 3000);
+
+              }
+          })
+        }else{
+          wx.showToast({
+            title:data.data.errorMsg,
+            icon:'none',
+            success: function () {
+              setTimeout(function () {
+                that.setData({
+                  show:false
+                })
+                wx.showTabBar({
+                  animation: true,
+                })
+              }, 3000);
+
+              }
+          })
+        }
+        
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  }
 
 })

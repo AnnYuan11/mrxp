@@ -8,7 +8,8 @@ Page({
    */
   data: {
     color: getApp().globalData.color,
-    col:0
+    col:0,
+    defaultztd:''
   },
 
   /**
@@ -17,7 +18,14 @@ Page({
   onLoad: function (options) {
     var that=this;
     that.list()//列表
-    that.query()//查询切换点
+    var aa=wx.getStorageSync('aa')
+    console.log(aa)
+    if(aa=='0'){
+      that.query()//查询用户切换店铺
+    }else {
+      return
+    }
+    // that.query()//查询切换点
   },
 
   /**

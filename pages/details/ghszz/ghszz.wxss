@@ -1,0 +1,7 @@
+/* pages/details/ghszz/ghszz.wxss */
+.imgbox{
+  width: 100%;
+}
+.imgbox image{
+  width: 100%;
+}

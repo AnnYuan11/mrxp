@@ -763,8 +763,21 @@ Page({
         })
   },
   // 我的提货码
-  thm(){
-
+  thm(e){
+    console.log(e)
+    var that=this;
+    that.setData({
+      orderId:e.currentTarget.dataset.orderid,
+      pickcode:e.currentTarget.dataset.pickcode,
+      showThm:true
+    })
+  },
+  // 关闭提货码
+  closeThm(){
+    var that=this;
+    that.setData({
+      showThm:false
+    })
   },
   // 积分订单
   jfList(){
@@ -821,5 +834,13 @@ Page({
       }
     }
     base.request(params);
+  },
+  // 申请售后
+  sqsh(){
+    wx.showToast({
+      title: '请联系团长',
+      icon:'none',
+      dduration:3000
+    })
   }
 })

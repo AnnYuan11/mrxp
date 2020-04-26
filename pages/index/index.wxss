@@ -351,9 +351,8 @@ video {
 }
 .yhq .left{
   position: absolute;
-  top: 25%;
-  left: 14%;
-
+  top: 36%;
+  left: 12%;
 }
 .yhq .left text{
   font-size:24rpx;

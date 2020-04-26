@@ -52,7 +52,7 @@
 		<view class="swiper_box" wx:if="{{currentTab=='0'}}">
 			<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
 				<block wx:for="{{listToday}}">
-					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}" hover-class="none">
+					<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
 						<view class="list_box">
 							<view class="img_goods">
 								<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
@@ -190,7 +190,20 @@
 			<text class="preferential">获得以下优惠券</text>
 		</view>
 		<view class="yhq_box">
+		<block wx:for="{{coupons}}">
 			<view class="yhq">
+				<image src="/img/details/3.png" mode="widthFix"></image>
+				<view class="left">
+					<text>￥</text>
+					<text class="num">{{item.money}}</text>
+				</view>
+				<view class="right">
+					<text class="yhqs">{{item.name}}</text>
+					<text>{{item.type}}</text>
+				</view>
+			</view>
+		</block>
+			<!-- <view class="yhq">
 				<image src="/img/details/3.png" mode="widthFix"></image>
 				<view class="left">
 					<text>￥</text>
@@ -211,25 +224,14 @@
 					<text class="yhqs">优惠券</text>
 					<text>只限于合作商家</text>
 				</view>
-			</view>
-			<view class="yhq">
-				<image src="/img/details/3.png" mode="widthFix"></image>
-				<view class="left">
-					<text>￥</text>
-					<text class="num">30</text>
-				</view>
-				<view class="right">
-					<text class="yhqs">优惠券</text>
-					<text>只限于合作商家</text>
-				</view>
-			</view>
+			</view> -->
 		</view>
 
 		<!-- <view class="bottom">
 			<image src="/img/details/2.png" mode="widthFix"></image>
 		</view> -->
-		<view class="sure" bindtap="sure">一键领取</view>
-		<view class="close">
+		<view class="sure" bindtap="getAll">一键领取</view>
+		<view class="close" bindtap="sure">
 			<image src="/img/details/close.png" mode="widthFix" style="width:60rpx"></image>
 		</view>
 	</view>

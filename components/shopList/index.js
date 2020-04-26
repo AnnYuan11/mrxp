@@ -65,6 +65,10 @@ Component({
         selectAllStatus: false
       })
     },
+    hide(){
+      var that=this;
+      that.data.currentPage=1
+    }
   },
   /**
    * 组件的方法列表
@@ -454,7 +458,7 @@ Component({
       if (that.data.list.length >= that.data.totalCount) {
         wx.showToast({
           title: '暂无更多数据了',
-          icon: 'success',
+          icon: 'none',
           duration: 1000
         });
         return false;

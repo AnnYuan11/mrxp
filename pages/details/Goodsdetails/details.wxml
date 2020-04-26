@@ -1,10 +1,16 @@
 <!--pages/details/Goodsdetails/details.wxml-->
 <import src="../../../utils/wxParse/wxParse.wxml" />
 <view class="img_goods">
-	<image src="{{imgUrl}}{{list.productInfo.photo}}"></image>
+<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:400rpx">
+		<block wx:for="{{background}}" wx:key="*this">
+			<swiper-item>
+				<image src="{{imgUrl}}{{item}}"></image>
+			</swiper-item>
+		</block>
+	</swiper>
 </view>
 <view class="goods_introduce">
-	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
+	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>	
 	<view class="price_box">￥
 		<text class="font_xl">{{list.price}}</text>
 		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
@@ -35,10 +41,12 @@
 </view>
 
 <!-- 供应商资质 -->
-<view class="gyszz_box">
-	<i></i>
-	<text>供应商资质</text>
-</view>
+<navigator url="/pages/details/ghszz/ghszz?img={{list.productInfo.supplierInfo.bannerPhoto}}" hover-class="none">
+	<view class="gyszz_box">
+		<i></i>
+		<text>供应商资质</text>
+	</view>
+</navigator>
 <!-- 商品详情 -->
 <view class="details_box">
 	<view class="swiper-tab">
@@ -112,6 +120,9 @@
 			<text>购物车</text>
 		</view>
 	</view>
-	<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
-	<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>
+	<view class="noClick" wx:if="{{isBuy!='1'}}">{{isBuy}}</view>
+	<block wx:if="{{isBuy==1}}">
+		<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
+		<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>
+	</block>
 </view>

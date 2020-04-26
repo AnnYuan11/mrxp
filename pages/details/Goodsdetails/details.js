@@ -12,6 +12,10 @@ Page({
   data: {
     imgUrl:app.globalData.imgUrl,
     currentTab: 0,
+    indicatorDots: false,
+    vertical: false,
+    autoplay: false,
+    duration: 500,
   },
 
   /**
@@ -22,6 +26,7 @@ Page({
     console.log(options)
     that.setData({
       id:options.id,
+      isBuy:options.isBuy
     })
     that.shop();//商品内容
     that.buyRecord()//购买记录
@@ -142,7 +147,8 @@ Page({
         var artice = data.data.result.productInfo.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
-          list:data.data.result
+          list:data.data.result,
+          background:JSON.parse(data.data.result.bannerPhotoView)
         })
         
       },
