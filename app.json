@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/Goodsdetails/details",
     "pages/details/setting/setting",
     "pages/login/login",
     "pages/details/sqtx/sqtx",
@@ -10,7 +11,6 @@
     "pages/details/order_details/order_details",
     "pages/my/my",
     "pages/details/orderDetailsck/ddxx",
-    "pages/details/Goodsdetails/details",
     "pages/details/sppj/sppj",
     "pages/gwc/gwc",
     "pages/addOrder/add_order",

@@ -23,7 +23,7 @@
 		<input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
 	</view>
 	<!-- 轮播 -->
-	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:280rpx">
+	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:400rpx">
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
 				<image src="{{imgUrl}}{{item.photo}}"></image>
@@ -68,7 +68,7 @@
 									<image src="/img/public/fc2.png"></image>
 								</view>
 							</view>
-
+							<view class="subtitle" wx:if="{{item.productInfo.subTitle!=''}}">{{item.productInfo.subTitle}}</view>
 							<view class="bottom_box">
 								<view class="thsj">
 									<text class="spmc">{{item.productInfo.commodityName}}</text>

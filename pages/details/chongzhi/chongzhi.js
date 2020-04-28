@@ -121,8 +121,15 @@ Recharges(e){
 // 添加充值
 Recharge(e){
   var that = this;
-  console.log(e)
+  console.log(that.data.id)
   var userId=wx.getStorageSync('userId')
+  if(that.data.id==''||that.data.id==undefined){
+    wx.showToast({
+      title: '请选择套餐',
+      icon:'none'
+    })
+    return;
+  }
   var arg={
     'userInfo':{
       'id':userId

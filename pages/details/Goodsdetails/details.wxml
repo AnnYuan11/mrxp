@@ -1,7 +1,7 @@
 <!--pages/details/Goodsdetails/details.wxml-->
 <import src="../../../utils/wxParse/wxParse.wxml" />
 <view class="img_goods">
-<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:400rpx">
+	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:700rpx">
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
 				<image src="{{imgUrl}}{{item}}"></image>
@@ -10,7 +10,7 @@
 	</swiper>
 </view>
 <view class="goods_introduce">
-	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>	
+	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
 	<view class="price_box">￥
 		<text class="font_xl">{{list.price}}</text>
 		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
@@ -119,10 +119,44 @@
 			<image src="/img/details/gwc.png" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>
+		<view class="index" catchtap="handleOpen1">
+			<image src="/img/details/share.png" mode="widthFix"></image>
+			<text>分享</text>
+		</view>
 	</view>
 	<view class="noClick" wx:if="{{isBuy!='1'}}">{{isBuy}}</view>
 	<block wx:if="{{isBuy==1}}">
 		<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
 		<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>
 	</block>
+</view>
+<!-- 分享 -->
+<view class="share_box" wx:if="{{ishow}}">
+	<view class="share">
+		<view class="fxd">
+			<i-divider content="分享到"></i-divider>
+		</view>
+		<view class="wechat">
+		<button open-type="share"	>
+			<view class="item">
+				<image	src="/img/details/dd3.png"></image>
+				<text>微信好友</text>
+			</view>
+			</button>
+			<view class="item" catchtap="handleClickItem1">
+				<image	src="/img/details/dd3.png"></image>
+				<text>生成海报</text>
+			</view>
+		</view>
+		<view class="qx" catchtap="handleCancel">取消</view>
+	</view>
+</view>
+<!-- 海报 -->
+<view class='imagePathBox' wx:if="{{maskHidden}}">
+	<image src="{{imagePath}}" class='shengcheng'></image>
+	<button class='baocun' catchtap='baocun'>保存相册，分享到朋友圈</button>
+</view>
+<!-- <view  wx:if="{{maskHidden}}"class="mask"></view> -->
+<view class="canvas-box" wx:if="{{maskHidden}}">
+	<canvas style="width: 100%;height: 90%;position:fixed;" canvas-id="mycanvas"/>
 </view>

@@ -208,13 +208,28 @@ swiper image{
   z-index: 99999;
   border-radius:4px 0px 13px 0px;
 }
+.subtitle{
+  display: inline-block;
+  max-width: 400rpx;
+  border-radius: 50rpx;
+  height: 40rpx;
+  line-height: 37rpx;
+  border:1px solid #FF3639;
+  color: #FF3639;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  margin: 20rpx auto;
+}
 .bottom_box{
   width: 100%;
 }
 .bottom_box .spmc{
   width: 100%;
   font-size:32rpx;
-  color:rgba(35,35,35,1);
+  color:#000;
+  font-weight: 600;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -2,6 +2,7 @@
 import { Base } from "../../../utils/request/base.js";
 var WxParse = require('../../../utils/wxParse/wxParse.js');
 var util = require('../../../utils/util.js');
+const { $Message } = require('../../../dist/base/index');
 var app = getApp();
 var base = new Base();
 Page({
@@ -16,6 +17,8 @@ Page({
     vertical: false,
     autoplay: false,
     duration: 500,
+    ishow:false,
+    maskHidden: false,
   },
 
   /**
@@ -62,12 +65,139 @@ Page({
   onReady: function () {
 
   },
+  createNewImg: function () {
+    var that = this;
+    var context = wx.createCanvasContext('mycanvas');
+    context.setFillStyle("#fff")
+    context.fillRect(0, 0, 375, 667)
+    var path = "/img/pic/11.jpg";
+    context.drawImage(path, 56, 56, 262, 349);
+    var path5 = "/img/pic/1.png";
+    var path2 = "/img/pic/2.png";
+    var name = that.data.name;
+    context.drawImage(path2, 56, 400, 263, 121);
+  
+    //绘制左下角文字
+    context.setFontSize(14);
+    context.setFillStyle('#333');
+    context.setTextAlign('left');
+    context.fillText("长按识别小程序", 70, 560);
+    context.stroke();
+    context.setFontSize(14);
+    context.setFillStyle('#333');
+    context.setTextAlign('left');
+    context.fillText("跟我一起来学习吧~~", 70, 580);
+    context.stroke();
+   
+    //绘制右下角小程序二维码
+    context.drawImage(path5, 230, 530,80,80);
+
+    context.draw();
+    //将生成好的图片保存到本地
+    setTimeout(function () {
+      wx.canvasToTempFilePath({
+        canvasId: 'mycanvas',
+        success: function (res) {
+          console.log(res)
+          var tempFilePath = res.tempFilePath;
+          that.setData({
+            imagePath: tempFilePath,
+            canvasHidden: true
+          });
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
+    }, 200);
+  },
+  //点击保存到相册
+  baocun: function () {
+    var that = this;
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+      if (!res.authSetting['scope.writePhotosAlbum']) {
+      wx.authorize({
+        scope:'scope.writePhotosAlbum',
+        success() {
+        console.log('授权成功')
+      }
+      })
+      }
+      }
+      })
+      
+    
+    console.log(that.data.imagePath)
+    wx.downloadFile({
+      url:that.data.imagePath,
+      success:function(res){
+        console.log(res)
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+           console.log(res)
+            wx.showModal({
+              content: '海报已保存到相册',
+              showCancel: false,
+              confirmText: '确定',
+              confirmColor: '#333',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定');
+                  /* 该隐藏的隐藏 */
+                  that.setData({
+                    maskHidden: false
+                  })
+                }
+              },
+               fail: function (res) {
+                console.log(11111)
+              }
+            })
+          },
+          fail:function (err) {
+            console.log(err);
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              console.log("用户一开始拒绝了，我们想再次发起授权")
+              console.log('打开设置窗口')
+            wx.openSetting({
+            success(settingdata) {
+            console.log(settingdata)
+            if (settingdata.authSetting['scope.writePhotosAlbum']) {
+            console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+            }else {
+            console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+            }
+            }
+            })
+            
+            }
+          
+          }
+
+
+
+
+
+
+
+
+
+        })
+      }
+    })
+   
+  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      ishow:false
+    })
   },
 
   /**
@@ -101,7 +231,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
 
   },
   // 详情切换
@@ -279,5 +409,37 @@ fanNum(){
     }
   }
   base.request(params);
-}
+},
+// 分享
+handleOpen1 () {
+  this.setData({
+      ishow: true
+  });
+},
+// 取消
+handleCancel () {
+  this.setData({
+      ishow: false
+  });
+},
+// 生成海报
+handleClickItem1 () {
+  var that = this;
+  this.setData({
+    maskHidden: false
+  });
+  wx.showToast({
+    title: '海报生成中...',
+    icon: 'loading',
+    duration: 1000
+  });
+  setTimeout(function () {
+    wx.hideToast()
+    that.createNewImg();
+    that.setData({
+      maskHidden: true,
+      ishow:false
+    });
+  }, 1000)
+},
 })

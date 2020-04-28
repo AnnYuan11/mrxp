@@ -32,26 +32,11 @@ Page({
     that.lunbo()//轮播图
     that.notice()//公告
     that.yhqList()//优惠券列表
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that = this;
     that.list()//团长地址
     wx.getSetting({
       success: (res) => {
         console.log(res);
-        // debugger
+       
         console.log(res.authSetting['scope.userLocation']);
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
           wx.showModal({
@@ -73,7 +58,7 @@ Page({
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
                       that.locations();
-                      that.list()
+                     
                       wx.showToast({
                         title: '授权成功',
                         icon: 'success',
@@ -95,9 +80,26 @@ Page({
           })
         } else if (res.authSetting['scope.userLocation'] == undefined||res.authSetting['scope.userLocation']==true) {//初始化进入
           that.locations();
+         
         }
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this;
+    
+   
    
     var aa=wx.getStorageSync('aa')
     console.log(aa)
@@ -457,7 +459,7 @@ locations: function () {
         latitude:res.latitude,
         longitude:res.longitude
       })
-     
+
       wx.setStorage({
         key:"latitude",
         data:res.latitude
@@ -466,7 +468,7 @@ locations: function () {
         key:"longitude",
         data:res.longitude
       });
-     
+      that.list()
     }
   })
 },

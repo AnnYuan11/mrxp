@@ -2,11 +2,11 @@
 @import "../../../utils/wxParse/wxParse.wxss";
 .img_goods{
   width: 100%;
-  height: 400rpx;
+  height: 700rpx;
 }
 .img_goods image{
   width: 100%;
-  height: 400rpx;
+  height: 700rpx;
 }
 .goods_introduce{
   width:90%;
@@ -152,7 +152,7 @@ i{
   background: #fff;
 }
 .bot{
-  width:250rpx;
+  width:210rpx;
   height:100rpx;
   background:rgba(252,168,0,1);
   line-height: 100rpx;
@@ -161,7 +161,7 @@ i{
   float: right;
 }
 .noClick{
-  width: 60%;
+  width: 50%;
   height:100rpx;
   line-height: 100rpx;
   text-align: center;
@@ -176,7 +176,7 @@ i{
   background: #E10004;
 }
 .icon_box{
-  width: 30%;
+  width: 40%;
   float: left;
   display: flex;
   justify-content: space-between;
@@ -255,4 +255,106 @@ i{
 }
 .phnr .imgs_box image{
   margin:16rpx 9rpx;
+}
+/* 分享浮层 */
+.share_box{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  top: 0;
+  left: 0;
+}
+.share{
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+}
+.fxd{
+  width: 50%;
+  margin: 0 auto;
+}
+.wechat{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 20rpx 15%;
+  box-sizing: border-box;
+}
+.item{
+  text-align: center;
+}
+.item image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.item text{
+  display: block;
+}
+.qx{
+  text-align: center;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+button{
+  font-size: 28rpx!important;
+  background-color: #fff;
+  border: none;
+  padding: 0!important;
+  margin: 0!important;
+  font-weight: 400!important;
+  line-height: 1;
+  width: auto!important;
+}
+button::after {
+  border: none;
+}
+button:not([size='mini']) {
+  width: auto;
+}
+
+
+/* pages/share/share.wxss */
+
+.imagePathBox{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+.shengcheng{
+  width: 80%;
+  height: 80%;
+  position: fixed;
+  top: 50rpx;
+  left: 50%;
+  margin-left: -40%;
+  z-index: 10;
+}
+.baocun{
+  display: block;
+  width: 80%;
+  height: 70rpx;
+  padding: 0;
+  line-height: 70rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 50rpx;
+  left: 10%;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 24rpx;
+  background: #fdd668;
+
+}
+button[class="baocun"]::after{
+  border: 0;
 }
