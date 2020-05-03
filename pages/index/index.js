@@ -98,9 +98,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    
-   
-   
     var aa=wx.getStorageSync('aa')
     console.log(aa)
     if(aa=='0'){
@@ -473,36 +470,36 @@ locations: function () {
   })
 },
 // 选择团长
-selectTZ(){
-  wx.navigateTo({
-    url: '/pages/details/dhzt/dhzt',
-  })
-},
+  selectTZ(){
+    wx.navigateTo({
+      url: '/pages/details/dhzt/dhzt',
+    })
+  },
 // 查询用户切换店铺
 
-query(){
-  console.log('调用了自提')
-  var that=this;
-  var userId = wx.getStorageSync('userId')
-  var params = {
-    url: '/app/user/findUserHeadInfo',
-    method: 'POST',
-    data: {
-      userInfo:{'id':userId}
-    },
-    sCallBack: function (data) {
-      console.log(data.data.result)
-      that.setData({
-        defaultztd:data.data.result,
-        shopName:data.data.result.headInfo.shopName
-      })
-      
-    },
-    eCallBack: function () {
+  query(){
+    console.log('调用了自提')
+    var that=this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/user/findUserHeadInfo',
+      method: 'POST',
+      data: {
+        userInfo:{'id':userId}
+      },
+      sCallBack: function (data) {
+        console.log(data.data.result)
+        that.setData({
+          defaultztd:data.data.result,
+          shopName:data.data.result.headInfo.shopName
+        })
+        
+      },
+      eCallBack: function () {
+      }
     }
-  }
-  base.request(params);
-},
+    base.request(params);
+  },
   // 团长地址
   list(){
     console.log('调用了团长')

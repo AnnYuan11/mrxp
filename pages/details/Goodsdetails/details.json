@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "i-action-sheet": "../../../dist/action-sheet/index",
-    "i-divider": "../../../dist/divider/index"
+    "i-divider": "../../../dist/divider/index",
+    "canvasdrawer": "../../../components/canvasdrawer/canvasdrawer"
   },
    "navigationBarTitleText": "商品详情"
 }

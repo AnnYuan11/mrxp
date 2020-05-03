@@ -27,9 +27,11 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log(options)
+    console.log(app.globalData.personal)
     that.setData({
       id:options.id,
-      isBuy:options.isBuy
+      isBuy:options.isBuy,
+      personal:app.globalData.personal
     })
     that.shop();//商品内容
     that.buyRecord()//购买记录
@@ -65,136 +67,12 @@ Page({
   onReady: function () {
 
   },
-  createNewImg: function () {
-    var that = this;
-    var context = wx.createCanvasContext('mycanvas');
-    context.setFillStyle("#fff")
-    context.fillRect(0, 0, 375, 667)
-    var path = "/img/pic/11.jpg";
-    context.drawImage(path, 56, 56, 262, 349);
-    var path5 = "/img/pic/1.png";
-    var path2 = "/img/pic/2.png";
-    var name = that.data.name;
-    context.drawImage(path2, 56, 400, 263, 121);
-  
-    //绘制左下角文字
-    context.setFontSize(14);
-    context.setFillStyle('#333');
-    context.setTextAlign('left');
-    context.fillText("长按识别小程序", 70, 560);
-    context.stroke();
-    context.setFontSize(14);
-    context.setFillStyle('#333');
-    context.setTextAlign('left');
-    context.fillText("跟我一起来学习吧~~", 70, 580);
-    context.stroke();
-   
-    //绘制右下角小程序二维码
-    context.drawImage(path5, 230, 530,80,80);
-
-    context.draw();
-    //将生成好的图片保存到本地
-    setTimeout(function () {
-      wx.canvasToTempFilePath({
-        canvasId: 'mycanvas',
-        success: function (res) {
-          console.log(res)
-          var tempFilePath = res.tempFilePath;
-          that.setData({
-            imagePath: tempFilePath,
-            canvasHidden: true
-          });
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      });
-    }, 200);
-  },
-  //点击保存到相册
-  baocun: function () {
-    var that = this;
-    wx.getSetting({
-      success(res) {
-        console.log(res)
-      if (!res.authSetting['scope.writePhotosAlbum']) {
-      wx.authorize({
-        scope:'scope.writePhotosAlbum',
-        success() {
-        console.log('授权成功')
-      }
-      })
-      }
-      }
-      })
-      
-    
-    console.log(that.data.imagePath)
-    wx.downloadFile({
-      url:that.data.imagePath,
-      success:function(res){
-        console.log(res)
-        wx.saveImageToPhotosAlbum({
-          filePath: res.tempFilePath,
-          success(res) {
-           console.log(res)
-            wx.showModal({
-              content: '海报已保存到相册',
-              showCancel: false,
-              confirmText: '确定',
-              confirmColor: '#333',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('用户点击确定');
-                  /* 该隐藏的隐藏 */
-                  that.setData({
-                    maskHidden: false
-                  })
-                }
-              },
-               fail: function (res) {
-                console.log(11111)
-              }
-            })
-          },
-          fail:function (err) {
-            console.log(err);
-            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
-              console.log("用户一开始拒绝了，我们想再次发起授权")
-              console.log('打开设置窗口')
-            wx.openSetting({
-            success(settingdata) {
-            console.log(settingdata)
-            if (settingdata.authSetting['scope.writePhotosAlbum']) {
-            console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
-            }else {
-            console.log('获取权限失败，给出不给权限就无法正常使用的提示')
-            }
-            }
-            })
-            
-            }
-          
-          }
-
-
-
-
-
-
-
-
-
-        })
-      }
-    })
-   
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    app.refresh()
     this.setData({
       ishow:false
     })
@@ -435,11 +313,176 @@ handleClickItem1 () {
   });
   setTimeout(function () {
     wx.hideToast()
-    that.createNewImg();
+    // that.ewm()
+    that.eventDraw();
     that.setData({
       maskHidden: true,
       ishow:false
     });
   }, 1000)
+},
+// 生成二维码
+ewm(){
+  var that=this;
+  var params = {
+    url: '/app/getUserIdWxCommodityQr',
+    method: 'GET',
+    data: {
+      'commodityId':that.data.id
+    },
+    sCallBack: function (data) {
+      console.log(data)
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+eventDraw () {
+  var that=this;
+  var path = that.data.imgUrl+that.data.background[0];
+  wx.showLoading({
+    title: '绘制分享图片中',
+    mask: true
+  })
+  this.setData({
+    painting: {
+      width: 375,
+      height: 555,
+      clear: true,
+      views: [
+        {
+          type: 'image',
+          url: 'https://hybrid.xiaoying.tv/miniprogram/viva-ad/1/1531103986231.jpeg',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 555
+        },
+        {
+          type: 'image',
+          url: that.data.personal.photo,
+          top: 27.5,
+          left: 29,
+          width: 55,
+          height: 55
+        },
+        {
+          type: 'image',
+          url: 'https://hybrid.xiaoying.tv/miniprogram/viva-ad/1/1531401349117.jpeg',
+          top: 27.5,
+          left: 29,
+          width: 55,
+          height: 55
+        },
+        {
+          type: 'text',
+          content: '您的好友【'+that.data.personal.wxNickName+'】',
+          fontSize: 16,
+          color: '#402D16',
+          textAlign: 'left',
+          top: 33,
+          left: 96,
+          bolder: true
+        },
+        {
+          type: 'text',
+          content: '发现一件好货，邀请你一起0元免费拿！',
+          fontSize: 15,
+          color: '#563D20',
+          textAlign: 'left',
+          top: 59.5,
+          left: 96
+        },
+        {
+          type: 'image',
+          url: path,
+          top: 136,
+          left: 42.5,
+          width: 290,
+          height: 186
+        },
+        {
+          type: 'image',
+          url: 'https://www.sxsswlkj.com/app/getUserIdWxCommodityQr?commodityId='+that.data.id,
+          top: 420,
+          left: 50,
+          width: 100,
+          height: 100
+        },
+        {
+          type: 'text',
+          content: that.data.list.productInfo.commodityName,
+          fontSize: 16,
+          lineHeight: 21,
+          color: '#383549',
+          textAlign: 'left',
+          top: 336,
+          left: 44,
+          width: 287,
+          MaxLineNumber: 2,
+          breakWord: true,
+          bolder: true
+        },
+        {
+          type: 'text',
+          content: '￥'+that.data.list.price,
+          fontSize: 19,
+          color: '#E62004',
+          textAlign: 'left',
+          top: 387,
+          left: 44.5,
+          bolder: true
+        },
+        {
+          type: 'text',
+          content: '原价:￥'+that.data.list.crossedPrice,
+          fontSize: 13,
+          color: '#7E7E8B',
+          textAlign: 'left',
+          top: 391,
+          left: 130,
+          textDecoration: 'line-through'
+        },
+        {
+          type: 'text',
+          content: '长按识别图中二维码',
+          fontSize: 14,
+          color: '#383549',
+          textAlign: 'left',
+          top: 460,
+          left: 165.5,
+          lineHeight: 20,
+          MaxLineNumber: 2,
+          breakWord: true,
+          width: 125
+        }
+      ]
+    }
+  })
+},
+eventGetImage (event) {
+  console.log(event)
+  wx.hideLoading()
+  const { tempFilePath, errMsg } = event.detail
+  if (errMsg === 'canvasdrawer:ok') {
+    this.setData({
+      shareImage: tempFilePath
+    })
+  }
+},
+// 保存图片
+eventSave () {
+  wx.saveImageToPhotosAlbum({
+    filePath: this.data.shareImage,
+    success (res) {
+      wx.showToast({
+        title: '保存图片成功',
+        icon: 'success',
+        duration: 2000
+      })
+    }
+})
 },
 })

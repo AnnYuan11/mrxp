@@ -152,11 +152,15 @@
 	</view>
 </view>
 <!-- 海报 -->
-<view class='imagePathBox' wx:if="{{maskHidden}}">
+<!-- <view class='imagePathBox' wx:if="{{maskHidden}}">
 	<image src="{{imagePath}}" class='shengcheng'></image>
 	<button class='baocun' catchtap='baocun'>保存相册，分享到朋友圈</button>
 </view>
-<!-- <view  wx:if="{{maskHidden}}"class="mask"></view> -->
 <view class="canvas-box" wx:if="{{maskHidden}}">
 	<canvas style="width: 100%;height: 90%;position:fixed;" canvas-id="mycanvas"/>
+</view> -->
+<view class='imagePathBox' wx:if="{{maskHidden}}">
+	<image src="{{shareImage}}" class='shengcheng'></image>
+	<button class='baocun' catchtap='eventSave'>保存相册，分享到朋友圈</button>
 </view>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
