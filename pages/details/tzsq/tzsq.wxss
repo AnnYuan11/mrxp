@@ -72,3 +72,31 @@
   color:#909090;
   margin-left: 10rpx;
 }
+/* 上传图片 */
+.uploadImg{
+  display: flex;
+  width:100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding-left: 40rpx;
+}
+.addImg{
+  text-align: left;
+  width: 180rpx;
+  float: left;
+}
+.imgInfo .del{
+  display:inline-block;
+  width:30rpx;
+  position:absolute;
+  right:20rpx;
+  top: -20rpx;
+}
+.imgInfo .del image{
+  width: 100%;
+}
+.imgInfo{
+  width: 30%;
+  float: left;
+  position: relative;
+}

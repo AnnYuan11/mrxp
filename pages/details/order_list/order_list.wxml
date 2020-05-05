@@ -71,7 +71,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dfkmore">
 			<block wx:for="{{dfklist}}" catchtap="Todetails" data-id="{{item.id}}">
-				<view class="box">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -119,7 +119,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bhzmore">
 			<block wx:for="{{bhzlist}}" catchtap="Todetails" data-id="{{item.id}}">
-				<view class="box">
+					<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -162,7 +162,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="pszmore">
 			<block wx:for="{{phzlist}}" catchtap="Todetails" data-id="{{item.id}}">
-				<view class="box">
+					<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -206,7 +206,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dthmore">
 			<block wx:for="{{dthlist}}" catchtap="Todetails" data-id="{{item.id}}">
-				<view class="box">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -252,7 +252,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="ythmore">
 			<block wx:for="{{ythlist}}" catchtap="Todetails" data-id="{{item.id}}">
-				<view class="box">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -393,7 +393,7 @@
 </swiper>
 <view class="thm_box" wx:if="{{showThm}}" bindtap="closeThm">
 	<view class="img_box">
-		<image src="https://www.sxsswlkj.com/app/order/getOrderIdQr?orderId={{orderId}}"></image>
+		<image src="https://www.zgmrxp.com/app/order/getOrderIdQr?orderId={{orderId}}"></image>
 		<text>提货码：{{pickcode}}</text>
 	</view>
 

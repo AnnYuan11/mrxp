@@ -17,7 +17,7 @@ Page({
     // show:true,//弹窗
     imgUrl:app.globalData.imgUrl,
     currentPage: 1,//请求数据的页码
-    size: 2,//每页数据条数
+    size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
     // aa:1
@@ -33,10 +33,10 @@ Page({
     that.notice()//公告
     that.yhqList()//优惠券列表
     that.list()//团长地址
+    // that.onPageScroll()
     wx.getSetting({
       success: (res) => {
         console.log(res);
-       
         console.log(res.authSetting['scope.userLocation']);
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
           wx.showModal({
@@ -57,6 +57,7 @@ Page({
                   success: function (data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
+                      console.log('定位授权问问')
                       that.locations();
                      
                       wx.showToast({
@@ -79,6 +80,7 @@ Page({
             }
           })
         } else if (res.authSetting['scope.userLocation'] == undefined||res.authSetting['scope.userLocation']==true) {//初始化进入
+          console.log('定位授权333')
           that.locations();
          
         }
@@ -99,7 +101,6 @@ Page({
   onShow: function () {
     var that = this;
     var aa=wx.getStorageSync('aa')
-    console.log(aa)
     if(aa=='0'){
       that.query()//查询用户切换店铺
     }else {
@@ -349,6 +350,8 @@ shopListM(className){
       // console.log(listTomorow)
       if(listTomorow!=''){
         listTomorow.forEach((item,index) =>{
+          item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+
           if(item.sendType==1){
             item.sendType="到店自提"
           }else{
@@ -399,10 +402,6 @@ shopListM(className){
   }
   base.request(params);
 },
-
-
-
-
 // 首页轮播图
 lunbo(){
   var that = this;
@@ -465,7 +464,13 @@ locations: function () {
         key:"longitude",
         data:res.longitude
       });
-      that.list()
+      var aa=wx.getStorageSync('aa')
+      if(aa=='0'){
+        that.query()//查询用户切换店铺
+      }else {
+        that.list()
+      }
+     
     }
   })
 },
@@ -491,7 +496,12 @@ locations: function () {
         console.log(data.data.result)
         that.setData({
           defaultztd:data.data.result,
-          shopName:data.data.result.headInfo.shopName
+          shopName:data.data.result.headInfo.shopName,
+          ztdid: data.data.result.headInfo.id
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.headInfo.id
         })
         
       },
@@ -511,15 +521,22 @@ locations: function () {
       method: 'POST',
       data: {
         myLat:myLat,
-        myLng:myLng
+        myLng:myLng,
+        'pageIndex':1,
+        'pageSize':1,
       },
       sCallBack: function (data) {
-        var list= data.data.result;
+        var list= data.data.result.datas;
         if(list.length==0){
           that.default()
         }
         that.setData({
          shopName:list[0].shopName,
+          ztdid: list[0].id
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: list[0].id
         })
         
       },
@@ -541,6 +558,11 @@ locations: function () {
         var list= data.data.result;
         that.setData({
           shopName:list.shopName,
+          ztdid: list.id,
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: list.id,
         })
         
       },
@@ -553,6 +575,7 @@ locations: function () {
   joinGwc(e){
     var that=this;
     console.log(e)
+    console.log(that.data.ztdid)
     var userId = wx.getStorageSync('userId')
     if(userId==''){
      wx.navigateTo({
@@ -577,7 +600,11 @@ locations: function () {
          'shoppingCarType':sendtype,
          'userInfo':{
            'id':userId
-         }
+         },
+          "headInfo": {
+            "id": that.data.ztdid//自提点id
+          }
+
         },
         sCallBack: function (data) {
           if(data.data.errorCode=='0'){
@@ -678,6 +705,20 @@ locations: function () {
   getAll(){
     var that=this;
     var userId = wx.getStorageSync('userId')
+    if(userId==undefined||userId==''){
+      wx.showToast({
+        title:'用户未登录 请先登陆',
+        duration: 2000,
+        success: function () {
+          setTimeout(function () {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }, 2000);
+          }
+      })
+      return false
+    }
     var params = {
       url: '/app/user/addUserCouponInfoIds',
       method: 'POST',
@@ -729,6 +770,32 @@ locations: function () {
       }
     }
     base.request(params);
-  }
+  },
+  // 获取滚动条当前位置
+  onPageScroll: function (e) {
+    console.log(e)
+    if (e.scrollTop > 100) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
 
+  //回到顶部
+  goTop: function (e) {  // 一键回到顶部
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
+  },
 })

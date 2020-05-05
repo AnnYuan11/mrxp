@@ -44,8 +44,10 @@ Component({
     ids: [],
   },
   lifetimes: {
+    // 在组件实例进入页面节点树时执行
     attached: function () {
       this.getShopList(this.data.shoppingType)
+      this.AllShopList(this.data.shoppingType)
       wx.getSystemInfo({
         success: (res) => {
           this.setData({
@@ -53,6 +55,7 @@ Component({
           })
         }
       })
+     
     }
   },
   pageLifetimes: {
@@ -64,6 +67,7 @@ Component({
       this.setData({
         selectAllStatus: false
       })
+    
     },
     hide(){
       var that=this;
@@ -73,7 +77,7 @@ Component({
   /**
    * 组件的方法列表
    */
-  methods: {
+  methods: { 
     /**
   * 当前商品选中事件
   */
@@ -184,13 +188,55 @@ Component({
     /**
      * 购物车全选事件
      */
+    // 列表全部
+    AllShopList(shoppingType) {
+      var that = this;
+      var id = wx.getStorageSync('userId')
+      var ztdid = wx.getStorageSync('zdtid')
+      console.log(ztdid)
+      console.log(id)
+      var params = {
+        url: '/app/commodity/listShoppingCartInfo',
+        method: 'POST',
+        data: {
+          'pageIndex': 1,
+          'pageSize': 1000,
+          'userInfo.id': id,
+          'shoppingCarType': shoppingType,
+          'headinfo.id': ztdid
+        },
+        sCallBack: function (data) {
+          if (data.data.errorCode == 0) {
+            if (data.data.result.datas.length == 0) {
+              that.setData({
+                hasList: false
+              })
+              return false;
+            } else {
+              that.setData({
+                hasList: true,
+                list2: data.data.result.datas, //初始化数据列表
+              })
+            }
+          } else {
+            wx.showToast({
+              title: data.data.errorMsg
+            })
+          }
+        },
+        eCallBack: function () {
+        }
+      }
+      base.request(params);
+    },
     selectAll(e) {
+  
       // 全选ICON默认选中
       let selectAllStatus = this.data.selectAllStatus;
       // true  -----   false
       selectAllStatus = !selectAllStatus;
       // 获取商品数据
-      let list = this.data.list;
+      let list = this.data.list2;
       // 循环遍历判断列表中的数据是否选中
       for (let i = 0; i < list.length; i++) {
         list[i].selected = selectAllStatus;
@@ -358,6 +404,8 @@ Component({
     getShopList(shoppingType) {
       var that = this;
       var id = wx.getStorageSync('userId')
+      var ztdid = wx.getStorageSync('zdtid')
+      console.log(ztdid)
       console.log(id)
       var params = {
         url: '/app/commodity/listShoppingCartInfo',
@@ -366,7 +414,8 @@ Component({
           'pageIndex': that.data.currentPage,
           'pageSize': that.data.size,
           'userInfo.id': id,
-          'shoppingCarType': shoppingType
+          'shoppingCarType': shoppingType,
+          'headinfo.id':ztdid
         },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
@@ -421,6 +470,7 @@ Component({
             productItem['photo'] = list[i].commodityInfo.productInfo.photo
             productItem['price'] = list[i].commodityInfo.price
             productItem['number'] = list[i].commodityNumber
+            productItem['ids'] = list[i].id
             product.push(productItem)
           }
         }
@@ -476,7 +526,8 @@ Component({
             'pageIndex': that.data.currentPage,
             'pageSize': that.data.size,
             'userInfo.id': id,
-            'shoppingCarType': that.data.shoppingType
+            'shoppingCarType': that.data.shoppingType,
+            'headinfo.id': that.data.ztdid
           },
           sCallBack: function (data) {
             if (data.data.errorCode == 0) {
@@ -507,5 +558,7 @@ Component({
         url: `../../pages/details/Goodsdetails/details?id=${id}`
       })
     },
-  }
+  
+  },
+  
 })

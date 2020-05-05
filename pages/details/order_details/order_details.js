@@ -37,7 +37,7 @@ Page({
       yhqid:options.yhqid,//优惠券id
       yhqmoney:options.yhqmoney//优惠券钱数
     })
-   
+   that.list()
   },
 
   /**
@@ -52,18 +52,14 @@ Page({
    */
   onShow: function () {
     var that=this;
-    if(that.data.options.sendType=="到店自提"){
-      that.orderMoney()
-      that.list()//团长地址
+    that.selectDz()//查询用户地址
       var aa=wx.getStorageSync('aa')
       if(aa=='0'){
         that.query()//查询用户切换店铺
       }else {
         return
       }
-    }else{
-      that.selectDz()//查询用户地址
-    }
+     
   },
 
   /**
@@ -221,6 +217,7 @@ Page({
     }
     var userId=wx.getStorageSync('userId')
     var ddid=that.data.ddid;
+    console.log(ddid)
     var sendType
     if(that.data.options.sendType=="到店自提"){
       that.data.dzid=''
@@ -327,7 +324,9 @@ radioChange: function (e) {
               duration: 2000,
               success: function () {
                 setTimeout(function () {
-                  
+                  wx.redirectTo({
+                    url: '/pages/details/order_list/order_list',
+                  })
                 }, 2000);
 
               }
@@ -403,8 +402,10 @@ radioChange: function (e) {
     }else{
       dzid=that.data.dzid
     }
-   wx.redirectTo({
-     url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+dzid+'&commodityNumber='+options.commodityNumber
+   wx.navigateTo({ 
+    url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid
+
+    //  url:'/pages/details/wdyhq/wdyhq?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+dzid+'&commodityNumber='+options.commodityNumber
    })
   },
 //  跳转到选择地址
@@ -430,9 +431,12 @@ query(){
     sCallBack: function (data) {
       that.setData({
         defaultztd:data.data.result,
+        addressth:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address,
         shopName:data.data.result.headInfo.shopName,
-        ztdid:data.data.result.headInfo.id
+        ztdid:data.data.result.headInfo.id,
+        phones:data.data.result.headInfo.phone
       })
+      that.orderMoney()
       
     },
     eCallBack: function () {
@@ -451,20 +455,23 @@ query(){
       method: 'POST',
       data: {
         myLat:myLat,
-        myLng:myLng
+        myLng:myLng,
+        'pageIndex':1,
+        'pageSize':1,
       },
       sCallBack: function (data) {
-        var list= data.data.result;
+        var list= data.data.result.datas;
         if(list.length==0){
           that.default()
+           
         }
         that.setData({
          shopName:list[0].shopName,
          phones:list[0].phone,
          ztdid2:list[0].id,
-         addressth:list[0].address
+         addressth:list[0].province+list[0].city+list[0].area+list[0].street+list[0].address
         })
-        
+        that.orderMoney()
       },
       eCallBack: function () {
       }

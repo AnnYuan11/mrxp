@@ -10,7 +10,7 @@
 	</swiper>
 </view>
 <view class="goods_introduce">
-	<image src="/img/details/bg_goodsdetails.png" mode="widthFix"></image>
+	<image src="{{imgUrl}}img/details/bg_goodsdetails.png" mode="widthFix"></image>
 	<view class="price_box">￥
 		<text class="font_xl">{{list.price}}</text>
 		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
@@ -34,7 +34,7 @@
 
 		</view>
 		<view class="gys_box">
-			<image src="/img/details/gys.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/gys.png" mode="widthFix"></image>
 			<text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text>
 		</view>
 	</view>
@@ -58,6 +58,8 @@
 		<scroll-view scroll-y style="height: 100%">
 			<view class="box">
 				<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
+				<image src="{{imgUrl}}{{gwzns}}" style="width:100%" mode="widthFix"></image>
+			
 			</view>
 
 		</scroll-view>
@@ -88,7 +90,7 @@
 		<scroll-view scroll-y style="height: 100%">
 			<view class="gmjl_lists">
 				<view class="sppj">
-					<image src="/img/pic/4.png" mode="widthFix" class="head"></image>
+					<image src="{{imgUrl}}img/pic/4.png" mode="widthFix" class="head"></image>
 					<view class="gmjl_mess">
 						<text class="mz">王XX</text>
 						<text>2020-04-05 12:20:23</text>
@@ -97,9 +99,9 @@
 				<view class="phnr">
 					<text class="cons">很好很好很好很好很好很好很好很好很好很好很好很好</text>
 					<view class="imgs_box">
-						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
-						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
-						<image src='/img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
 					</view>
 				</view>
 			</view>
@@ -112,15 +114,15 @@
 <view class="bottom">
 	<view class="icon_box">
 		<view class="index" catchtap="toIndex">
-			<image src="/img/details/sy.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/sy.png" mode="widthFix"></image>
 			<text>首页</text>
 		</view>
 		<view class="index" catchtap="toGwc">
-			<image src="/img/details/gwc.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/gwc.png" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>
 		<view class="index" catchtap="handleOpen1">
-			<image src="/img/details/share.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/share.png" mode="widthFix"></image>
 			<text>分享</text>
 		</view>
 	</view>
@@ -139,12 +141,12 @@
 		<view class="wechat">
 		<button open-type="share"	>
 			<view class="item">
-				<image	src="/img/details/dd3.png"></image>
+				<image	src="{{imgUrl}}img/details/dd3.png"></image>
 				<text>微信好友</text>
 			</view>
 			</button>
 			<view class="item" catchtap="handleClickItem1">
-				<image	src="/img/details/dd3.png"></image>
+				<image	src="{{imgUrl}}img/details/dd3.png"></image>
 				<text>生成海报</text>
 			</view>
 		</view>
@@ -161,6 +163,7 @@
 </view> -->
 <view class='imagePathBox' wx:if="{{maskHidden}}">
 	<image src="{{shareImage}}" class='shengcheng'></image>
-	<button class='baocun' catchtap='eventSave'>保存相册，分享到朋友圈</button>
+	<button class='baocun' catchtap='eventSave'>保存图片</button>
+  <image  src="{{imgUrl}}img/details/close.png" mode="widthFix" style="width:40rpx" class="close" bindtap="close"></image>
 </view>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>

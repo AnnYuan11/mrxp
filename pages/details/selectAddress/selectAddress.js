@@ -12,6 +12,7 @@ Page({
     multiIndex: [0, 0, 0, 0],
     chinaData: [],
     color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
   },
 
  

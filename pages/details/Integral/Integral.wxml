@@ -1,6 +1,6 @@
 <!--pages/details/Integral/Integral.wxml-->
 <view class="top_box">
-  <image src="/img/details/jf.png" mode="widthFix" style="width:100%"></image>
+  <image src="{{imgUrl}}img/details/jf.png" mode="widthFix" style="width:100%"></image>
   <view class="jfxx">
     <view>我的积分</view>
     <view class="num_jf">{{personal.integral}}分</view>
@@ -8,7 +8,9 @@
     <navigator url="/pages/details/jfmx/jfmx" hover-class="none">
       <view>积分明细</view>
     </navigator>
-      <view>积分规则</view>
+    	<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10345&name=积分规则" hover-class="none">
+        <view>积分规则</view>
+      </navigator>
     </view>
   </view>
 </view>

@@ -5,7 +5,7 @@ var base = new Base();
 var util = require('/utils/cache.js');
 App({
   globalData: {
-    imgUrl: "http://139.155.113.100:8686/",
+    imgUrl: "http://39.101.190.182:8585/",
     color: '#E10004',
   },
   onLaunch (options) {
@@ -25,7 +25,7 @@ App({
             if (res.code) {
                 // 发起网络请求
                 wx.request({
-                    url: 'http://139.155.113.100:8085/app/getOpenId?code=' + res.code,
+                    url: 'https://www.zgmrxp.com/app/getOpenId?code=' + res.code,
                     success: function (data) {
                         console.log(data);
                         wx.setStorage({

@@ -1,6 +1,7 @@
 // pages/details/address_edit/address_edit.js
 import { Base } from "../../../utils/request/base.js";
 var base = new Base();
+var app = getApp();
 Page({
  
   /**
@@ -11,6 +12,7 @@ Page({
     multiIndex: [0, 0, 0, 0],
     chinaData: [],
     color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
   },
 
  

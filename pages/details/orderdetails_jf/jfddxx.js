@@ -117,10 +117,12 @@ Page({
         method: 'POST',
         data: {
           myLat:myLat,
-          myLng:myLng
+          myLng:myLng,
+          'pageIndex':1,
+          'pageSize':1,
         },
         sCallBack: function (data) {
-          var list= data.data.result;
+          var list= data.data.result.datas;
           if(list.length==0){
             that.default()
           }
@@ -174,7 +176,10 @@ Page({
         'integralProductInfo':{
           'id':that.data.list.id
         },
-        'commodityNumbers':1
+        'commodityNumbers':1,
+        "headInfo":{
+          "id":that.data.ztdid2//自提点id
+        }
       }
       console.log(JSON.stringify(arg))
       var params = {

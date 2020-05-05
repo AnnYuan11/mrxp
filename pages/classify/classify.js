@@ -1,8 +1,10 @@
 // pages/classify/classify.js
+var app = getApp();
 Page({
   data: {
     active:0,
-    currentTab:0
+    currentTab:0,
+    imgUrl:app.globalData.imgUrl,
   },
   switchNav: function (e) {
     var page = this;

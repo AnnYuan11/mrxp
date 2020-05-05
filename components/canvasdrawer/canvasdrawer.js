@@ -245,6 +245,7 @@ Component({
             wx.getImageInfo({
               src: url,
               complete: res => {
+                console.log(res)
                 if (res.errMsg === 'getImageInfo:ok') {
                   this.cache[url] = res.path
                   resolve(res.path)

@@ -15,6 +15,7 @@ Page({
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
+    imgUrl:getApp().globalData.imgUrl,
   },
 
   /**
@@ -137,7 +138,9 @@ Page({
         'type':0,
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var yhqlist=data.data.result.datas;
@@ -192,7 +195,9 @@ Page({
         'type':1,
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var yhqysylist=data.data.result.datas;
@@ -249,7 +254,9 @@ Page({
         'type':2,
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var yhqygqlist=data.data.result.datas;
@@ -298,9 +305,23 @@ Page({
     var that=this;
     if(that.data.toddxq=="1"){
       var options=that.data.options
-      wx.redirectTo({
-        url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'元'+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+options.dzid+'&commodityNumber='+options.commodityNumber,
+      let pages = getCurrentPages(); //获取当前页面pages里的所有信息。
+      let prevPage = pages[pages.length - 2]; 
+      prevPage.setData({  // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        yhqid: e.currentTarget.dataset.id,
+        ddid:that.data.ddid,
+        yhqmoney:e.currentTarget.dataset.yhqmoney+'元',
+        
       })
+      wx.navigateBack({
+        delta: 1  // 返回上一级页面。
+      })
+      // wx.redirectTo({
+      //   url: '/pages/details/order_details/order_details?yhqid='+e.currentTarget.dataset.id+'&ddid='+that.data.ddid+'&yhqmoney='+e.currentTarget.dataset.yhqmoney+'元'+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&dzid='+options.dzid+'&commodityNumber='+options.commodityNumber,
+      // })
+
+
+
     }else if (that.data.type == 'shopSubmit'){
       console.log(e.currentTarget.dataset.id)
       wx.redirectTo({

@@ -6,8 +6,8 @@
 				<view class="top">
 					<view class="all_select">
 						<!-- 全选ICON -->
-						<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='/img/public/select.png'></image>
-						<image wx:else class="total-select" bindtap="selectAll" src='/img/public/sec.png'></image>
+						<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='{{imgUrl}}img/public/select.png'></image>
+						<image wx:else class="total-select" bindtap="selectAll" src='{{imgUrl}}img/public/sec.png'></image>
 						<!-- 全选标题 -->
 						<text class='sel_count_name'>全选</text>
 					</view>
@@ -18,9 +18,9 @@
 				</view>
 				<!-- 列表 -->
 				<view class="list" wx:for="{{list}}" wx:key="{{index}}">
-					<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='/img/public/del.png'></image>
-					<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/public/select.png'></image>
-					<image wx:else src='/img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
+					<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
+					<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='{{imgUrl}}img/public/select.png'></image>
+					<image wx:else src='{{imgUrl}}img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
 					<!-- 列表标题 -->
 					<text class="list_name" data-id="{{item.commodityInfo.id}}" bindtap="Details">{{item.commodityInfo.productInfo.commodityName}}</text>
 					<!-- 列表商品图片 -->
@@ -32,7 +32,7 @@
 						<view class="carts-num">
 							<!-- 减按钮 -->
 							<lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
-								<image src='/img/public/jian.png' style="width:44rpx;height:44rpx"></image>
+								<image src='{{imgUrl}}img/public/jian.png' style="width:44rpx;height:44rpx"></image>
 							</lable>
 							<!-- 文本框值 -->
 							<label class="view_text_center" bindinput='input_num' data-index="{{index}}">
@@ -40,7 +40,7 @@
 							</label>
 							<!-- 加按钮 -->
 							<lable class="plus" bindtap="btn_add" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
-								<image src='/img/public/add.png' style="width:44rpx;height:44rpx"></image>
+								<image src='{{imgUrl}}img/public/add.png' style="width:44rpx;height:44rpx"></image>
 							</lable>
 						</view>
 					</view>

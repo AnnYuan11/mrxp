@@ -5,7 +5,7 @@
     <text class="yuan">元</text>
 </view>
 <view class="rules">
-  <image src="/img/details/chongzhi.png" mode="widthFix"></image>
+  <image src="{{imgUrl}}img/details/chongzhi.png" mode="widthFix"></image>
   <text class="rule">您的账户享受如下规则</text>
   <view class="amount ">
     <view class="cont">
@@ -27,7 +27,7 @@
 <!-- 充值规则 -->
 <view class="box">
 	<view class="rules">
-		<image src="/img/details/wycz.png" mode="widthFix"></image>
+		<image src="{{imgUrl}}img/details/wycz.png" mode="widthFix"></image>
     <view class="rule_text">
       <text class="rules_title">您的账户享受如下规则</text>
       <text class="con">您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则</text>

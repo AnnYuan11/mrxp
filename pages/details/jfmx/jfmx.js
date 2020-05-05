@@ -11,7 +11,8 @@ Page({
     currentPage: 1,//请求数据的页码
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
-    pagecount: 0,//总的页数
+    pagecount: 0,//总的页数,
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**

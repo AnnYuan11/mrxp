@@ -7,6 +7,7 @@ Page({
   data: {
     imgArr: [],
     color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
   },
 
   /**

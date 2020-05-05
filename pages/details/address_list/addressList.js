@@ -12,6 +12,7 @@ Page({
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**
@@ -37,7 +38,28 @@ Page({
    */
   onShow: function () {
     var that=this;
-    that.list()
+    var session = wx.getStorageSync('session')
+    console.log(session)
+    if(session==''){
+      wx.showModal({
+        title: '提示',
+        content: '用户未登录',
+        confirmText:'去登陆',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1  // 返回上一级页面。
+            })
+          }
+        }
+      })   
+    }else{
+      that.list()//列表
+    }
   },
 
   /**
@@ -91,7 +113,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo':{
+          'id': id
+        }
       },
       sCallBack: function (data) {
         var list=data.data.result.datas;

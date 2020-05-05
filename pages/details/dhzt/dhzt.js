@@ -1,6 +1,7 @@
 // pages/dhzt/dhzt.js
 import { Base } from "../../../utils/request/base.js";
 var base = new Base();
+var app = getApp();
 Page({
 
   /**
@@ -9,7 +10,12 @@ Page({
   data: {
     color: getApp().globalData.color,
     col:0,
-    defaultztd:''
+    defaultztd:'',
+    imgUrl:getApp().globalData.imgUrl,
+    currentPage: 1,//请求数据的页码
+    size: 10,//每页数据条数
+    totalCount: 0,//总是数据条数
+    pagecount: 0,//总的页数
   },
 
   /**
@@ -67,7 +73,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.search();
+    } else {
+      //没有更多数据
+     app.nomore_showToast();
+    }
   },
 
   /**
@@ -76,9 +88,54 @@ Page({
   onShareAppMessage: function () {
 
   },
- 
+  con(e){
+    console.log(e)
+    var className=e.detail.value
+    this.setData({
+      className:className,
+     currentPage:1
+    })
+  },
+//  搜索
+search(e){
+  console.log(e)
+  var that=this;
+  var className=that.data.className
+  var params = {
+    url: '/app/head/listHeadInfo',
+    method: 'POST',
+    data: {
+      'pageIndex':that.data.currentPage,
+      'pageSize':that.data.size,
+      'searchName':className
+    },
+    sCallBack: function (data) {
+      var yhqlist=data.data.result.datas;    
+      var temlist = that.data.list; //原始的数据集合
+     var currentPage = that.data.currentPage; //获取当前页码
+     if (currentPage == 1) {
+         temlist = data.data.result.datas; //初始化数据列表
+         currentPage = 1;
+     }
+     else {
+         temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+         
+       }
+       that.setData({
+         currentPage: currentPage,
+         list: temlist,
+         totalCount: data.data.result.rowCount, //总的数据条数
+         pagecount: data.data.result.totalPages //总页数
+       })
+       console.log(that.data.pagecount)         
+   },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
   
-  // 自提点列表
+ // 自提点列表
 list(){
   var that = this;
   var myLat = wx.getStorageSync('latitude');
@@ -89,16 +146,15 @@ list(){
     method: 'POST',
     data: {
       myLat:myLat,
-      myLng:myLng
+      myLng:myLng,
+      'pageIndex':1,
+      'pageSize':10,
     },
     sCallBack: function (data) {
-      var list= data.data.result;
+      var list= data.data.result.datas;
       if(list.length==0){
         that.default()
       }
-      // list.forEach(item => {
-      //   item.distance=parseInt(item.distance)/1000
-      // });
       var address=list[0].province+list[0].city+list[0].area+list[0].street+list[0].address
       that.setData({
        list:list,

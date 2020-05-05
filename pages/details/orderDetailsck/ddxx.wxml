@@ -67,7 +67,7 @@
 	</view>
 	<view class="lis">
 		<text>物流单号：</text>
-		<text  class="rig">{{list.deliverNam}}{{list.deliverNumber}}</text>
+		<text  class="rig" wx:if="{{list.deliverNam!=''}}">{{list.deliverNam}}{{list.deliverNumber}}</text>
 	</view>
 </view>
 <!-- 第四部分 -->
@@ -76,7 +76,7 @@
 		<text>应付金额：</text>
 		<text class="rig">￥{{list.needMoney}}</text>
 	</view>
-	<view class="lis">
+	<view class="lis" wx:if="{{list.userCouponInfo!=''}}">
 		<text>优惠券：</text>
 		<text class="rig">{{list.userCouponInfo.couponInfo.money}}元</text>
 	</view>

@@ -20,7 +20,8 @@ Page({
     console.log(options)
     that.setData({
       id:options.id,
-       imgUrl: app.globalData.imgUrl
+      imgUrl: app.globalData.imgUrl,
+      name:options.name
     })
     that.content();
     console.log(that.data.id)
@@ -37,7 +38,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    wx.setNavigationBarTitle({title: that.data.name})
   },
 
   /**
@@ -79,7 +81,7 @@ Page({
     var id = that.data.id;
     console.log(id)
     var params = {
-      url: '/app/h5/findCommodityInfoDetail',
+      url: '/app/user/findAgreementDetail',
       method: 'GET',
       data: {
         'id':id
@@ -87,7 +89,7 @@ Page({
       sCallBack: function (data) {
         console.log(data)
        
-        var artice = data.data;
+        var artice = data.data.result.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
       },
       eCallBack: function () {

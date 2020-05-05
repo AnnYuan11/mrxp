@@ -1,6 +1,6 @@
 <!--pages/login/login.wxml-->
 <view class="bg_box">
-  <image src="/img/pic/1.jpg" mode="widthFix"></image>
+  <image src="{{imgUrl}}img/pic/1.jpg" mode="widthFix"></image>
   <text>每一天便利</text>
 </view>
 <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo" wx:if="{{issq==true}}">

@@ -9,6 +9,7 @@ Page({
    */
   data: {
     color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
     currentPage: 1,//请求数据的页码
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
@@ -38,7 +39,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    var session = wx.getStorageSync('session')
+    console.log(session)
+    if(session==''){
+      wx.showModal({
+        title: '提示',
+        content: '用户未登录',
+        confirmText:'去登陆',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1  // 返回上一级页面。
+            })
+          }
+        }
+      })   
+    }else{
+      that.list()//列表
+    }
   },
 
   /**
@@ -102,7 +125,7 @@ Page({
             item.orderType='消费'
           }
   
-          item.paymentTime=item.paymentTime.substring(0,10)
+          // item.paymentTime=item.paymentTime.substring(0,10)
   
         })
        

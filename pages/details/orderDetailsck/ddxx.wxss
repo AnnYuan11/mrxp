@@ -69,7 +69,7 @@
 .price{
   display: flex;
   justify-content: space-between;
-  margin-top:20rpx;
+  margin-top:14%;
 }
 .price .jg{
   font-size:28rpx;

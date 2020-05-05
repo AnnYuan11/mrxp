@@ -1,7 +1,7 @@
 <!--pages/details/sppj/sppj.wxml-->
 <view class="box">
 	<view class="project_describe">
-		<image src="/img/pic/3 (1).png" mode="widthFix"></image>
+		<image src="{{imgUrl}}img/pic/3 (1).png" mode="widthFix"></image>
 		<text>好丽友呀土豆连包超值礼包实惠家庭装休闲膨化薯惠家庭装休闲膨化薯</text>
 	</view>
 	<view class="textarea">
@@ -12,12 +12,12 @@
 			<view class='imgInfo'>
 				<image src='{{item}}' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
 				<view class='del' data-index="{{index}}" catchtap="deleteImg">
-					<image src='/img/details/del.png' mode="widthFix"></image>
+					<image src='{{imgUrl}}img/details/del.png' mode="widthFix"></image>
 				</view>
 			</view>
 		</block>
 		<view class='addImg' bindtap='addImg' wx:if="{{imgArr.length<9}}">
-			<image src='/img/details/3 (2).png' style='width:60rpx;height:60rpx;'></image>
+			<image src='{{imgUrl}}img/details/3 (2).png' style='width:60rpx;height:60rpx;'></image>
       <text>上传图片</text>
 		</view>
 	</view>

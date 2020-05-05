@@ -1,6 +1,6 @@
 // pages/my/my.js
 import { Base } from "../../utils/request/base.js";
-var baseUrl = "http://139.155.113.100:8085";
+var baseUrl = "https://www.zgmrxp.com";
 var app = getApp();
 var base = new Base();
 Page({
@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**

@@ -1,32 +1,38 @@
 <!--pages/details/setting/setting.wxml-->
 <view class="box">
+<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10143&name=平台资质" hover-class="none">
 	<view class="list">
 		<view class="left">
-			<image src="/img/details/ptzz.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/ptzz.png" mode="widthFix"></image>
 			<text>平台资质</text>
 		</view>
-		<image src="/img/public/point.png" mode="widthFix" class="point"></image>
+		<image src="{{imgUrl}}img/public/point.png" mode="widthFix" class="point"></image>
 	</view>
+</navigator>
+<navigator url="/pages/details/h/h?id=4028b88171c00e030171c0a4569d0000&name=用户协议" hover-class="none">
   <view class="list">
 		<view class="left">
-			<image src="/img/details/yhxy.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/yhxy.png" mode="widthFix"></image>
 			<text>用户协议</text>
 		</view>
-		<image src="/img/public/point.png" mode="widthFix" class="point"></image>
+		<image src="{{imgUrl}}img/public/point.png" mode="widthFix" class="point"></image>
 	</view>
+</navigator>
+<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10243&name=隐藏政策" hover-class="none">
   <view class="list">
 		<view class="left">
-			<image src="/img/details/yczc.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/yczc.png" mode="widthFix"></image>
 			<text>隐藏政策</text>
 		</view>
-		<image src="/img/public/point.png" mode="widthFix" class="point"></image>
+		<image src="{{imgUrl}}img/public/point.png" mode="widthFix" class="point"></image>
 	</view>
-  <view class="list">
+</navigator>
+  <!-- <view class="list">
 		<view class="left">
-			<image src="/img/details/qchc.png" mode="widthFix"></image>
+			<image src="{{imgUrl}}img/details/qchc.png" mode="widthFix"></image>
 			<text>清除缓存</text>
 		</view>
-		<image src="/img/public/point.png" mode="widthFix" class="point"></image>
-	</view>
+		<image src="{{imgUrl}}img/public/point.png" mode="widthFix" class="point"></image>
+	</view> -->
   <button style="background:{{color}};width:100%" class="sub" bindtap="exit">退出登录</button>
 </view>

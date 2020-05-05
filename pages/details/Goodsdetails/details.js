@@ -36,6 +36,8 @@ Page({
     that.shop();//商品内容
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
+    that.list()//团长地址
+    that.gwzn()//购物指南
   },
   // 获取日期
   getDateStr: function(today, addDayCount) {
@@ -72,7 +74,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.refresh()
+    var that = this;
+    var aa = wx.getStorageSync('aa')
+    console.log(aa)
+    if (aa == '0') {
+      that.query()//查询用户切换店铺
+    } else {
+      return
+    }
     this.setData({
       ishow:false
     })
@@ -222,7 +231,10 @@ joinGwc(e){
      'shoppingCarType':sendtype,
      'userInfo':{
        'id':userId
-     }
+     },
+      "headInfo": {
+        "id": that.data.ztdid//自提点id
+      }
     },
     sCallBack: function (data) {
       if(data.data.errorCode=='0'){
@@ -321,24 +333,6 @@ handleClickItem1 () {
     });
   }, 1000)
 },
-// 生成二维码
-ewm(){
-  var that=this;
-  var params = {
-    url: '/app/getUserIdWxCommodityQr',
-    method: 'GET',
-    data: {
-      'commodityId':that.data.id
-    },
-    sCallBack: function (data) {
-      console.log(data)
-      
-    },
-    eCallBack: function () {
-    }
-  }
-  base.request(params);
-},
 eventDraw () {
   var that=this;
   var path = that.data.imgUrl+that.data.background[0];
@@ -353,63 +347,36 @@ eventDraw () {
       clear: true,
       views: [
         {
-          type: 'image',
-          url: 'https://hybrid.xiaoying.tv/miniprogram/viva-ad/1/1531103986231.jpeg',
+          type: 'rect',
+          background:'#fff',
           top: 0,
           left: 0,
           width: 375,
-          height: 555
+          height: 565
         },
         {
           type: 'image',
-          url: that.data.personal.photo,
+          url: that.data.imgUrl+'img/public/logoo.png',
           top: 27.5,
           left: 29,
-          width: 55,
-          height: 55
-        },
-        {
-          type: 'image',
-          url: 'https://hybrid.xiaoying.tv/miniprogram/viva-ad/1/1531401349117.jpeg',
-          top: 27.5,
-          left: 29,
-          width: 55,
-          height: 55
-        },
-        {
-          type: 'text',
-          content: '您的好友【'+that.data.personal.wxNickName+'】',
-          fontSize: 16,
-          color: '#402D16',
-          textAlign: 'left',
-          top: 33,
-          left: 96,
-          bolder: true
-        },
-        {
-          type: 'text',
-          content: '发现一件好货，邀请你一起0元免费拿！',
-          fontSize: 15,
-          color: '#563D20',
-          textAlign: 'left',
-          top: 59.5,
-          left: 96
+          width: 300,
+          height: 57
         },
         {
           type: 'image',
           url: path,
-          top: 136,
-          left: 42.5,
-          width: 290,
-          height: 186
+          top: 90,
+          left: 38,
+          width: 300,
+          height: 300
         },
         {
           type: 'image',
-          url: 'https://www.sxsswlkj.com/app/getUserIdWxCommodityQr?commodityId='+that.data.id,
-          top: 420,
+          url: 'https://www.zgmrxp.com/app/getUserIdWxCommodityQr?commodityId='+that.data.id,
+          top: 470,
           left: 50,
-          width: 100,
-          height: 100
+          width: 70,
+          height: 70
         },
         {
           type: 'text',
@@ -418,7 +385,7 @@ eventDraw () {
           lineHeight: 21,
           color: '#383549',
           textAlign: 'left',
-          top: 336,
+          top: 400,
           left: 44,
           width: 287,
           MaxLineNumber: 2,
@@ -431,19 +398,28 @@ eventDraw () {
           fontSize: 19,
           color: '#E62004',
           textAlign: 'left',
-          top: 387,
+          top: 445,
           left: 44.5,
           bolder: true
         },
         {
           type: 'text',
-          content: '原价:￥'+that.data.list.crossedPrice,
+          content: '￥'+that.data.list.crossedPrice,
           fontSize: 13,
           color: '#7E7E8B',
           textAlign: 'left',
-          top: 391,
-          left: 130,
+          top: 450,
+          left: 115,
           textDecoration: 'line-through'
+        },
+        {
+          type: 'text',
+          content: '预约时间：' + that.data.list.startTime.substring(5, 7) + '月' + that.data.list.startTime.substring(8, 10) + '日',
+          fontSize: 13,
+          color: '#7E7E8B',
+          textAlign: 'left',
+          top: 450,
+          left: 175
         },
         {
           type: 'text',
@@ -451,7 +427,20 @@ eventDraw () {
           fontSize: 14,
           color: '#383549',
           textAlign: 'left',
-          top: 460,
+          top: 500,
+          left: 165.5,
+          lineHeight: 20,
+          MaxLineNumber: 2,
+          breakWord: true,
+          width: 125
+        },
+        {
+          type: 'text',
+          content: that.data.shopName,
+          fontSize: 16,
+          color: '#232323',
+          textAlign: 'left',
+          top: 480,
           left: 165.5,
           lineHeight: 20,
           MaxLineNumber: 2,
@@ -485,4 +474,110 @@ eventSave () {
     }
 })
 },
+// 关闭图片
+close(){
+  var that=this;
+  that.setData({
+    maskHidden:false
+  })
+},
+// 获取当前店铺
+
+  query() {
+    console.log('调用了自提')
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/user/findUserHeadInfo',
+      method: 'POST',
+      data: {
+        userInfo: { 'id': userId }
+      },
+      sCallBack: function (data) {
+        console.log(data.data.result)
+        that.setData({
+          shopName: data.data.result.headInfo.shopName,
+          ztdid: data.data.result.headInfo.id
+        })
+
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 团长地址
+  list() {
+    console.log('调用了团长')
+    var that = this;
+    var myLat = wx.getStorageSync('latitude');
+    var myLng = wx.getStorageSync('longitude');
+    var params = {
+      url: '/app/head/findAllHeadInfoByDistance',
+      method: 'POST',
+      data: {
+        myLat: myLat,
+        myLng: myLng,
+        'pageIndex':1,
+        'pageSize':1,
+      },
+      sCallBack: function (data) {
+        var list = data.data.result.datas;
+        if (list.length == 0) {
+          that.default()
+        }
+        that.setData({
+          shopName: list[0].shopName,
+          ztdid: list[0].id
+        })
+
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 默认自提点
+  default() {
+    var that = this;
+    var params = {
+      url: '/app/head/findHeadInfoProperty',
+      method: 'GET',
+      data: {
+
+      },
+      sCallBack: function (data) {
+        var list = data.data.result;
+        that.setData({
+          shopName: list.shopName,
+          ztdid: list.id
+        })
+
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 购物指南
+  gwzn(){
+    var that=this;
+    var params = {
+      url: '/app/commodity/findShoppingGuide',
+      method: 'GET',
+      data: {
+
+      },
+      sCallBack: function (data) {
+        console.log(data)
+       that.setData({
+         gwzns:data.data.result.photo
+       })
+       
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  }
 })

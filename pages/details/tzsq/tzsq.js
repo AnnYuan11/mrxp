@@ -1,6 +1,7 @@
 // pages/details/tzsq/tzsq.js
 import WxValidate from '../../../utils/WxValidate'
 import { Base } from "../../../utils/request/base.js";
+var url='https://www.zgmrxp.com'
 var app = getApp();
 var base = new Base();
 Page({
@@ -10,13 +11,15 @@ Page({
    */
   data: {
     color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
     multiArray: [],
     multiIndex: [0, 0, 0, 0],
     chinaData: [],
     address: '请选择详细地址',
     supervisorInfo: {
       phone: ''
-    }
+    },
+    imgArr:[]
   },
 
   /**
@@ -221,6 +224,7 @@ Page({
       return false
     } else {
       var that = this;
+      that.upload();
       var params = {
         url: '/app/head/addHeadInfo',
         method: 'POST',
@@ -235,6 +239,7 @@ Page({
           'shopName': e.detail.value.shopName,
           'lat':that.data.latitude,
           'lng':that.data.longitude,
+          'personNumber':e.detail.value.wxnum,
           'supervisorInfo': {
             'phone': e.detail.value.supervisorInfo
           }
@@ -278,6 +283,9 @@ Page({
       shopName: {
         required: true,
       },
+      wxnum:{
+        required: true,
+      },
       supervisorInfo: {
         required: true,
         tel: true,
@@ -299,6 +307,9 @@ Page({
       address: {
         required: '请选择团长详细地址',
       },
+      wxnum: {
+        required: '请填写数字'
+      },
       shopName: {
         required: '请填写店铺名称',
       },
@@ -315,4 +326,68 @@ Page({
     this.WxValidate = new WxValidate(rules, messages)
 
   },
+  // 上传图片
+  addImg: function () {
+    var that = this;
+    var imgArr = that.data.imgArr;
+    wx.chooseImage({
+        count: 1, // 最多可以选择的图片张数，默认9
+        sizeType: ['original', 'compressed'],
+        success: function (res) {
+          console.log(res)
+            var tempFilePaths = res.tempFilePaths
+            var imgsrc = res.tempFilePaths;
+            imgArr = imgArr.concat(imgsrc);
+            that.setData({
+                imgArr: imgArr
+            });
+
+            console.log(tempFilePaths);
+            console.log(that.data.imgArr)
+        }
+    })
+},
+  upload: function () {
+    var that = this;
+    for (var i = 0; i < that.data.imgArr.length; i++) {
+        var filePath = that.data.imgArr[i];
+        wx.uploadFile({
+            url: url + '/app/fileUploadLocal',
+            filePath: filePath,
+            name: 'file',
+            formData: {},
+            header: { Cookie: that.data.loginData },
+            success: function (res) {
+                console.log(res);
+                var data = res.data
+                var datas = JSON.parse(data)
+               
+            }
+        })
+    }
+},
+ //预览照片
+ previewImg: function (e) {
+  var that = this;
+  var index = e.currentTarget.dataset.index;
+
+  wx.previewImage({
+      current: that.data.imgArr[index], // 当前显示图片的http链接
+      urls: that.data.imgArr // 需要预览的图片http链接列表
+  })
+  console.log(e.currentTarget.dataset)
+},
+
+deleteImg: function (e) {
+  console.log(e)
+  var that = this;
+  console.log(that.data.imgArr)
+  var imgs = this.data.imgArr;
+  var index = e.currentTarget.dataset.index;
+  imgs.splice(index, 1);
+
+  this.setData({
+      imgArr: imgs
+  });
+},
 })

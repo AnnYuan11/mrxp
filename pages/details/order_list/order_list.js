@@ -184,7 +184,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var Alllist=data.data.result.datas;
@@ -252,7 +254,9 @@ Page({
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
         'orderStatus':1,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var dfklist=data.data.result.datas;
@@ -317,7 +321,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        },
         'orderStatus':2,
       },
       sCallBack: function (data) {
@@ -383,7 +389,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        },
         'orderStatus':3,
       },
       sCallBack: function (data) {
@@ -449,7 +457,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        },
         'orderStatus':4,
       },
       sCallBack: function (data) {
@@ -515,7 +525,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id,
+        'userInfo': {
+          'id': id
+        },
         'orderStatus':5,
       },
       sCallBack: function (data) {
@@ -790,7 +802,9 @@ Page({
       data: {
         'pageIndex':that.data.currentPage,
         'pageSize':that.data.size,
-        'userInfo.id':id
+        'userInfo': {
+          'id': id
+        }
       },
       sCallBack: function (data) {
          var ythlist=data.data.result.datas;

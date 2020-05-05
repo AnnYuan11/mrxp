@@ -341,20 +341,27 @@ button:not([size='mini']) {
 }
 .baocun{
   display: block;
-  width: 80%;
-  height: 70rpx;
-  padding: 0;
-  line-height: 70rpx;
+  width:430rpx!important;
+  height:80rpx;
+  background:rgba(255,59,6,1);
+  border-radius:40px;
+  line-height: 80rpx;
   text-align: center;
   position: fixed;
   bottom: 50rpx;
-  left: 10%;
+  left: 0;
+  right: 0;
+  margin:auto!important;
   color: #fff;
   font-size: 32rpx;
-  border-radius: 24rpx;
-  background: #fdd668;
 
 }
 button[class="baocun"]::after{
   border: 0;
+}
+.close{
+  position: fixed;
+  top:20rpx;
+  right: 20rpx;
+  z-index: 9999;
 }

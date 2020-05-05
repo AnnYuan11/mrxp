@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    color: getApp().globalData.color
+    color: getApp().globalData.color,
+    imgUrl:getApp().globalData.imgUrl,
   },
 
   /**

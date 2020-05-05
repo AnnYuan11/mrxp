@@ -1,6 +1,6 @@
 // pages/login/login.js
 import { Base } from "../../utils/request/base.js";
-var baseUrl = "http://139.155.113.100:8085";
+var baseUrl = "https://www.zgmrxp.com";
 var util = require('../../utils/cache.js');
 var app = getApp();
 var base = new Base();
@@ -11,6 +11,7 @@ Page({
    */
   data: {
     // issq:true
+    imgUrl:app.globalData.imgUrl,
   },
 
   /**
@@ -52,7 +53,8 @@ Page({
             })
           }
         }
-      })
+    })
+    that.list()
   },
 
   /**
@@ -202,6 +204,7 @@ wxlogin(){
     var openId=wx.getStorageSync('openId')
     var nickName=wx.getStorageSync('nickName')
     var photo=wx.getStorageSync('photo')
+    console.log(that.data.ztdid)
     var params = {
         url: '/app/user/login',
         method: 'POST',
@@ -209,7 +212,10 @@ wxlogin(){
             'phone':that.data.phone,
             'openId':openId,
             'nickName':nickName,
-            'photo':photo
+            'photo':photo,
+            "headInfo": {
+              "id": that.data.ztdid//自提点id
+            }
         },
         sCallBack: function (data) {
             console.log(data.data.result.id)
@@ -229,5 +235,60 @@ wxlogin(){
         }
       }
     base.request(params);
+},
+// 团长地址
+list(){
+  console.log('调用了团长')
+  var that = this;
+  var myLat = wx.getStorageSync('latitude');
+  var myLng = wx.getStorageSync('longitude');
+  var params = {
+    url: '/app/head/findAllHeadInfoByDistance',
+    method: 'POST',
+    data: {
+      myLat:myLat,
+      myLng:myLng,
+      'pageIndex':1,
+      'pageSize':1,
+    },
+    sCallBack: function (data) {
+      var list= data.data.result.datas;
+      if(list.length==0){
+        that.default()
+      }
+      that.setData({
+       shopName:list[0].shopName,
+        ztdid: list[0].id
+      })
+      
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+// 默认自提点
+default(){
+  var that=this;
+  var params = {
+    url: '/app/head/findHeadInfoProperty',
+    method: 'GET',
+    data: {
+     
+    },
+    sCallBack: function (data) {
+      var list= data.data.result;
+      that.setData({
+        shopName:list.shopName,
+        ztdid: list.id,
+      })
+   
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
 },
 })

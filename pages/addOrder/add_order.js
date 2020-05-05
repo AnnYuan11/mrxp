@@ -24,10 +24,12 @@ Page({
   onLoad: function (options) {
     let that = this
     let userId = wx.getStorageSync('userId')
+    var phone=wx.getStorageSync('phone')
     that.setData({
       couponsId: options.couponsId,
       yhqmoney: options.yhqmoney,
       userId: userId,
+      phone:phone
     })
 
   },
@@ -42,20 +44,21 @@ Page({
         that.setData({
           productInfo: res.data
         })
-        if (that.data.productInfo.sendType == 1) {
+        console.log(that.data.productInfo)
+        // if (that.data.productInfo.sendType == 1) {
           that.findShopAdress()
           //查询用户是否切换店铺
           var isCheck = wx.getStorageSync('aa')
           if (isCheck == '0') {
             that.checkAddress()
           } 
-        } else if (that.data.productInfo.sendType == 2) {
+        // } else if (that.data.productInfo.sendType == 2) {
           let dzid = wx.getStorageSync('dzid')
           that.setData({
             dzid: dzid ? dzid : ""
           })
           that.defaultDz()
-        }
+        // }
       }
     })
   },
@@ -83,11 +86,13 @@ Page({
       method: 'POST',
       data: {
         myLat: myLat,
-        myLng: myLng
+        myLng: myLng,
+      'pageIndex':1,
+      'pageSize':1,
       },
       sCallBack: function (data) {
         console.log(data.data.result.length)
-        const result = data.data.result
+        const result = data.data.result.datas
         if (result.length == 0) {
           that.defaultAddress()
         } else {
@@ -98,6 +103,39 @@ Page({
             addressth: result[0].address
           })
           that.orderMoney()
+        }
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  delItem(id) {
+    let that = this
+    var productInfo=that.data.productInfo.productList
+    const ids = [];
+    console.log(productInfo)
+    productInfo.forEach(res=>{
+      ids.push(res.ids)
+    })
+    console.log(ids)
+    var params = {
+      url: '/app/commodity/deleteShoppingCartInfo',
+      method: 'POST',
+      data: {
+        'ids': ids,
+      },
+      sCallBack: function (data) {
+        if (data.data.errorCode == 0) {
+          // wx.showToast({
+          //   title: data.data.result
+          // })
+
+          app.getShopNum()
+        } else {
+          // wx.showToast({
+          //   title: data.data.errorMsg
+          // })
         }
       },
       eCallBack: function () {
@@ -144,8 +182,10 @@ Page({
       sCallBack: function (data) {
         that.setData({
           defaultztd:data.data.result,
+          addressth:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address,
           shopName:data.data.result.headInfo.shopName,
-          ztdid:data.data.result.headInfo.id
+          ztdid:data.data.result.headInfo.id,
+          phones:data.data.result.headInfo.phone
         })
         that.orderMoney()
       },
@@ -158,7 +198,7 @@ Page({
    * 选择优惠券
    */
   selectCoupons(){
-   wx.redirectTo({
+    wx.navigateTo({
      url:'/pages/details/wdyhq/wdyhq?type=shopSubmit'
    })
   },
@@ -258,6 +298,7 @@ Page({
       payTypes: e.detail.value
     })
   },
+  
   /**
    * 微信支付
    */
@@ -284,13 +325,16 @@ Page({
           signType: 'MD5',
           paySign: data.data.result['paySign'],
           'success': function (res) {
+            // that.delItem()
             wx.showToast({
               title: '已支付成功！',
               icon: 'none',
               duration: 3000,
               success: function () {
                 setTimeout(function () {
-
+                  wx.redirectTo({
+                    url: '/pages/details/order_list/order_list',
+                  })
                 }, 3000);
 
               }
@@ -334,6 +378,7 @@ Page({
           })
         }
         else{
+          // that.delItem()
           wx.showToast({
             title: data.data.result,
             icon: 'none',

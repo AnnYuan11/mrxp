@@ -6,7 +6,8 @@ var base = new Base();
 Page({
     data: {
         tabList: ["到店自提", "快递到家"],
-        select: 0
+        select: 0,
+        imgUrl:app.globalData.imgUrl,
     },
     onShow() {
        
