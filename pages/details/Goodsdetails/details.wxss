@@ -2,17 +2,17 @@
 @import "../../../utils/wxParse/wxParse.wxss";
 .img_goods{
   width: 100%;
-  height: 700rpx;
+  height: 750rpx;
 }
 .img_goods image{
   width: 100%;
-  height: 700rpx;
+  height: 750rpx;
 }
 .goods_introduce{
   width:90%;
   margin: 0 auto;
   position: relative;
-  margin-top: -11%
+  margin-top: -28%
 }
 .goods_introduce image{
   width: 100%;
@@ -334,9 +334,11 @@ button:not([size='mini']) {
   width: 80%;
   height: 80%;
   position: fixed;
-  top: 50rpx;
-  left: 50%;
-  margin-left: -40%;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  margin:auto;
   z-index: 10;
 }
 .baocun{

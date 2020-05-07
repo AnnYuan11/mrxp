@@ -23,7 +23,7 @@
     <input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
   </view>
   <!-- 轮播 -->
-  <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:400rpx">
+  <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:350rpx">
     <block wx:for="{{background}}" wx:key="*this">
       <swiper-item>
         <image src="{{imgUrl}}{{item.photo}}"></image>
@@ -98,7 +98,7 @@
                 </view>
                 <view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
                   <view class="box_figure">
-                    <block wx:for="{{item.orderRecord.orderList}}" wx:for-item="itemName">
+                    <block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}"wx:for-item="itemName">
                       <view class="figure">
                         <image src="{{itemName.photo}}"></image>
                         <text>{{itemName.nick_name}}</text>
@@ -165,7 +165,7 @@
                 </view>
                <view class="buy_box" wx:if="{{item.orderRecord!=''}}">
                   <view class="box_figure">
-                    <block wx:for="{{item.orderRecord.orderList}}" wx:for-item="itemName">
+                    <block wx:for="{{item.orderRecord.orderList}}"wx:if="{{index<4}}" wx:for-item="itemName">
                       <view class="figure">
                         <image src="{{itemName.photo}}"></image>
                         <text>{{itemName.nick_name}}</text>

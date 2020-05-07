@@ -36,7 +36,7 @@ Page({
     that.shop();//商品内容
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
-    that.list()//团长地址
+    
     that.gwzn()//购物指南
   },
   // 获取日期
@@ -80,7 +80,7 @@ Page({
     if (aa == '0') {
       that.query()//查询用户切换店铺
     } else {
-      return
+      that.list()//团长地址
     }
     this.setData({
       ishow:false
@@ -189,8 +189,9 @@ Page({
       var ddname = that.data.list.productInfo.commodityName;
       var ddjg = that.data.list.price;
       var sendType =that.data.list.sendType;
+      var pickDate=that.data.list.pickDate
       wx.navigateTo({
-        url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg+'&sendType='+sendType+'&commodityNumber=1',
+        url: '/pages/details/order_details/order_details?ddid='+ddid+'&ddname='+ddname+'&ddpic='+ddpic+'&ddjg='+ddjg+'&sendType='+sendType+'&commodityNumber=1'+'&pickDate='+pickDate,
       })
     }
    
@@ -333,6 +334,7 @@ handleClickItem1 () {
     });
   }, 1000)
 },
+
 eventDraw () {
   var that=this;
   var path = that.data.imgUrl+that.data.background[0];
@@ -340,10 +342,20 @@ eventDraw () {
     title: '绘制分享图片中',
     mask: true
   })
+  wx.getSystemInfo({
+    success: function (res) {
+      console.log(res)
+      that.setData({
+        width: res.windowWidth,
+        height: res.windowHeight
+      })
+    }
+  })
+  console.log(that.data.width+"哈哈哈"+that.data.height)
   this.setData({
     painting: {
-      width: 375,
-      height: 555,
+      width: that.data.width,
+      height: that.data.height,
       clear: true,
       views: [
         {

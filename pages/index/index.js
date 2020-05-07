@@ -773,7 +773,6 @@ locations: function () {
   },
   // 获取滚动条当前位置
   onPageScroll: function (e) {
-    console.log(e)
     if (e.scrollTop > 100) {
       this.setData({
         floorstatus: true
@@ -797,5 +796,8 @@ locations: function () {
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
-  },
+  }
+  
+  
+  
 })

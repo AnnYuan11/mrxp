@@ -1,5 +1,7 @@
 // pages/details/order_list/order_list.js
-import { Base } from "../../../utils/request/base.js";
+import {
+  Base
+} from "../../../utils/request/base.js";
 var base = new Base();
 var app = getApp();
 Page({
@@ -11,12 +13,12 @@ Page({
     winWidth: 0,
     winHeight: 0,
     currentTab: 0,
-    scrollLeft:0,
-    imgUrl:app.globalData.imgUrl,
-    currentPage: 1,//请求数据的页码
-    size: 10,//每页数据条数
-    totalCount: 0,//总是数据条数
-    pagecount: 0,//总的页数
+    scrollLeft: 0,
+    imgUrl: app.globalData.imgUrl,
+    currentPage: 1, //请求数据的页码
+    size: 10, //每页数据条数
+    totalCount: 0, //总是数据条数
+    pagecount: 0, //总的页数
   },
 
   /**
@@ -24,9 +26,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    var that=this;
+    var that = this;
     that.setData({
-      currentTab:options.currentTab
+      currentTab: options.currentTab
     })
     /**
      * 获取当前设备的宽高
@@ -53,38 +55,55 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    var that=this;
-    // that.jfList()
-    if(that.data.currentTab=='1'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-       that.dfkorder()//待付款
-     }
-    else if(that.data.currentTab=='2'){
-       that.data.currentPage=1,
-       that.data.totalCount= 0,//总是数据条数
-       that.data.pagecount= 0,//总的页数
-       that.bhz()//备货中
-     }
-     else if(that.data.currentTab=='3'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.psz()//配送中
+    var that = this;
+    var session = wx.getStorageSync('session')
+    if (session == '') {
+      wx.showModal({
+        title: '提示',
+        content: '用户未登录',
+        confirmText: '去登陆',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1 // 返回上一级页面。
+            })
+          }
+        }
+      })
+    } else {
+      // debugger
+      if (that.data.currentTab == '1') {
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.dfkorder() //待付款
+      } else if (that.data.currentTab == '2') {
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.bhz() //备货中
+      } else if (that.data.currentTab == '3') {
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.psz() //配送中
+      } else if (that.data.currentTab == '4') {
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.dth() //待提货
+      } else if (that.data.currentTab == '5') {
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.yth() //已提货
+      }
     }
-    else if(that.data.currentTab=='4'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.dth()//待提货
-    }
-    else if(that.data.currentTab=='5'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.yth()//已提货
-    }
+
   },
 
   /**
@@ -124,41 +143,37 @@ Page({
   swichNav: function (e) {
     var that = this;
     console.log(e)
-    if(e.target.dataset.current=='0'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-       that.Allorder()//全部
-     }
-    if(e.target.dataset.current=='1'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-       that.dfkorder()//待付款
-     }
-    else if(e.target.dataset.current=='2'){
-       that.data.currentPage=1,
-       that.data.totalCount= 0,//总是数据条数
-       that.data.pagecount= 0,//总的页数
-       that.bhz()//备货中
-     }
-     else if(e.target.dataset.current=='3'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.psz()//配送中
+    if (e.target.dataset.current == '0') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.Allorder() //全部
     }
-    else if(e.target.dataset.current=='4'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.dth()//待提货
-    }
-    else if(e.target.dataset.current=='5'){
-      that.data.currentPage=1,
-      that.data.totalCount= 0,//总是数据条数
-      that.data.pagecount= 0,//总的页数
-      that.yth()//已提货
+    if (e.target.dataset.current == '1') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.dfkorder() //待付款
+    } else if (e.target.dataset.current == '2') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.bhz() //备货中
+    } else if (e.target.dataset.current == '3') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.psz() //配送中
+    } else if (e.target.dataset.current == '4') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.dth() //待提货
+    } else if (e.target.dataset.current == '5') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.yth() //已提货
     }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -171,70 +186,70 @@ Page({
 
   bindChange: function (e) {
     var that = this;
-    that.setData({ currentTab: e.detail.current });
+    that.setData({
+      currentTab: e.detail.current
+    });
 
   },
   // 全部订单
-  Allorder(){
-    var that=this;
+  Allorder() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         }
       },
       sCallBack: function (data) {
-         var Alllist=data.data.result.datas;
-         Alllist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
-          }else if(item.orderStatus=='6'){
-            item.orderStatus='已完成'
+        var Alllist = data.data.result.datas;
+        Alllist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
+          } else if (item.orderStatus == '6') {
+            item.orderStatus = '已完成'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.Alllist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            Alllist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          Alllist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 全部订单的加载
-  Allqbdd(){
+  Allqbdd() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.Allorder();
@@ -244,65 +259,63 @@ Page({
     }
   },
   // 待付款
-  dfkorder(){
-    var that=this;
+  dfkorder() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
-        'orderStatus':1,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
+        'orderStatus': 1,
         'userInfo': {
           'id': id
         }
       },
       sCallBack: function (data) {
-         var dfklist=data.data.result.datas;
-         dfklist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var dfklist = data.data.result.datas;
+        dfklist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.dfklist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            dfklist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          dfklist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 待付款的加载更多
-  dfkmore(){
+  dfkmore() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.dfkorder();
@@ -312,65 +325,63 @@ Page({
     }
   },
   // 备货中
-  bhz(){
-    var that=this;
+  bhz() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         },
-        'orderStatus':2,
+        'orderStatus': 2,
       },
       sCallBack: function (data) {
-         var bhzlist=data.data.result.datas;
-         bhzlist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var bhzlist = data.data.result.datas;
+        bhzlist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.bhzlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            bhzlist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          bhzlist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 备货中加载更多
-  bhzmore(){
+  bhzmore() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.bhz();
@@ -380,65 +391,63 @@ Page({
     }
   },
   // 配送中
-  psz(){
-    var that=this;
+  psz() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         },
-        'orderStatus':3,
+        'orderStatus': 3,
       },
       sCallBack: function (data) {
-         var phzlist=data.data.result.datas;
-         phzlist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var phzlist = data.data.result.datas;
+        phzlist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.phzlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            phzlist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          phzlist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
-   // 配送中加载更多
-  pszmore(){
+  // 配送中加载更多
+  pszmore() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.psz();
@@ -448,65 +457,63 @@ Page({
     }
   },
   // 待提货
-  dth(){
-    var that=this;
+  dth() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         },
-        'orderStatus':4,
+        'orderStatus': 4,
       },
       sCallBack: function (data) {
-         var dthlist=data.data.result.datas;
-         dthlist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var dthlist = data.data.result.datas;
+        dthlist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.dthlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            dthlist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          dthlist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 待提货加载更多
-  dthmore(){
+  dthmore() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.dth();
@@ -516,65 +523,63 @@ Page({
     }
   },
   // 已提货
-  yth(){
-    var that=this;
+  yth() {
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         },
-        'orderStatus':5,
+        'orderStatus': 5,
       },
       sCallBack: function (data) {
-         var ythlist=data.data.result.datas;
-         ythlist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var ythlist = data.data.result.datas;
+        ythlist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.ythlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            ythlist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          ythlist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 已提货加载更多
-  ythmore(){
+  ythmore() {
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.yth();
@@ -612,7 +617,7 @@ Page({
   //         }
   //         item.orderTime=item.orderTime.substring(0,10)
   //       })
-       
+
   //       var temlist = that.data.shzlist; //原始的数据集合
   //       var currentPage = that.data.currentPage; //获取当前页码
   //       if (currentPage == 1) {
@@ -630,9 +635,9 @@ Page({
   //           pagecount: data.data.result.totalPages //总页数
   //         })
   //         console.log(that.data.pagecount)
-       
 
-         
+
+
   //     },
   //     eCallBack: function () {
   //     }
@@ -680,7 +685,7 @@ Page({
   //         }
   //         item.orderTime=item.orderTime.substring(0,10)
   //       })
-       
+
   //       var temlist = that.data.yjslist; //原始的数据集合
   //       var currentPage = that.data.currentPage; //获取当前页码
   //       if (currentPage == 1) {
@@ -698,9 +703,9 @@ Page({
   //           pagecount: data.data.result.totalPages //总页数
   //         })
   //         console.log(that.data.pagecount)
-       
 
-         
+
+
   //     },
   //     eCallBack: function () {
   //     }
@@ -721,24 +726,24 @@ Page({
 
 
   // 跳转到商品详情
-  Todetails(e){
+  Todetails(e) {
     console.log(e)
     wx.navigateTo({
-      url: '/pages/details/orderDetailsck/ddxx?id='+e.currentTarget.dataset.id,
+      url: '/pages/details/orderDetailsck/ddxx?id=' + e.currentTarget.dataset.id,
     })
   },
   // 取消订单
-  cancel(e){
-    var that=this;
+  cancel(e) {
+    var that = this;
     console.log(e)
     var params = {
       url: '/app/order/deleteCommodityOrderInfo',
       method: 'GET',
       data: {
-        'id':e.currentTarget.dataset.id,//订单id
+        'id': e.currentTarget.dataset.id, //订单id
       },
       sCallBack: function (data) {
-        if(data.data.errorCode=="0"){
+        if (data.data.errorCode == "0") {
           wx.showToast({
             title: data.data.result,
 
@@ -747,114 +752,116 @@ Page({
           that.dfkorder()
         }
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 去付款
-  Topay(e){
-    console.log(e)
-    var list=e.currentTarget.dataset.item.commoditySubOrderInfoList
-    const product = [];
-        for (let i = 0; i < list.length; i++) {
-            const productItem = {};
-            productItem['id'] = list[i].commodityInfo.id
-            productItem['name'] = list[i].commodityInfo.productInfo.commodityName
-            productItem['photo'] = list[i].commodityInfo.productInfo.photo
-            productItem['price'] = list[i].commodityInfo.price
-            productItem['number'] = list[i].commodityNumber
-            product.push(productItem)
-        } 
-        const productInfo = {};
-        productInfo['sendType'] = e.currentTarget.dataset.item.orderSendType
-        productInfo['productList'] = product
-        wx.setStorageSync('productInfo', productInfo)
-        wx.navigateTo({
-          url: `/pages/addOrder/add_order`
-        })
-  },
-  // 我的提货码
-  thm(e){
+  Topay(e) {
     console.log(e)
     var that=this;
+    var message = e.currentTarget.dataset.item.commoditySubOrderInfoList
     that.setData({
-      orderId:e.currentTarget.dataset.orderid,
-      pickcode:e.currentTarget.dataset.pickcode,
-      showThm:true
+      message:message
+    })
+    
+    // const product = [];
+    // for (let i = 0; i < list.length; i++) {
+    //   const productItem = {};
+    //   productItem['id'] = list[i].commodityInfo.id
+    //   productItem['name'] = list[i].commodityInfo.productInfo.commodityName
+    //   productItem['photo'] = list[i].commodityInfo.productInfo.photo
+    //   productItem['price'] = list[i].commodityInfo.price
+    //   productItem['number'] = list[i].commodityNumber
+    //   product.push(productItem)
+    // }
+    // const productInfo = {};
+    // productInfo['sendType'] = e.currentTarget.dataset.item.orderSendType
+    // productInfo['productList'] = product
+    // wx.setStorageSync('productInfo', productInfo)
+    wx.navigateTo({
+      url: `/pages/details/topay/topay`
+    })
+  },
+  // 我的提货码
+  thm(e) {
+    console.log(e)
+    var that = this;
+    that.setData({
+      orderId: e.currentTarget.dataset.orderid,
+      pickcode: e.currentTarget.dataset.pickcode,
+      showThm: true
     })
   },
   // 关闭提货码
-  closeThm(){
-    var that=this;
+  closeThm() {
+    var that = this;
     that.setData({
-      showThm:false
+      showThm: false
     })
   },
   // 积分订单
-  jfList(){
-    var that=this;
-    var that=this;
+  jfList() {
+    var that = this;
+    var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listIntegralOrderInfo',
       method: 'POST',
       data: {
-        'pageIndex':that.data.currentPage,
-        'pageSize':that.data.size,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
         'userInfo': {
           'id': id
         }
       },
       sCallBack: function (data) {
-         var ythlist=data.data.result.datas;
-         ythlist.forEach(item=>{
-          if(item.orderStatus=='1'){
-            item.orderStatus='待支付'
-          }else if(item.orderStatus=='2'){
-            item.orderStatus='备货中'
-          }else if(item.orderStatus=='3'){
-            item.orderStatus='配送中'
-          }else if(item.orderStatus=='4'){
-            item.orderStatus='待提货'
-          }else if(item.orderStatus=='5'){
-            item.orderStatus='已收货'
+        var ythlist = data.data.result.datas;
+        ythlist.forEach(item => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已收货'
           }
-          item.orderTime=item.orderTime.substring(0,10)
+          item.orderTime = item.orderTime.substring(0, 10)
         })
-       
+
         var temlist = that.data.ythlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-            temlist = data.data.result.datas; //初始化数据列表
-            currentPage = 1;
+          temlist = data.data.result.datas; //初始化数据列表
+          currentPage = 1;
+        } else {
+          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          // currentPage = currentPage + 1;
         }
-        else {
-            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-            // currentPage = currentPage + 1;
-          }
-          that.setData({
-            currentPage: currentPage,
-            ythlist: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
-          })
-          console.log(that.data.pagecount)
-       
+        that.setData({
+          currentPage: currentPage,
+          ythlist: temlist,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.pagecount)
 
-         
+
+
       },
-      eCallBack: function () {
-      }
+      eCallBack: function () {}
     }
     base.request(params);
   },
   // 申请售后
-  sqsh(){
+  sqsh() {
     wx.showToast({
       title: '请联系团长',
-      icon:'none',
-      dduration:3000
+      icon: 'none',
+      dduration: 3000
     })
   }
 })

@@ -36,7 +36,7 @@ Component({
     submitBtn: '提交订单',
     isBool: true,
     currentPage: 1,//请求数据的页码
-    size: 5,//每页数据条数
+    size: 1000,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
     // shoppingCarType: 1,
@@ -47,7 +47,7 @@ Component({
     // 在组件实例进入页面节点树时执行
     attached: function () {
       this.getShopList(this.data.shoppingType)
-      this.AllShopList(this.data.shoppingType)
+      // this.AllShopList(this.data.shoppingType)
       wx.getSystemInfo({
         success: (res) => {
           this.setData({
@@ -65,9 +65,9 @@ Component({
       this.count_price();
       this.getShopList(this.data.shoppingType)
       this.setData({
-        selectAllStatus: false
+        selectAllStatus: false,
+        totalPrice:'0'
       })
-    
     },
     hide(){
       var that=this;
@@ -188,55 +188,13 @@ Component({
     /**
      * 购物车全选事件
      */
-    // 列表全部
-    AllShopList(shoppingType) {
-      var that = this;
-      var id = wx.getStorageSync('userId')
-      var ztdid = wx.getStorageSync('zdtid')
-      console.log(ztdid)
-      console.log(id)
-      var params = {
-        url: '/app/commodity/listShoppingCartInfo',
-        method: 'POST',
-        data: {
-          'pageIndex': 1,
-          'pageSize': 1000,
-          'userInfo.id': id,
-          'shoppingCarType': shoppingType,
-          'headinfo.id': ztdid
-        },
-        sCallBack: function (data) {
-          if (data.data.errorCode == 0) {
-            if (data.data.result.datas.length == 0) {
-              that.setData({
-                hasList: false
-              })
-              return false;
-            } else {
-              that.setData({
-                hasList: true,
-                list2: data.data.result.datas, //初始化数据列表
-              })
-            }
-          } else {
-            wx.showToast({
-              title: data.data.errorMsg
-            })
-          }
-        },
-        eCallBack: function () {
-        }
-      }
-      base.request(params);
-    },
     selectAll(e) {
-  
       // 全选ICON默认选中
       let selectAllStatus = this.data.selectAllStatus;
       // true  -----   false
       selectAllStatus = !selectAllStatus;
       // 获取商品数据
-      let list = this.data.list2;
+      let list = this.data.list;
       // 循环遍历判断列表中的数据是否选中
       for (let i = 0; i < list.length; i++) {
         list[i].selected = selectAllStatus;
@@ -450,11 +408,13 @@ Component({
 
       var that = this;
       // 获取商品数据
-      let price = Number(that.data.totalPrice.slice('.')[0])
+      console.log(that.data.totalPrice)
+      // let price = Number(that.data.totalPrice.slice('.')[0])
+      let price =that.data.totalPrice
       if (price == 0) {
         wx.showToast({
           title: '请选择要提交的订单',
-          icon: 'warn',
+          icon: 'none',
           duration: 2000
         })
       } else {

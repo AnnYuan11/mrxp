@@ -30,7 +30,6 @@ Page({
    */
   onShow: function () {
     var session = wx.getStorageSync('session')
-    console.log(session)
     if(session==''){
       wx.showModal({
         title: '提示',

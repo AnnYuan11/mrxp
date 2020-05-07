@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/txjl/txjl",
     "pages/details/order_details/order_details",
+    "pages/details/topay/topay",
     "pages/details/Goodsdetails/details",
     "pages/details/order_list/order_list",
     "pages/login/login",

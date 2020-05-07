@@ -1,0 +1,25 @@
+<!--pages/details/topay/topay.wxml-->
+<view class="box">
+	<text class="order">订单金额</text>
+	<text class="money">￥{{money}}</text>
+	<text class="detail">订单提交成功，请在10分钟内完成支付。</text>
+	<view class="pay">
+		<radio-group class="radio-group" bindchange="radioChange">
+			<view class="payType">
+				<view class="wechat">
+					<image src="{{imgUrl}}img/details/dd3.png" mode="widthFix"></image>
+					<radio class="radio" value="2" checked="checked">
+						<text>微信支付</text>
+					</radio>
+				</view>
+				<view class="wechat">
+					<image src="{{imgUrl}}img/details/dd4.png" mode="widthFix"></image>
+					<radio class="radio" value="1">
+						<text>余额支付</text>
+					</radio>
+				</view>
+			</view>
+		</radio-group>
+	</view>
+</view>
+<view class="sure" style="background:{{color}}" bindtap="Recharge">去付款</view>

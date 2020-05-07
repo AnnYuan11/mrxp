@@ -1,0 +1,73 @@
+/* pages/details/topay/topay.wxss */
+.box{
+  width: 92%;
+  background: #fff;
+  border-radius: 20rpx;
+  margin: 0 auto;
+  padding: 40rpx 0;
+  box-sizing: border-box;
+}
+.box text{
+  text-align: center;
+  display: block;
+  margin: 40rpx auto;
+}
+.order{
+  color: #000;
+}
+.money{
+  font-size: 52rpx;
+  color: #f0302f;
+  font-weight: 600;
+}
+/* 支付方式 */
+.payType image{
+  width: 48rpx;
+  vertical-align: middle;
+  margin-right: 30rpx;
+}
+.payType{
+  width: 92%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+radio-group text {
+  font-size: 24rpx;
+  color: #232323;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border-color: #f0302f !important;
+  background: #f0302f !important;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.sure{
+  width:92%;
+  height:100rpx;
+  background:rgba(225,0,4,1);
+  box-shadow:0px 3px 10px rgba(225,0,4,0.15);
+  border-radius:50rpx;
+  margin:96rpx auto;
+  color: #fff;
+  text-align: center;
+  line-height: 100rpx;
+}

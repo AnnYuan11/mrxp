@@ -132,6 +132,7 @@ login(){
         data: JSON.stringify(arg),
         sCallBack: function (data) {     
        if (data.data.result != 0) {
+        //  debugger
               wx.setTabBarBadge({
                 index: 1,
                 text: String(data.data.result)

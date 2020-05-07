@@ -206,3 +206,69 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .jine text.hj{
   color: #909090;
 }
+/* 确认信息弹窗 */
+.sureMessage{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.sureMessageBox{
+  width: 100%;
+  background: #fff;
+  height: 600rpx;
+  border-radius:10px 10px 0px 0px;
+  bottom: 0;
+  position: absolute;
+}
+.topImg{
+  margin-top: -15rpx;
+  text-align: center;
+  position: relative;
+}
+.thrq{
+  font-size: 28rpx;
+  font-weight: 500;
+  position: absolute;
+  left: 39%;
+  top: 18%;
+  color:rgba(255,255,255,1);
+}
+.tips{
+  font-size:28rpx;
+  font-weight:500;
+  color:rgba(225,0,4,1);
+  text-align: center;
+  margin: 32rpx 0;
+}
+.addressMessage{
+  width:92%;
+  height:240rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 10px rgba(0,0,0,0.16);
+  opacity:1;
+  border-radius:10px;
+  margin: 0 auto;
+}
+.buttons{
+  width: 92%;
+  margin: 48rpx auto;
+  display: flex;
+  justify-content: space-between;
+}
+.quxiao{
+  width:320rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(226,226,226,1);
+  border-radius:40rpx;
+  text-align: center;
+  color: #646464;
+}
+.toPsy{
+  background:rgba(225,11,9,1);
+  color: #fff;
+}

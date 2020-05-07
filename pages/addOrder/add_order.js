@@ -16,7 +16,8 @@ Page({
     dzid: '', // 快递地址id
     ztdid: '', // 自提地址id
     couponsId: '',
-    addressId: ''
+    addressId: '',
+    topay:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -46,12 +47,14 @@ Page({
         })
         console.log(that.data.productInfo)
         // if (that.data.productInfo.sendType == 1) {
-          that.findShopAdress()
+         
           //查询用户是否切换店铺
           var isCheck = wx.getStorageSync('aa')
           if (isCheck == '0') {
             that.checkAddress()
-          } 
+          } else{
+            that.findShopAdress()
+          }
         // } else if (that.data.productInfo.sendType == 2) {
           let dzid = wx.getStorageSync('dzid')
           that.setData({
@@ -277,119 +280,15 @@ Page({
         that.setData({
           message: data.data.result
         })
-        if (that.data.payTypes == '2') {
-          that.pay()
-        } else {
-          that.payYe(that.data.message.orderNumber)
-        }
-
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  /**
-   * 选择支付方式
-   */
-  radioChange: function (e) {
-    var that = this;
-    that.setData({
-      payTypes: e.detail.value
-    })
-  },
-  
-  /**
-   * 微信支付
-   */
-  pay() {
-    var that = this;
-    var openId = wx.getStorageSync('openId')
-    var arg = {
-      id: that.data.message.id,
-      name: that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
-      payType: 2,
-      type: '1',
-      openId: openId
-    }
-    var params = {
-      url: '/app/payment/getOrderStr',
-      method: 'POST',
-      data: arg,
-      sCallBack: function (data) {
-        wx.requestPayment({
-          appId: 'wx806b47b81b69c8bd',
-          timeStamp: data.data.result['timeStamp'],
-          nonceStr: data.data.result['nonceStr'],
-          package: data.data.result['packageValue'],
-          signType: 'MD5',
-          paySign: data.data.result['paySign'],
-          'success': function (res) {
-            // that.delItem()
-            wx.showToast({
-              title: '已支付成功！',
-              icon: 'none',
-              duration: 3000,
-              success: function () {
-                setTimeout(function () {
-                  wx.redirectTo({
-                    url: '/pages/details/order_list/order_list',
-                  })
-                }, 3000);
-
-              }
-            })
-          },
-          fail: function (e) {
-            console.log(e)
-          }
-        })
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  /**
-   * 余额支付
-   */
-  payYe(orderNumber) {
-    var that = this;
-    var arg = {
-      'userInfo': {
-        'id': that.data.userId,
-      },
-      'orderNumber': orderNumber
-    }
-    var params = {
-      url: '/app/order/updateCommodityOrderInfoPaymentStatusYe',
-      method: 'POST',
-      data: JSON.stringify(arg),
-      sCallBack: function (data) {
-        if (data.data.errorCode == '-1') {
+        if(data.data.errorCode=='0'){
+          that.setData({
+            topay:true
+          })
+         
+        }else{
           wx.showToast({
             title: data.data.errorMsg,
-            icon: 'none'
-          })
-        }else if (data.data.errorCode == '-200') {
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon: 'none'
-          })
-        }
-        else{
-          // that.delItem()
-          wx.showToast({
-            title: data.data.result,
-            icon: 'none',
-            success: function () {
-              setTimeout(function () {
-                wx.redirectTo({
-                  url: '/pages/details/order_list/order_list',
-                })
-              }, 2000);
-
-            }
+            icon:'none'
           })
         }
 
@@ -398,8 +297,8 @@ Page({
       }
     }
     base.request(params);
-
   },
+ 
   /**
    * 查询用户默认的快递地址
    */
@@ -438,5 +337,23 @@ Page({
     wx.redirectTo({
       url: '/pages/details/address_list/addressList?type=shopSubmit'
     })
-  }
+  },
+  //  取消付款
+cancel(){
+  var that=this;
+  that.setData({
+    topay:false
+  })
+},
+// 去付款
+Tofk(){
+  var that=this;
+  wx.navigateTo({
+    url: '/pages/details/topay/topay',
+  })
+  that.setData({
+    topay:false//订单信息
+  })
+},
+
 })

@@ -25,6 +25,9 @@
     
   </view>
   <button style="background:{{color}};width:100%" class="sub" formType="submit">提交申请</button>
+  <navigator hover-class="none" url="/pages/details/txjl/txjl">
+    <view class="txjl" >提现记录</view>
+  </navigator>
   </form>
 </view>
 

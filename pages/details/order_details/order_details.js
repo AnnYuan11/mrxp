@@ -11,7 +11,8 @@ Page({
     imgUrl:app.globalData.imgUrl,
     yhqmoney:'选择优惠券',
     payTypes:2,//默认微信支付
-    yhje:0
+    yhje:0,
+    topay:false//订单信息
   },
 
   /**
@@ -37,7 +38,7 @@ Page({
       yhqid:options.yhqid,//优惠券id
       yhqmoney:options.yhqmoney//优惠券钱数
     })
-   that.list()
+  
   },
 
   /**
@@ -57,9 +58,9 @@ Page({
       if(aa=='0'){
         that.query()//查询用户切换店铺
       }else {
-        return
+        that.list()
       }
-     
+   
   },
 
   /**
@@ -100,12 +101,9 @@ Page({
   selectDz(){
     var that = this;
     var userId=wx.getStorageSync('userId')
-    console.log(that.data.options.dzid)
-    if(that.data.options.dzid==undefined){
-      that.data.options.dzid=''
-    }
+    console.log(that.data.dzid)
     var arg={
-      "id":that.data.options.dzid,
+      "id":that.data.dzid,
       "userInfo":{
         "id":userId
       },
@@ -144,8 +142,8 @@ Page({
     var sendType
     if(that.data.options.sendType=="到店自提"){
       that.data.dzid=''
-    }else if(that.data.options.dzid){
-      that.data.dzid=that.data.options.dzid
+    }else if(that.data.dzid){
+      that.data.dzid=that.data.dzid
     }
     if(that.data.options.sendType=="到店自提"){
       sendType='1'
@@ -193,11 +191,25 @@ Page({
         that.setData({
           message:data.data.result
         })
-        if(that.data.payTypes=='2'){
-          that.pay()
+        if(data.data.errorCode=='0'){
+          if(that.data.options.sendType=="到店自提"){
+            that.setData({
+              topay:true
+            })
+          }else{
+            wx.navigateTo({
+              url: '/pages/details/topay/topay',
+            })
+          }
+          
+         
         }else{
-          that.payYe(that.data.message.orderNumber)
+          wx.showToast({
+            title: data.data.errorMsg,
+            icon:'none'
+          })
         }
+        
         
       },
       eCallBack: function () {
@@ -221,8 +233,8 @@ Page({
     var sendType
     if(that.data.options.sendType=="到店自提"){
       that.data.dzid=''
-    }else if(that.data.options.dzid){
-      that.data.dzid=that.data.options.dzid
+    }else if(that.data.dzid){
+      that.data.dzid=that.data.dzid
     }
     if(that.data.options.sendType=="到店自提"){
       sendType='1'
@@ -281,117 +293,6 @@ Page({
     }
     base.request(params);
   },
-// 支付方式
-radioChange: function (e) {
-  console.log(e)
-  var that=this;
-  that.setData({
-    payTypes:e.detail.value
-  })
-},
-  //微信支付
-  pay(){
-    var that = this;
-    var openId=wx.getStorageSync('openId')
-    console.log(that.data.message)
-    var arg={
-      id: that.data.message.id,
-      name:that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
-      payType:2,
-      type:'1',
-      openId:openId
-    }
-    console.log(JSON.stringify(arg))
-    var params = {
-      url: '/app/payment/getOrderStr',
-      method: 'POST',
-      data: arg,
-      sCallBack: function (data) {
-        console.log(data)  
-        wx.requestPayment({
-          appId: 'wx806b47b81b69c8bd',
-          timeStamp: data.data.result['timeStamp'],
-          nonceStr: data.data.result['nonceStr'],
-          package: data.data.result['packageValue'],
-          signType: 'MD5',
-          paySign: data.data.result['paySign'],
-          'success': function (res) {
-            console.log(res)
-            
-            wx.showToast({
-              title: '已支付成功！',
-              icon: 'none',
-              duration: 2000,
-              success: function () {
-                setTimeout(function () {
-                  wx.redirectTo({
-                    url: '/pages/details/order_list/order_list',
-                  })
-                }, 2000);
-
-              }
-            })
-          },
-          fail: function (e) {
-            console.log(e)
-          }
-        })      
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-
-  // 余额支付
-  payYe(orderNumber){
-    var that = this;
-    var userId=wx.getStorageSync('userId')
-    var arg={
-      'userInfo':{
-        'id': userId,
-      },
-      'orderNumber':orderNumber
-    }
-    var params = {
-      url: '/app/order/updateCommodityOrderInfoPaymentStatusYe',
-      method: 'POST',
-      data: JSON.stringify(arg),
-      sCallBack: function (data) {
-        console.log(data)  
-        if(data.data.errorCode=='-1'){
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon:'none'
-          })
-        }else if(data.data.errorCode=='-200'){
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon:'none'
-          })
-        }else{
-          wx.showToast({
-            title: data.data.result,
-            icon:'none',
-            duration: 2000,
-              success: function () {
-                setTimeout(function () {
-                  wx.redirectTo({
-                    url: '/pages/details/order_list/order_list',
-                  })
-                }, 2000);
-
-              }
-          })
-        }
-           
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-
-  },
   // 选择优惠券跳转
   selectYhq(){
     var that=this;
@@ -412,11 +313,30 @@ radioChange: function (e) {
 Todz(){
   var that=this;
   var options=that.data.options
-  wx.redirectTo({
-    url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&yhqmoney='+options.sendType.yhqmoney+'元'+'&commodityNumber='+options.commodityNumber
+  wx.navigateTo({
+    url:'/pages/details/address_list/addressList?toddxq=1'
+    // url:'/pages/details/address_list/addressList?toddxq=1&ddid='+that.data.ddid+'&ddpic='+options.ddpic+'&ddname='+options.ddname+'&ddjg='+options.ddjg+'&sendType='+options.sendType+'&yhqid='+options.yhqid+'&yhqmoney='+options.sendType.yhqmoney+'元'+'&commodityNumber='+options.commodityNumber
   })
 },
-  // 自提点的地址
+//  取消付款
+cancel(){
+  var that=this;
+  that.setData({
+    topay:false
+  })
+},
+// 去付款
+Tofk(){
+  var that=this;
+  wx.navigateTo({
+    url: '/pages/details/topay/topay',
+  })
+  that.setData({
+    topay:false//订单信息
+  })
+},
+
+
   // 查询用户切换店铺
 
 query(){
@@ -502,4 +422,5 @@ query(){
     }
     base.request(params);
   },
+
 })

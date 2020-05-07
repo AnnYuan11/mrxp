@@ -38,7 +38,7 @@ Page({
         });
       }
     });
-    that.list()
+  
    
    
   },
@@ -54,7 +54,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var session = wx.getStorageSync('session')
+    if(session==''){
+      wx.showModal({
+        title: '提示',
+        content: '用户未登录',
+        confirmText:'去登陆',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1  // 返回上一级页面。
+            })
+          }
+        }
+      })   
+    }else{
+      var that=this;
+      that.list()//列表
+    }
   },
 
   /**

@@ -10,7 +10,7 @@ Page({
         imgUrl:app.globalData.imgUrl,
     },
     onShow() {
-       
+        app.getShopNum()
     },
     selectTab(e)  {
         this.setData({
