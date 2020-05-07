@@ -20,7 +20,7 @@ Page({
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
-    // aa:1
+
   },
 
   /**
@@ -33,7 +33,7 @@ Page({
     that.notice()//公告
     that.yhqList()//优惠券列表
     that.list()//团长地址
-    // that.onPageScroll()
+    // that.djs()
     wx.getSetting({
       success: (res) => {
         console.log(res);
@@ -796,8 +796,21 @@ locations: function () {
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+  },
+  
+  // 定时器
+  djs(){
+    var times=5;
+    var interval = setInterval(function () {
+      console.log(111)
+      times--;
+      if(times<0){
+        clearInterval(interval);
+        wx.showToast({
+          title: '活动已结束',
+        });
+      }
+    },1000)
   }
-  
-  
   
 })
