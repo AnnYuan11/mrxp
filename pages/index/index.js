@@ -1,5 +1,9 @@
 // pages/index/index.js
 import { Base } from "../../utils/request/base.js";
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+var qqmapsdk = new QQMapWX({
+  key: 'GTMBZ-PJLCW-2QDRH-RMAHZ-DRPT2-VMFS6' // 必填
+});
 var app = getApp();
 var base = new Base();
 
@@ -33,7 +37,8 @@ Page({
     that.lunbo()//轮播图
     that.notice()//公告
     that.yhqList()//优惠券列表
-    that.weather()//查询天气
+    that.city();//获取所在城市名
+    that.fans()//头部粉丝数
     // that.djs()
     wx.getSetting({
       success: (res) => {
@@ -127,7 +132,7 @@ Page({
       that.list()//团长地址
     }
    app.getShopNum()
-   
+   that.order()
   },
 
   /**
@@ -478,11 +483,10 @@ locations: function () {
   wx.getLocation({
     type: 'gcj02',
     success: function (res) {
-      
       that.setData({
         latitude:res.latitude,
         longitude:res.longitude
-      })
+      })  
 
       wx.setStorage({
         key:"latitude",
@@ -847,26 +851,82 @@ locations: function () {
     },1000)
   },
   // 查询天气情况
-  weather(){
+  weather(city){
     var that=this;
     var params = {
       url: '/app/getEmojiWeather',
       method: 'GET',
       data: {
-       'city':'西安市'
+       'city':city
       },
       sCallBack: function (data) {
        that.setData({
         weather:data.data.result
        })
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  city(){
+    var that=this;
+    var latitude = wx.getStorageSync('latitude')
+    var longitude = wx.getStorageSync('longitude')
+    qqmapsdk.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude:longitude
+      },
+      success: function (addressRes) {
+        
+        that.weather(addressRes.result.ad_info.city)
+      },
+      fail: function (error) {
+        
+      },
+      complete: function (res) {
        
-        
-        
+      }
+    })
+  },
+  // 头部粉丝数
+  fans(){
+    var that=this;
+    var zdtid = wx.getStorageSync('zdtid')
+    var params = {
+      url: '/app/head/listHeadUserNumbers',
+      method: 'POST',
+      data: {
+       'headInfo':{
+         'id':zdtid
+       }
+      },
+      sCallBack: function (data) {
+       that.setData({
+        fans:data.data.result
+       })
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 最新下单
+  order(){
+    var that=this;
+    var params = {
+      url: '/app/order/findAllCommodityOrderInfo30ByPay',
+      method: 'GET',
+      data: {
+       
+      },
+      sCallBack: function (data) {
+       
       },
       eCallBack: function () {
       }
     }
     base.request(params);
   }
-  
 })

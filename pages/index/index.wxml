@@ -26,7 +26,7 @@
       </view>
       <view class="line"></view>
       <view class="fans">
-        <text class="num">200</text>
+        <text class="num">{{fans}}</text>
         <text>粉丝数</text>
       </view>
     </view>
