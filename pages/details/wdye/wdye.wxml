@@ -10,7 +10,7 @@
       <view class="line"></view>
       <view class="ktx">
         <text class="money">{{personal.overCashMoney}}</text>
-        <text>赠送可使用(元)</text>
+        <text>已提现(元)</text>
       </view>
   </view>
 </view>

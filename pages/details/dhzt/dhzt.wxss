@@ -102,13 +102,13 @@
 }
 /* 搜索 */
 .search_Box{
-  width:100%;
+  width:90%;
   background:#fff;
   border-radius:32px;
   padding: 16rpx 32rpx;
   box-sizing: border-box;
   display: flex;
-  margin: 50rpx 0;
+  margin: 50rpx auto;
   
 }
 .search_Box image{

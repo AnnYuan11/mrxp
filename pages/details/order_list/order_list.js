@@ -760,7 +760,7 @@ Page({
   Topay(e) {
     console.log(e)
     var that=this;
-    var message = e.currentTarget.dataset.item.commoditySubOrderInfoList
+    var message = e.currentTarget.dataset.item
     that.setData({
       message:message
     })

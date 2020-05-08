@@ -2,3 +2,6 @@
 page{
   background: #F7F7F7;
 }
+image{
+  height: auto;
+}

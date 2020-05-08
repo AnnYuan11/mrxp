@@ -27,9 +27,9 @@ Page({
     if(url=='pages/details/order_list/order_list'){
       console.log(1111)
       that.setData({
-        name:prevPage.data.message[0].commodityInfo.productInfo.commodityName,
-        money:prevPage.data.message[0].subOrderMoney,
-        message:prevPage.data.message[0].commodityOrderInfo,
+        name:prevPage.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
+        money:prevPage.data.message.needMoney,
+        message:prevPage.data.message,
       })
     }else{
       console.log(222)
@@ -49,7 +49,7 @@ Page({
   onReady: function () {
 
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
@@ -135,7 +135,7 @@ Recharge(){
         paySign: data.data.result['paySign'],
         'success': function (res) {
           console.log(res)
-          
+          that.delItem()
           wx.showToast({
             title: '已支付成功！',
             icon: 'none',
@@ -160,7 +160,35 @@ Recharge(){
   }
   base.request(params);
 },
-
+delItem(id) {
+  var idslist=wx.getStorageSync('productInfo')
+ 
+  var ids=[];
+  console.log(idslist)
+  idslist.productList.forEach(item => {
+    ids.push(item.ids)
+  });
+  console.log(ids)
+  let that = this
+  var params = {
+    url: '/app/commodity/deleteShoppingCartInfo',
+    method: 'POST',
+    data: {
+      'ids': ids,
+    },
+    sCallBack: function (data) {
+      if (data.data.errorCode == 0) {
+        
+        app.getShopNum()
+      } else {
+        
+      }
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
 // 余额支付
 payYe(orderNumber){
   var that = this;
@@ -188,8 +216,9 @@ payYe(orderNumber){
           icon:'none'
         })
       }else{
+        that.delItem()
         wx.showToast({
-          title: data.data.result,
+          title: '订单支付成功',
           icon:'none',
           duration: 2000,
             success: function () {

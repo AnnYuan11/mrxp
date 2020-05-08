@@ -125,7 +125,7 @@ i{
 .swiper-tab-list {
   font-size: 32rpx;
   display: inline-block;
-  width: 33.33%;
+  width: 50%;
   color: #9b9b9b;
   text-align: center;
  

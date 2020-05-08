@@ -300,6 +300,7 @@ Component({
       // 声明一个变量接收数组列表price
       let total = 0;
       let nums = 0;
+      console.log(list)
       // 循环列表得到每个数据
       for (let i = 0; i < list.length; i++) {
         // 判断选中计算价格
@@ -371,9 +372,13 @@ Component({
         data: {
           'pageIndex': that.data.currentPage,
           'pageSize': that.data.size,
-          'userInfo.id': id,
+          'userInfo':{
+            'id':id
+          },
           'shoppingCarType': shoppingType,
-          'headinfo.id':ztdid
+          'headInfo':{
+            'id':ztdid
+          }
         },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
@@ -485,9 +490,13 @@ Component({
           data: {
             'pageIndex': that.data.currentPage,
             'pageSize': that.data.size,
-            'userInfo.id': id,
-            'shoppingCarType': that.data.shoppingType,
-            'headinfo.id': that.data.ztdid
+            'userInfo':{
+              'id':id
+            },
+            'shoppingCarType': shoppingType,
+            'headInfo':{
+              'id':ztdid
+            }
           },
           sCallBack: function (data) {
             if (data.data.errorCode == 0) {

@@ -197,28 +197,42 @@ default(){
 },
 // 切换自提点
 change(e){
+  console.log(e)
   var that=this;
-  var userId = wx.getStorageSync('userId')
-  console.log(userId)
-  wx.setStorage({
-    data: 0,
-    key: 'aa',
-  })
-  var params = {
-    url: '/app/user/addUserHeadInfo',
-    method: 'POST',
-    data: {
-      userInfo:{'id':userId},
-      headInfo:{'id':e.currentTarget.dataset.item.id}
-    },
-    sCallBack: function (data) {
-      that.query()
-      
-    },
-    eCallBack: function () {
+  var dpmc=e.currentTarget.dataset.item
+  wx.showModal({
+    title: '提示',
+    content: '确定将'+dpmc.shopName+'设为新的自提点吗?',
+    success (res) {
+      if (res.confirm) {
+        var userId = wx.getStorageSync('userId')
+        console.log(userId)
+        wx.setStorage({
+          data: 0,
+          key: 'aa',
+        })
+        var params = {
+          url: '/app/user/addUserHeadInfo',
+          method: 'POST',
+          data: {
+            userInfo:{'id':userId},
+            headInfo:{'id':e.currentTarget.dataset.item.id}
+          },
+          sCallBack: function (data) {
+            that.query()
+            
+          },
+          eCallBack: function () {
+          }
+        }
+        base.request(params);
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
     }
-  }
-  base.request(params);
+  })
+  
+  
 },
 // 查询用户切换店铺
 query(){

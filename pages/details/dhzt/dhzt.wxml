@@ -2,7 +2,7 @@
 <view class="title" wx:if="{{defaultztd==''}}">
   <view class="top">
     <view class="img">
-      <image src="{{imgUrl}}img/public/logo.png" mode="widthFix"></image>
+      <image src="{{imgUrl}}img/public/logo.png" lazy-load="{{true}}"wx:if="{{imgUrl}}" mode="widthFix"></image>
     </view>
     <view class="message">
       <text class="name">
@@ -16,7 +16,7 @@
   </view>
 
   <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{phone}}">
-    <image src="{{imgUrl}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
+    <image src="{{imgUrl}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle" lazy-load="{{true}}"></image>
     <text>团长：{{name}}</text>
   </view>
 </view>

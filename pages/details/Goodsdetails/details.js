@@ -319,13 +319,12 @@ handleClickItem1 () {
   this.setData({
     maskHidden: false
   });
-  wx.showToast({
-    title: '海报生成中...',
-    icon: 'loading',
-    duration: 1000
-  });
+  // wx.showToast({
+  //   title: '海报生成中...',
+  //   icon: 'loading',
+  //   duration: 1000
+  // });
   setTimeout(function () {
-    wx.hideToast()
     // that.ewm()
     that.eventDraw();
     that.setData({
@@ -351,7 +350,6 @@ eventDraw () {
       })
     }
   })
-  console.log(that.data.width+"哈哈哈"+that.data.height)
   this.setData({
     painting: {
       width: that.data.width,
@@ -368,7 +366,8 @@ eventDraw () {
         },
         {
           type: 'image',
-          url: that.data.imgUrl+'img/public/logoo.png',
+          // url: that.data.imgUrl+'img/new/logoo.png',
+          url: '/img/new/logoo.png',
           top: 27.5,
           left: 29,
           width: 300,

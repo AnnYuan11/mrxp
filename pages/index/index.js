@@ -27,23 +27,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that=this;
     that.shopList()//今日售卖列表
     that.lunbo()//轮播图
     that.notice()//公告
     that.yhqList()//优惠券列表
-    that.list()//团长地址
+    that.weather()//查询天气
     // that.djs()
     wx.getSetting({
       success: (res) => {
-        console.log(res);
-        console.log(res.authSetting['scope.userLocation']);
+       
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
           wx.showModal({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
             success: function (res) {
-              console.log(res)
+            
               if (res.cancel) {
                 wx.showToast({
                   title: '拒绝授权',
@@ -55,9 +55,9 @@ Page({
                
                 wx.openSetting({
                   success: function (data) {
-                    console.log(data);
+                  
                     if (data.authSetting["scope.userLocation"] == true) {
-                      console.log('定位授权问问')
+                     
                       that.locations();
                      
                       wx.showToast({
@@ -80,12 +80,31 @@ Page({
             }
           })
         } else if (res.authSetting['scope.userLocation'] == undefined||res.authSetting['scope.userLocation']==true) {//初始化进入
-          console.log('定位授权333')
+        
           that.locations();
          
         }
       }
     })
+    var date = new Date();
+    var today= date.getMonth()+1+'月'+ date.getDate()+'日'
+    that.setData({
+      today:today
+    })
+    // 获取设备高度
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+    });
+    // 分享
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+   
   },
 
   /**
@@ -101,12 +120,14 @@ Page({
   onShow: function () {
     var that = this;
     var aa=wx.getStorageSync('aa')
+    
     if(aa=='0'){
       that.query()//查询用户切换店铺
     }else {
-      return
+      that.list()//团长地址
     }
-    // app.getOpenId()
+   app.getShopNum()
+   
   },
 
   /**
@@ -151,7 +172,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var zdtid=wx.getStorageSync('zdtid')
+   console.log(zdtid)
+    return {
+      title: '弹出分享时显示的分享标题',
+      desc: '分享页面的内容',
+      path: '/pages/index/index?zdtid='+zdtid // 路径，传递参数到指定页面。
+     }
   },
   // 搜索
   search: function (e) {
@@ -213,7 +240,7 @@ Page({
   // 商品切换
   swichNav: function (e) {
     var that = this;
-    console.log(e)
+   
     if(e.target.dataset.current=='0'){
       that.data.currentPage=1,
       that.data.totalCount= 0,//总是数据条数
@@ -257,15 +284,16 @@ sure(){
     var y = date.getFullYear();
     var m = date.getMonth() + 1;//获取当前月份的日期 
     var d = date.getDate();
+   
     if(m < 10){
       m = '0' + m;
     };
     if(d < 10) {
       d = '0' + d;
     };
-    var tomorow=m + "月" + d+"日";
+    var tomorow=m + "月" + d+"日"; 
     that.setData({
-      tomorow:tomorow
+      tomorow:tomorow,
     })
 },
 // 今日售卖列表
@@ -328,7 +356,7 @@ shopList(className){
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
-        // console.log(that.data.pagecount)         
+          
     },
     eCallBack: function () {
     }
@@ -347,7 +375,7 @@ shopListM(className){
     },
     sCallBack: function (data) {
       var listTomorow=data.data.result.datas
-      // console.log(listTomorow)
+     
       if(listTomorow!=''){
         listTomorow.forEach((item,index) =>{
           item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
@@ -395,7 +423,7 @@ shopListM(className){
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
-        console.log(that.data.pagecount)         
+          
     },
     eCallBack: function () {
     }
@@ -450,7 +478,7 @@ locations: function () {
   wx.getLocation({
     type: 'gcj02',
     success: function (res) {
-      console.log(res);
+      
       that.setData({
         latitude:res.latitude,
         longitude:res.longitude
@@ -483,7 +511,6 @@ locations: function () {
 // 查询用户切换店铺
 
   query(){
-    console.log('调用了自提')
     var that=this;
     var userId = wx.getStorageSync('userId')
     var params = {
@@ -493,7 +520,7 @@ locations: function () {
         userInfo:{'id':userId}
       },
       sCallBack: function (data) {
-        console.log(data.data.result)
+       
         that.setData({
           defaultztd:data.data.result,
           shopName:data.data.result.headInfo.shopName,
@@ -512,7 +539,7 @@ locations: function () {
   },
   // 团长地址
   list(){
-    console.log('调用了团长')
+    
     var that = this;
     var myLat = wx.getStorageSync('latitude');
     var myLng = wx.getStorageSync('longitude');
@@ -574,10 +601,10 @@ locations: function () {
   // 加入购物车
   joinGwc(e){
     var that=this;
-    console.log(e)
-    console.log(that.data.ztdid)
+    var session = wx.getStorageSync('session')
+   
     var userId = wx.getStorageSync('userId')
-    if(userId==''){
+    if(session==''){
      wx.navigateTo({
        url: '/pages/login/login',
      })
@@ -612,7 +639,21 @@ locations: function () {
               title: data.data.result,
             })
             app.getShopNum()
-          } else {
+          }else if(data.data.errorCode=='-200'){
+            wx.showToast({
+              title: data.errorMsg,
+              icon:'none',
+              duration: 2000,
+              success: function () {
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '/pages/login/login',
+                  })
+                }, 2000);
+                }
+            })
+          }
+           else {
             wx.showToast({
               title: data.data.result,
             })
@@ -660,7 +701,7 @@ locations: function () {
        'userId':userId
       },
       sCallBack: function (data) {
-        console.log(data)
+      
         if(data.data.result.datas.length=='0'){
           that.setData({
             show:false
@@ -688,7 +729,7 @@ locations: function () {
             coupons:data.data.result.datas.slice(0,3),
             ids:ids
           })
-          // console.log(that.data.ids)
+         
         } else {
           wx.showToast({
             title: data.data.result,
@@ -729,7 +770,7 @@ locations: function () {
        }
       },
       sCallBack: function (data) {
-        console.log(data)
+       
         if(data.data.errorCode==0){
           wx.showToast({
             title:data.data.result,
@@ -772,8 +813,8 @@ locations: function () {
     base.request(params);
   },
   // 获取滚动条当前位置
-  onPageScroll: function (e) {
-    if (e.scrollTop > 100) {
+  scoll: function (e) {
+    if (e.detail.scrollTop > 100) {
       this.setData({
         floorstatus: true
       });
@@ -786,23 +827,16 @@ locations: function () {
 
   //回到顶部
   goTop: function (e) {  // 一键回到顶部
-    if (wx.pageScrollTo) {
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-      })
-    }
+    this.setData({
+      topNum: this.data.topNum = 0
+    });
   },
   
   // 定时器
   djs(){
     var times=5;
     var interval = setInterval(function () {
-      console.log(111)
+     
       times--;
       if(times<0){
         clearInterval(interval);
@@ -811,6 +845,28 @@ locations: function () {
         });
       }
     },1000)
+  },
+  // 查询天气情况
+  weather(){
+    var that=this;
+    var params = {
+      url: '/app/getEmojiWeather',
+      method: 'GET',
+      data: {
+       'city':'西安市'
+      },
+      sCallBack: function (data) {
+       that.setData({
+        weather:data.data.result
+       })
+       
+        
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   }
   
 })

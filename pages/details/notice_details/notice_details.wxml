@@ -1,0 +1,5 @@
+<!--pages/details/notice_details/notice_details.wxml-->
+<import src="../../../utils/wxParse/wxParse.wxml"/> 
+<view class="box">
+  <template is="wxParse" data="{{wxParseData:artice.nodes}}"/>
+</view>

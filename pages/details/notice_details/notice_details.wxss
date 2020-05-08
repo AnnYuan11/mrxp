@@ -1,0 +1,7 @@
+/* pages/details/notice_details/notice_details.wxss */
+@import "../../../utils/wxParse/wxParse.wxss";
+.box{
+  width: 95%;
+  margin:0 auto;
+  
+}

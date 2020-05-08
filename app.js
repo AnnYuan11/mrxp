@@ -12,7 +12,7 @@ App({
     this.getOpenId()
    
   },
-  onShow: function () {
+  onShow: function (e) {
     this.getShopNum()
     this.refresh()
   },
@@ -21,13 +21,13 @@ App({
     var that = this;
     wx.login({
         success: function (res) {
-            console.log(res)
+           
             if (res.code) {
                 // 发起网络请求
                 wx.request({
                     url: 'https://www.zgmrxp.com/app/getOpenId?code=' + res.code,
                     success: function (data) {
-                        console.log(data);
+                       
                         wx.setStorage({
                             key:"sessionId",
                             data:data.data.result.sessionKey
@@ -40,7 +40,7 @@ App({
                        that.login()
                       },
                     fail: function (data) {
-                        console.log(data);
+                       
                     }
                 })
             }
@@ -96,7 +96,7 @@ login(){
               data:data.data.result.id
             });
             var value = { header: data.data.result.sessionId}
-            console.log(value)
+           
             util.put('loginData', value)
           }else{
             wx.removeStorageSync('session')
@@ -121,9 +121,14 @@ login(){
   getShopNum(){
     var that=this;
     var userId=wx.getStorageSync('userId')
+    var ztdid = wx.getStorageSync('zdtid')
+    
     var arg={
       'userInfo':{
         'id':userId
+      },
+      'headInfo':{
+        'id':ztdid
       }
     }
     var params = {

@@ -84,6 +84,7 @@
 .lis{
   display: flex;
   justify-content: space-between;
+  height: 60rpx;
 }
 .lis text{
   font-size:24rpx;
