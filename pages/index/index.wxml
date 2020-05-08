@@ -7,7 +7,7 @@
     <view class="date">
       <text style="margin-right:20rpx">{{today}}</text>
       <image src="/img/new/W0.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
-      <text>{{wether.temperature}}℃</text>
+      <text>{{weather.temperature}}℃</text>
     </view>
   </view>
 </view>
