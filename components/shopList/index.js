@@ -51,11 +51,11 @@ Component({
       wx.getSystemInfo({
         success: (res) => {
           this.setData({
-            height: res.windowHeight 
+            height: res.windowHeight
           })
         }
       })
-     
+
     }
   },
   pageLifetimes: {
@@ -66,18 +66,18 @@ Component({
       this.getShopList(this.data.shoppingType)
       this.setData({
         selectAllStatus: false,
-        totalPrice:'0'
+        totalPrice: '0'
       })
     },
-    hide(){
-      var that=this;
-      that.data.currentPage=1
+    hide() {
+      var that = this;
+      that.data.currentPage = 1
     }
   },
   /**
    * 组件的方法列表
    */
-  methods: { 
+  methods: {
     /**
   * 当前商品选中事件
   */
@@ -142,6 +142,7 @@ Component({
         success: function (res) {
           if (res.confirm) {
             that.delItem(ids)
+            // console.log(that.data.selectAllStatus)
           } else {
             // console.log(res);
           }
@@ -165,7 +166,10 @@ Component({
               title: data.data.result
             })
             that.getShopList(that.data.shoppingType)
-            that.count_price()
+            that.setData({
+              totalPrice: '0'
+            })
+            // that.count_price()
             app.getShopNum()
           } else {
             wx.showToast({
@@ -305,11 +309,10 @@ Component({
       for (let i = 0; i < list.length; i++) {
         // 判断选中计算价格
         if (list[i].selected) {
-          console.log(list[i])
           // 所有价格加起来 count_money
           total += list[i].commodityNumber * list[i].commodityInfo.price;
           nums += list[i].commodityNumber
-        }
+        } 
       }
       // 最后赋值到data中渲染到页面
       that.setData({
@@ -372,12 +375,12 @@ Component({
         data: {
           'pageIndex': that.data.currentPage,
           'pageSize': that.data.size,
-          'userInfo':{
-            'id':id
+          'userInfo': {
+            'id': id
           },
           'shoppingCarType': shoppingType,
-          'headInfo':{
-            'id':ztdid
+          'headInfo': {
+            'id': ztdid
           }
         },
         sCallBack: function (data) {
@@ -390,10 +393,28 @@ Component({
             } else {
               that.setData({
                 hasList: true,
-                list: data.data.result.datas, //初始化数据列表
+                // list: data.data.result.datas, //初始化数据列表
                 totalCount: data.data.result.rowCount, //总的数据条数
                 pagecount: data.data.result.totalPages //总页数
               })
+              if (that.data.selectAllStatus) {
+                let list = data.data.result.datas;
+                // 循环遍历判断列表中的数据是否选中
+                for (let i = 0; i < list.length; i++) {
+                  list[i].selected = true;
+                }
+                // 页面重新渲染
+                that.setData({
+                  list: list
+                });
+                // 计算金额方法
+                that.count_price();
+              } else {
+                // that.count_price();
+                that.setData({
+                  list: data.data.result.datas, //初始化数据列表
+                })
+              }
             }
           } else {
             wx.showToast({
@@ -415,7 +436,7 @@ Component({
       // 获取商品数据
       console.log(that.data.totalPrice)
       // let price = Number(that.data.totalPrice.slice('.')[0])
-      let price =that.data.totalPrice
+      let price = that.data.totalPrice
       if (price == 0) {
         wx.showToast({
           title: '请选择要提交的订单',
@@ -490,12 +511,12 @@ Component({
           data: {
             'pageIndex': that.data.currentPage,
             'pageSize': that.data.size,
-            'userInfo':{
-              'id':id
+            'userInfo': {
+              'id': id
             },
             'shoppingCarType': shoppingType,
-            'headInfo':{
-              'id':ztdid
+            'headInfo': {
+              'id': ztdid
             }
           },
           sCallBack: function (data) {
@@ -503,7 +524,7 @@ Component({
               var cont = []
               cont = [...that.data.list, ...data.data.result.datas]
               that.setData({
-                list : cont
+                list: cont
               })
             } else {
               wx.showToast({
@@ -527,7 +548,7 @@ Component({
         url: `../../pages/details/Goodsdetails/details?id=${id}`
       })
     },
-  
+
   },
-  
+
 })
