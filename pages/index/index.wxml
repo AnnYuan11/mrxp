@@ -266,10 +266,17 @@
 		</view>
 	</view>
 </view>
+<!-- 分享 -->
+<button open-type="share" class="share">
+	<view class="item">
+		<image src="/img/new/fx.png" mode="widthFix"></image>
+	</view>
+</button>
 <!-- 回到顶部 -->
-<view class="back" hidden='{{!floorstatus}}' bindtap="goTop">返回顶部</view>
+<view class="back" hidden='{{!floorstatus}}' bindtap="goTop">
+	<image src="/img/new/fhdb.png" mode="widthFix"></image>
+</view>
 <!-- 下单提醒 -->
-
 <swiper class="swiper_container orderN" vertical="true" bindchange="bindchange" autoplay="true" circular="true" interval="4000" easing-function="linear" wx:if="{{contents.length!='0'}}">
 	<block wx:for="{{contents}}">
 		<swiper-item>

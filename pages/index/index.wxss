@@ -525,16 +525,39 @@ video {
 }
 /* 返回顶部 */
 .back{
-  width: 150rpx;
-  height:150rpx;
   color: #fff;
   text-align: center;
-  line-height: 150rpx;
-  background: rgba(0,0,0,0.5);
   position: fixed;
-  bottom: 50rpx;
+  bottom: 25rpx;
   right: 20rpx;
-  border-radius: 50%;
+}
+.back image{
+  width: 172rpx;
+}
+/* 分享 */
+.share{
+  position: fixed;
+  bottom:150rpx;
+  right: 20rpx;
+ }
+ .share image{
+  width: 172rpx;
+ }
+ button{
+  font-size: 28rpx!important;
+  background-color:transparent;
+  border: none;
+  padding: 0!important;
+  margin: 0!important;
+  font-weight: 400!important;
+  line-height: 1;
+  width: auto!important;
+}
+button::after {
+  border: none;
+}
+button:not([size='mini']) {
+  width: auto;
 }
 /* 下单提醒 */
 .orderN{

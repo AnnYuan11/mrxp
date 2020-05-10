@@ -42,8 +42,12 @@ Page({
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
     that.setData({
-      today: today
+      today: today,
+      qhdzid: options.zdtid
     })
+    if(that.data.qhdzid){
+      that.change()
+    }
     // 获取设备高度
     wx.getSystemInfo({
       success: function (res) {
@@ -59,7 +63,7 @@ Page({
     })
 
   },
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -181,8 +185,8 @@ Page({
     var zdtid = wx.getStorageSync('zdtid')
     console.log(zdtid)
     return {
-      title: '弹出分享时显示的分享标题',
-      desc: '分享页面的内容',
+      title: '天天每一天',
+      // desc: '分享页面的内容',
       path: '/pages/index/index?zdtid=' + zdtid // 路径，传递参数到指定页面。
     }
   },
@@ -914,12 +918,12 @@ Page({
           //   "photo": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKEmop1ZibxCuo7HjU0PoQkzjic9xK73FbF5sTK1z9DsY2QRN2s18u9AkFI3aFBXibCKZ5SsVPtnLnicg/132",
           //   "times": 3
           // },]
-          contents:data.data.result
+          contents: data.data.result
         })
-        if(that.data.contents.length==1){
-          setTimeout(function(){ 
+        if (that.data.contents.length == 1) {
+          setTimeout(function () {
             that.setData({
-              contents:[]
+              contents: []
             })
           }, 3000);
         }
@@ -928,19 +932,48 @@ Page({
     }
     base.request(params);
   },
-  bindchange(e){
-    var that=this;
+  bindchange(e) {
+    var that = this;
     console.log(that.data.contents.length)
-    var current=e.detail.current+1
+    var current = e.detail.current + 1
     console.log(current)
-    if(current==that.data.contents.length){
-      setTimeout(function(){ 
+    if (current == that.data.contents.length) {
+      setTimeout(function () {
         that.setData({
-          contents:[]
+          contents: []
         })
       }, 3000);
-     
+
     }
   },
+  // 切换自提点
+  change(e) {
+    console.log(e)
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    console.log(userId)
+    var params = {
+      url: '/app/user/addUserHeadInfo',
+      method: 'POST',
+      data: {
+        userInfo: {
+          'id': userId
+        },
+        headInfo: {
+          'id': that.data.qhdzid
+        }
+      },
+      sCallBack: function (data) {
+        that.query()
 
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+
+
+
+
+
+  },
 })

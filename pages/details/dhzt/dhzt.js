@@ -22,16 +22,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    that.list()//列表
-    var aa=wx.getStorageSync('aa')
-    console.log(aa)
-    if(aa=='0'){
-      that.query()//查询用户切换店铺
-    }else {
-      return
-    }
-    // that.query()//查询切换点
+    
+   
   },
 
   /**
@@ -45,9 +37,118 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    var session = wx.getStorageSync('session')
+    console.log(session)
+    if(session==''){
+      wx.showModal({
+        title: '提示',
+        content: '用户未登录',
+        confirmText:'去登陆',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack({
+              delta: 1  // 返回上一级页面。
+            })
+          }
+        }
+      })   
+    }else{
+      wx.getSetting({
+        success: (res) => {
+  
+          if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) { //非初始化进入该页面,且未授权
+            wx.showModal({
+              title: '是否授权当前位置',
+              content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+              success: function (res) {
+  
+                if (res.cancel) {
+                  wx.showToast({
+                    title: '拒绝授权',
+                    icon: 'none',
+                    duration: 1000
+                  })
+  
+                } else if (res.confirm) {
+  
+                  wx.openSetting({
+                    success: function (data) {
+  
+                      if (data.authSetting["scope.userLocation"] == true) {
+  
+                        that.locations();
+  
+                        wx.showToast({
+                          title: '授权成功',
+                          icon: 'success',
+                          duration: 5000
+                        })
+                        //再次授权，调用getLocationt的API
+  
+                      } else {
+                        wx.showToast({
+                          title: '授权失败',
+                          icon: 'success',
+                          duration: 5000
+                        })
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          } else if (res.authSetting['scope.userLocation'] == undefined || res.authSetting['scope.userLocation'] == true) { //初始化进入
+  
+            that.locations();
+  
+          }
+        }
+      })
+      that.list()//列表
+      var aa=wx.getStorageSync('aa')
+      console.log(aa)
+      if(aa=='0'){
+        that.query()//查询用户切换店铺
+      }else {
+        return
+      }
+    }
   },
+// 定位授权
+locations: function () {
+  let that = this;
+  //1、获取当前位置坐标
+  wx.getLocation({
+    type: 'gcj02',
+    success: function (res) {
+      that.setData({
+        latitude: res.latitude,
+        longitude: res.longitude
+      })
 
+      wx.setStorage({
+        key: "latitude",
+        data: res.latitude
+      });
+      wx.setStorage({
+        key: "longitude",
+        data: res.longitude
+      });
+      var aa = wx.getStorageSync('aa')
+      if (aa == '0') {
+        that.query() //查询用户切换店铺
+      } else {
+        that.list()
+      }
+
+    }
+  })
+},
   /**
    * 生命周期函数--监听页面隐藏
    */
