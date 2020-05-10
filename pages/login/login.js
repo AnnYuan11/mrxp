@@ -147,6 +147,7 @@ getPhoneNumber: function(e) { 
       icon:'none'
     })  
     } else {//同意授权
+      app.getOpenId()
     console.log(sessionk)
     wx.request({
     
@@ -201,6 +202,7 @@ getPhoneNumber: function(e) { 
 // 登陆
 wxlogin(){
     var that=this;
+
     var openId=wx.getStorageSync('openId')
     var nickName=wx.getStorageSync('nickName')
     var photo=wx.getStorageSync('photo')

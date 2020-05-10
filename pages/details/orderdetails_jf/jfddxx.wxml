@@ -32,7 +32,7 @@
 			<text>{{list.commodityName}}</text>
 			<view class="price">
 				<text class="jg">￥{{list.price}}</text>
-				<text class="num">×{{list.totalBuyLimitNumbers}}</text>
+				<text class="num">×1</text>
 			</view>
 		</view>
 	</view>

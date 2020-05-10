@@ -1,27 +1,32 @@
 <!--pages/details/txjl/txjl.wxml-->
 <block wx:for="{{expenseList}}">
-  <view class="list">
-    <view class="top">
-      <!-- <view class="left">
-        <image src="/img/new/success.png" mode="widthFix" style="width:44rpx"></image>
-        <text>提现成功</text>
-      </view> -->
-    <view class="left" >
+	<view class="list">
+		<view class="top">
+			<view class="left" wx:if="{{item.orderStatus==2}}">
+				<image src="/img/new/success.png" mode="widthFix" style="width:44rpx"></image>
+				<text>提现成功</text>
+			</view>
+			<view class="left" wx:if="{{item.orderStatus==0}}">
+				<image src="/img/new/fail.png" mode="widthFix" style="width:44rpx"></image>
+				<text>提现失败</text>
+			</view>
+      <view class="left" wx:if="{{item.orderStatus==1}}">
         <image src="/img/new/fail.png" mode="widthFix" style="width:44rpx"></image>
-        <text>提现失败</text>
+        <text>提现审核中</text>
       </view>
-      <view class="right">￥{{item.money}}</view>
-    </view>
-    <!-- 失败原因 -->
-    <view class="reason">
-      原因：收款码不清晰重新上传
-    </view>
-    <view class="bottom">
-      <text>订单号：{{item.orderNumber}}</text>
-      <view class="left">
-        <image src="/img/new/time.png" mode="widthFix" style="width:28rpx"></image>
-        <text>{{item.orderTime}}</text>
-      </view>
-    </view>
-  </view>
+			<view class="right">￥{{item.money}}</view>
+		</view>
+		
+		<!-- 失败原因 -->
+		<view class="reason" wx:if="{{item.falseReason!=''}}">
+			{{item.falseReason}}
+		</view>
+		<view class="bottom">
+			<text>订单号：{{item.orderNumber}}</text>
+			<view class="left">
+				<image src="/img/new/time.png" mode="widthFix" style="width:28rpx"></image>
+				<text>{{item.orderTime}}</text>
+			</view>
+		</view>
+	</view>
 </block>

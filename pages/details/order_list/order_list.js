@@ -217,7 +217,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           } else if (item.orderStatus == '6') {
             item.orderStatus = '已完成'
           }
@@ -285,7 +285,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })
@@ -351,7 +351,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })
@@ -417,7 +417,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })
@@ -483,7 +483,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })
@@ -549,7 +549,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })
@@ -827,7 +827,7 @@ Page({
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
-            item.orderStatus = '已收货'
+            item.orderStatus = '已提货'
           }
           item.orderTime = item.orderTime.substring(0, 10)
         })

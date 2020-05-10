@@ -29,6 +29,6 @@
     <template is="wxParse" data="{{wxParseData:artice.nodes}}"/>
   </view>
 </view>
-<navigator url="/pages/details/orderdetails_jf/jfddxx?list={{lists}}" hover-class="none">
+<navigator url="/pages/details/orderdetails_jf/jfddxx" hover-class="none">
   <view class="ljdh" style="background:{{color}}">立即兑换</view>
 </navigator>

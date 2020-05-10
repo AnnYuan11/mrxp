@@ -19,9 +19,13 @@ Page({
     console.log(options)
     var that=this
     var phone=wx.getStorageSync('phone')
+    let pages = getCurrentPages(); //获取当前页面pages里的所有信息。
+    let prevPage = pages[pages.length - 2]; 
+    var url = prevPage.route // 获取上一个页面的路径
+    console.log(prevPage)
     that.setData({
       phone:phone,
-      list:JSON.parse(options.list)
+      list:prevPage.data.list
     })
     console.log(that.data.list)
   },
@@ -186,7 +190,7 @@ Page({
         url: '/app/order/addIntegralOrderInfo',
         method: 'POST',
          
-        data: JSON.stringify(arg),
+        data:arg,
         sCallBack: function (data) {
           console.log(data)
           if(data.data.errorCode=="0"){
