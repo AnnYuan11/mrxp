@@ -62,6 +62,7 @@
 }
 .mess{
   margin-left: 20rpx;
+  width: 65%;
 }
 .mess text{
   font-size:24rpx;

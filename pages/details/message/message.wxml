@@ -1,0 +1,12 @@
+<!--pages/details/message/message.wxml-->
+<block wx:for="{{content}}">
+	<navigator hover-class="none" url="/pages/details/notice_details/notice_details?id={{item.id}}">
+    <view class="list_box">
+      <view class="time">{{item.createTime}}</view>
+      <view class="title">
+      {{item.title}}
+      </view>
+    </view>
+  </navigator>
+</block>
+

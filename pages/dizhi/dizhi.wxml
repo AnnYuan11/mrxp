@@ -1,0 +1,4 @@
+<!--pages/dizhi/dizhi.wxml-->
+<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" 
+value="{{citiesIndex}}" range="{{cityArray}}" range-key="name">qqq
+  </picker>

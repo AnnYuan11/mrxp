@@ -1,7 +1,5 @@
 // pages/index/index.js
-import {
-  Base
-} from "../../utils/request/base.js";
+import { Base } from "../../utils/request/base.js";
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk = new QQMapWX({
   key: 'GTMBZ-PJLCW-2QDRH-RMAHZ-DRPT2-VMFS6' // 必填
@@ -37,7 +35,7 @@ Page({
     that.lunbo() //轮播图
     that.notice() //公告
     that.yhqList() //优惠券列表
-    that.city(); //获取所在城市名
+    that.getPic()//获取分享店铺
     that.fans() //头部粉丝数
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
@@ -45,7 +43,7 @@ Page({
       today: today,
       qhdzid: options.zdtid
     })
-    if(that.data.qhdzid){
+    if (that.data.qhdzid) {
       that.change()
     }
     // 获取设备高度
@@ -61,7 +59,7 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-
+  
   },
 
   /**
@@ -70,12 +68,15 @@ Page({
   onReady: function () {
 
   },
+  
+ 
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     var that = this;
+    that.city(); //获取所在城市名
     wx.getSetting({
       success: (res) => {
 
@@ -182,14 +183,37 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that=this;
     var zdtid = wx.getStorageSync('zdtid')
+  
     console.log(zdtid)
     return {
-      title: '天天每一天',
+      title: that.data.shopShareTitle,
+      imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
       // desc: '分享页面的内容',
       path: '/pages/index/index?zdtid=' + zdtid // 路径，传递参数到指定页面。
     }
   },
+  // 获取分享图片
+getPic(){
+  var that = this;
+  var params = {
+    url: '/app/findHeadInfoProperty',
+    method: 'GET',
+    data: {
+      
+    },
+    sCallBack: function (data) {
+      that.setData({
+        shopShareTitle:data.data.result.shopShareTitle,
+        shopSharePhoto:data.data.result.shopSharePhoto
+      })
+
+    },
+    eCallBack: function () {}
+  }
+  base.request(params);
+},
   // 搜索
   search: function (e) {
     var that = this;

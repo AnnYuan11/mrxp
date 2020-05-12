@@ -1,0 +1,14 @@
+/* pages/details/message/message.wxss */
+.list_box{
+  width: 100%;
+  background: #fff;
+  padding: 32rpx;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+.time{
+  text-align: right;
+}
+.title{
+  margin-top: 20rpx;
+}

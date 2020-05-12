@@ -4,9 +4,10 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -24,7 +25,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
-	"appid": "wx806b47b81b69c8bd",
+	"appid": "wx874be472f0a6147b",
 	"projectname": "mrxp",
 	"debugOptions": {
 		"hidedInDevtools": []

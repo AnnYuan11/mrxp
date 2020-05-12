@@ -4,9 +4,9 @@
 	<view class="title">天天每一天社区团购</view>
 	<view class="weather">
 		<image src="/img/new/title.png" mode="widthFix" style="width:300rpx"></image>
-		<view class="date">
+		<view class="date" wx:if="{{weather.icon}}">
 			<text style="margin-right:20rpx">{{today}}</text>
-			<image wx:if="{{weather.icon}}" src="/img/weather/w{{weather.icon}}.png" mode="widthFix" style="width:36rpx;"></image>
+			<image src="/img/weather/W{{weather.icon}}.png" mode="widthFix" style="width:36rpx;"></image>
 			<text>{{weather.temperature}}℃</text>
 		</view>
 	</view>
@@ -36,10 +36,12 @@
 				<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
 				<input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
 			</view>
-			<view class="search_right">
-				<image src="/img/new/0.png" mode="widthFix"></image>
-				<text>消息通知</text>
-			</view>
+			<navigator hover-class="none" url="/pages/details/message/message">
+				<view class="search_right">
+					<image src="/img/new/0.png" mode="widthFix"></image>
+					<text>消息通知</text>
+				</view>
+			</navigator>
 		</view>
 		<!-- 轮播 -->
 		<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:350rpx">
@@ -49,6 +51,7 @@
 				</swiper-item>
 			</block>
 		</swiper>
+	
 		<!-- 广播 -->
 		<!-- <view class='notice'>
 			<image style='width:62rpx;height:62rpx;' src="{{imgUrl}}img/details/lb.png"></image>

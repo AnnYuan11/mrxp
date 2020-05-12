@@ -2,7 +2,7 @@
 .title{
   width: 100%;
   background: #fff;
-  padding: 34rpx;
+  padding: 0 30rpx 34rpx 30rpx;
   box-sizing: border-box;
  
 }
@@ -47,6 +47,7 @@
 .box{
   width: 90%;
   margin: 0 auto;
+  margin-top: -20rpx;
 }
 .list{
   width: 100%;
@@ -108,7 +109,7 @@
   padding: 16rpx 32rpx;
   box-sizing: border-box;
   display: flex;
-  margin: 50rpx auto;
+  margin: 20rpx auto;
   
 }
 .search_Box image{

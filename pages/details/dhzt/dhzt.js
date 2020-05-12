@@ -321,7 +321,11 @@ change(e){
           },
           sCallBack: function (data) {
             that.query()
-            
+            setTimeout(function () {
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+            }, 1000);
           },
           eCallBack: function () {
           }

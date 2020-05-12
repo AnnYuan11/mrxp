@@ -130,13 +130,16 @@ Page({
   // 添加商品
   orderMessage(){
     var that = this;
-    if(that.data.mrdz==''){
-      wx.showToast({
-        title: '请选择地址',
-        icon:'none',
-      })
-      return
+    if(that.data.options.sendType=="快递到家"){
+      if(that.data.mrdz==''){
+        wx.showToast({
+          title: '请选择地址',
+          icon:'none',
+        })
+        return
+      }
     }
+   
     var userId=wx.getStorageSync('userId')
     var ddid=that.data.ddid;
     var sendType
@@ -220,13 +223,15 @@ Page({
   // 订单金额查询
   orderMoney(){
     var that = this;
-    if(that.data.mrdz==''){
-      wx.showToast({
-        title: '请选择地址',
-        icon:'none',
-      })
-      return
-    }
+    // if(that.data.options.sendType=="快递到家"){
+    //   if(that.data.mrdz==''){
+    //     wx.showToast({
+    //       title: '请选择地址',
+    //       icon:'none',
+    //     })
+    //     return
+    //   }
+    // }
     var userId=wx.getStorageSync('userId')
     var ddid=that.data.ddid;
     console.log(ddid)

@@ -3,7 +3,7 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="sqr">
     <text>提现金额</text>
-    <input placeholder="提现金额不低于100元" class="input" name="txjt"></input>
+    <input placeholder="请输入提现金额" class="input" name="txjt"></input>
   </view>
   <view class="sqr">
     <text>绑定微信</text>
@@ -12,6 +12,7 @@
       	<open-data type="userNickName"></open-data>
     </view>
   </view>
+  
   <view class="sqr">
     <text>绑定手机</text>
     <view class="input">{{phone}}</view>

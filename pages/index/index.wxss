@@ -64,7 +64,7 @@
   background: red;
   justify-content: space-between;
   border-radius: 50rpx;
-  padding: 0 20rpx;
+  padding: 4rpx 20rpx;
   box-sizing: border-box;
   margin-left: 40rpx;
 }
@@ -189,7 +189,7 @@ swiper image{
 .swiper-tab-list {
   font-size: 32rpx;
   display: inline-block;
-  width: 33.33%;
+  width: 50%;
   color: #9b9b9b;
   text-align: center;
 }
@@ -311,23 +311,26 @@ swiper image{
   height:50rpx;
   line-height: 50rpx;
   font-size:24rpx;
-  color:#F66527;
+  color:#000;
   text-align: center;
   margin-bottom: 10rpx;
 }
 
-/* .thsj .right{
-  line-height: 50rpx;
-} */
+.thsj .left text.rq{
+  color: green;
+}
 .thsj .right text{
-  font-size:24rpx;
+  font-size:30rpx;
+  font-weight: 600;
   color:rgba(35,35,35,1);
 }
 .thsj .right text.num{
-  color: #FF6A6C;
+  color: green;
+  font-size: 32rpx;
+  font-weight: 600;
 }
 .thsj .right .limited{
-  color: #FF6A6C;
+  color: green;
   display: block;
 }
 .price_box{
@@ -478,7 +481,8 @@ video {
 
 }
 .thsj .fsgz .limited{
-  font-size: 28rpx;
+  font-size: 30rpx;
+  font-weight: 600;
 }
 /* 购买记录 */
 .buy_box{

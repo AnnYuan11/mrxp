@@ -1,6 +1,6 @@
 <!--pages/details/orderDetailsck/ddxx.wxml-->
 <!-- 自提点地址 -->
-<view class="section" wx:if="{{list.headInfo!=''}}">
+<view class="section" wx:if="{{list.headInfo!=''&&list.orderSendType=='到店自提'}}">
 	<view class="list">
 		<i></i>
 		<text>收货人：</text>
@@ -16,7 +16,7 @@
 	</view>
 </view>
 <!-- 配送地址 -->
-<view class="section" wx:if="{{list.userAddressInfo!=''}}">
+<view class="section" wx:if="{{list.userAddressInfo!=''&&list.orderSendType=='配送订单'}}">
 	<view class="list">
 		<i></i>
 		<text>收货人：{{list.userAddressInfo.name}} </text><text class="phone">{{list.userAddressInfo.phone}}</text>
@@ -65,9 +65,9 @@
 		<text>提货方式：</text>
 		<text  class="rig">{{list.orderSendType}}</text>
 	</view>
-	<view class="lis">
+	<view class="lis"  wx:if="{{list.deliverName!=''}}">
 		<text>物流单号：</text>
-		<text  class="rig" wx:if="{{list.deliverNam!=''}}">{{list.deliverNam}}{{list.deliverNumber}}</text>
+		<text  class="rig">{{list.deliverName}}{{list.deliverNumber}}</text>
 	</view>
 </view>
 <!-- 第四部分 -->

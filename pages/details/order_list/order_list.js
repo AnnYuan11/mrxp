@@ -221,7 +221,7 @@ Page({
           } else if (item.orderStatus == '6') {
             item.orderStatus = '已完成'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.Alllist; //原始的数据集合
@@ -287,7 +287,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.dfklist; //原始的数据集合
@@ -353,7 +353,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.bhzlist; //原始的数据集合
@@ -419,7 +419,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.phzlist; //原始的数据集合
@@ -485,7 +485,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.dthlist; //原始的数据集合
@@ -551,7 +551,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.ythlist; //原始的数据集合
@@ -829,7 +829,7 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
-          item.orderTime = item.orderTime.substring(0, 10)
+          // item.orderTime = item.orderTime.substring(0, 10)
         })
 
         var temlist = that.data.ythlist; //原始的数据集合

@@ -127,27 +127,42 @@ Page({
       this.getZhen();
     }
   },
-  getSiteData: function () {
+  getSiteData: function() {
     var that = this;
-    wx.request({
-      url: 'http://139.155.113.100:8585/upload/city.json',
-      success: res => {
-        var chinaData = res.data;
-        var qxz={'name':"请选择",'children':[{'name':'','children':[{'name':'','children':[{'name':''}]}]}]}
-        chinaData.unshift(qxz)
-        console.log(chinaData)
-        this.data.chinaData = chinaData;
-        var sheng = []; //  设置省数组
-        for(var i = 0; i < chinaData.length; i++) {
-          sheng.push(chinaData[i].name);
+    if(wx.getStorageSync("chinaData")){
+      var chinaData = wx.getStorageSync("chinaData");
+      that.initData(chinaData);
+    }else{
+      wx.request({
+        url: 'https://www.zgmrxp.com/city.json',
+        success: res=> {
+          console.log(res);
+          var chinaData = res.data;
+          wx.setStorage({
+            key: "chinaData",
+            data: res.data
+          });
+          that.initData(chinaData);
         }
-        this.setData({
-          "multiArray[0]": sheng
-        })
-        console.log(that.data.multiArray[0][0])
-        that.getCity(); // 得到市
-      }
-    })
+      })
+    }
+  
+  },
+  initData: function(chinaData){
+    var that=this;
+    var qxz={'name':"请选择",'children':[{'name':'','children':[{'name':'','children':[{'name':''}]}]}]}
+          chinaData.unshift(qxz)
+          console.log(chinaData)
+          this.data.chinaData = chinaData;
+          var sheng = []; //  设置省数组
+          for(var i = 0; i < chinaData.length; i++) {
+            sheng.push(chinaData[i].name);
+          }
+          this.setData({
+            "multiArray[0]": sheng
+          })
+          console.log(that.data.multiArray[0][0])
+          that.getCity(); // 得到市
   },
   getCity: function () { //  得到市
     var shengNum = this.data.multiIndex[0];

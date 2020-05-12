@@ -25,14 +25,14 @@ Page({
    
     // debugger
     if(url=='pages/details/order_list/order_list'){
-      console.log(1111)
+      
       that.setData({
         name:prevPage.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.commodityName,
         money:prevPage.data.message.needMoney,
         message:prevPage.data.message,
       })
     }else{
-      console.log(222)
+     
       that.setData({
         name:prevPage.options.ddname,
         message:prevPage.data.message,
@@ -54,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -99,14 +99,39 @@ radioChange: function (e) {
     payTypes:e.detail.value
   })
 },
+
+//授权
+subTap: function() {
+  let that = this;
+  wx.requestSubscribeMessage({
+    tmplIds: ['bGUjPW83BRA1EURp3HZSN8c6iqW2oW79gxJYde6PTtk','8GrE3m5Osels_WYTv4LTH-GCMQayU-WqPBEmIDXA62w','4t172N9EaSaLlbmRvUzR5OWgJusC_FZrHKzHFV_Sk-I'],
+    success(res) {
+      if(that.data.payTypes=='2'){
+        that.pay()
+      }else{
+        that.payYe(that.data.message.orderNumber)
+      }
+    },
+    fail(res) {
+      if(that.data.payTypes=='2'){
+        that.pay()
+      }else{
+        that.payYe(that.data.message.orderNumber)
+      }
+    }
+  })
+},
+
+
 // 去付款
 Recharge(){
   var that=this;
-  if(that.data.payTypes=='2'){
-    that.pay()
-  }else{
-    that.payYe(that.data.message.orderNumber)
-  }
+  that.subTap()
+  // if(that.data.payTypes=='2'){
+  //   that.pay()
+  // }else{
+  //   that.payYe(that.data.message.orderNumber)
+  // }
 },
  //微信支付
  pay(){
@@ -127,7 +152,7 @@ Recharge(){
     sCallBack: function (data) {
       console.log(data)  
       wx.requestPayment({
-        appId: 'wx806b47b81b69c8bd',
+        appId: 'wx874be472f0a6147b',
         timeStamp: data.data.result['timeStamp'],
         nonceStr: data.data.result['nonceStr'],
         package: data.data.result['packageValue'],
@@ -164,30 +189,33 @@ delItem(id) {
   var idslist=wx.getStorageSync('productInfo')
  
   var ids=[];
-  console.log(idslist)
-  idslist.productList.forEach(item => {
-    ids.push(item.ids)
-  });
-  console.log(ids)
-  let that = this
-  var params = {
-    url: '/app/commodity/deleteShoppingCartInfo',
-    method: 'POST',
-    data: {
-      'ids': ids,
-    },
-    sCallBack: function (data) {
-      if (data.data.errorCode == 0) {
-        
-        app.getShopNum()
-      } else {
-        
+  if(idslist){
+    console.log(idslist)
+    idslist.productList.forEach(item => {
+      ids.push(item.ids)
+    });
+    console.log(ids)
+    let that = this
+    var params = {
+      url: '/app/commodity/deleteShoppingCartInfo',
+      method: 'POST',
+      data: {
+        'ids': ids,
+      },
+      sCallBack: function (data) {
+        if (data.data.errorCode == 0) {
+          
+          app.getShopNum()
+        } else {
+          
+        }
+      },
+      eCallBack: function () {
       }
-    },
-    eCallBack: function () {
     }
+    base.request(params);
   }
-  base.request(params);
+ 
 },
 // 余额支付
 payYe(orderNumber){
