@@ -30,6 +30,7 @@ Page({
     that.setData({
       currentTab: options.currentTab
     })
+    
     /**
      * 获取当前设备的宽高
      */
@@ -486,6 +487,7 @@ Page({
             item.orderStatus = '已提货'
           }
           // item.orderTime = item.orderTime.substring(0, 10)
+        
         })
 
         var temlist = that.data.dthlist; //原始的数据集合
@@ -505,7 +507,7 @@ Page({
         })
         console.log(that.data.pagecount)
 
-
+       
 
       },
       eCallBack: function () {}
@@ -863,5 +865,7 @@ Page({
       icon: 'none',
       dduration: 3000
     })
-  }
+  },
+  
+
 })

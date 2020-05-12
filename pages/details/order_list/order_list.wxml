@@ -58,6 +58,7 @@
 								<view class="sub buy" catchtap="sqsh">申请售后</view>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待提货'}}">
+							
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
 							</view>
 						</view>
@@ -239,6 +240,7 @@
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
 							<view class="button" style="width:30%">
+							
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
 							</view>
 						</view>
