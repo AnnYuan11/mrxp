@@ -284,12 +284,12 @@ Page({
       data: JSON.stringify(arg),
       sCallBack: function (data) {
         console.log(data)
-        if(data.data.result.fullReductionInfo.fullMoney==''){
-          data.data.result.fullReductionInfo.fullMoney=0
+        if(data.data.result.fullMoney==''){
+          data.data.result.fullMoney=0
         }
         that.setData({
           money:data.data.result,
-          yhje:data.data.result.fullReductionInfo.fullMoney
+          yhje:data.data.result.fullMoney
         })
         
       },

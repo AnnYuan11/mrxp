@@ -122,4 +122,5 @@
 }
 .search_Box input{
   margin-left: 20rpx;
+  width: 80%;
 }

@@ -194,13 +194,15 @@ locations: function () {
     var className=e.detail.value
     this.setData({
       className:className,
-     currentPage:1
+      currentPage:1
     })
   },
 //  搜索
 search(e){
   console.log(e)
   var that=this;
+  var myLat = wx.getStorageSync('latitude');
+  var myLng = wx.getStorageSync('longitude');
   var className=that.data.className
   var params = {
     url: '/app/head/listHeadInfo',
@@ -208,7 +210,9 @@ search(e){
     data: {
       'pageIndex':that.data.currentPage,
       'pageSize':that.data.size,
-      'searchName':className
+      'searchName':className,
+        myLat:myLat,
+        myLng:myLng,
     },
     sCallBack: function (data) {
       var yhqlist=data.data.result.datas;    

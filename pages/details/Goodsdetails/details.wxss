@@ -9,10 +9,10 @@
   height: 750rpx;
 }
 .goods_introduce{
-  width:90%;
+  width: 95%;
   margin: 0 auto;
   position: relative;
-  margin-top: -28%
+  margin-top: -17%;  
 }
 .goods_introduce image{
   width: 100%;
@@ -293,6 +293,7 @@ i{
 }
 .item text{
   display: block;
+  font-size: 30rpx;
 }
 .qx{
   text-align: center;

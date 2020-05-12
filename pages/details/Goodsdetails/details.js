@@ -15,7 +15,7 @@ Page({
     currentTab: 0,
     indicatorDots: false,
     vertical: false,
-    autoplay: false,
+    autoplay: true,
     duration: 500,
     ishow:false,
     maskHidden: false,

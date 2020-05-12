@@ -1,7 +1,7 @@
 <!--pages/details/Goodsdetails/details.wxml-->
 <import src="../../../utils/wxParse/wxParse.wxml" />
 <view class="img_goods">
-	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:750rpx">
+	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height:750rpx" circular='true'>
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
 				<image src="{{imgUrl}}{{item}}"></image>
@@ -142,11 +142,11 @@
 		<button open-type="share"	>
 			<view class="item">
 				<image	src="{{imgUrl}}img/details/dd3.png"></image>
-				<text>微信好友</text>
+				<text style="margin-top:10rpx">微信好友</text>
 			</view>
 			</button>
 			<view class="item" catchtap="handleClickItem1">
-				<image	src="{{imgUrl}}img/details/dd3.png"></image>
+				<image	src="/img/new/hb.png" style="width:90rpx;height:90rpx"></image>
 				<text>生成海报</text>
 			</view>
 		</view>
