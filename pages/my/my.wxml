@@ -166,7 +166,7 @@
 		</view>
 	</view>
 </navigator>
-<navigator url="/pages/details/sjrz/sjrz" hover-class="none">
+<!-- <navigator url="/pages/details/sjrz/sjrz" hover-class="none">
 	<view class="wd">
 		<view class="my_order">
 			<image src="{{imgUrl}}img/my/b2.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
@@ -176,7 +176,7 @@
 			<image src="{{imgUrl}}img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
 		</view>
 	</view>
-</navigator>
+</navigator> -->
 	<!-- <view class="wd">
 		<view class="my_order">
 			<image src="{{imgUrl}}img/my/b3.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>

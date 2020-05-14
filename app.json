@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/dizhi/dizhi",
     "pages/details/topay/topay",
     "pages/details/tzsq/tzsq",
     "pages/details/selectAddress/selectAddress",
-    "pages/dizhi/dizhi",
     "pages/details/message/message",
     "pages/details/txjl/txjl",
     "pages/details/order_details/order_details",

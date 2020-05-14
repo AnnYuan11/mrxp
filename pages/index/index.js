@@ -171,11 +171,11 @@ Page({
    */
   onReachBottom: function () {
     var that = this
-    if (that.data.currentTab == '0') {
-      that.bindscrolltolower()
-    } else {
-      that.bindscrolltolower2()
-    }
+    // if (that.data.currentTab == '0') {
+    //   that.bindscrolltolower()
+    // } else {
+    //   that.bindscrolltolower2()
+    // }
 
   },
 
@@ -691,8 +691,14 @@ getPic(){
   },
   // 今日售卖下拉加载
   bindscrolltolower: function () {
+    var that=this
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
+      if (that.data.currentTab == '0') {
+        this.shopList();
+      } else {
+        this.shopListM();
+      }
       this.shopList();
     } else {
       //没有更多数据
@@ -700,15 +706,15 @@ getPic(){
     }
   },
   // 明日售卖下拉加载
-  bindscrolltolower2: function () {
-    if (this.data.currentPage < this.data.pagecount) {
-      this.data.currentPage++;
-      this.shopListM();
-    } else {
-      //没有更多数据
-      app.nomore_showToast();
-    }
-  },
+  // bindscrolltolower2: function () {
+  //   if (this.data.currentPage < this.data.pagecount) {
+  //     this.data.currentPage++;
+  //     this.shopListM();
+  //   } else {
+  //     //没有更多数据
+  //     app.nomore_showToast();
+  //   }
+  // },
   // 优惠券列表
   yhqList() {
     var that = this;

@@ -12,6 +12,7 @@
 
 </scroll-view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 40}}px" bindchange="bindChange">
+
 	<!-- 全部订单 -->
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="Allqbdd">
@@ -57,8 +58,9 @@
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
 								<view class="sub buy" catchtap="sqsh">申请售后</view>
 							</view>
-							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='待提货'}}">
 							
+							<view class="button" style="width:60%" wx:if="{{item.orderStatus=='待提货'}}">
+								<view class="sub buy" wx:if="{{item.orderStatus=='待提货'}}">{{item.updateOrderTime4}}</view>
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
 							</view>
 						</view>
@@ -205,6 +207,7 @@
 	</swiper-item>
 	<!-- 待提货 -->
 	<swiper-item>
+
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="dthmore">
 			<block wx:for="{{dthlist}}" catchtap="Todetails" data-id="{{item.id}}">
 				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
@@ -239,8 +242,8 @@
 								<text> 合计：</text>
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
-							<view class="button" style="width:30%">
-							
+							<view class="button" style="width:60%">
+								<view class="sub buy" wx:if="{{item.updateOrderTime4}}">{{item.updateOrderTime4}}</view>
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
 							</view>
 						</view>

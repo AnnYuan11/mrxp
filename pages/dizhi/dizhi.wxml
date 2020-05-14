@@ -1,4 +1,51 @@
 <!--pages/dizhi/dizhi.wxml-->
-<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" 
-value="{{citiesIndex}}" range="{{cityArray}}" range-key="name">qqq
-  </picker>
+<!-- <view class='tui-countdown-content' wx:for="{{countDownList}}" wx:key="countDownList">
+	剩余
+	<text class='tui-conutdown-box'>{{item.day}}</text>天
+	<text class='tui-conutdown-box'>{{item.hou}}</text>时
+	<text class='tui-conutdown-box'>{{item.min}}</text>分
+	<text class='tui-conutdown-box tui-countdown-bg'>{{item.sec}}</text>秒
+</view> -->
+<block wx:for="{{dthlist}}" catchtap="Todetails" data-id="{{item.id}}">
+	<view class="box" catchtap="Todetails" data-id="{{item.id}}">
+		<view class="section">
+			<view class="order_num">
+				<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
+				<text class="orderdz" wx:else>地址 :{{item.userAddressInfo.province}}{{item.userAddressInfo.city}}{{item.userAddressInfo.area}}{{item.userAddressInfo.street}}{{item.userAddressInfo.address}}</text>
+				<text class="state">{{item.orderStatus}}</text>
+			</view>
+			<view class="order-box">
+				<block wx:for="{{item.commoditySubOrderInfoList}}" wx:for-item="dditem">
+					<view class="order">
+						<view class="img">
+							<image src="{{imgUrl}}{{dditem.commodityInfo.productInfo.photo}}"></image>
+						</view>
+						<view class="mess">
+							<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
+							<view class="price">
+								<text class="jg">￥{{dditem.commodityInfo.price}}</text>
+								<text class="num">×{{dditem.commodityNumber}}</text>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+			<view class="order_num">
+				<text>订单号：{{item.orderNumber}}</text>
+				<text>{{item.orderTime}}</text>
+			</view>
+			<view class="order_num">
+				<view class="combined">
+					<text> 合计：</text>
+					<text class="state">￥{{item.paymentMoney}}</text>
+				</view>
+				<view class="button" style="width:60%">
+          <view class='tui-countdown-content' wx:for="{{countDownList}}" wx:key="countDownList" wx:for-item="items">
+            <view class="sub buy" style="color:red">{{items.day}}天{{items.hou}}时{{items.min}}分{{items.sec}}秒</view>
+          </view>
+					<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>

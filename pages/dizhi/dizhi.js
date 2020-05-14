@@ -1,202 +1,128 @@
 // pages/dizhi/dizhi.js
+import { Base } from "../../utils/request/base.js";
+var base = new Base();
+var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    countDownList: [],
+    actEndTimeList: []
+  },
+  
+  onLoad(){
+   this.dth()
+    // let endTimeList = [];
+    // // 将活动的结束时间参数提成一个单独的数组，方便操作
+    // goodsList.forEach(o => {endTimeList.push(o.actEndTime)})
+    // this.setData({ actEndTimeList: endTimeList});
+    // // 执行倒计时函数
+    // this.countDown();
 
   },
+  timeFormat(param){//小于10的格式化函数
+    return param < 10 ? '0' + param : param; 
+  },
+  countDown(){//倒计时函数
+    // 获取当前时间，同时得到活动结束时间数组
+    let newTime = new Date().getTime();
+    let endTimeList = this.data.actEndTimeList;
+    let countDownArr = [];
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    // 对结束时间进行处理渲染到页面
+    endTimeList.forEach(o => {
+      let endTime = new Date(o).getTime();
+      let obj = null;
+      // 如果活动未结束，对时间进行处理
+      if (endTime - newTime > 0){
+        let time = (endTime - newTime) / 1000;
+        // 获取天、时、分、秒
+        let day = parseInt(time / (60 * 60 * 24));
+        let hou = parseInt(time % (60 * 60 * 24) / 3600);
+        let min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+        let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+        obj = {
+          day: this.timeFormat(day),
+          hou: this.timeFormat(hou),
+          min: this.timeFormat(min),
+          sec: this.timeFormat(sec)
+        }
+      }else{//活动已结束，全部设置为'00'
+        obj = {
+          day: '00',
+          hou: '00',
+          min: '00',
+          sec: '00'
+        }
+      }
+      countDownArr.push(obj);
+    })
+    // 渲染，然后每隔一秒执行一次倒计时函数
+    this.setData({ countDownList: countDownArr})
+    setTimeout(this.countDown,1000);
+  },
+ 
+  dth() {
     var that = this;
-    if(wx.getStorageSync("cityData")){
-      array = wx.getStorageSync("cityData");
-      that.initData();
-    } else {
-      wx.request({
-        url: 'https://www.easy-mock.com/mock/5eb8c507a2293e5119c967c2/city/city',
-        success: res => {
-          array = res.data;
-          wx.setStorageSync("cityData", res.data);
-          that.initData();
-        }
-      });
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex': 1,
+        'pageSize': 10,
+        'userInfo': {
+          'id': id
+        },
+        'orderStatus': 4,
+      },
+      sCallBack: function (data) {
+        let endTimeList = [];
+
+      
+        
+        var dthlist = data.data.result.datas;
+        dthlist.forEach((item,i) => {
+          if (item.orderStatus == '1') {
+            item.orderStatus = '待支付'
+          } else if (item.orderStatus == '2') {
+            item.orderStatus = '备货中'
+          } else if (item.orderStatus == '3') {
+            item.orderStatus = '配送中'
+          } else if (item.orderStatus == '4') {
+            item.orderStatus = '待提货'
+          } else if (item.orderStatus == '5') {
+            item.orderStatus = '已提货'
+          }
+         
+       
+       
+        var dateTime=new Date(item.updateOrderTime4);
+        console.log(dateTime)
+        dateTime=dateTime.setDate(dateTime.getDate()+1);
+        dateTime=new Date(dateTime)
+        item.updateOrderTime4=item.updateOrderTime4.substring(0, 10).replace(item.updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+item.updateOrderTime4.substring(10, 20)
+          // item.difftime = item.updateOrderTime4
+          // endTimeList.push(item.updateOrderTime4)
+          that.setData({ actEndTimeList: dthlist});
+          // 执行倒计时函数
+          that.countDown();
+        })
+
+        var temlist = that.data.dthlist; //原始的数据集合
+        
+        
+        that.setData({
+         
+          dthlist: data.data.result.datas,
+          totalCount: data.data.result.rowCount, //总的数据条数
+          pagecount: data.data.result.totalPages //总页数
+        })
+        console.log(that.data.dthlist)
+
+
+
+      },
+      eCallBack: function () {}
     }
+    base.request(params);
   },
-  initData: function(){
-    let cityArray = [[], [], [], []];  //选择器数据
-
-    for (let i = 0, len = array.length; i < len; i++) {  //存入省
-      cityArray[0].push({
-        name: array[i].name,
-        code: array[i].code
-      });
-    }
-    for (let j = 0, len = array[0].children.length; j < len; j++) {  //存入市，默认关联第一个省
-      cityArray[1].push({
-        name: array[0].children[j].name,
-        code: array[0].children[j].code
-      });
-    }
-    for (let k = 0, len = array[0].children[0].children.length; k < len; k++) {  //存入区，默认关联第一个省的第一个市
-      cityArray[2].push({
-        name: array[0].children[0].children[k].name,
-        code: array[0].children[0].children[k].code
-      });
-    }
-
-    for (let s = 0, len = array[0].children[0].children[0].children.length; s < len; s++) {  //存入街道，默认关联第一个省的第一个市的第一个区
-      cityArray[3].push({
-        name: array[0].children[0].children[0].children[s].name,
-        code: array[0].children[0].children[0].children[s].code
-      });
-    }
-    this.setData({
-      cityArray: cityArray
-    });
-  },
-  bindMultiPickerColumnChange(e){
-    let selectedIndex = e.detail.value;  //滚动到哪一项
-
-    let cityArray = this.data.cityArray;
-    let list1 = []; //存放第二列数据，即市的列
-    let list2 = []; //存放第三列数据，即区的列
-    let list3 = []; //存放第四例数据，即街道的列
-
-    let citiesIndex = [];
-    let provinceIndex = this.data.citiesIndex[0];  //选中的省索引
-    let cityIndex = this.data.citiesIndex[1];  //选中的市索引 
-    let areaIndex = this.data.citiesIndex[2];  //选中的区索引
-
-    switch (e.detail.column) {  //判断滚动的哪一列并做相应的数据处理
-      case 0: //滚动第一列，即省的那一列
-        for(let i = 0,len = array[selectedIndex].children.length;i<len;i++){ //存入省下面的市
-          list1.push({
-            name: array[selectedIndex].children[i].name,
-            code: array[selectedIndex].children[i].code
-          });
-        }
-        for (let j = 0, len = array[selectedIndex].children[0].children.length; j < len; j++) { //存入市下面的区
-          list2.push({
-            name: array[selectedIndex].children[0].children[j].name,
-            code: array[selectedIndex].children[0].children[j].code
-          });
-        }
-        for (let k = 0, len = array[selectedIndex].children[0].children[0].children.length; k < len; k++) {//存入区下面的街道
-          list3.push({
-            name: array[selectedIndex].children[0].children[0].children[k].name,
-            code: array[selectedIndex].children[0].children[0].children[k].code
-          });
-        }
-
-
-        citiesIndex = [selectedIndex, 0, 0, 0];   //记录索引
-        break;
-      case 1:  //滚动第二列，即市的那一列
-        list1 = cityArray[1];  //市那一列数据不需要更新
-
-        for(let i = 0,len = array[provinceIndex].children[selectedIndex].children.length;i<len;i++){//存入市下面的区
-          list2.push({
-            name: array[provinceIndex].children[selectedIndex].children[i].name,
-            code: array[provinceIndex].children[selectedIndex].children[i].code
-          });
-        }
-
-        for (let j = 0, len = array[provinceIndex].children[selectedIndex].children[0].children.length; j < len; j++) {//存入区下面的街道
-          list3.push({
-            name: array[provinceIndex].children[selectedIndex].children[0].children[j].name,
-            code: array[provinceIndex].children[selectedIndex].children[0].children[j].code
-          });
-        }
-        citiesIndex = [provinceIndex, selectedIndex, 0, 0];  //记录索引
-        break;
-      case 2: //滚动第三列，即区的那一列
-        list1 = cityArray[1]; //市和区的数据都需要更新
-        list2 = cityArray[2];
-
-        for (let i = 0, len = array[provinceIndex].children[cityIndex].children[selectedIndex].children.length; i < len; i++) { //存入区下面的街道
-          list3.push({
-            name: array[provinceIndex].children[cityIndex].children[selectedIndex].children[i].name,
-            code: array[provinceIndex].children[cityIndex].children[selectedIndex].children[i].code
-          });
-        }
-    
-        citiesIndex = [provinceIndex, cityIndex, selectedIndex, 0];  //记录索引
-        break;
-      case 3: //滚动第四列，即街道那一列
-        list1 = cityArray[1];
-        list2 = cityArray[2];
-        list3 = cityArray[3];
-
-        citiesIndex = [provinceIndex, cityIndex, areaIndex, selectedIndex];  //记录索引
-        break;
-    }
-    this.setData({
-      [`cityArray[1]`]: list1,//重新赋值第二列数组，即联动了市
-      [`cityArray[2]`]: list2,//重新赋值第三列数组，即联动了区
-      [`cityArray[3]`]: list3,//重新赋值第四列数组，即联动了街道
-      citiesIndex: citiesIndex,//更新索引
-    });
-  },
-  //选择器选择事件
-  bindMultiPickerChange(e){
-    let cityIndex = e.detail.value;
-    //选择的地址拼接
-    let selectedAddress = array[cityIndex[0]].name + array[cityIndex[0]].children[cityIndex[1]].name + array[cityIndex[0]].children[cityIndex[1]].children[cityIndex[2]].name + array[cityIndex[0]].children[cityIndex[1]].children[cityIndex[2]].children[cityIndex[3]].name;
-    //选择的区域编码
-    let areaCode = array[cityIndex[0]].children[cityIndex[1]].children[cityIndex[2]].children[cityIndex[3]].code;
-   
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

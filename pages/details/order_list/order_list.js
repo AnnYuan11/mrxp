@@ -1,7 +1,5 @@
 // pages/details/order_list/order_list.js
-import {
-  Base
-} from "../../../utils/request/base.js";
+import { Base } from "../../../utils/request/base.js";
 var base = new Base();
 var app = getApp();
 Page({
@@ -30,7 +28,8 @@ Page({
     that.setData({
       currentTab: options.currentTab
     })
-    
+   
+
     /**
      * 获取当前设备的宽高
      */
@@ -103,6 +102,7 @@ Page({
           that.data.pagecount = 0, //总的页数
           that.yth() //已提货
       }
+      
     }
 
   },
@@ -208,7 +208,7 @@ Page({
       },
       sCallBack: function (data) {
         var Alllist = data.data.result.datas;
-        Alllist.forEach(item => {
+        Alllist.forEach((item,i) => {
           if (item.orderStatus == '1') {
             item.orderStatus = '待支付'
           } else if (item.orderStatus == '2') {
@@ -222,7 +222,13 @@ Page({
           } else if (item.orderStatus == '6') {
             item.orderStatus = '已完成'
           }
-          // item.orderTime = item.orderTime.substring(0, 10)
+            var dateTime=new Date(item.updateOrderTime4);
+            dateTime=dateTime.setDate(dateTime.getDate()+1);
+            dateTime=new Date(dateTime)
+            item.updateOrderTime4=item.updateOrderTime4.substring(0, 10).replace(item.updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+item.updateOrderTime4.substring(10, 20)
+              that.time2(item.updateOrderTime4,i)
+           
+    
         })
 
         var temlist = that.data.Alllist; //原始的数据集合
@@ -473,8 +479,9 @@ Page({
         'orderStatus': 4,
       },
       sCallBack: function (data) {
+       
         var dthlist = data.data.result.datas;
-        dthlist.forEach(item => {
+        dthlist.forEach((item,i) => {
           if (item.orderStatus == '1') {
             item.orderStatus = '待支付'
           } else if (item.orderStatus == '2') {
@@ -485,9 +492,12 @@ Page({
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
-          }
-          // item.orderTime = item.orderTime.substring(0, 10)
-        
+          }      
+        var dateTime=new Date(item.updateOrderTime4);
+        dateTime=dateTime.setDate(dateTime.getDate()+1);
+        dateTime=new Date(dateTime)
+        item.updateOrderTime4=item.updateOrderTime4.substring(0, 10).replace(item.updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+item.updateOrderTime4.substring(10, 20)
+          that.time(item.updateOrderTime4,i)
         })
 
         var temlist = that.data.dthlist; //原始的数据集合
@@ -505,9 +515,9 @@ Page({
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
-        console.log(that.data.pagecount)
+        console.log(that.data.dthlist)
 
-       
+
 
       },
       eCallBack: function () {}
@@ -761,12 +771,12 @@ Page({
   // 去付款
   Topay(e) {
     console.log(e)
-    var that=this;
+    var that = this;
     var message = e.currentTarget.dataset.item
     that.setData({
-      message:message
+      message: message
     })
-    
+
     // const product = [];
     // for (let i = 0; i < list.length; i++) {
     //   const productItem = {};
@@ -866,6 +876,53 @@ Page({
       dduration: 3000
     })
   },
-  
+
+ 
+ getTimeLeft(datetimeTo){
+    // 计算目标与现在时间差（毫秒）
+    let time = new Date(datetimeTo).getTime();
+    let time2 = new Date().getTime();
+    let mss = time - time2;
+    // 将时间差（毫秒）格式为：天时分秒
+    let days = parseInt(mss / (1000 * 60 * 60 * 24));
+    let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = parseInt((mss % (1000 * 60)) / 1000);
+    
+    return hours + "时" + minutes + "分" + seconds + "秒"
+  },
+   
+ time(aa,param) {
+    this.data.timer = setInterval(() =>{ //注意箭头函数！！
+      var dthlist = this.data.dthlist;
+      dthlist[param].updateOrderTime4 = this.getTimeLeft(aa);
+      this.setData({
+        dthlist: dthlist
+       })
+      // this.setData({
+      //   timeLeft: this.getTimeLeft(aa)//使用了util.getTimeLeft
+      // });
+      if (dthlist[param].updateOrderTime4 == "0时0分0秒") {
+        clearInterval(this.data.timer);
+      }
+    }, 1000);
+  },
+ 
+  time2(aa,param) {
+    this.data.timer = setInterval(() =>{ //注意箭头函数！！
+      var Alllist = this.data.Alllist;
+      Alllist[param].updateOrderTime4 = this.getTimeLeft(aa);
+      this.setData({
+        Alllist: Alllist
+       })
+      // this.setData({
+      //   timeLeft: this.getTimeLeft(aa)//使用了util.getTimeLeft
+      // });
+      if (Alllist[param].updateOrderTime4 == "0时0分0秒") {
+        clearInterval(this.data.timer);
+      }
+    }, 1000);
+  },
+ 
 
 })
