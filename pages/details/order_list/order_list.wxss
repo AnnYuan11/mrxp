@@ -130,7 +130,7 @@
 }
 
 .button {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   width: 65%;
 }
@@ -150,6 +150,7 @@
 .sub.buy {
   background: #E10B09;
   color: #fff;
+  float: right;
 }
 /* 我的提货码 */
 .thm_box{

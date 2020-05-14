@@ -136,6 +136,9 @@ Recharge(){
  //微信支付
  pay(){
   var that = this;
+  wx.showLoading({
+    title: '支付中',
+  })
   var openId=wx.getStorageSync('openId')
   var arg={
     id: that.data.message.id,
@@ -151,6 +154,9 @@ Recharge(){
     data: arg,
     sCallBack: function (data) {
       console.log(data)  
+      wx.hideLoading({
+        complete: (res) => {},
+      })
       wx.requestPayment({
         appId: 'wx874be472f0a6147b',
         timeStamp: data.data.result['timeStamp'],
@@ -220,6 +226,9 @@ delItem(id) {
 // 余额支付
 payYe(orderNumber){
   var that = this;
+  wx.showLoading({
+    title: '支付中',
+  })
   var userId=wx.getStorageSync('userId')
   var arg={
     'userInfo':{
@@ -232,6 +241,9 @@ payYe(orderNumber){
     method: 'POST',
     data: JSON.stringify(arg),
     sCallBack: function (data) {
+      wx.hideLoading({
+        complete: (res) => {},
+      })
       console.log(data)  
       if(data.data.errorCode=='-1'){
         wx.showToast({

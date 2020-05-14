@@ -60,8 +60,9 @@
 							</view>
 							
 							<view class="button" style="width:60%" wx:if="{{item.orderStatus=='待提货'}}">
-								<view class="sub buy" wx:if="{{item.orderStatus=='待提货'}}">{{item.updateOrderTime4}}</view>
+								
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
+								<view class="sub buy" wx:if="{{item.orderStatus=='待提货'&&item.updateOrderTime4!='已结束'}}">{{item.updateOrderTime4}}</view>
 							</view>
 						</view>
 					</view>
@@ -243,8 +244,9 @@
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
 							<view class="button" style="width:60%">
-								<view class="sub buy" wx:if="{{item.updateOrderTime4}}">{{item.updateOrderTime4}}</view>
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
+								<view class="sub buy" wx:if="{{item.updateOrderTime4!='已结束'}}">{{item.updateOrderTime4}}</view>
+								
 							</view>
 						</view>
 					</view>

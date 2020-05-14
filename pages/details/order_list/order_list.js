@@ -2,6 +2,70 @@
 import { Base } from "../../../utils/request/base.js";
 var base = new Base();
 var app = getApp();
+
+function grouponcountdown(that, end_time, param) {
+  var EndTime = new Date(end_time).getTime();
+  var NowTime = new Date().getTime();
+
+  var total_micro_second = EndTime - NowTime;
+
+  var groupons = that.data.dthlist;
+  groupons[param].updateOrderTime4 = dateformat(total_micro_second);
+  if (total_micro_second <= 0) {
+      groupons[param].updateOrderTime4 = "已结束"
+  }
+  that.setData({
+    dthlist: groupons
+  })
+  setTimeout(function () {
+      grouponcountdown(that, end_time, param);
+  }, 1000)
+}
+function grouponcountdown2(that, end_time, param) {
+  var EndTime = new Date(end_time).getTime();
+  var NowTime = new Date().getTime();
+
+  var total_micro_second = EndTime - NowTime;
+
+  var groupons = that.data.Alllist;
+  groupons[param].updateOrderTime4 = dateformat(total_micro_second);
+  if (total_micro_second <= 0) {
+      groupons[param].updateOrderTime4 = "已结束"
+  }
+  that.setData({
+    Alllist: groupons
+  })
+  setTimeout(function () {
+    grouponcountdown2(that, end_time, param);
+  }, 1000)
+}
+// 时间格式化输出，每1s都会调用一次
+function dateformat(micro_second) {
+  // 总秒数
+  var second = Math.floor(micro_second / 1000);
+  // 天数
+  var day = Math.floor(second / 3600 / 24);
+  // 小时
+  var hr = Math.floor(second / 3600 % 24);
+  var hrStr = hr.toString();
+  if (hrStr.length == 1) hrStr = '0' + hrStr;
+
+  // 分钟
+  var min = Math.floor(second / 60 % 60);
+  var minStr = min.toString();
+  if (minStr.length == 1) minStr = '0' + minStr;
+
+  // 秒
+  var sec = Math.floor(second % 60);
+  var secStr = sec.toString();
+  if (secStr.length == 1) secStr = '0' + secStr;
+
+  if (day <= 1) {
+      return  hrStr + ":" + minStr + ":" + secStr;
+  } else {
+      return  + day + " 天 " + hrStr + ":" + minStr + ":" + secStr;
+  }
+}
 Page({
 
   /**
@@ -17,6 +81,7 @@ Page({
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
+    djs:true
   },
 
   /**
@@ -96,15 +161,20 @@ Page({
           that.data.totalCount = 0, //总是数据条数
           that.data.pagecount = 0, //总的页数
           that.dth() //待提货
+        
       } else if (that.data.currentTab == '5') {
         that.data.currentPage = 1,
           that.data.totalCount = 0, //总是数据条数
           that.data.pagecount = 0, //总的页数
           that.yth() //已提货
+      }else if (that.data.currentTab == '0'){
+        that.data.currentPage = 1,
+          that.data.totalCount = 0, //总是数据条数
+          that.data.pagecount = 0, //总的页数
+          that.Allorder()
+        
       }
-      
     }
-
   },
 
   /**
@@ -118,7 +188,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   
   },
 
   /**
@@ -221,12 +291,7 @@ Page({
             item.orderStatus = '已提货'
           } else if (item.orderStatus == '6') {
             item.orderStatus = '已完成'
-          }
-            var dateTime=new Date(item.updateOrderTime4);
-            dateTime=dateTime.setDate(dateTime.getDate()+1);
-            dateTime=new Date(dateTime)
-            item.updateOrderTime4=item.updateOrderTime4.substring(0, 10).replace(item.updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+item.updateOrderTime4.substring(10, 20)
-              that.time2(item.updateOrderTime4,i)
+          } 
            
     
         })
@@ -246,6 +311,15 @@ Page({
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
+        var data = that.data.Alllist
+        for (var i = 0; i < data.length; i++) {
+          var dateTime=new Date(data[i].updateOrderTime4);
+            dateTime=dateTime.setDate(dateTime.getDate()+1);
+            dateTime=new Date(dateTime)
+            data[i].updateOrderTime4=data[i].updateOrderTime4.substring(0, 10).replace(data[i].updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+data[i].updateOrderTime4.substring(10, 20)
+            var end_time = data[i].updateOrderTime4.replace(/-/g, '/')
+            grouponcountdown2(that,end_time, i)
+        }
         console.log(that.data.pagecount)
 
 
@@ -493,11 +567,6 @@ Page({
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }      
-        var dateTime=new Date(item.updateOrderTime4);
-        dateTime=dateTime.setDate(dateTime.getDate()+1);
-        dateTime=new Date(dateTime)
-        item.updateOrderTime4=item.updateOrderTime4.substring(0, 10).replace(item.updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+item.updateOrderTime4.substring(10, 20)
-          that.time(item.updateOrderTime4,i)
         })
 
         var temlist = that.data.dthlist; //原始的数据集合
@@ -515,6 +584,15 @@ Page({
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
+        var data = that.data.dthlist
+        for (var i = 0; i < data.length; i++) {
+          var dateTime=new Date(data[i].updateOrderTime4);
+            dateTime=dateTime.setDate(dateTime.getDate()+1);
+            dateTime=new Date(dateTime)
+            data[i].updateOrderTime4=data[i].updateOrderTime4.substring(0, 10).replace(data[i].updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+data[i].updateOrderTime4.substring(10, 20)
+            var end_time = data[i].updateOrderTime4.replace(/-/g, '/')
+            grouponcountdown(that,end_time, i)
+        }
         console.log(that.data.dthlist)
 
 
@@ -878,51 +956,7 @@ Page({
   },
 
  
- getTimeLeft(datetimeTo){
-    // 计算目标与现在时间差（毫秒）
-    let time = new Date(datetimeTo).getTime();
-    let time2 = new Date().getTime();
-    let mss = time - time2;
-    // 将时间差（毫秒）格式为：天时分秒
-    let days = parseInt(mss / (1000 * 60 * 60 * 24));
-    let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = parseInt((mss % (1000 * 60)) / 1000);
-    
-    return hours + "时" + minutes + "分" + seconds + "秒"
-  },
-   
- time(aa,param) {
-    this.data.timer = setInterval(() =>{ //注意箭头函数！！
-      var dthlist = this.data.dthlist;
-      dthlist[param].updateOrderTime4 = this.getTimeLeft(aa);
-      this.setData({
-        dthlist: dthlist
-       })
-      // this.setData({
-      //   timeLeft: this.getTimeLeft(aa)//使用了util.getTimeLeft
-      // });
-      if (dthlist[param].updateOrderTime4 == "0时0分0秒") {
-        clearInterval(this.data.timer);
-      }
-    }, 1000);
-  },
  
-  time2(aa,param) {
-    this.data.timer = setInterval(() =>{ //注意箭头函数！！
-      var Alllist = this.data.Alllist;
-      Alllist[param].updateOrderTime4 = this.getTimeLeft(aa);
-      this.setData({
-        Alllist: Alllist
-       })
-      // this.setData({
-      //   timeLeft: this.getTimeLeft(aa)//使用了util.getTimeLeft
-      // });
-      if (Alllist[param].updateOrderTime4 == "0时0分0秒") {
-        clearInterval(this.data.timer);
-      }
-    }, 1000);
-  },
- 
+
 
 })

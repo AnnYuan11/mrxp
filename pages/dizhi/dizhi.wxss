@@ -1,24 +1,138 @@
 /* pages/dizhi/dizhi.wxss */
-page{background-color: #eee;}
-.tui-countdown-content{
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  background-color: #fff;
-  margin-top: 15px;
-  padding: 0 15px;
-  font-size: 18px;
+.hbMpBox{
+  padding: 20rpx;
+  background: #fff;
+  display: flex;
+  border-bottom: 2rpx #eee solid;
 }
-.tui-conutdown-box{
-  display: inline-block;
-  height: 26px;
-  width: 26px;
-  line-height: 26px;
-  text-align: center;
-  background-color: #000;
+.hbMpBox .hbMpBox_l{
+  width: 155rpx;
+  height: 140rpx;
+  min-width: 155rpx;
+
+}
+.hbMpBox .hbMpBox_l image{
+  width: 100%;
+  height: 100%;
+}
+.hbMpBox .hbMpBox_r{
+  width: 540rpx;
+  margin-left: 20rpx;
+  color: #333;
+  font-size: 22rpx;
+  position: relative;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_bb{
+  display: flex;
+  position: relative;
+  margin-top: 10rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2{
+  position: relative;
+  max-width: 270rpx;
+}
+.hbMpBox .hbMpBox_r  .hbMpBox_r_hh{
+  font-size: 28rpx;
+  max-width: 270rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2 .hbMpBox_r_l2_h{
+  font-size: 40rpx;
+
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2 .hbMpBox_r_l2_des{
+  width: 100%;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+  color: #a8a8a8;
+  line-height: 35rpx;
+  height: 70rpx;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2; /** 显示的行数 **/
+  overflow: hidden;  /** 隐藏超出的内容 **/
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2 .hbMpBox_r_l2_text{
+  font-weight: 600;
+  color: #d13d4b;
+  margin-top: 10rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_head{
+  font-size: 28rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_des{
+  margin-top: 4rpx;
+  color: #999;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2_Time{
+  font-size: 20rpx;
+  color: #bdbdbd;
+  word-spacing: 5rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_l2_Time .fontTime{
+  font-weight: 900;
+  font-size: 26rpx;
+  color: #7c7d7f;
+}
+.hbMpBox_r .hbMpBox_r_r2{
+  min-width: 210rpx;
+  max-width: 48%;
+  border: 2rpx #d13d4b solid;
+  border-radius: 10rpx;
+  max-height: 110rpx;
+  position: absolute;
+  right: 0rpx;
+  height: 100%;
+
+}
+.hbMpBox_r .hbMpBox_r_r2 .hbMpBox_r_r2_in{
+  height: 54rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rpx 10rpx;
+  line-height: 54rpx;
+}
+.hbMpBox_r .hbMpBox_r_r2 .hbMpBox_r_r2_in1{
+  background: #d13d4b;
   color: #fff;
-  margin: 0 5px;
 }
-.tui-countdown-bg{
-  background-color: #DF0101;
+.hbMpBox_r .hbMpBox_r_r2 .hbMpBox_r_r2_in2{
+  color: #d13d4b;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_time{
+  margin-top: 15rpx;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.syTime_time{
+  padding: 3rpx 6rpx;
+  background: #444;
+  text-align: center;
+  color: #fff;
+  border-radius: 5rpx;
+  margin: 0rpx 5rpx;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_price{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hbMpBox .hbMpBox_r .hbMpBox_r_price .hbMpBox_r_price_r{
+  background: #d13d4b;
+  color: #fff;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 5rpx;
+}
+.indexMptxBox{
+  padding: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
 }

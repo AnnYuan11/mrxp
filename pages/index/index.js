@@ -13,7 +13,7 @@ Page({
   data: {
     indicatorDots: true,
     vertical: false,
-    autoplay: false,
+    autoplay: true,
     duration: 500,
     currentTab: 0,
     // show:true,//弹窗

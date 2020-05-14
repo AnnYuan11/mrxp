@@ -19,6 +19,7 @@ Page({
     duration: 500,
     ishow:false,
     maskHidden: false,
+    interval:3000
   },
 
   /**
