@@ -1,7 +1,21 @@
 <!--pages/details/ghszz/ghszz.wxml-->
 <view class="imgbox">
-<block wx:for="{{img}}">
-    <image src="{{imgUrl}}{{item}}" ></image>
-</block>
-   
+	<view class="cnfw">服务承诺</view>
+	<view class="box">
+
+		<block wx:for="{{list}}">
+			<view class="list-box">
+				<view class="left">
+					<image src="{{imgUrl}}{{item.photo}}" mode="widthFix"></image>
+				</view>
+				<view class="right">
+					<view class="title">{{item.name}}</view>
+					<view class="con">{{item.content}}</view>
+				</view>
+			</view>
+		</block>
+
+	</view>
+
+
 </view>

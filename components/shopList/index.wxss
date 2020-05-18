@@ -52,8 +52,8 @@
   position: absolute;
   left: 0rpx;
   top: 70rpx;
-  width: 40rpx;
-  height: 40rpx;
+  width: 50rpx;
+  height: 50rpx;
 }
 
 /* 列表商品图片 */
@@ -142,8 +142,8 @@
   /* position: absolute;
   left: 30rpx;
   top: 34rpx; */
-  width: 40rpx;
-  height: 40rpx;
+  width: 50rpx;
+  height: 50rpx;
   vertical-align: middle;
 }
 

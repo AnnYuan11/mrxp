@@ -1,0 +1,78 @@
+<!--pages/details/search/search.wxml-->
+<view class="search_Box">
+    <view class="search_left">
+      <image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+      <input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
+    </view>
+  </view>
+<view class="swiperBox">
+	<view class="swiper_box">
+		<scroll-view scroll-y style="height: 100%">
+			<block wx:for="{{listToday}}">
+				<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
+					<view class="list_box">
+						<view class="img_goods">
+							<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
+							<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
+							<!-- 显示状态图 -->
+							<image src="/img/new/1.png" style="width:128rpx" mode="widthFix" class="zt"></image>
+							<view class="subtitle" wx:if="{{item.productInfo.subTitle!=''}}">{{item.productInfo.subTitle}}</view>
+							<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+							<!-- 已售罄 -->
+							<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
+								<image src="{{imgUrl}}img/public/fc.png"></image>
+							</view>
+							<!-- 活动已结束 -->
+							<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
+								<image src="{{imgUrl}}img/public/fc2.png"></image>
+							</view>
+						</view>
+
+						<view class="bottom_box">
+							<view class="thsj" style="border-bottom:1px solid #E2E2E2;padding-bottom:10rpx">
+								<text class="spmc">{{item.productInfo.commodityName}}</text>
+								<view class="right fsgz">
+									<text class="limited">{{item.viewNumber}}</text>
+									<text>粉丝关注</text>
+								</view>
+							</view>
+
+							<view class="thsj">
+								<view class="left">
+									<text>预售时间:{{item.startTime}}</text>
+									<text class="rq">提货时间:{{item.pickDate}}</text>
+								</view>
+								<view class="right" style="line-height:50rpx;text-align:right;">
+									<text class="weight">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+									<text class="limited">限量{{item.limitBuyNumbers}}份</text>
+								</view>
+							</view>
+							<view class="price_box">
+								<view class="price">
+									<text>￥{{item.price}}</text>
+									<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
+								</view>
+								<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
+								<view class="jrgec over" wx:else>{{item.isBuy}}</view>
+							</view>
+							<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
+								<view class="box_figure">
+									<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}" wx:for-item="itemName">
+										<view class="figure">
+											<image src="{{itemName.photo}}"></image>
+											<text>{{itemName.nick_name}}</text>
+										</view>
+									</block>
+								</view>
+
+								<text class="so">等购买了此产品</text>
+							</view>
+						</view>
+
+					</view>
+				</navigator>
+			</block>
+		</scroll-view>
+	</view>
+
+</view>

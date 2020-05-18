@@ -1,6 +1,5 @@
 // pages/my/my.js
 import { Base } from "../../utils/request/base.js";
-var baseUrl = "https://www.zgmrxp.com";
 var app = getApp();
 var base = new Base();
 Page({
@@ -38,6 +37,7 @@ Page({
       session:session,
       phone:wx.getStorageSync('phone')
     })
+    that.orderNum()
   },
 
   /**
@@ -76,6 +76,28 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+// 查询订单数
+orderNum() {
+  var that = this;
+  var id = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/order/findAllOrderStatusNumberByUserId',
+    method: 'GET',
+    data: {
+      'userId':id,
+    },
+    sCallBack: function (data) {
+      that.setData({
+        dfkNum:data.data.result[0].commodityNumber,
+        bhzNum:data.data.result[1].commodityNumber,
+        pszNum:data.data.result[2].commodityNumber,
+        dthNum:data.data.result[3].commodityNumber,
+        ythNum:data.data.result[4].commodityNumber
+      })
+    },
+    eCallBack: function () {}
+  }
+  base.request(params);
+},
 
 })

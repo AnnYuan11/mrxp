@@ -4,6 +4,8 @@ var base = new Base();
 var app = getApp();
 
 function grouponcountdown(that, end_time, param) {
+  
+  console.log("111111111")
   var EndTime = new Date(end_time).getTime();
   var NowTime = new Date().getTime();
 
@@ -13,15 +15,27 @@ function grouponcountdown(that, end_time, param) {
   groupons[param].updateOrderTime4 = dateformat(total_micro_second);
   if (total_micro_second <= 0) {
       groupons[param].updateOrderTime4 = "已结束"
+      // clearInterval(timer);   
+
   }
   that.setData({
     dthlist: groupons
   })
   setTimeout(function () {
-      grouponcountdown(that, end_time, param);
-  }, 1000)
+    grouponcountdown(that, end_time, param);
+}, 1000)
+
+
+  // var timer=setTimeout(function () {
+  //     grouponcountdown(that, end_time, param);
+  // }, 1000)
+  // that.setData({
+  //   timer: timer
+  // })
 }
+
 function grouponcountdown2(that, end_time, param) {
+  console.log("222222")
   var EndTime = new Date(end_time).getTime();
   var NowTime = new Date().getTime();
 
@@ -31,10 +45,13 @@ function grouponcountdown2(that, end_time, param) {
   groupons[param].updateOrderTime4 = dateformat(total_micro_second);
   if (total_micro_second <= 0) {
       groupons[param].updateOrderTime4 = "已结束"
+  }else{
+    
   }
   that.setData({
     Alllist: groupons
   })
+  // var timer = setInterval(grouponcountdown2(), 1000);
   setTimeout(function () {
     grouponcountdown2(that, end_time, param);
   }, 1000)
@@ -167,12 +184,12 @@ Page({
           that.data.totalCount = 0, //总是数据条数
           that.data.pagecount = 0, //总的页数
           that.yth() //已提货
-      }else if (that.data.currentTab == '0'){
+      }
+      else if (that.data.currentTab == '0') {
         that.data.currentPage = 1,
           that.data.totalCount = 0, //总是数据条数
           that.data.pagecount = 0, //总的页数
-          that.Allorder()
-        
+          that.Allorder() //已提货
       }
     }
   },
@@ -188,7 +205,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-   
+    // clearTimeout(timer)
+    // clearInterval(this.data.timer);
+    
   },
 
   /**
@@ -213,6 +232,7 @@ Page({
   },
   swichNav: function (e) {
     var that = this;
+    // debugger
     console.log(e)
     if (e.target.dataset.current == '0') {
       that.data.currentPage = 1,
@@ -313,12 +333,18 @@ Page({
         })
         var data = that.data.Alllist
         for (var i = 0; i < data.length; i++) {
-          var dateTime=new Date(data[i].updateOrderTime4);
+        
+          if(data[i].orderStatus=='待提货'){
+            var dateTime=new Date(data[i].updateOrderTime4);
             dateTime=dateTime.setDate(dateTime.getDate()+1);
             dateTime=new Date(dateTime)
             data[i].updateOrderTime4=data[i].updateOrderTime4.substring(0, 10).replace(data[i].updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+data[i].updateOrderTime4.substring(10, 20)
             var end_time = data[i].updateOrderTime4.replace(/-/g, '/')
             grouponcountdown2(that,end_time, i)
+          }else{
+            // console.log("没有数据")
+          }
+         
         }
         console.log(that.data.pagecount)
 
@@ -331,6 +357,7 @@ Page({
   },
   // 全部订单的加载
   Allqbdd() {
+    // this.clearAllTimer()
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       this.Allorder();
@@ -339,6 +366,14 @@ Page({
       app.nomore_showToast();
     }
   },
+  // clearAllTimer() {
+  //   console.log('清除订单')
+  //   this.data.Alllist.forEach((el, index) => {
+  //      clearInterval(el)
+  //    })
+     
+  //   },
+
   // 待付款
   dfkorder() {
     var that = this;

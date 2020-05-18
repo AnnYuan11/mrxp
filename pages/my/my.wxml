@@ -4,23 +4,23 @@
 	<image src="{{imgUrl}}img/my/my_bg.png" mode="widthFix"></image>
 	<view class="head" wx:if="{{session==''||phone==''}}">
 		<view class="head_pic">
-		<image src="{{imgUrl}}img/my/head.png" mode="widthFix"></image> 
+			<image src="{{imgUrl}}img/my/head.png" mode="widthFix"></image>
 		</view>
-		<navigator url="/pages/login/login" style="margin-top: 45rpx;margin-left: 20rpx;color: #fff;"> 
+		<navigator url="/pages/login/login" style="margin-top: 45rpx;margin-left: 20rpx;color: #fff;">
 			<text class="phone">授权登录</text>
 		</navigator>
 	</view>
 	<view class="head" wx:else>
 		<view class="head_pic">
-		<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:block;height:130rpx;"></open-data>
+			<open-data type="userAvatarUrl" style="border-radius:50%;overflow:hidden;display:block;height:130rpx;"></open-data>
 		</view>
 		<view class="grxx">
 			<open-data type="userNickName"></open-data>
 			<text class="phone">{{phone}}</text>
 		</view>
-		
+
 	</view>
-	
+
 </view>
 <view class="section1 order_box">
 	<view class="wd">
@@ -35,46 +35,56 @@
 	</view>
 	<view class="icon_box">
 		<i-grid>
-		<navigator url="/pages/details/order_list/order_list?currentTab=1" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="{{imgUrl}}img/my/1.png" />
-				</i-grid-icon>
-				<i-grid-label>待付款</i-grid-label>
-			</i-grid-item>
-		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=2" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="{{imgUrl}}img/my/2.png" />
-				</i-grid-icon>
-				<i-grid-label>备货中</i-grid-label>
-			</i-grid-item>
-		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=3" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="{{imgUrl}}img/my/4.png" />
-				</i-grid-icon>
-				<i-grid-label>配送中</i-grid-label>
-			</i-grid-item>
-		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=4" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="{{imgUrl}}img/my/3.png" />
-				</i-grid-icon>
-				<i-grid-label>待提货</i-grid-label>
-			</i-grid-item>
-		</navigator>
-		<navigator url="/pages/details/order_list/order_list?currentTab=5" hover-class="none">
-			<i-grid-item>
-				<i-grid-icon>
-					<image src="{{imgUrl}}img/my/5.png" />
-				</i-grid-icon>
-				<i-grid-label>已提货</i-grid-label>
-			</i-grid-item>
-		</navigator>
+			<navigator url="/pages/details/order_list/order_list?currentTab=1" hover-class="none">
+				<i-grid-item>
+					<i-badge dot="{{dfkNum!='0'? 'true':''}}">
+						<i-grid-icon>
+							<image src="{{imgUrl}}img/my/1.png" />
+						</i-grid-icon>
+						<i-grid-label>待付款</i-grid-label>
+					</i-badge>
+				</i-grid-item>
+			</navigator>
+			<navigator url="/pages/details/order_list/order_list?currentTab=2" hover-class="none">
+				<i-grid-item>
+					<i-badge dot="{{bhzNum!='0'? 'true':''}}">
+						<i-grid-icon>
+							<image src="{{imgUrl}}img/my/2.png" />
+						</i-grid-icon>
+						<i-grid-label>备货中</i-grid-label>
+					</i-badge>
+				</i-grid-item>
+			</navigator>
+			<navigator url="/pages/details/order_list/order_list?currentTab=3" hover-class="none">
+				<i-grid-item>
+					<i-badge dot="{{pszNum!='0'? 'true':''}}">
+						<i-grid-icon>
+							<image src="{{imgUrl}}img/my/3.png" />
+						</i-grid-icon>
+						<i-grid-label>配送中</i-grid-label>
+					</i-badge>
+				</i-grid-item>
+			</navigator>
+			<navigator url="/pages/details/order_list/order_list?currentTab=4" hover-class="none">
+				<i-grid-item>
+					<i-badge dot="{{dthNum!='0'? 'true':''}}">
+						<i-grid-icon>
+							<image src="{{imgUrl}}img/my/4.png" />
+						</i-grid-icon>
+						<i-grid-label>待提货</i-grid-label>
+					</i-badge>
+				</i-grid-item>
+			</navigator>
+			<navigator url="/pages/details/order_list/order_list?currentTab=5" hover-class="none">
+				<i-grid-item>
+					<i-badge>
+						<i-grid-icon>
+							<image src="{{imgUrl}}img/my/5.png" />
+						</i-grid-icon>
+						<i-grid-label>已提货</i-grid-label>
+					</i-badge>
+				</i-grid-item>
+			</navigator>
 		</i-grid>
 	</view>
 </view>
@@ -90,7 +100,7 @@
 					<i-grid-label>我的优惠券</i-grid-label>
 				</i-grid-item>
 			</navigator>
-			<navigator url="/pages/details/wdye/wdye"hover-class="none">
+			<navigator url="/pages/details/wdye/wdye" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrl}}img/my/a2.png" />
@@ -155,18 +165,18 @@
 </view>
 <!-- 第三部分 -->
 <view class="section3 order_box">
-<navigator url="/pages/details/tzsq/tzsq" hover-class="none">
-	<view class="wd">
-		<view class="my_order">
-			<image src="{{imgUrl}}img/my/b1.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
-			<text>团长申请</text>
+	<navigator url="/pages/details/tzsq/tzsq" hover-class="none">
+		<view class="wd">
+			<view class="my_order">
+				<image src="{{imgUrl}}img/my/b1.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
+				<text>团长申请</text>
+			</view>
+			<view class="all">
+				<image src="{{imgUrl}}img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
+			</view>
 		</view>
-		<view class="all">
-			<image src="{{imgUrl}}img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
-		</view>
-	</view>
-</navigator>
-<!-- <navigator url="/pages/details/sjrz/sjrz" hover-class="none">
+	</navigator>
+	<!-- <navigator url="/pages/details/sjrz/sjrz" hover-class="none">
 	<view class="wd">
 		<view class="my_order">
 			<image src="{{imgUrl}}img/my/b2.png" mode="widthFix" style="width:48rpx;vertical-align: middle;"></image>
@@ -196,5 +206,5 @@
 				<image src="{{imgUrl}}img/public/right.png" mode="widthFix" style="width:32rpx;vertical-align: middle;"></image>
 			</view>
 		</view>
-	</navigator>	
+	</navigator>
 </view>

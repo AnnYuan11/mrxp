@@ -32,10 +32,12 @@
 		</view>
 		<!-- 搜索 -->
 		<view class="search_Box">
-			<view class="search_left">
-				<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
-				<input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
-			</view>
+			<navigator hover-class="none" url="/pages/details/search/search">
+				<view class="search_left">
+					<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+					<input placeholder="搜索商品名称" disabled></input>
+				</view>
+				</navigator>
 			<navigator hover-class="none" url="/pages/details/message/message">
 				<view class="search_right">
 					<image src="/img/new/0.png" mode="widthFix"></image>
@@ -70,7 +72,7 @@
 	<view class="details_box">
 		<view class="swiper-tab">
 			<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">今日售卖</view>
-			<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">明日预售</view>
+			<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">快递到家</view>
 		</view>
 		<view class="swiperBox">
 			<view class="swiper_box" wx:if="{{currentTab=='0'}}">
@@ -96,7 +98,7 @@
 								</view>
 
 								<view class="bottom_box">
-									<view class="thsj">
+									<view class="thsj" style="border-bottom:1px solid #E2E2E2;padding-bottom:10rpx">
 										<text class="spmc">{{item.productInfo.commodityName}}</text>
 										<view class="right fsgz">
 											<text class="limited">{{item.viewNumber}}</text>
@@ -109,8 +111,8 @@
 											<text>预售时间:{{item.startTime}}</text>
 											<text class="rq">提货时间:{{item.pickDate}}</text>
 										</view>
-										<view class="right" style="line-height:50rpx">
-											<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+										<view class="right" style="line-height:50rpx;text-align:right;">
+											<text class="weight">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
 											<text class="limited">限量{{item.limitBuyNumbers}}份</text>
 										</view>
 									</view>
@@ -142,7 +144,7 @@
 				</scroll-view>
 			</view>
 			<view class="swiper_box" wx:if="{{currentTab=='1'}}">
-				<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower2">
+				<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
 					<block wx:for="{{listTomorow}}">
 						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
 							<view class="list_box">
@@ -164,7 +166,7 @@
 								</view>
 
 								<view class="bottom_box">
-									<view class="thsj">
+									<view class="thsj" style="border-bottom:1px solid #E2E2E2;padding-bottom:10rpx">
 										<text class="spmc">{{item.productInfo.commodityName}}</text>
 										<view class="right fsgz">
 											<text class="limited">{{item.viewNumber}}</text>
@@ -177,8 +179,8 @@
 											<text>预售时间:{{item.startTime}}</text>
 											<text class="rq">提货时间:{{item.pickDate}}</text>
 										</view>
-										<view class="right" style="line-height:50rpx">
-											<text>今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+										<view class="right" style="line-height:50rpx;text-align:right;">
+											<text class="weight">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
 											<text class="limited">限量{{item.limitBuyNumbers}}份</text>
 										</view>
 									</view>
@@ -190,7 +192,7 @@
 										<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
 										<view class="jrgec over" wx:else>{{item.isBuy}}</view>
 									</view>
-									<!-- <view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
+									<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
                     <view class="box_figure">
                       <block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}"wx:for-item="itemName">
                         <view class="figure">
@@ -201,7 +203,7 @@
                     </view>
 
                     <text class="so">等购买了此产品</text>
-                  </view> -->
+                  </view>
 								</view>
 
 							</view>

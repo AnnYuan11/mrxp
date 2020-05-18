@@ -4,6 +4,7 @@ var base = new Base();
 var app = getApp();
 
 function grouponcountdown(that, end_time, param) {
+  console.log("111111")
   var EndTime = new Date(end_time).getTime();
   var NowTime = new Date().getTime();
 
@@ -58,12 +59,7 @@ Page({
   data: {
       groupon:[]
   },
-  //拼团详情
-  toSpellingDetail:function(e){
-    wx.navigateTo({
-        url: '/pages/spelling/spellingDetail?id='+e.currentTarget.id,
-    })
-  },
+  
 
   /**
    * 生命周期函数--监听页面加载

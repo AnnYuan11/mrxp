@@ -33,18 +33,19 @@
 			</view>
 
 		</view>
-		<view class="gys_box">
+		<view class="gys_box"  wx:if="{{list.productInfo.advertiseSlogans!=''}}">
 			<image src="{{imgUrl}}img/details/gys.png" mode="widthFix"></image>
-			<text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text>
+			<!-- <text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text> -->
+			<text>{{list.productInfo.advertiseSlogans}}</text>
 		</view>
 	</view>
 </view>
 
 <!-- 供应商资质 -->
-<navigator url="/pages/details/ghszz/ghszz?img={{list.productInfo.supplierInfo.bannerPhoto}}" hover-class="none">
+<navigator url="/pages/details/ghszz/ghszz" hover-class="none">
 	<view class="gyszz_box">
 		<i></i>
-		<text>供应商资质</text>
+		<text>服务承诺</text>
 	</view>
 </navigator>
 <!-- 商品详情 -->
@@ -71,7 +72,7 @@
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
 			</view>
 			<view class="gmjl_box">
-				<block wx:for="{{RecordList.orderList}}">
+				<block wx:for="{{RecordList.orderList}}" wx:if="{{index<21}}">
 					<view class="gmjl_list">
 						<image src="{{item.photo}}" mode="widthFix"></image>
 						<view class="gmjl_mess">
@@ -82,6 +83,7 @@
 							<text>{{item.commodity_number}}</text>份
 						</view>
 					</view>
+					<view class="gmjl_list" wx:if="{{index>20}}">购买人数太多，显示不下了</view>
 				</block>
 			</view>
 		</scroll-view>
@@ -126,8 +128,8 @@
 			<text>分享</text>
 		</view>
 	</view>
-	<view class="noClick" wx:if="{{isBuy!='1'}}">{{isBuy}}</view>
-	<block wx:if="{{isBuy==1}}">
+	<view class="noClick" wx:if="{{list.isBuy!='1'}}">{{list.isBuy}}</view>
+	<block wx:if="{{list.isBuy==1}}">
 		<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
 		<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>
 	</block>

@@ -12,7 +12,7 @@
   width: 95%;
   margin: 0 auto;
   position: relative;
-  margin-top: -17%;  
+  margin-top: -14%;  
 }
 .goods_introduce image{
   width: 100%;

@@ -27,13 +27,21 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    if (options.scene) {
+      that.setData({
+        id:options.scene,
+       
+      })
+    }else{
+      that.setData({
+        id:options.id,
+        // isBuy:options.isBuy,
+        personal:app.globalData.personal
+      })
+    }
     console.log(options)
-    console.log(app.globalData.personal)
-    that.setData({
-      id:options.id,
-      isBuy:options.isBuy,
-      personal:app.globalData.personal
-    })
+    
+    
     that.shop();//商品内容
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
@@ -77,7 +85,7 @@ Page({
   onShow: function () {
     var that = this;
     var aa = wx.getStorageSync('aa')
-    console.log(aa)
+    
     if (aa == '0') {
       that.query()//查询用户切换店铺
     } else {
@@ -125,7 +133,7 @@ Page({
   // 详情切换
   swichNav: function (e) {
     var that = this;
-    console.log(e)
+  
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -144,6 +152,7 @@ Page({
         'id':that.data.id, 
       },
       sCallBack: function (data) {
+        console.log(data)
         if(data.data.result.sendType==1){
           data.data.result.sendType="到店自提"
         }else{
@@ -162,6 +171,13 @@ Page({
           var ht=that.data.tomorow
           data.data.result.pickDate=ht
         }
+        if (data.data.result.isBuy == 2) {
+          data.data.result.isBuy = "活动未开始"
+        } else if (data.data.result.isBuy == 3) {
+          data.data.result.isBuy = "活动已结束"
+        } else if (data.data.result.isBuy == 4) {
+          data.data.result.isBuy = "已售罄"
+        }
         var artice = data.data.result.productInfo.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
@@ -178,7 +194,7 @@ Page({
   // 立即购买
   buyNow(){
     var session=wx.getStorageSync("session")
-    console.log(session)
+ 
     var that=this;
     if(session==''){
       wx.navigateTo({
@@ -213,7 +229,7 @@ toGwc(){
 // 加入购物车
 joinGwc(e){
   var that=this;
-  console.log(e)
+
   var userId = wx.getStorageSync('userId')
   var spid=e.currentTarget.dataset.spid;
   var sendtype=e.currentTarget.dataset.sendtype
@@ -344,7 +360,7 @@ eventDraw () {
   })
   wx.getSystemInfo({
     success: function (res) {
-      console.log(res)
+     
       that.setData({
         width: res.windowWidth,
         height: res.windowHeight
@@ -464,7 +480,7 @@ eventDraw () {
   })
 },
 eventGetImage (event) {
-  console.log(event)
+ 
   wx.hideLoading()
   const { tempFilePath, errMsg } = event.detail
   if (errMsg === 'canvasdrawer:ok') {
@@ -496,7 +512,7 @@ close(){
 // 获取当前店铺
 
   query() {
-    console.log('调用了自提')
+   
     var that = this;
     var userId = wx.getStorageSync('userId')
     var params = {
@@ -506,7 +522,7 @@ close(){
         userInfo: { 'id': userId }
       },
       sCallBack: function (data) {
-        console.log(data.data.result)
+       
         that.setData({
           shopName: data.data.result.headInfo.shopName,
           ztdid: data.data.result.headInfo.id
@@ -520,7 +536,7 @@ close(){
   },
   // 团长地址
   list() {
-    console.log('调用了团长')
+   
     var that = this;
     var myLat = wx.getStorageSync('latitude');
     var myLng = wx.getStorageSync('longitude');
@@ -581,7 +597,7 @@ close(){
 
       },
       sCallBack: function (data) {
-        console.log(data)
+      
        that.setData({
          gwzns:data.data.result.photo
        })

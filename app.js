@@ -5,7 +5,7 @@ var base = new Base();
 var util = require('/utils/cache.js');
 App({
   globalData: {
-    imgUrl: "http://39.101.190.182:8585/",
+    imgUrl: "https://resource.zgmrxp.com/",
     color: '#E10004',
   },
   onLaunch (options) {
@@ -74,12 +74,16 @@ base.request(params);
 login(){
   var that=this;
   var openId=wx.getStorageSync('openId')
+  var nickName = wx.getStorageSync('nickName')
+  var photo = wx.getStorageSync('photo')
   // debugger
   var params = {
       url: '/app/user/weixinLogin',
       method: 'POST',
       data: {
-        'openId':openId
+        'openId':openId,
+        'nickName':nickName,
+        'photo':photo
       },
       sCallBack: function (data) {
           if(data.data.errorCode=="0"){

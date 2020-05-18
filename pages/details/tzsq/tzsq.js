@@ -134,7 +134,7 @@ Page({
       that.initData(chinaData);
     }else{
       wx.request({
-        url: 'https://www.zgmrxp.com/city.json',
+        url: 'https://resource.zgmrxp.com/city.json',
         success: res=> {
           console.log(res);
           var chinaData = res.data;
@@ -214,7 +214,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          'address': res.address,
+          'address': res.name,
           'latitude':res.latitude,
           'longitude':res.longitude
         })

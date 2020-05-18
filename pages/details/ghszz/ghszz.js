@@ -1,4 +1,6 @@
 // pages/details/ghszz/ghszz.js
+import { Base } from "../../../utils/request/base.js";
+var base = new Base();
 var app = getApp();
 Page({
 
@@ -13,14 +15,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    var imgs=options.img.split(",");
     var that=this;
-    that.setData({
-      img:imgs
-    })
-
-    console.log(that.data.img)
+    that.list()
   },
 
   /**
@@ -70,5 +66,27 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+   // 自提点列表
+list(){
+  var that = this;
+  var params = {
+    url: '/app/commodity/listServicePledgeInfo',
+    method: 'POST',
+    data: {
+      'pageIndex':1,
+      'pageSize':50,
+    },
+    sCallBack: function (data) {
+      var list= data.data.result;
+      that.setData({
+       list:list,
+      })
+      
+    },
+    eCallBack: function () {
+    }
   }
+  base.request(params);
+},
 })

@@ -31,7 +31,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that = this;
-    that.shopList() //今日售卖列表
+    // that.shopList() //今日售卖列表
     that.lunbo() //轮播图
     that.notice() //公告
     that.yhqList() //优惠券列表
@@ -137,6 +137,7 @@ Page({
     }
     app.getShopNum()
     that.order()
+    that.shopList() 
     // that.djs()
   },
 
@@ -214,66 +215,10 @@ getPic(){
   }
   base.request(params);
 },
-  // 搜索
-  search: function (e) {
-    var that = this;
-    var className = e.detail.value
-    var that = this;
-    var params = {
-      url: '/app/commodity/listCommodityInfo',
-      method: 'POST',
-      data: {
-        'name': className,
-        'pageIndex': 1,
-        'pageSize': 1000,
-      },
-      sCallBack: function (data) {
-        var listToday = data.data.result.datas
-        if (listToday != '') {
-          listToday.forEach((item, index) => {
-            item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-
-            if (item.sendType == 1) {
-              item.sendType = "到店自提"
-            } else {
-              item.sendType = "快递到家"
-            }
-            if (item.pickDate == 1) {
-              that.getDateStr(null, 0)
-              item.pickDate = that.data.tomorow
-            } else if (item.pickDate == 2) {
-              that.getDateStr(null, 1)
-              var tomorow = that.data.tomorow
-              item.pickDate = tomorow
-            } else {
-              that.getDateStr(null, 2)
-              var ht = that.data.tomorow
-              item.pickDate = ht
-            }
-            if (item.isBuy == 2) {
-              item.isBuy = "活动未开始"
-            } else if (item.isBuy == 3) {
-              item.isBuy = "活动已结束"
-            } else if (item.isBuy == 4) {
-              item.isBuy = "已售罄"
-            }
-
-          })
-        }
-        that.setData({
-          listToday: listToday,
-          currentPage: 10000
-        })
-
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+  
   // 商品切换
   swichNav: function (e) {
     var that = this;
-
     if (e.target.dataset.current == '0') {
       that.data.currentPage = 1,
         that.data.totalCount = 0, //总是数据条数
@@ -338,6 +283,7 @@ getPic(){
         'name': className,
         'pageIndex': that.data.currentPage,
         'pageSize': that.data.size,
+        'sendType':'1'
       },
       sCallBack: function (data) {
         var listToday = data.data.result.datas
@@ -393,15 +339,17 @@ getPic(){
     }
     base.request(params);
   },
-  // 明日售卖
+  // 快递到家
   shopListM(className) {
     var that = this;
     var params = {
-      url: '/app/commodity/findProductListNextDay',
+      url: '/app/commodity/listCommodityInfo',
       method: 'POST',
       data: {
+        'name': className,
         'pageIndex': that.data.currentPage,
         'pageSize': that.data.size,
+        'sendType':'2'
       },
       sCallBack: function (data) {
         var listTomorow = data.data.result.datas
@@ -626,13 +574,12 @@ getPic(){
   joinGwc(e) {
     var that = this;
     var session = wx.getStorageSync('session')
-
     var userId = wx.getStorageSync('userId')
-    if (session == '') {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    } else {
+    // if (session == '') {
+    //   wx.navigateTo({
+    //     url: '/pages/login/login',
+    //   })
+    // } else {
       var spid = e.currentTarget.dataset.spid;
       var sendtype = e.currentTarget.dataset.sendtype
       if (sendtype == "到店自提") {
@@ -686,11 +633,12 @@ getPic(){
         eCallBack: function () {}
       }
       base.request(params);
-    }
+    // }
 
   },
   // 今日售卖下拉加载
   bindscrolltolower: function () {
+    // debugger
     var that=this
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
@@ -699,7 +647,7 @@ getPic(){
       } else {
         this.shopListM();
       }
-      this.shopList();
+     
     } else {
       //没有更多数据
       app.nomore_showToast();

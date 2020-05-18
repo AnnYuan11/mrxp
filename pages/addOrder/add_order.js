@@ -281,9 +281,15 @@ Page({
           message: data.data.result
         })
         if(data.data.errorCode=='0'){
-          that.setData({
-            topay:true
-          })
+          if(that.data.productInfo.sendType=="1"){
+            that.setData({
+              topay:true
+            })
+          }else{
+            wx.navigateTo({
+              url: '/pages/details/topay/topay',
+            })
+          }
          
         }else{
           wx.showToast({

@@ -1,7 +1,31 @@
 /* pages/details/ghszz/ghszz.wxss */
 .imgbox{
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
 }
-.imgbox image{
-  width: 100%;
+.cnfw{
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #d8d8d8f5;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.box{
+  margin-top: 30rpx;
+}
+.title{
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+.con{
+  font-size: 28rpx;
+  color: rgb(141, 141, 141);
+}
+.left image{
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+.list-box{
+  display: flex;
+  justify-content: space-between;
 }

@@ -136,7 +136,7 @@
 }
 
 .sub {
-  width: 176rpx;
+  /* width: 176rpx; */
   height: 60rpx;
   line-height: 60rpx;
   background: rgba(255, 255, 255, 1);
@@ -145,6 +145,9 @@
   text-align: center;
   color: #646464;
   font-size: 24rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+
 }
 
 .sub.buy {
