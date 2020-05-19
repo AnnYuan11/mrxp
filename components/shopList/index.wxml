@@ -59,6 +59,6 @@
 		</view>
 	</view>
 	<view wx:else>
-		<view class="list_none">购物车是空的哦~</view>
+		<view class="list_none"><image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx"></image><text style="margin-left: 18rpx">购物车是空的哦~</text></view>
 	</view>
 </view>

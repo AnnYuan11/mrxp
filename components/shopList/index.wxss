@@ -170,9 +170,13 @@
 
 /* 购物车为空 */
 .list_none {
-  padding: 40rpx 0;
+  padding: 55% 0;
   color: #999;
   text-align: center;
+  display: flex;
+  width: 39%;
+  margin: 0 auto;
+
 }
 
 /* 提交 */
