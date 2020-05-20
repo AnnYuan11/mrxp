@@ -116,14 +116,14 @@
 					<i-grid-label>我要充值</i-grid-label>
 				</i-grid-item>
 			</navigator>
-			<navigator url="/pages/details/address_list/addressList" hover-class="none">
+			<!-- <navigator url="/pages/details/address_list/addressList" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrl}}img/my/a4.png" />
 					</i-grid-icon>
 					<i-grid-label>收货地址</i-grid-label>
 				</i-grid-item>
-			</navigator>
+			</navigator> -->
 		</i-grid>
 	</view>
 	<view class="icon_box">
@@ -136,14 +136,14 @@
 					<i-grid-label>切换提货点</i-grid-label>
 				</i-grid-item>
 			</navigator>
-			<navigator url="/pages/details/Integral/Integral" hover-class="none">
+			<!-- <navigator url="/pages/details/Integral/Integral" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrl}}img/my/a6.png" />
 					</i-grid-icon>
 					<i-grid-label>积分商城</i-grid-label>
 				</i-grid-item>
-			</navigator>
+			</navigator> -->
 			<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10345&name=客服中心" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>

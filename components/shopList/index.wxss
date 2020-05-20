@@ -1,10 +1,10 @@
 .box{
-  width:90%;
+  width:96%;
   margin: 20rpx auto;
   background:rgba(255,255,255,1);
   box-shadow:0px 3px 10px rgba(0,0,0,0.16);
   border-radius:20rpx;
-  padding: 32rpx 32rpx 136rpx;
+  padding: 50rpx 32rpx;
   box-sizing: border-box;
 }
 /* 列表 */
@@ -61,8 +61,8 @@
   position: absolute;
   top: 20rpx;
   left: 70rpx;
-  width: 144rpx;
-  height: 144rpx;
+  width: 218rpx;
+  height: 150rpx;
 }
 
 /* 列表规格 */
@@ -93,7 +93,7 @@
 /* 列表商品名称 */
 .list_name {
   position: absolute;
-  left: 230rpx;
+  left: 300rpx;
   top: 30rpx;
   width: 380rpx;
   /* background-color: red; */
@@ -108,8 +108,8 @@
   position: absolute;
   font-size: 32rpx;
   color: #E10B09;
-  left: 230rpx;
-  bottom: 20rpx;
+  left: 300rpx;
+  bottom: 32rpx;
 }
 
 /* 列表商品删除 */

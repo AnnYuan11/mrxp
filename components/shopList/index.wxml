@@ -1,7 +1,7 @@
 <!-- pages/gwc/gwc.wxml -->
 <view class="pages">
 	<view wx:if="{{hasList}}">
-		<scroll-view class="container" scroll-y='true' bindscrolltolower='scrollLower' style="height:{{height}}px;">
+		<scroll-view class="container" scroll-y='true' bindscrolltolower='scrollLower' style="height:{{height - 125}}px;">
 			<view class="box">
 				<view class="top">
 					<view class="all_select">

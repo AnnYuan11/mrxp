@@ -14,14 +14,14 @@
       </view>
   </view>
 </view>
-<view class="button">
+<!-- <view class="button">
   <navigator url="/pages/details/chongzhi/chongzhi" hover-class="none">
     <view class="top-up" style="background:{{color}}">充值</view>
   </navigator>
   <navigator url="/pages/details/sqtx/sqtx" hover-class="none">
     <view class="top-up tx">提现</view>
  </navigator>
-</view>
+</view> -->
 <view class="list_box">
 <block wx:for="{{expenseList}}">
    <view class="list">

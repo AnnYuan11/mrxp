@@ -70,10 +70,10 @@
 	</view>
 	<!-- 商品 -->
 	<view class="details_box">
-		<view class="swiper-tab">
+		<!-- <view class="swiper-tab">
 			<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">今日售卖</view>
 			<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">快递到家</view>
-		</view>
+		</view> -->
 		<view class="swiperBox">
 			<view class="swiper_box" wx:if="{{currentTab=='0'}}">
 				<scroll-view scroll-y style="height: 100%">
