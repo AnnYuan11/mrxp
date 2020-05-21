@@ -2,54 +2,11 @@
 import { Base } from "../../utils/request/base.js";
 var base = new Base();
 var app = getApp();
+//距结束时间
+var endSecond = []
+var timeOut
+var supOpenid = ''
 
-function grouponcountdown(that, end_time, param) {
-  console.log("111111")
-  var EndTime = new Date(end_time).getTime();
-  var NowTime = new Date().getTime();
-
-  var total_micro_second = EndTime - NowTime;
-
-  var groupons = that.data.groupon;
-  groupons[param].updateOrderTime4 = dateformat(total_micro_second);
-  if (total_micro_second <= 0) {
-      groupons[param].updateOrderTime4 = "已结束"
-  }
-  that.setData({
-      groupon: groupons
-  })
-  setTimeout(function () {
-      grouponcountdown(that, end_time, param);
-  }, 1000)
-}
-
-// 时间格式化输出，每1s都会调用一次
-function dateformat(micro_second) {
-  // 总秒数
-  var second = Math.floor(micro_second / 1000);
-  // 天数
-  var day = Math.floor(second / 3600 / 24);
-  // 小时
-  var hr = Math.floor(second / 3600 % 24);
-  var hrStr = hr.toString();
-  if (hrStr.length == 1) hrStr = '0' + hrStr;
-
-  // 分钟
-  var min = Math.floor(second / 60 % 60);
-  var minStr = min.toString();
-  if (minStr.length == 1) minStr = '0' + minStr;
-
-  // 秒
-  var sec = Math.floor(second % 60);
-  var secStr = sec.toString();
-  if (secStr.length == 1) secStr = '0' + secStr;
-
-  if (day <= 1) {
-      return "剩 " + hrStr + ":" + minStr + ":" + secStr;
-  } else {
-      return "剩 " + day + " 天 " + hrStr + ":" + minStr + ":" + secStr;
-  }
-}
 
 Page({
 
@@ -57,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      groupon:[]
+     
   },
   
 
@@ -111,10 +68,13 @@ Page({
                   dateTime=dateTime.setDate(dateTime.getDate()+1);
                   dateTime=new Date(dateTime)
                   data[i].updateOrderTime4=data[i].updateOrderTime4.substring(0, 10).replace(data[i].updateOrderTime4.substring(0, 10),dateTime.toLocaleDateString())+data[i].updateOrderTime4.substring(10, 20)
-                  var end_time = data[i].updateOrderTime4.replace(/-/g, '/')
-                  grouponcountdown(that,end_time, i)
+                  var end_time = data[i].updateOrderTime4
+                  endSecond.push("2020-5-22 09:56:25","2020-5-22 10:56:25","2020-5-22 15:56:25",)
+                 
               }
-          console.log(that.data.groupon)
+              that.setData({endSecond: endSecond })
+              that.countdownEnd()
+          console.log(endSecond)
   
   
   
@@ -123,4 +83,61 @@ Page({
       }
       base.request(params);
   },
+  timeFormat(param) { //小于10的格式化函数
+    return param < 10 ? '0' + param : param;
+  },
+  countdownEnd: function () {
+    var that = this
+    let nowTime = new Date().getTime();
+    console.log(nowTime)
+    let timeList = that.data.endSecond;
+    console.log('endSecond', timeList)
+    var totaltime = 0;
+    let countDownArr = [];
+    timeList.forEach(o => {
+      console.log(o)
+      let endTime = new Date(o.replace(/-/g, '/')).getTime();
+      let obj = null;
+      let totalSeconds = (endTime - nowTime) / 1000;
+      totaltime = totalSeconds
+      console.log(totalSeconds)
+      // 如果活动未结束，对时间进行处理
+      if (totalSeconds > 0) {
+        // 获取天、时、分、秒
+        let day = parseInt(totalSeconds / (60 * 60 * 24));
+        let hou = parseInt(totalSeconds % (60 * 60 * 24) / 3600);
+        let min = parseInt(totalSeconds % (60 * 60 * 24) % 3600 / 60);
+        let sec = parseInt(totalSeconds % (60 * 60 * 24) % 3600 % 60);
+        obj = {
+          day: that.timeFormat(day),
+          hou: that.timeFormat(hou),
+          min: that.timeFormat(min),
+          sec: that.timeFormat(sec),
+          state: 0,
+          G_TYPE: o.G_TYPE
+        }
+      } else { //活动已结束，全部设置为'00'
+        obj = {
+          day: '00',
+          hou: '00',
+          min: '00',
+          sec: '00',
+          state: 1,
+          G_TYPE: o.G_TYPE
+        }
+        that.setData({
+          buyState: 1
+        })
+      }
+      countDownArr.push(obj);
+    })
+    // 渲染，然后每隔一秒执行一次倒计时函数
+    that.setData({
+      endCountDownList: countDownArr
+    })
+    // console.log('endCountDownList', that.data.endCountDownList)
+    timeOut = setTimeout(function () {
+      that.countdownEnd();
+    }, 1000)
+  }
 })

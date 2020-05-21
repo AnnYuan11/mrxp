@@ -132,7 +132,7 @@
 .button {
   /* display: flex; */
   justify-content: space-between;
-  width: 65%;
+  width: 68%;
 }
 
 .sub {

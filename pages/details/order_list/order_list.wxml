@@ -58,11 +58,19 @@
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
 								<view class="sub buy" catchtap="sqsh">申请售后</view>
 							</view>
-							
-							<view class="button"  wx:if="{{item.orderStatus=='待提货'}}">
-								
+
+							<view class="button" wx:if="{{item.orderStatus=='待提货'}}">
+
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
-								<view class="sub buy" wx:if="{{item.orderStatus=='待提货'&&item.updateOrderTime4!='已结束'}}">售后计时{{item.updateOrderTime4}}</view>
+								
+								<view class="sub buy" wx:if="{{item.orderStatus=='待提货'&&endCountDownList2[index].state == 0}}">
+									<label>
+										售后计时</label>
+									<label>{{endCountDownList2[index].hou}}</label>
+									:
+									<label>{{endCountDownList2[index].min}}</label>
+									:
+									<label>{{endCountDownList2[index].sec}}</label></view>
 							</view>
 						</view>
 					</view>
@@ -111,7 +119,7 @@
 								<view class="sub buy" catchtap="cancel" data-id="{{item.id}}">取消订单</view>
 							</view>
 							<view class="button" style="width:30%">
-								<view class="sub buy"  catchtap="Topay" data-item="{{item}}">去付款</view>
+								<view class="sub buy" catchtap="Topay" data-item="{{item}}">去付款</view>
 							</view>
 						</view>
 					</view>
@@ -123,7 +131,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="bhzmore">
 			<block wx:for="{{bhzlist}}" catchtap="Todetails" data-id="{{item.id}}">
-					<view class="box" catchtap="Todetails" data-id="{{item.id}}">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -166,7 +174,7 @@
 	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="pszmore">
 			<block wx:for="{{phzlist}}" catchtap="Todetails" data-id="{{item.id}}">
-					<view class="box" catchtap="Todetails" data-id="{{item.id}}">
+				<view class="box" catchtap="Todetails" data-id="{{item.id}}">
 					<view class="section">
 						<view class="order_num">
 							<text wx:if="{{item.headInfo!=''}}" class="orderdz"> 团长：{{item.headInfo.shopName}}</text>
@@ -202,7 +210,7 @@
 						</view>
 					</view>
 				</view>
-				
+
 			</block>
 		</scroll-view>
 	</swiper-item>
@@ -245,14 +253,23 @@
 							</view>
 							<view class="button">
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>
-								<view class="sub buy" wx:if="{{item.updateOrderTime4!='已结束'}}">售后计时{{item.updateOrderTime4}}</view>
-								
+
+								<!-- <view class="sub buy" wx:if="{{item.updateOrderTime4!='已结束'}}">售后计时{{item.updateOrderTime4}}</view> -->
+								<view class="sub buy" wx:if="{{endCountDownList[index].state == 0}}">
+									<label>
+										售后计时</label>
+									<label>{{endCountDownList[index].hou}}</label>
+									:
+									<label>{{endCountDownList[index].min}}</label>
+									:
+									<label>{{endCountDownList[index].sec}}</label></view>
+
 							</view>
 						</view>
 					</view>
 				</view>
 			</block>
-		
+
 		</scroll-view>
 	</swiper-item>
 	<!-- 已提货 -->
@@ -396,7 +413,7 @@
 			</block>
 		</scroll-view>
 	</swiper-item> -->
-		
+
 </swiper>
 <view class="thm_box" wx:if="{{showThm}}" bindtap="closeThm">
 	<view class="img_box">
