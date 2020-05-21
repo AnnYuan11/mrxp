@@ -6,8 +6,9 @@
 				<view class="top">
 					<view class="all_select">
 						<!-- 全选ICON -->
-						<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='{{imgUrl}}img/public/select.png'></image>
-						<image wx:else class="total-select" bindtap="selectAll" src='{{imgUrl}}img/public/sec.png'></image>
+						<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='/img/new/select.png'></image>
+						<image wx:else class="total-select" bindtap="selectAll" src='/img/new/sec.png'></image>
+					
 						<!-- 全选标题 -->
 						<text class='sel_count_name'>全选</text>
 					</view>
@@ -17,10 +18,17 @@
 					</view>
 				</view>
 				<!-- 列表 -->
-				<view class="list" wx:for="{{list}}" wx:key="{{index}}">
-					<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
-					<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='{{imgUrl}}img/public/select.png'></image>
-					<image wx:else src='{{imgUrl}}img/public/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
+				<view class="list {{item.isBuy=='2'? 'gray':''}}" wx:for="{{list}}" wx:key="{{index}}">
+					<view class="tiems" wx:if="{{item.isBuy=='2'}}">该商品将于{{item.commodityInfo.startTime}}开售</view>
+					<view class="isbuy" wx:if="{{item.isBuy!='2'}}">
+						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
+						<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/new/select.png'></image>
+						<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
+					</view>
+					<view class="isbuy" wx:else>
+						<image  data-index="{{index}}" class="radio_chek" src='/img/new/nosec.png'></image>
+						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
+					</view>
 					<!-- 列表标题 -->
 					<text class="list_name" data-id="{{item.commodityInfo.id}}" bindtap="Details">{{item.commodityInfo.productInfo.commodityName}}</text>
 					<!-- 列表商品图片 -->

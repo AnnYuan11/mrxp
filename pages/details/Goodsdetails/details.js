@@ -172,7 +172,7 @@ Page({
           data.data.result.pickDate=ht
         }
         if (data.data.result.isBuy == 2) {
-          data.data.result.isBuy = "活动未开始"
+          data.data.result.isBuy = "提前加入购物车"
         } else if (data.data.result.isBuy == 3) {
           data.data.result.isBuy = "活动已结束"
         } else if (data.data.result.isBuy == 4) {
@@ -360,7 +360,6 @@ eventDraw () {
   })
   wx.getSystemInfo({
     success: function (res) {
-     
       that.setData({
         width: res.windowWidth,
         height: res.windowHeight

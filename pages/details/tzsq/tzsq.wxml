@@ -41,7 +41,7 @@
 			<input placeholder="请填写店铺名称" class="input" name="shopName"></input>
 		</view>
 		<view class="sqr">
-			<text class="important">*</text>
+			<!-- <text class="important">*</text> -->
 			<text>推荐人</text>
 			<input placeholder="请填写推荐人的电话" class="input" name='supervisorInfo'></input>
 		</view>

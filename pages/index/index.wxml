@@ -37,7 +37,7 @@
 					<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
 					<input placeholder="搜索商品名称" disabled></input>
 				</view>
-				</navigator>
+			</navigator>
 			<navigator hover-class="none" url="/pages/details/message/message">
 				<view class="search_right">
 					<image src="/img/new/0.png" mode="widthFix"></image>
@@ -53,7 +53,7 @@
 				</swiper-item>
 			</block>
 		</swiper>
-	
+
 		<!-- 广播 -->
 		<!-- <view class='notice'>
 			<image style='width:62rpx;height:62rpx;' src="{{imgUrl}}img/details/lb.png"></image>
@@ -112,8 +112,9 @@
 											<text class="rq">提货时间:{{item.pickDate}}</text>
 										</view>
 										<view class="right" style="line-height:50rpx;text-align:right;">
-											<text class="weight">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+											<text class="weight" wx:if="{{item.isBuy!='提前加入购物车'}}">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
 											<text class="limited">限量{{item.limitBuyNumbers}}份</text>
+											<text class="limited" wx:if="{{item.isBuy=='提前加入购物车'}}">{{item.startTime2}}开售</text>
 										</view>
 									</view>
 									<view class="price_box">
@@ -122,7 +123,7 @@
 											<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
 										</view>
 										<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
-										<view class="jrgec over" wx:else>{{item.isBuy}}</view>
+										<view class="jrgec over" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:else>{{item.isBuy}}</view>
 									</view>
 									<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
 										<view class="box_figure">
@@ -193,17 +194,17 @@
 										<view class="jrgec over" wx:else>{{item.isBuy}}</view>
 									</view>
 									<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
-                    <view class="box_figure">
-                      <block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}"wx:for-item="itemName">
-                        <view class="figure">
-                          <image src="{{itemName.photo}}"></image>
-                          <text>{{itemName.nick_name}}</text>
-                        </view>
-                      </block>
-                    </view>
+										<view class="box_figure">
+											<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}" wx:for-item="itemName">
+												<view class="figure">
+													<image src="{{itemName.photo}}"></image>
+													<text>{{itemName.nick_name}}</text>
+												</view>
+											</block>
+										</view>
 
-                    <text class="so">等购买了此产品</text>
-                  </view>
+										<text class="so">等购买了此产品</text>
+									</view>
 								</view>
 
 							</view>
@@ -219,11 +220,7 @@
 <!-- 弹窗 -->
 <view class="flow" wx:if="{{show}}">
 	<view class="img_box">
-		<image src="{{imgUrl}}img/details/1.png" mode="widthFix"></image>
-		<view class="text">
-			<text>恭喜您</text>
-			<text class="preferential">获得以下优惠券</text>
-		</view>
+		<image src="/img/new/yhq.png" mode="widthFix"></image>
 		<view class="yhq_box">
 			<block wx:for="{{coupons}}">
 				<view class="yhq">
@@ -238,36 +235,10 @@
 					</view>
 				</view>
 			</block>
-			<!-- <view class="yhq">
-				<image src="{{imgUrl}}img/details/3.png" mode="widthFix"></image>
-				<view class="left">
-					<text>￥</text>
-					<text class="num">30</text>
-				</view>
-				<view class="right">
-					<text class="yhqs">优惠券</text>
-					<text>只限于合作商家</text>
-				</view>
+			<view class="sure" bindtap="getAll">一键领取</view>
+			<view class="close" bindtap="sure">
+				<image src="{{imgUrl}}img/details/close.png" mode="widthFix" style="width:60rpx"></image>
 			</view>
-			<view class="yhq">
-				<image src="{{imgUrl}}img/details/3.png" mode="widthFix"></image>
-				<view class="left">
-					<text>￥</text>
-					<text class="num">30</text>
-				</view>
-				<view class="right">
-					<text class="yhqs">优惠券</text>
-					<text>只限于合作商家</text>
-				</view>
-			</view> -->
-		</view>
-
-		<!-- <view class="bottom">
-			<image src="{{imgUrl}}img/details/2.png" mode="widthFix"></image>
-		</view> -->
-		<view class="sure" bindtap="getAll">一键领取</view>
-		<view class="close" bindtap="sure">
-			<image src="{{imgUrl}}img/details/close.png" mode="widthFix" style="width:60rpx"></image>
 		</view>
 	</view>
 </view>

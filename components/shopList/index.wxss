@@ -11,7 +11,7 @@
 .list {
   position: relative;
   width: 100%;
-  height: 185rpx;
+  height: 250rpx;
 }
 .top{
   width: 100%;
@@ -51,7 +51,7 @@
 .radio_chek {
   position: absolute;
   left: 0rpx;
-  top: 70rpx;
+  top: 108rpx;
   width: 50rpx;
   height: 50rpx;
 }
@@ -59,7 +59,7 @@
 /* 列表商品图片 */
 .list_img {
   position: absolute;
-  top: 20rpx;
+  top: 70rpx;
   left: 70rpx;
   width: 218rpx;
   height: 150rpx;
@@ -94,7 +94,7 @@
 .list_name {
   position: absolute;
   left: 300rpx;
-  top: 30rpx;
+  top: 60rpx;
   width: 380rpx;
   /* background-color: red; */
   font-size: 30rpx;
@@ -236,4 +236,11 @@
 /* .carts-num .minus.disabled{color: red;} */
 .carts-num .plus {
   font-size: 34rpx;
+}
+.tiems{
+  font-size: 28rpx;
+  color: rgb(255, 94, 0);
+}
+.gray{
+  opacity: 0.6;
 }

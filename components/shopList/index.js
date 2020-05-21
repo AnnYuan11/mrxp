@@ -201,7 +201,10 @@ Component({
       let list = this.data.list;
       // 循环遍历判断列表中的数据是否选中
       for (let i = 0; i < list.length; i++) {
-        list[i].selected = selectAllStatus;
+        if(list[i].isBuy!='2'){
+          list[i].selected = selectAllStatus;
+        }
+        
       }
       // 页面重新渲染
       this.setData({

@@ -150,7 +150,7 @@ Page({
   },
   initData: function(chinaData){
     var that=this;
-    var qxz={'name':"请选择",'children':[{'name':'','children':[{'name':'','children':[{'name':''}]}]}]}
+    var qxz={'name':"请选择所在市县",'children':[{'name':'','children':[{'name':'','children':[{'name':''}]}]}]}
           chinaData.unshift(qxz)
           console.log(chinaData)
           this.data.chinaData = chinaData;
@@ -302,7 +302,7 @@ Page({
         required: true,
       },
       supervisorInfo: {
-        required: true,
+        // required: true,
         tel: true,
       },
       street: {
@@ -329,7 +329,7 @@ Page({
         required: '请填写店铺名称',
       },
       supervisorInfo: {
-        required: '请填写推荐人的电话',
+        // required: '请填写推荐人的电话',
         tel: '请输入正确的手机号',
       },
       street: {

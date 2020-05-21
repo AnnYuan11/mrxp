@@ -385,9 +385,10 @@ video {
   z-index: 99999999;
 }
 .img_box{
-  width: 80%;
+  width: 87%;
   margin:0 auto;
   position: relative;
+  top: 3%;
 }
 .img_box image{
   width: 100%;
@@ -408,17 +409,19 @@ video {
   font-size: 32rpx;
 }
 .yhq_box{
-  width: 96%;
+  width: 100%;
   margin:0 auto;
   position: absolute;
   left: 0;
   right: 0;
-  top: 36%;
+  top: 92%;
+  background: #fd622b;
+  padding: 30rpx 0 147rpx 0
 }
 .yhq{
   width: 100%;
   position: relative;
-  margin-top: -6%;
+  margin-top: -7%;
 }
 .yhq image{
   width: 100%;
@@ -468,13 +471,18 @@ video {
   font-size:32rpx;
   color:rgba(0,0,0,1);
   position: absolute;
-  bottom: 12%;
+  /* bottom: 12%; */
   left: 0;
   right: 0;
   margin:auto;
 }
 .close{
   text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:105%;
+  margin: auto;
 }
 /* 粉丝关注 */
 .fsgz{

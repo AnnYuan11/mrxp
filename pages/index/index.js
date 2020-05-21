@@ -6,6 +6,8 @@ var qqmapsdk = new QQMapWX({
 });
 var app = getApp();
 var base = new Base();
+//整点报时器方法
+
 Page({
   /**
    * 页面的初始数据
@@ -37,6 +39,7 @@ Page({
     that.yhqList() //优惠券列表
     that.getPic()//获取分享店铺
     that.fans() //头部粉丝数
+    that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
     that.setData({
@@ -147,7 +150,29 @@ Page({
   onHide: function () {
 
   },
-
+ 
+  hourReport() {
+    console.log(11111111)
+    var that=this;
+    //当前时间
+    var time = new Date();
+    //小时
+    var hours = time.getHours();
+    //分钟
+    var mins = time.getMinutes();
+    //秒钟
+    var secs = time.getSeconds();
+    //下一次报时间隔
+    var next = ((60 - mins) * 60 - secs) * 1000;
+    //设置下次启动时间
+    setTimeout(function () {
+      that.hourReport();
+    }, next)
+    //整点报时，因为第一次进来mins可能不为0所以要判断
+    if (mins == 0) {
+        that.shopList()
+    }
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -289,8 +314,9 @@ getPic(){
         var listToday = data.data.result.datas
         if (listToday != '') {
           listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-
+            
             if (item.sendType == 1) {
               item.sendType = "到店自提"
             } else {
@@ -309,7 +335,7 @@ getPic(){
               item.pickDate = ht
             }
             if (item.isBuy == 2) {
-              item.isBuy = "活动未开始"
+              item.isBuy = "提前加入购物车"
             } else if (item.isBuy == 3) {
               item.isBuy = "活动已结束"
             } else if (item.isBuy == 4) {
@@ -333,6 +359,7 @@ getPic(){
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
+        console.log(that.data.listToday)
 
       },
       eCallBack: function () {}
@@ -357,7 +384,7 @@ getPic(){
         if (listTomorow != '') {
           listTomorow.forEach((item, index) => {
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-
+           
             if (item.sendType == 1) {
               item.sendType = "到店自提"
             } else {

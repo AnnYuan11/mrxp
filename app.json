@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/sqtx/sqtx",
     "pages/dizhi/dizhi",
     "pages/details/ghszz/ghszz",
     "pages/details/search/search",
@@ -14,7 +15,6 @@
     "pages/details/order_list/order_list",
     "pages/login/login",
     "pages/details/setting/setting",
-    "pages/details/sqtx/sqtx",
     "pages/details/Integral/Integral",
     "pages/details/chongzhi/chongzhi",
     "pages/my/my",
