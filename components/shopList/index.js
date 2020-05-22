@@ -21,13 +21,14 @@ Component({
    * 组件的初始数据
    */
   data: {
-    hasList: true,
+    hasList: false,
     // 商品列表数据
     list: [],
     temlist: [],
     show_edit: "block",
     edit_name: "编辑",
     edit_show: "none",
+    ischoose:true,
     nums: '0',
     // 金额
     totalPrice: 0, // 总价，初始为0
@@ -110,13 +111,19 @@ Component({
     btn_edit() {
       var that = this;
       if (bool) {
-        that.setData({
-          edit_show: "block",
-          edit_name: "取消",
-          show_edit: "none",
-          submitBtn: '删除订单',
-          isBool: false
-        })
+        if(that.data.ischoose==true){
+          that.setData({
+            edit_show: "block",
+            edit_name: "取消",
+            show_edit: "none",
+            submitBtn: '删除订单',
+            isBool: false,
+            ischoose:false
+          })
+        }else{
+          console.log("222")
+        }
+        
         bool = false;
       } else {
         that.setData({
@@ -124,11 +131,12 @@ Component({
           edit_name: "编辑",
           show_edit: "block",
           submitBtn: '提交订单',
-          isBool: true
+          isBool: true,
+          ischoose:true
         })
         bool = true;
       }
-
+      that.count_price();
     },
     // 删除
     deletes(e) {
@@ -165,12 +173,14 @@ Component({
             wx.showToast({
               title: data.data.result
             })
-            that.getShopList(that.data.shoppingType)
+           
             that.setData({
               totalPrice: '0'
             })
             // that.count_price()
             app.getShopNum()
+            that.data.currentPage=1
+            that.getShopList(that.data.shoppingType)
           } else {
             wx.showToast({
               title: data.data.errorMsg
@@ -194,6 +204,7 @@ Component({
      */
     selectAll(e) {
       // 全选ICON默认选中
+    
       let selectAllStatus = this.data.selectAllStatus;
       // true  -----   false
       selectAllStatus = !selectAllStatus;
@@ -201,9 +212,14 @@ Component({
       let list = this.data.list;
       // 循环遍历判断列表中的数据是否选中
       for (let i = 0; i < list.length; i++) {
-        if(list[i].isBuy!='2'){
+        if(this.data.ischoose==true){
+          if(list[i].isBuy!='2'){
+            list[i].selected = selectAllStatus;
+          }
+        }else{
           list[i].selected = selectAllStatus;
         }
+         
         
       }
       // 页面重新渲染
@@ -315,11 +331,21 @@ Component({
       // 循环列表得到每个数据
       for (let i = 0; i < list.length; i++) {
         // 判断选中计算价格
-        if (list[i].selected) {
-          // 所有价格加起来 count_money
-          total += list[i].commodityNumber * list[i].commodityInfo.price;
-          nums += list[i].commodityNumber
-        } 
+        if(that.data.ischoose==false){
+          if (list[i].selected) {
+            // 所有价格加起来 count_money
+            total += list[i].commodityNumber * list[i].commodityInfo.price;
+            nums += list[i].commodityNumber
+          } 
+        }else{
+          if(list[i].isBuy=='1'){
+            if (list[i].selected) {
+            total += list[i].commodityNumber * list[i].commodityInfo.price;
+            nums += list[i].commodityNumber
+            }
+          }
+        }
+       
       }
       // 最后赋值到data中渲染到页面
       that.setData({
@@ -372,6 +398,9 @@ Component({
     */
     getShopList(shoppingType) {
       var that = this;
+      wx.showLoading({
+        title: '加载中',
+      })
       var id = wx.getStorageSync('userId')
       var ztdid = wx.getStorageSync('zdtid')
       console.log(ztdid)
@@ -392,6 +421,9 @@ Component({
         },
         sCallBack: function (data) {
           if (data.data.errorCode == 0) {
+            wx.hideLoading({
+              complete: (res) => {},
+            })
             if (data.data.result.datas.length == 0) {
               that.setData({
                 hasList: false
@@ -421,11 +453,15 @@ Component({
                 that.setData({
                   list: data.data.result.datas, //初始化数据列表
                 })
+                console.log(that.data.list)
               }
             }
           } else {
             wx.showToast({
               title: data.data.errorMsg
+            })
+            wx.hideLoading({
+              complete: (res) => {},
             })
           }
         },
@@ -441,7 +477,7 @@ Component({
 
       var that = this;
       // 获取商品数据
-      console.log(that.data.totalPrice)
+      console.log(that.data.list)
       // let price = Number(that.data.totalPrice.slice('.')[0])
       let price = that.data.totalPrice
       if (price == 0) {
@@ -456,7 +492,7 @@ Component({
         const product = [];
 
         for (let i = 0; i < list.length; i++) {
-          if (list[i].selected) {
+          if (list[i].selected&&list[i].isBuy!='2') {
             const productItem = {};
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName

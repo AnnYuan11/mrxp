@@ -128,7 +128,8 @@
 			<text>分享</text>
 		</view>
 	</view>
-	<view class="noClick" wx:if="{{list.isBuy!='1'}}">{{list.isBuy}}</view>
+	<view class="noClick {{list.isBuy=='提前加入购物车'? 'overs':''}}" wx:if="{{list.isBuy=='提前加入购物车'}}" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">{{list.isBuy}}</view>
+	<view class="noClick" wx:if="{{list.isBuy!='提前加入购物车'&&list.isBuy!='1'}}">{{list.isBuy}}</view>
 	<block wx:if="{{list.isBuy==1}}">
 		<view class="bot BuyNow" catchtap="buyNow">立即购买</view>
 		<view class="bot shoppingCart" catchtap="joinGwc" data-spid="{{list.id}}" data-sendType="{{list.sendType}}">加入购物车</view>

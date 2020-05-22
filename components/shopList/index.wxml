@@ -8,7 +8,7 @@
 						<!-- 全选ICON -->
 						<image wx:if="{{selectAllStatus}}" class="total-select" bindtap="selectAll" src='/img/new/select.png'></image>
 						<image wx:else class="total-select" bindtap="selectAll" src='/img/new/sec.png'></image>
-					
+
 						<!-- 全选标题 -->
 						<text class='sel_count_name'>全选</text>
 					</view>
@@ -25,8 +25,13 @@
 						<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/new/select.png'></image>
 						<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
 					</view>
+
 					<view class="isbuy" wx:else>
-						<image  data-index="{{index}}" class="radio_chek" src='/img/new/nosec.png'></image>
+						<block wx:if="{{ischoose==false}}">
+							<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/new/select.png'></image>
+							<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
+						</block>
+						<image data-index="{{index}}" wx:if="{{ischoose}}" class="radio_chek" src='/img/new/nosec.png'></image>
 						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
 					</view>
 					<!-- 列表标题 -->
@@ -67,6 +72,8 @@
 		</view>
 	</view>
 	<view wx:else>
-		<view class="list_none"><image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx"></image><text style="margin-left: 18rpx">购物车是空的哦~</text></view>
+		<view class="list_none">
+			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx"></image><text style="margin-left: 18rpx">购物车是空的哦~</text>
+		</view>
 	</view>
 </view>

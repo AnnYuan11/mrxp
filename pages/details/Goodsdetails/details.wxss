@@ -170,7 +170,10 @@ i{
   float: right;
   padding: 10rpx 0 10rpx 32rpx;
   box-sizing: border-box;
-
+}
+.overs{
+  background: rgba(250, 143, 21, 0.863);
+  color: #fff;
 }
 .BuyNow{
   background: #E10004;

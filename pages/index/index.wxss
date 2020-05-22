@@ -362,6 +362,10 @@ swiper image{
   background: #CECECE;
   color: #727272;
 }
+.overs{
+  background: rgba(250, 143, 21, 0.863);
+  /* color: #727272; */
+}
 .list_box{
   background: #fff;
   padding: 10rpx;

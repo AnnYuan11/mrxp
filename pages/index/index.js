@@ -336,7 +336,11 @@ getPic(){
             }
             if (item.isBuy == 2) {
               item.isBuy = "提前加入购物车"
-            } else if (item.isBuy == 3) {
+
+            }else if(item.isBuy == 1) {
+              item.isBuy = "加入购物车"
+            }
+            else if (item.isBuy == 3) {
               item.isBuy = "活动已结束"
             } else if (item.isBuy == 4) {
               item.isBuy = "已售罄"

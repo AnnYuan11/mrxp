@@ -122,8 +122,8 @@
 											<text>￥{{item.price}}</text>
 											<text style="text-decoration: line-through;font-size:32rpx;color:#333">￥{{item.crossedPrice}}</text>
 										</view>
-										<view class="jrgec" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='1'}}">加入购物车</view>
-										<view class="jrgec over" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:else>{{item.isBuy}}</view>
+										<view class="jrgec {{item.isBuy=='提前加入购物车'? 'overs':''}}" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='加入购物车'|| item.isBuy=='提前加入购物车'}}">{{item.isBuy}}</view>
+										<view class="jrgec over"  wx:else>{{item.isBuy}}</view>
 									</view>
 									<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
 										<view class="box_figure">

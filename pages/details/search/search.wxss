@@ -221,6 +221,10 @@ video {
   -webkit-box-orient: vertical;
 
 }
+.overs{
+  background: rgba(250, 143, 21, 0.863);
+  /* color: #727272; */
+}
 
 .figure{
   width: 150rpx;
