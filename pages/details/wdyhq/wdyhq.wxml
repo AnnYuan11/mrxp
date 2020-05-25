@@ -10,7 +10,7 @@
 			<block wx:for="{{yhqlist}}">
 				<view class="box" bindtap="Toddxq" data-id="{{item.id}}" data-yhqmoney="{{item.couponInfo.money}}">
 					<view class="preferential">
-						<image src="{{imgUrl}}img/details/logo.png" class="logo" mode="widthFix"></image>
+						<image src="{{imgUrls}}img/details/logo.png" class="logo" mode="widthFix"></image>
 						<view class="preferent">
 							<text class="preferent_title">{{item.couponInfo.name}}</text>
 							<text class="preferent_type">{{item.couponInfo.type}}</text>
@@ -23,7 +23,7 @@
 						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
 						<text class="use">{{item.type}}</text>
 					</view>
-					<image src="{{imgUrl}}img/details/bg.png" class="bg" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/details/bg.png" class="bg" mode="widthFix"></image>
 				</view>
 			</block>
 		</scroll-view>
@@ -33,7 +33,7 @@
 			<block wx:for="{{yhqysylist}}">
 				<view class="box">
 					<view class="preferential">
-						<image src="{{imgUrl}}img/details/logo.png" class="logo" mode="widthFix"></image>
+						<image src="{{imgUrls}}img/details/logo.png" class="logo" mode="widthFix"></image>
 						<view class="preferent">
 							<text class="preferent_title">{{item.couponInfo.name}}</text>
 							<text class="preferent_type">{{item.couponInfo.type}}</text>
@@ -46,7 +46,7 @@
 						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
 						<text class="use">{{item.type}}</text>
 					</view>
-					<image src="{{imgUrl}}img/details/bg2.png" class="bg" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/details/bg2.png" class="bg" mode="widthFix"></image>
 				</view>
 			</block>
 		</scroll-view>
@@ -56,7 +56,7 @@
 		<block wx:for="{{yhqygqlist}}">
 				<view class="box">
 					<view class="preferential">
-						<image src="{{imgUrl}}img/details/logo.png" class="logo" mode="widthFix"></image>
+						<image src="{{imgUrls}}img/details/logo.png" class="logo" mode="widthFix"></image>
 						<view class="preferent">
 							<text class="preferent_title">{{item.couponInfo.name}}</text>
 							<text class="preferent_type">{{item.couponInfo.type}}</text>
@@ -69,7 +69,7 @@
 						<text class="time">有效期{{item.startTime}}至{{item.endTime}}</text>
 						<text class="use">{{item.type}}</text>
 					</view>
-					<image src="{{imgUrl}}img/details/bg3.png" class="bg" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/details/bg3.png" class="bg" mode="widthFix"></image>
 				</view>
 			</block>
 		</scroll-view>

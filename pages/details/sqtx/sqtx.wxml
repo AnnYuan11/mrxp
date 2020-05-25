@@ -20,7 +20,7 @@
   <view class="sqr">
     <text>提现方式</text>
     <view class="input">
-      <image src="{{imgUrl}}img/details/dd3.png" mode="widthFix" style="width:40rpx;vertical-align: middle;margin-right:20rpx"></image>
+      <image src="{{imgUrls}}img/details/dd3.png" mode="widthFix" style="width:40rpx;vertical-align: middle;margin-right:20rpx"></image>
       <text>微信提现</text>
     </view>
     

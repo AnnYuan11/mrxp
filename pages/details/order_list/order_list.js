@@ -21,6 +21,7 @@ Page({
     currentTab: 0,
     scrollLeft: 0,
     imgUrl: app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数

@@ -32,7 +32,7 @@
 			<input type="text" name="street" style="display:none" value="{{street}}"></input>
 		</view>
 		<view class="sqrs">
-			<image src="{{imgUrl}}img/details/map.png" mode="widthFix" style="width:28rpx"></image>
+			<image src="{{imgUrls}}img/details/map.png" mode="widthFix" style="width:28rpx"></image>
 			<text class="td">请在地图上选点，方便居民按距离查找你</text>
 		</view>
 		<view class="sqr">
@@ -43,7 +43,12 @@
 		<view class="sqr">
 			<!-- <text class="important">*</text> -->
 			<text>推荐人</text>
-			<input placeholder="请填写推荐人的电话" class="input" name='supervisorInfo'></input>
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+				<view class="picker">
+					{{objectArray[index].name}}
+				</view>
+			</picker>
+			<input wx:if="{{registerType=='2'}}" placeholder="请填写推荐人的电话" class="input" name='supervisorInfo'></input>
 		</view>
 		<view class="sqr">
 			<text class="important">*</text>

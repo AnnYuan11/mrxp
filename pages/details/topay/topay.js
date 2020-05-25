@@ -9,6 +9,7 @@ Page({
    */
   data: {
     imgUrl: app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     color: app.globalData.color,
     payTypes:2,//默认微信支付
   },

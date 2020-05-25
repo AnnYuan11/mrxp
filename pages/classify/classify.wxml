@@ -2,7 +2,7 @@
 <!-- 搜索 -->
 <view class="box">
   <view class="search_Box">
-		<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+		<image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
 		<input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
 	</view>
 </view>
@@ -25,141 +25,112 @@
           <scroll-view scroll-y style="height: 100%">
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
-              </view>
-            </view>
-           
-          </view>
-
-          <view class="all_goods">
-            <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
-            </view>
-            <view class="all_details">
-              <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
-              <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
-              <view class="all_price">
-                <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
-              </view>
-            </view>
-           
-          </view>
-          <view class="all_goods">
-            <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
-            </view>
-            <view class="all_details">
-              <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
-              <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
-              <view class="all_price">
-                <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
@@ -167,27 +138,28 @@
 
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
-          </view><view class="all_goods">
+          </view>
+          <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
@@ -195,68 +167,96 @@
 
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view><view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
+              </view>
+            </view>
+           
+          </view>
+
+          <view class="all_goods">
+            <view class="all_img">
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
+            </view>
+            <view class="all_details">
+              <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
+              <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
+              <view class="all_price">
+                <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
+              </view>
+            </view>
+           
+          </view><view class="all_goods">
+            <view class="all_img">
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
+            </view>
+            <view class="all_details">
+              <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
+              <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
+              <view class="all_price">
+                <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view>
           <view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            
           </view><view class="all_goods">
             <view class="all_img">
-              <image src="{{imgUrl}}img/pic/gwc.png" mode="widthFix"></image>
+              <image src="{{imgUrls}}img/pic/gwc.png" mode="widthFix"></image>
             </view>
             <view class="all_details">
               <text class="all_title">好丽友呀土豆9连包超值礼包实惠家庭装休闲膨化薯片</text>
               <text class="porl">今日已售<text class="all_num">300/</text>份<text class="all_num">限量3000份</text></text>
               <view class="all_price">
                 <text class="xj">￥16.45</text><text class="yj">￥50.00</text>
-                <image src="{{imgUrl}}img/details/gwcs.png" mode="widthFix"></image>
+                <image src="{{imgUrls}}img/details/gwcs.png" mode="widthFix"></image>
               </view>
             </view>
            

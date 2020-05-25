@@ -21,12 +21,14 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
 	"appid": "wx874be472f0a6147b",
-	"projectname": "mrxp",
+	"projectname": "ttmyt",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

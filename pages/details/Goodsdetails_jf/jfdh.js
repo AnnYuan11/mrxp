@@ -11,6 +11,7 @@ Page({
   data: {
     color: getApp().globalData.color,
     imgUrl:app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
   },
 
   /**

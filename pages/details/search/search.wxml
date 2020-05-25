@@ -1,7 +1,7 @@
 <!--pages/details/search/search.wxml-->
 <view class="search_Box">
     <view class="search_left">
-      <image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+      <image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
       <input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
     </view>
   </view>
@@ -20,11 +20,11 @@
 							<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 							<!-- 已售罄 -->
 							<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
-								<image src="{{imgUrl}}img/public/fc.png"></image>
+								<image src="{{imgUrls}}img/public/fc.png"></image>
 							</view>
 							<!-- 活动已结束 -->
 							<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
-								<image src="{{imgUrl}}img/public/fc2.png"></image>
+								<image src="{{imgUrls}}img/public/fc2.png"></image>
 							</view>
 						</view>
 

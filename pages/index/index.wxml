@@ -15,7 +15,7 @@
 	<view class="box">
 		<view class="top">
 			<view class="img">
-				<image src="{{imgUrl}}img/public/logo.png" lazy-load='true' mode="widthFix"></image>
+				<image src="{{imgUrls}}img/public/logo.png" lazy-load='true' mode="widthFix"></image>
 			</view>
 			<view class="message" catchtap="selectTZ">
 				<text class="name" wx:if="{{defaultztd!=''}}">{{shopName}}</text>
@@ -34,7 +34,7 @@
 		<view class="search_Box">
 			<navigator hover-class="none" url="/pages/details/search/search">
 				<view class="search_left">
-					<image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
 					<input placeholder="搜索商品名称" disabled></input>
 				</view>
 			</navigator>
@@ -56,7 +56,7 @@
 
 		<!-- 广播 -->
 		<!-- <view class='notice'>
-			<image style='width:62rpx;height:62rpx;' src="{{imgUrl}}img/details/lb.png"></image>
+			<image style='width:62rpx;height:62rpx;' src="{{imgUrls}}img/details/lb.png"></image>
 			<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
 				<block wx:for="{{content}}">
 					<swiper-item>
@@ -89,11 +89,11 @@
 									<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 									<!-- 已售罄 -->
 									<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
-										<image src="{{imgUrl}}img/public/fc.png"></image>
+										<image src="{{imgUrls}}img/public/fc.png"></image>
 									</view>
 									<!-- 活动已结束 -->
 									<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
-										<image src="{{imgUrl}}img/public/fc2.png"></image>
+										<image src="{{imgUrls}}img/public/fc2.png"></image>
 									</view>
 								</view>
 
@@ -158,11 +158,11 @@
 									<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 									<!-- 已售罄 -->
 									<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
-										<image src="{{imgUrl}}img/public/fc.png"></image>
+										<image src="{{imgUrls}}img/public/fc.png"></image>
 									</view>
 									<!-- 活动已结束 -->
 									<view class="supernatant" wx:if="{{item.isBuy=='活动已结束'}}">
-										<image src="{{imgUrl}}img/public/fc2.png"></image>
+										<image src="{{imgUrls}}img/public/fc2.png"></image>
 									</view>
 								</view>
 
@@ -224,7 +224,7 @@
 		<view class="yhq_box">
 			<block wx:for="{{coupons}}">
 				<view class="yhq">
-					<image src="{{imgUrl}}img/details/3.png" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/details/3.png" mode="widthFix"></image>
 					<view class="left">
 						<text>￥</text>
 						<text class="num">{{item.money}}</text>
@@ -237,7 +237,7 @@
 			</block>
 			<view class="sure" bindtap="getAll">一键领取</view>
 			<view class="close" bindtap="sure">
-				<image src="{{imgUrl}}img/details/close.png" mode="widthFix" style="width:60rpx"></image>
+				<image src="{{imgUrls}}img/details/close.png" mode="widthFix" style="width:60rpx"></image>
 			</view>
 		</view>
 	</view>

@@ -12,6 +12,7 @@ Page({
     col:0,
     defaultztd:'',
     imgUrl:getApp().globalData.imgUrl,
+    imgUrls: getApp().globalData.imgUrls,
     currentPage: 1,//请求数据的页码
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
@@ -214,9 +215,9 @@ search(e){
         myLat:myLat,
         myLng:myLng,
     },
-    sCallBack: function (data) {
-      var yhqlist=data.data.result.datas;    
+    sCallBack: function (data) {   
       var temlist = that.data.list; //原始的数据集合
+      
      var currentPage = that.data.currentPage; //获取当前页码
      if (currentPage == 1) {
          temlist = data.data.result.datas; //初始化数据列表
@@ -226,6 +227,28 @@ search(e){
          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
          
        }
+       console.log(temlist)
+       temlist.forEach( item =>{
+         console.log(item.distance.toString().substr(-1))
+         if(item.distance.toString().substr(-1)=='m'){
+          if (item.distance<1){
+            item.distance2 = item.distance * 1000
+            item.distance = item.distance2.toFixed(2)
+          }else{
+            item.distance = item.distance.toFixed(2)
+          }
+         }else{
+            if (item.distance<1){
+          item.distance2 = item.distance * 1000
+          item.distance = item.distance2.toFixed(0)+'m'
+        }else{
+          item.distance = item.distance.toFixed(2)+'km'
+        }
+         }
+        console.log(typeof(item.distance))
+       
+      })
+      
        that.setData({
          currentPage: currentPage,
          list: temlist,
@@ -257,6 +280,15 @@ list(){
     },
     sCallBack: function (data) {
       var list= data.data.result.datas;
+      list.forEach( item =>{
+        if (item.distance<1){
+          item.distance2 = item.distance * 1000
+          item.distance = item.distance2.toFixed(0)+'m'
+        }else{
+          item.distance = item.distance+'km'
+        }
+       
+      })
       if(list.length==0){
         that.default()
       }

@@ -10,7 +10,7 @@
 	</swiper>
 </view>
 <view class="goods_introduce">
-	<image src="{{imgUrl}}img/details/bg_goodsdetails.png" mode="widthFix"></image>
+	<image src="{{imgUrls}}img/details/bg_goodsdetails.png" mode="widthFix"></image>
 	<view class="price_box">￥
 		<text class="font_xl">{{list.price}}</text>
 		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
@@ -34,7 +34,7 @@
 
 		</view>
 		<view class="gys_box"  wx:if="{{list.productInfo.advertiseSlogans!=''}}">
-			<image src="{{imgUrl}}img/details/gys.png" mode="widthFix"></image>
+			<image src="{{imgUrls}}img/details/gys.png" mode="widthFix"></image>
 			<!-- <text>供应商：{{list.productInfo.supplierInfo.supplieName}}</text> -->
 			<text>{{list.productInfo.advertiseSlogans}}</text>
 		</view>
@@ -45,7 +45,7 @@
 <navigator url="/pages/details/ghszz/ghszz" hover-class="none">
 	<view class="gyszz_box">
 		<i></i>
-		<text>服务承诺</text>
+		<text>服务承诺  购买须知 售后处理</text>
 	</view>
 </navigator>
 <!-- 商品详情 -->
@@ -72,7 +72,7 @@
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
 			</view>
 			<view class="gmjl_box">
-				<block wx:for="{{RecordList.orderList}}" wx:if="{{index<21}}">
+				<block wx:for="{{orderList}}" wx:if="{{index<21}}">
 					<view class="gmjl_list">
 						<image src="{{item.photo}}" mode="widthFix"></image>
 						<view class="gmjl_mess">
@@ -92,7 +92,7 @@
 		<scroll-view scroll-y style="height: 100%">
 			<view class="gmjl_lists">
 				<view class="sppj">
-					<image src="{{imgUrl}}img/pic/4.png" mode="widthFix" class="head"></image>
+					<image src="{{imgUrls}}img/pic/4.png" mode="widthFix" class="head"></image>
 					<view class="gmjl_mess">
 						<text class="mz">王XX</text>
 						<text>2020-04-05 12:20:23</text>
@@ -101,9 +101,9 @@
 				<view class="phnr">
 					<text class="cons">很好很好很好很好很好很好很好很好很好很好很好很好</text>
 					<view class="imgs_box">
-						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
-						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
-						<image src='{{imgUrl}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrls}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrls}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
+						<image src='{{imgUrls}}img/pic/1.png' style='width:180rpx;height:180rpx;' bindtap='previewImg' data-index="{{i}}"></image>
 					</view>
 				</view>
 			</view>
@@ -116,15 +116,15 @@
 <view class="bottom">
 	<view class="icon_box">
 		<view class="index" catchtap="toIndex">
-			<image src="{{imgUrl}}img/details/sy.png" mode="widthFix"></image>
+			<image src="{{imgUrls}}img/details/sy.png" mode="widthFix"></image>
 			<text>首页</text>
 		</view>
 		<view class="index" catchtap="toGwc">
-			<image src="{{imgUrl}}img/details/gwc.png" mode="widthFix"></image>
+			<image src="{{imgUrls}}img/details/gwc.png" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>
 		<view class="index" catchtap="handleOpen1">
-			<image src="{{imgUrl}}img/details/share.png" mode="widthFix"></image>
+			<image src="{{imgUrls}}img/details/share.png" mode="widthFix"></image>
 			<text>分享</text>
 		</view>
 	</view>
@@ -144,7 +144,7 @@
 		<view class="wechat">
 		<button open-type="share"	>
 			<view class="item">
-				<image	src="{{imgUrl}}img/details/dd3.png"></image>
+				<image	src="{{imgUrls}}img/details/dd3.png"></image>
 				<text style="margin-top:10rpx">微信好友</text>
 			</view>
 			</button>
@@ -160,6 +160,6 @@
 <view class='imagePathBox' wx:if="{{maskHidden}}">
 	<image src="{{shareImage}}" class='shengcheng'></image>
 	<button class='baocun' catchtap='eventSave'>保存图片</button>
-  <image  src="{{imgUrl}}img/details/close.png" mode="widthFix" style="width:40rpx" class="close" bindtap="close"></image>
+  <image  src="{{imgUrls}}img/details/close.png" mode="widthFix" style="width:40rpx" class="close" bindtap="close"></image>
 </view>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>

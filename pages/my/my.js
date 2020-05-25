@@ -9,6 +9,7 @@ Page({
    */
   data: {
     imgUrl:app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
   },
 
   /**
@@ -30,6 +31,12 @@ Page({
    */
   onShow: function () {
     var  that=this;
+    var aa=wx.getStorageSync('aa')
+    if(aa=='0'){
+      that.query()//查询用户切换店铺
+    }else {
+      that.list()
+    }
     app.refresh()    
     var session=wx.getStorageSync('session')
     console.log(session)
@@ -99,5 +106,89 @@ orderNum() {
   }
   base.request(params);
 },
+// 查询用户切换店铺
 
+query(){
+  var that=this;
+  var userId = wx.getStorageSync('userId')
+  var params = {
+    url: '/app/user/findUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo:{'id':userId}
+    },
+    sCallBack: function (data) {
+      that.setData({
+        defaultztd:data.data.result,
+        addressth:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address,
+        shopName:data.data.result.headInfo.shopName,
+       
+        phones:data.data.result.headInfo.phone
+      })
+     
+      
+    },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
+  // 团长地址
+  list(){
+    var that = this;
+    var myLat = wx.getStorageSync('latitude');
+    var myLng = wx.getStorageSync('longitude');
+    console.log(myLat)
+    var params = {
+      url: '/app/head/findAllHeadInfoByDistance',
+      method: 'POST',
+      data: {
+        myLat:myLat,
+        myLng:myLng,
+        'pageIndex':1,
+        'pageSize':1,
+      },
+      sCallBack: function (data) {
+        var list= data.data.result.datas;
+        if(list.length==0){
+          that.default()
+           
+        }
+        that.setData({
+         shopName:list[0].shopName,
+         phones:list[0].phone,
+        
+         addressth:list[0].province+list[0].city+list[0].area+list[0].street+list[0].address
+        })
+       
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 默认自提点
+  default(){
+    var that=this;
+    var params = {
+      url: '/app/head/findHeadInfoProperty',
+      method: 'GET',
+      data: {
+       
+      },
+      sCallBack: function (data) {
+        var list= data.data.result;
+        that.setData({
+          shopName:list.shopName,
+          phones:list.phone,
+          ztdid2:list.id,
+          addressth:list.address
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
 })

@@ -4,7 +4,7 @@
 	<view class="message_kd">
 		<view class="top">
 			<view class="img">
-				<image src="{{imgUrl}}img/public/logo.png" mode="widthFix"></image>
+				<image src="{{imgUrls}}img/public/logo.png" mode="widthFix"></image>
 			</view>
 			<view class="message">
 				<text class="name">{{shopName}}</text>

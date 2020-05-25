@@ -1,2 +1,6 @@
 /* pages/details/h/h.wxss */
 @import "../../../utils/wxParse/wxParse.wxss";
+.box{
+  width: 92%;
+  margin: 0 auto;
+}

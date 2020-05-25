@@ -173,8 +173,8 @@
   padding: 55% 0;
   color: #999;
   text-align: center;
-  display: flex;
-  width: 39%;
+  /* display: flex; */
+  width: 80%;
   margin: 0 auto;
 
 }

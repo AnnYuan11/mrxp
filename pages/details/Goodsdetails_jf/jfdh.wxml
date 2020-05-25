@@ -4,7 +4,7 @@
   <image src="{{imgUrl}}{{list.photo}}"></image>
 </view>
 <view class="goods_introduce">
-  <image src="{{imgUrl}}img/details/bg_goodsdetails.png" mode="widthFix"></image>
+  <image src="{{imgUrls}}img/details/bg_goodsdetails.png" mode="widthFix"></image>
   <view class="price_box">
     <text class="font_xl">{{list.integral}}积分兑换</text>
     <text style="text-decoration: line-through;">￥{{list.price}}</text>
@@ -18,7 +18,7 @@
       {{list.commodityName}}
     </view>
     <view class="gys_box">
-      <image src="{{imgUrl}}img/details/gys.png" mode="widthFix"></image>
+      <image src="{{imgUrls}}img/details/gys.png" mode="widthFix"></image>
       <text>供应商：{{list.supplier}}</text>
     </view>
   </view>

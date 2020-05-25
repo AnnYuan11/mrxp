@@ -6,6 +6,7 @@ var util = require('/utils/cache.js');
 App({
   globalData: {
     imgUrl: "https://resource.zgmrxp.com/",
+    imgUrls: "https://photo.zgmrxp.com/",
     color: '#E10004',
   },
   onLaunch (options) {

@@ -12,6 +12,7 @@ Page({
     size: 10,//每页数据条数
     totalCount: 0,//总是数据条数
     pagecount: 0,//总的页数
+    imgUrls: app.globalData.imgUrls,
   },
 
   /**

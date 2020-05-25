@@ -2,7 +2,7 @@
 <view class="title" wx:if="{{defaultztd==''}}">
   <view class="top">
     <view class="img">
-      <image src="{{imgUrl}}img/public/logo.png" lazy-load="{{true}}"wx:if="{{imgUrl}}" mode="widthFix"></image>
+      <image src="{{imgUrls}}img/public/logo.png" lazy-load="{{true}}"wx:if="{{imgUrls}}" mode="widthFix"></image>
     </view>
     <view class="message">
       <text class="name">
@@ -16,14 +16,14 @@
   </view>
 
   <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{phone}}">
-    <image src="{{imgUrl}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle" lazy-load="{{true}}"></image>
+    <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle" lazy-load="{{true}}"></image>
     <text>团长：{{name}}</text>
   </view>
 </view>
 <view class="title" wx:else>
   <view class="top">
     <view class="img">
-      <image src="{{imgUrl}}img/public/logo.png" mode="widthFix"></image>
+      <image src="{{imgUrls}}img/public/logo.png" mode="widthFix"></image>
     </view>
     <view class="message">
       <text class="name">
@@ -37,13 +37,13 @@
   </view>
 
   <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{defaultztd.headInfo.phone}}">
-    <image src="{{imgUrl}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
+    <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
     <text>团长：{{defaultztd.headInfo.headName}}</text>
   </view>
 </view>
  <!-- 搜索 -->
 <view class="search_Box">
-    <image src="{{imgUrl}}img/details/search.png" mode="widthFix"></image>
+    <image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
     <input placeholder="搜索店铺" placeholder-class="serch" bindinput="con" bindconfirm="search"></input>
   </view>
 <i-load-more tip="附近提货点" loading="{{ false }}" />
@@ -51,12 +51,12 @@
 <block wx:for="{{list}}">
   <view class="list" catchtap="change" data-item="{{item}}">
     <view class="img_box">
-      <image src="{{col=='0'?imgUrl+'img/public/yingye.png':imgUrl+'img/public/xiuxi.png'}}" mode="widthFix"></image>
+      <image src="{{col=='0'?imgUrls+'img/public/yingye.png':imgUrls+'img/public/xiuxi.png'}}" mode="widthFix"></image>
       <text>营业中</text>
     </view>
     <text class="dm_name">{{item.shopName}}</text>
     <text class="address_detail">{{item.province}}{{item.city}}{{item.area}}{{item.street}}{{item.address}}    </text>
-    <text class="distance">{{item.distance}}km</text>
+    <text class="distance">{{item.distance}}</text>
   </view>
 </block>
 </view>

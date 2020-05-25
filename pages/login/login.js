@@ -14,6 +14,7 @@ Page({
   data: {
     // issq:true
     imgUrl: app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
   },
 
   /**

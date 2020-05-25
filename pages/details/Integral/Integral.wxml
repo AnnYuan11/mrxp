@@ -1,6 +1,6 @@
 <!--pages/details/Integral/Integral.wxml-->
 <view class="top_box">
-  <image src="{{imgUrl}}img/details/jf.png" mode="widthFix" style="width:100%"></image>
+  <image src="{{imgUrls}}img/details/jf.png" mode="widthFix" style="width:100%"></image>
   <view class="jfxx">
     <view>我的积分</view>
     <view class="num_jf">{{personal.integral}}分</view>

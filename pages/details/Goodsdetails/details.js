@@ -12,6 +12,7 @@ Page({
    */
   data: {
     imgUrl:app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     currentTab: 0,
     indicatorDots: false,
     vertical: false,
@@ -282,10 +283,19 @@ buyRecord(e){
      id:that.data.id
     },
     sCallBack: function (data) {
+      var orderList=data.data.result.orderList;
+      orderList.forEach(element => {
+        if(element.nick_name.length>1){
+          element.nick_name=element.nick_name.substr(0, 1)+'***'+element.nick_name.substr(-1)
+        }
+      });
       if(data.data.errorCode=='0'){
         that.setData({
+          orderList:orderList,
           RecordList:data.data.result
         })
+
+        // console.log(data.data.result.orderList[0].nick_name.length)
       } 
       
     },
@@ -454,7 +464,7 @@ eventDraw () {
           fontSize: 14,
           color: '#383549',
           textAlign: 'left',
-          top: 500,
+          top: 520,
           left: 165.5,
           lineHeight: 20,
           MaxLineNumber: 2,
@@ -472,7 +482,7 @@ eventDraw () {
           lineHeight: 20,
           MaxLineNumber: 2,
           breakWord: true,
-          width: 125
+          width: 170
         }
       ]
     }

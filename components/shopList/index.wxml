@@ -21,7 +21,7 @@
 				<view class="list {{item.isBuy=='2'? 'gray':''}}" wx:for="{{list}}" wx:key="{{index}}">
 					<view class="tiems" wx:if="{{item.isBuy=='2'}}">该商品将于{{item.commodityInfo.startTime}}开售</view>
 					<view class="isbuy" wx:if="{{item.isBuy!='2'}}">
-						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
+						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrls}}img/public/del.png'></image>
 						<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/new/select.png'></image>
 						<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
 					</view>
@@ -32,7 +32,7 @@
 							<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>
 						</block>
 						<image data-index="{{index}}" wx:if="{{ischoose}}" class="radio_chek" src='/img/new/nosec.png'></image>
-						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrl}}img/public/del.png'></image>
+						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrls}}img/public/del.png'></image>
 					</view>
 					<!-- 列表标题 -->
 					<text class="list_name" data-id="{{item.commodityInfo.id}}" bindtap="Details">{{item.commodityInfo.productInfo.commodityName}}</text>
@@ -45,7 +45,7 @@
 						<view class="carts-num">
 							<!-- 减按钮 -->
 							<lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
-								<image src='{{imgUrl}}img/public/jian.png' style="width:44rpx;height:44rpx"></image>
+								<image src='{{imgUrls}}img/public/jian.png' style="width:44rpx;height:44rpx"></image>
 							</lable>
 							<!-- 文本框值 -->
 							<label class="view_text_center" bindinput='input_num' data-index="{{index}}">
@@ -53,7 +53,7 @@
 							</label>
 							<!-- 加按钮 -->
 							<lable class="plus" bindtap="btn_add" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
-								<image src='{{imgUrl}}img/public/add.png' style="width:44rpx;height:44rpx"></image>
+								<image src='{{imgUrls}}img/public/add.png' style="width:44rpx;height:44rpx"></image>
 							</lable>
 						</view>
 					</view>
@@ -72,8 +72,11 @@
 		</view>
 	</view>
 	<view wx:else>
-		<view class="list_none">
-			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx"></image><text style="margin-left: 18rpx">购物车是空的哦~</text>
+		<view class="list_none" wx:if="{{shoppingType==1}}">
+			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx;margin-top: -11rpx;vertical-align: middle;"></image><text style="margin-left: 18rpx">购物车是空的哦~</text>
+		</view>
+		<view class="list_none" wx:if="{{shoppingType==2}}">
+			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx;margin-top: -11rpx;vertical-align: middle;"></image><text style="margin-left: 18rpx">快递配送系统正在努力开发中~</text>
 		</view>
 	</view>
 </view>

@@ -28,7 +28,7 @@
   width:150rpx;
   height:40rpx;
   line-height: 40rpx;
-  background:rgba(255,217,54,1);
+  background:green;
   opacity:0.9;
   text-align: center;
   color: #fff;

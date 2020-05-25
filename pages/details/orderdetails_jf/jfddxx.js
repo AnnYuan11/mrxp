@@ -9,6 +9,7 @@ Page({
    */
   data: {
     imgUrl:app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
 
   },
 

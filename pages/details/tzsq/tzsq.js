@@ -12,6 +12,7 @@ Page({
   data: {
     color: getApp().globalData.color,
     imgUrl:getApp().globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     multiArray: [],
     multiIndex: [0, 0, 0, 0],
     chinaData: [],
@@ -19,7 +20,19 @@ Page({
     supervisorInfo: {
       phone: ''
     },
-    imgArr:[]
+    imgArr:[],
+    objectArray: [
+      {
+        id: 1,
+        name: '自主注册'
+      },
+      {
+        id: 2,
+        name: '推广经理发展'
+      },
+    ],
+    index: 0,
+    registerType:1
   },
 
   /**
@@ -80,6 +93,15 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 推荐人选择
+  bindPickerChange: function(e) {
+    console.log(e.detail.value)
+    this.setData({
+      index: e.detail.value,
+      registerType:this.data.objectArray[e.detail.value].id
+    })
+    console.log(this.data.registerType)
+  },
   bindMultiPickerChange: function (e) {
     console.log(e);
     var that = this;
@@ -134,7 +156,7 @@ Page({
       that.initData(chinaData);
     }else{
       wx.request({
-        url: 'https://resource.zgmrxp.com/city.json',
+        url: 'https://photo.zgmrxp.com/city.json',
         success: res=> {
           console.log(res);
           var chinaData = res.data;
@@ -231,7 +253,9 @@ Page({
   },
   // 提交
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    console.log(e.detail.value)
+    console.log(this.data.registerType)
+
     const Deparams = e.detail.value;
     if (!this.WxValidate.checkForm(Deparams)) {
       const error = this.WxValidate.errorList[0]
@@ -239,7 +263,8 @@ Page({
       return false
     } else {
       var that = this;
-      that.upload();
+     
+      console.log(that.data.photo)
       var params = {
         url: '/app/head/addHeadInfo',
         method: 'POST',
@@ -254,10 +279,12 @@ Page({
           'shopName': e.detail.value.shopName,
           'lat':that.data.latitude,
           'lng':that.data.longitude,
+          'photo':that.data.photo,
           'personNumber':e.detail.value.wxnum,
           'supervisorInfo': {
             'phone': e.detail.value.supervisorInfo
-          }
+          },
+          'registerType':this.data.registerType
         },
         sCallBack: function (data) {
           if(data.data.errorCode == 0) {
@@ -356,7 +383,7 @@ Page({
             that.setData({
                 imgArr: imgArr
             });
-
+            that.upload();
             console.log(tempFilePaths);
             console.log(that.data.imgArr)
         }
@@ -373,9 +400,12 @@ Page({
             formData: {},
             header: { Cookie: that.data.loginData },
             success: function (res) {
-                console.log(res);
-                var data = res.data
-                var datas = JSON.parse(data)
+              var data = res.data
+              var datas = JSON.parse(data)
+              that.setData({
+                photo:datas.result.path[0]
+              })
+              console.log(datas);
                
             }
         })

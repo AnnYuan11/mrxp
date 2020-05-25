@@ -42,6 +42,7 @@ Component({
     pagecount: 0,//总的页数
     // shoppingCarType: 1,
     imgUrl: app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     ids: [],
   },
   lifetimes: {

@@ -5,7 +5,7 @@
 		<view class="message_kd">
 			<view class="top">
 				<view class="img">
-					<image src="{{imgUrl}}img/public/logo.png" mode="widthFix"></image>
+					<image src="{{imgUrls}}img/public/logo.png" mode="widthFix"></image>
 				</view>
 			<view class="message">
           <text class="name">{{shopName}}</text>
@@ -27,7 +27,7 @@
 			<view class="bottom">
 				<view class="address">地  址：{{mrdz.province}}{{mrdz.city}}{{mrdz.area}}{{mrdz.province}}{{mrdz.address}}</view>
 				<view class="thr">收货人：{{mrdz.name}} {{mrdz.phone}}</view>
-				<image src="{{imgUrl}}img/public/right.png" mode="widthFix" style="width:40rpx;float:right;margin-top: -10%"></image>
+				<image src="{{imgUrls}}img/public/right.png" mode="widthFix" style="width:40rpx;float:right;margin-top: -10%"></image>
 			</view>
 		</view>
 		<view class="message_kd" wx:else>请选择地址</view>
@@ -49,17 +49,17 @@
 	<view class="section section2">
 		<view class="yhq yhqs" bindtap="selectCoupons">
 			<view class="left">
-				<image src="{{imgUrl}}img/details/dd1.png" mode="widthFix"></image>
+				<image src="{{imgUrls}}img/details/dd1.png" mode="widthFix"></image>
 				<text>优惠券</text>
 			</view>
 			<view class="right">
 				<text>{{yhqmoney}}</text>
-				<image src="{{imgUrl}}img/public/right.png" mode="widthFix"></image>
+				<image src="{{imgUrls}}img/public/right.png" mode="widthFix"></image>
 			</view>
 		</view>
 		<view class="yhq">
 			<view class="left">
-				<image src="{{imgUrl}}img/details/dd2.png" mode="widthFix"></image>
+				<image src="{{imgUrls}}img/details/dd2.png" mode="widthFix"></image>
 				<text>满减优惠</text>
 			</view>
 			<view class="right">
@@ -71,7 +71,7 @@
 	<view class="section section2">
 		<view class="instructions">
 			<text>1. 如果您在购物过程中有任何问题，请直接与购买的门店联系！</text>
-			<text>2. 如果您在平台使用中有任何疑问，可致电每日鲜品热线电话4003008000</text>
+			<text>2. 如果您在平台使用中有任何疑问，可致电每日鲜品热线电话4000038000</text>
 		</view>
 	</view>
 </view>
@@ -87,7 +87,7 @@
 <view class="sureMessage" wx:if="{{topay}}">
 	<view class="sureMessageBox">
 		<view class="topImg">
-			<image src="{{imgUrl}}a1.png" mode="widthFix" style="width:390rpx"></image>
+			<image src="{{imgUrls}}a1.png" mode="widthFix" style="width:390rpx"></image>
 			<text class="thrq">{{options.pickDate}}提货</text>
 		</view>
 		<view class="tips">此商品需要您到店自提，请仔细确认地址！</view>
@@ -95,7 +95,7 @@
 			<view class="message_kd">
 				<view class="top">
 					<view class="img">
-						<image src="{{imgUrl}}img/public/logo.png" mode="widthFix"></image>
+						<image src="{{imgUrls}}img/public/logo.png" mode="widthFix"></image>
 					</view>
 					<view class="message">
 						<text class="name">{{shopName}}</text>

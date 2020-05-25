@@ -20,11 +20,11 @@ Page({
     currentTab: 0,
     // show:true,//弹窗
     imgUrl: app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
-
   },
 
   /**
@@ -140,6 +140,9 @@ Page({
     }
     app.getShopNum()
     that.order()
+    that.data.currentPage = 1,
+    that.data.totalCount = 0, //总是数据条数
+    that.data.pagecount = 0, //总的页数
     that.shopList() 
     // that.djs()
   },
@@ -253,7 +256,7 @@ getPic(){
       that.data.currentPage = 1,
         that.data.totalCount = 0, //总是数据条数
         that.data.pagecount = 0, //总的页数
-        that.shopListM() //已使用
+        that.shopListM() 
     }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -286,6 +289,7 @@ getPic(){
     var y = date.getFullYear();
     var m = date.getMonth() + 1; //获取当前月份的日期 
     var d = date.getDate();
+    
 
     if (m < 10) {
       m = '0' + m;
@@ -301,6 +305,9 @@ getPic(){
   // 今日售卖列表
   shopList(className) {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var params = {
       url: '/app/commodity/listCommodityInfo',
       method: 'POST',
@@ -311,7 +318,14 @@ getPic(){
         'sendType':'1'
       },
       sCallBack: function (data) {
+       
         var listToday = data.data.result.datas
+        if(listToday){
+          wx.hideLoading({
+            complete: (res) => {},
+          })
+        }
+        
         if (listToday != '') {
           listToday.forEach((item, index) => {
             item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
@@ -327,8 +341,8 @@ getPic(){
               item.pickDate = that.data.tomorow
             } else if (item.pickDate == 2) {
               that.getDateStr(null, 1)
-              var tomorow = that.data.tomorow
-              item.pickDate = tomorow
+              var tomorows = that.data.tomorow
+              item.pickDate = tomorows
             } else {
               that.getDateStr(null, 2)
               var ht = that.data.tomorow
@@ -363,7 +377,7 @@ getPic(){
           totalCount: data.data.result.rowCount, //总的数据条数
           pagecount: data.data.result.totalPages //总页数
         })
-        console.log(that.data.listToday)
+        // console.log(that.data.listToday)
 
       },
       eCallBack: function () {}
@@ -671,12 +685,13 @@ getPic(){
   bindscrolltolower: function () {
     // debugger
     var that=this
+    console.log(that.data.currentTab)
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
       if (that.data.currentTab == '0') {
         this.shopList();
       } else {
-        this.shopListM();
+        // this.shopListM();
       }
      
     } else {

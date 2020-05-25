@@ -1,6 +1,6 @@
 <!--pages/details/wdye/wdye.wxml-->
 <view class="bg_box">
-  <image src="{{imgUrl}}img/details/wdye_bg.png" mode="widthFix"></image>
+  <image src="{{imgUrls}}img/details/wdye_bg.png" mode="widthFix"></image>
   <view class="assets">我的资产：￥{{personal.money}}</view>
   <view class="withdrawal">
       <view class="ktx bot">

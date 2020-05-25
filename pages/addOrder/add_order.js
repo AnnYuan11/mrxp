@@ -9,6 +9,7 @@ Page({
    */
   data: {
     imgUrl:app.globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
     productInfo: {},
     yhqmoney: '选择优惠券',
     payTypes: 2,//默认微信支付

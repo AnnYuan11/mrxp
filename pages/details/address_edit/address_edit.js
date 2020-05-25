@@ -13,6 +13,7 @@ Page({
     chinaData: [],
     color: getApp().globalData.color,
     imgUrl:getApp().globalData.imgUrl,
+    imgUrls: app.globalData.imgUrls,
   },
 
  
@@ -141,7 +142,7 @@ Page({
       that.initData(chinaData);
     }else{
       wx.request({
-        url: 'https://resource.zgmrxp.com/city.json',
+        url: 'https://photo.zgmrxp.com/city.json',
         success: res=> {
           console.log(res);
           var chinaData = res.data;
