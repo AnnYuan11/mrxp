@@ -18,9 +18,9 @@
 					</view>
 				</view>
 				<!-- 列表 -->
-				<view class="list {{item.isBuy=='2'? 'gray':''}}" wx:for="{{list}}" wx:key="{{index}}">
+				<view class="list {{item.isBuy=='2'||item.isBuy=='4'? 'gray':''}}" wx:for="{{list}}" wx:key="{{index}}">
 					<view class="tiems" wx:if="{{item.isBuy=='2'}}">该商品将于{{item.commodityInfo.startTime}}开售</view>
-					<view class="isbuy" wx:if="{{item.isBuy!='2'}}">
+					<view class="isbuy" wx:if="{{item.isBuy=='1'}}">
 						<image class='dele_edit' bindtap="{{item.selected ? 'deletes' :  'deletrsTip'}}" data-id='{{item.id}}' style='display:{{edit_show}}' src='{{imgUrls}}img/public/del.png'></image>
 						<image wx:if="{{item.selected}}" data-index="{{index}}" class="radio_chek" bindtap="selectList" src='/img/new/select.png'></image>
 						<image wx:else src='/img/new/sec.png' class="radio_chek" data-index="{{index}}" bindtap="selectList"></image>

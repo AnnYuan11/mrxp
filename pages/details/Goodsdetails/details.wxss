@@ -239,6 +239,9 @@ i{
 .gmjl_shul text{
   color: #E10004;
 }
+.gmjl{
+  text-align: center;
+}
 /* 商品评价 */
 .gmjl_lists{
   width: 100%;

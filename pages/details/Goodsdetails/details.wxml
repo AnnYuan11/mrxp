@@ -72,7 +72,7 @@
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
 			</view>
 			<view class="gmjl_box">
-				<block wx:for="{{orderList}}" wx:if="{{index<21}}">
+				<block wx:for="{{orderList}}" wx:if="{{index<20}}">
 					<view class="gmjl_list">
 						<image src="{{item.photo}}" mode="widthFix"></image>
 						<view class="gmjl_mess">
@@ -83,8 +83,8 @@
 							<text>{{item.commodity_number}}</text>份
 						</view>
 					</view>
-					<view class="gmjl_list" wx:if="{{index>20}}">购买人数太多，显示不下了</view>
 				</block>
+				<view class="gmjl" wx:if="{{orderList.length>20}}">购买人数太多，显示不下了</view>
 			</view>
 		</scroll-view>
 	</view>

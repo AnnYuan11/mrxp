@@ -255,12 +255,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+ 
   swichNav: function (e) {
     var that = this;
     endSecond = []
@@ -912,6 +907,10 @@ Page({
     }
     base.request(params);
   },
+  // 备货中取消订单
+  // cancel_bh(){
+
+  // },
   // 去付款
   Topay(e) {
     console.log(e)

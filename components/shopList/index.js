@@ -84,6 +84,7 @@ Component({
   * 当前商品选中事件
   */
     selectList(e) {
+      console.log(e)
       var that = this;
       // 获取选中的radio索引
       var index = e.currentTarget.dataset.index;
@@ -489,11 +490,13 @@ Component({
         })
       } else {
         let list = that.data.list;
+        console.log(that.data.list)
         // 循环遍历判断列表中的数据是否选中
         const product = [];
 
         for (let i = 0; i < list.length; i++) {
-          if (list[i].selected&&list[i].isBuy!='2') {
+          // debugger
+          if (list[i].selected&&list[i].isBuy!='4'){
             const productItem = {};
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName

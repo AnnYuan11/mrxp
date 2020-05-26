@@ -2,5 +2,8 @@
   "usingComponents": {  },
   "navigationBarTitleText": "每日鲜品社区团购",
   "navigationStyle": "custom",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh":true,
+  "backgroundTextStyle": "dark"
+
 }

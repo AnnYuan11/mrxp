@@ -154,38 +154,58 @@ Recharge(){
     method: 'POST',
     data: arg,
     sCallBack: function (data) {
-      console.log(data)  
+      console.log(data)
+      
       wx.hideLoading({
         complete: (res) => {},
       })
-      wx.requestPayment({
-        appId: 'wx874be472f0a6147b',
-        timeStamp: data.data.result['timeStamp'],
-        nonceStr: data.data.result['nonceStr'],
-        package: data.data.result['packageValue'],
-        signType: 'MD5',
-        paySign: data.data.result['paySign'],
-        'success': function (res) {
-          console.log(res)
-          that.delItem()
-          wx.showToast({
-            title: '已支付成功！',
-            icon: 'none',
-            duration: 2000,
-            success: function () {
-              setTimeout(function () {
-                wx.redirectTo({
-                  url: '/pages/details/order_list/order_list',
-                })
-              }, 2000);
+      if(data.data.errorCode=='0'){
+        wx.requestPayment({
+          appId: 'wx874be472f0a6147b',
+          timeStamp: data.data.result['timeStamp'],
+          nonceStr: data.data.result['nonceStr'],
+          package: data.data.result['packageValue'],
+          signType: 'MD5',
+          paySign: data.data.result['paySign'],
+          'success': function (res) {
+            console.log(res)
+            that.delItem()
+            wx.showToast({
+              title: '已支付成功！',
+              icon: 'none',
+              duration: 2000,
+              success: function () {
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '/pages/details/order_list/order_list',
+                  })
+                }, 2000);
+  
+              }
+            })
+          },
+          fail: function (e) {
+            console.log(e)
+          }
+        })    
+      }else{
+        wx.showToast({
+          title: data.data.errorMsg,
+          icon:'none',
+          duration:2000,
+          success: function () {
+            setTimeout(function () {
+              wx.navigateBack({
 
-            }
-          })
-        },
-        fail: function (e) {
-          console.log(e)
-        }
-      })      
+                delta: 2
+                
+                })
+            }, 2000);
+
+          }
+        })
+      }
+       
     },
     eCallBack: function () {
     }

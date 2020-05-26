@@ -25,6 +25,7 @@ Page({
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
+    triggered: false,
   },
 
   /**
@@ -42,12 +43,22 @@ Page({
     that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
+    that.shopList() 
     that.setData({
       today: today,
-      qhdzid: options.zdtid
+      qhdzid: options.zdtid,
+      options:options
     })
     if (that.data.qhdzid) {
+      that.setData({
+        shopName:options.shopName
+      })
+      // var zdtid = wx.getStorageSync('zdtid')
+      // console.log(zdtid)
+      // console.log(that.data.qhdzid)
       that.change()
+    }else{
+      
     }
     // 获取设备高度
     wx.getSystemInfo({
@@ -69,10 +80,30 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
-  
- 
+  onPulling(e) {
+    var that=this;
+    that.data.listToday=[]
+    console.log(that.data.listToday)
+  },
+  onRefresh() {
+    var that=this;
+    var that=this;
+    that.data.currentPage = 1,
+    that.data.totalCount = 0, //总是数据条数
+    that.data.pagecount = 0, //总的页数
+    that.shopList() //已使用
+    
+    if (this._freshing) return
+    this._freshing = true
+    setTimeout(() => {
+      this.setData({
+        triggered: false,
+      })
+      this._freshing = false
+    }, 1500)
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -131,6 +162,7 @@ Page({
         }
       }
     })
+    
     var aa = wx.getStorageSync('aa')
 
     if (aa == '0') {
@@ -140,10 +172,7 @@ Page({
     }
     app.getShopNum()
     that.order()
-    that.data.currentPage = 1,
-    that.data.totalCount = 0, //总是数据条数
-    that.data.pagecount = 0, //总的页数
-    that.shopList() 
+   
     // that.djs()
   },
 
@@ -155,7 +184,6 @@ Page({
   },
  
   hourReport() {
-    console.log(11111111)
     var that=this;
     //当前时间
     var time = new Date();
@@ -192,9 +220,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+  
   },
-
+  
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -215,12 +243,12 @@ Page({
     var that=this;
     var zdtid = wx.getStorageSync('zdtid')
   
-    console.log(zdtid)
+    console.log(that.data.shopName)
     return {
       title: that.data.shopShareTitle,
       imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
       // desc: '分享页面的内容',
-      path: '/pages/index/index?zdtid=' + zdtid // 路径，传递参数到指定页面。
+      path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
     }
   },
   // 获取分享图片
@@ -309,7 +337,7 @@ getPic(){
       title: '加载中',
     })
     var params = {
-      url: '/app/commodity/listCommodityInfo',
+      url: '/app/commodity/listCommodityInfoForNative',
       method: 'POST',
       data: {
         'name': className,
@@ -319,7 +347,10 @@ getPic(){
       },
       sCallBack: function (data) {
        
-        var listToday = data.data.result.datas
+        var listToday = data.data.result
+        // if(listToday.length=='0'){
+        //   that.shopList()
+        // }
         if(listToday){
           wx.hideLoading({
             complete: (res) => {},
@@ -365,17 +396,17 @@ getPic(){
         var temlist = that.data.listToday; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-          temlist = data.data.result.datas; //初始化数据列表
+          temlist = data.data.result; //初始化数据列表
           currentPage = 1;
         } else {
-          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          temlist = temlist.concat(data.data.result); //请求的数据追加到原始数据集合里
           // currentPage = currentPage + 1;
         }
         that.setData({
           currentPage: currentPage,
           listToday: temlist,
-          totalCount: data.data.result.rowCount, //总的数据条数
-          pagecount: data.data.result.totalPages //总页数
+          totalCount: data.data.result[0].rowCount, //总的数据条数
+          pagecount: data.data.result[0].totalPages //总页数
         })
         // console.log(that.data.listToday)
 
@@ -886,6 +917,7 @@ getPic(){
   },
   city() {
     var that = this;
+   
     var latitude = wx.getStorageSync('latitude')
     var longitude = wx.getStorageSync('longitude')
     qqmapsdk.reverseGeocoder({
@@ -894,11 +926,11 @@ getPic(){
         longitude: longitude
       },
       success: function (addressRes) {
-
+     
         that.weather(addressRes.result.ad_info.city)
       },
       fail: function (error) {
-
+        console.log(error)
       },
       complete: function (res) {
 
@@ -994,10 +1026,11 @@ getPic(){
       eCallBack: function () {}
     }
     base.request(params);
-
-
-
-
-
   },
+  radioChange(e) {
+    console.log(e)    
+  },
+  sure_zt(){
+    
+  }
 })

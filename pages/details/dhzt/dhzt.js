@@ -184,12 +184,7 @@ locations: function () {
     }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  
   con(e){
     console.log(e)
     var className=e.detail.value

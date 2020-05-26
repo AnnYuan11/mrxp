@@ -31,7 +31,7 @@ Page({
     if (options.scene) {
       that.setData({
         id:options.scene,
-       
+        // scene:options.scene
       })
     }else{
       that.setData({
@@ -129,7 +129,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-
+    console.log(res)
+    if(res.from==='button'){
+      return {
+        title: this.data.list.productInfo.commodityName,     
+      }
+    }
+   
   },
   // 详情切换
   swichNav: function (e) {

@@ -163,7 +163,9 @@
 								<text> 合计：</text>
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
-
+							<!-- <view class="button" style="width:30%">
+								<view class="sub buy" catchtap="cancel_bh" data-id="{{item.id}}">取消订单</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
