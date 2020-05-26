@@ -33,7 +33,8 @@
     "pages/details/h/h",
     "pages/details/address_edit/address_edit",
     "pages/details/jfmx/jfmx",
-    "pages/details/notice_details/notice_details"
+    "pages/details/notice_details/notice_details",
+    "pages/details/topay/pay_success"
   ],
   "window": {
     "backgroundTextStyle": "light",

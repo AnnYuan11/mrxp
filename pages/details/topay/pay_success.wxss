@@ -1,0 +1,98 @@
+/* pages/details/topay/pay_success.wxss */
+
+.pay_top {
+    width: 100%;
+    position: relative;
+}
+
+.text_3 {
+    color: #333;
+}
+
+.text_8 {
+    color: #888;
+}
+
+.text_white {
+    color: #fff;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.text_red {
+    color: #e10004;
+}
+
+.red_back {
+    background: #e10004;
+}
+
+.border_red {
+    border: 1px solid #e10004;
+}
+
+.font_sm {
+    font-size: 32rpx;
+}
+
+.font {
+    font-size: 28rpx;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.pay_top image {
+    display: block;
+    width: 100%;
+}
+
+.head_info {
+    width: 100%;
+    font-size: 32rpx;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    z-index: 9999;
+}
+
+.pay_middle {
+    width: 100%;
+    text-align: center;
+}
+
+.pay_middle image {
+    width: 50%;
+}
+
+.pay_button_box {
+    padding-top: 60rpx;
+}
+
+.pay_button_box button {
+    display: inline-block;
+    width: 100rpx;
+    padding: 15rpx 0;
+    text-align: center;
+    font-size: 36rpx;
+    border-radius: 50rpx;
+    margin: 10rpx 20rpx;
+}
+
+.tip_success {
+    padding: 20rpx 50rpx;
+    box-sizing: border-box;
+}
+
+.safe_tip {
+    margin-top: 80rpx;
+}
