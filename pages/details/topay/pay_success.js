@@ -19,13 +19,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        var that = this;
+        var that = this; 
+        wx.showShareMenu({ withShareTicket: true });
         var orderId = options.orderId;
         that.setData({
             orderId: orderId
         })
         that.getPic();
         that.getOrderDetail(orderId);
+
     },
 
     getOrderDetail: function(id) {
