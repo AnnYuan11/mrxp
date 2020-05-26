@@ -44,13 +44,29 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "支付成功",
+					"pathName": "pages/details/topay/pay_success",
+					"query": "orderId=2c985f097247c1df017248e03e300e53",
+					"scene": null
+				}
+			]
 		}
 	}
 }
