@@ -58,7 +58,9 @@
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
 								<view class="sub buy" catchtap="sqsh">申请售后</view>
 							</view>
-
+							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='备货中'}}">
+								<view class="sub buy" catchtap="cancel_bh">取消订单</view>
+							</view>
 							<view class="button" wx:if="{{item.orderStatus=='待提货'}}">
 
 								<view class="sub buy" catchtap="thm" data-orderId="{{item.id}}" data-pickCode="{{item.pickCode}}">我的提货码</view>

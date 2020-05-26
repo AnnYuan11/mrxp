@@ -108,7 +108,7 @@
 											<text class="spmc">{{item.commodityName}}</text>
 											<view class="right fsgz">
 												<text class="limited">{{item.viewNumber}}</text>
-												<text>粉丝关注</text>
+												<text>粉丝数</text>
 											</view>
 										</view>
 
@@ -177,7 +177,7 @@
 											<text class="spmc">{{item.productInfo.commodityName}}</text>
 											<view class="right fsgz">
 												<text class="limited">{{item.viewNumber}}</text>
-												<text>粉丝关注</text>
+												<text>粉丝数</text>
 											</view>
 										</view>
 

@@ -31,12 +31,26 @@ Page({
    */
   onShow: function () {
     var  that=this;
-    var aa=wx.getStorageSync('aa')
-    if(aa=='0'){
-      that.query()//查询用户切换店铺
-    }else {
-      that.list()
+    var userId=wx.getStorageSync('userId') 
+    console.log(userId)
+    if(userId!=''){
+      console.log('有id')
+      var aa=wx.getStorageSync('aa')
+      if(aa=='0'){
+        that.query()//查询用户切换店铺
+      }else {
+        that.list()
+      }
+    }else{
+      console.log('没有id')
+      var shop=wx.getStorageSync('shop')
+      console
+      that.setData({
+        shopName:shop.shopName,
+        addressth:shop.province+shop.city+shop.area+shop.street+shop.address
+      })
     }
+    
     app.refresh()    
     var session=wx.getStorageSync('session')
     console.log(session)
@@ -77,12 +91,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+ 
 // 查询订单数
 orderNum() {
   var that = this;

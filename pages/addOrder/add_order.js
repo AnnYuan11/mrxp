@@ -61,7 +61,7 @@ Page({
           that.setData({
             dzid: dzid ? dzid : ""
           })
-          that.defaultDz()
+          // that.defaultDz()
         // }
       }
     })
@@ -95,9 +95,10 @@ Page({
       'pageSize':1,
       },
       sCallBack: function (data) {
-        console.log(data.data.result.length)
         const result = data.data.result.datas
+        console.log(result.length)
         if (result.length == 0) {
+          debugger
           that.defaultAddress()
         } else {
           that.setData({
@@ -217,16 +218,34 @@ Page({
       method: 'POST',
       data: JSON.stringify(that.data.params),
       sCallBack: function (data) {
-        if (data.data.result.fullReductionInfo.fullMoney == '') {
-          data.data.result.fullReductionInfo.fullMoney = 0
+        if(data.data.errorCode=='0'){
+          if (data.data.result.fullReductionInfo.fullMoney == '') {
+            data.data.result.fullReductionInfo.fullMoney = 0
+          }
+          that.setData({
+            money: data.data.result,
+            yhje: data.data.result.fullReductionInfo.fullMoney
+          })
+        }else{
+          wx.showToast({
+            title: data.data.errorMsg,
+            icon:'none',
+            duration:2000,
+            success: function () {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                  })
+              }, 2000);
+  
+            }
+          })
         }
-        that.setData({
-          money: data.data.result,
-          yhje: data.data.result.fullReductionInfo.fullMoney
-        })
+        
 
       },
       eCallBack: function () {
+        console.log(data.errorMsg)
       }
     }
     base.request(params);

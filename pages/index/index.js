@@ -25,7 +25,7 @@ Page({
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
-    triggered: false,
+    triggered: false,//下拉刷新
   },
 
   /**
@@ -49,17 +49,7 @@ Page({
       qhdzid: options.zdtid,
       options:options
     })
-    if (that.data.qhdzid) {
-      that.setData({
-        shopName:options.shopName
-      })
-      // var zdtid = wx.getStorageSync('zdtid')
-      // console.log(zdtid)
-      // console.log(that.data.qhdzid)
-      that.change()
-    }else{
-      
-    }
+   
     // 获取设备高度
     wx.getSystemInfo({
       success: function (res) {
@@ -162,12 +152,29 @@ Page({
         }
       }
     })
-    
+    var userId = wx.getStorageSync('userId')
+    console.log(userId)
+    if (that.data.qhdzid) {
+      console.log(userId)
+     
+      if(userId){
+        that.change()
+      }else{
+        that.search(that.data.options.shopName)
+      }
+      that.setData({
+        shopName:that.data.options.shopName
+      })
+      // var zdtid = wx.getStorageSync('zdtid')
+      // console.log(zdtid)
+      // console.log(that.data.qhdzid)
+     
+    }
     var aa = wx.getStorageSync('aa')
-
+console.log(that.data.qhdzid)
     if (aa == '0') {
       that.query() //查询用户切换店铺
-    } else {
+    } else if(that.data.qhdzid==undefined){
       that.list() //团长地址
     }
     app.getShopNum()
@@ -544,7 +551,7 @@ getPic(){
         var aa = wx.getStorageSync('aa')
         if (aa == '0') {
           that.query() //查询用户切换店铺
-        } else {
+        } else if(that.data.qhdzid==undefined){
           that.list()
         }
 
@@ -688,7 +695,7 @@ getPic(){
             app.getShopNum()
           } else if (data.data.errorCode == '-200') {
             wx.showToast({
-              title: data.errorMsg,
+              title: data.data.errorMsg,
               icon: 'none',
               duration: 2000,
               success: function () {
@@ -1027,6 +1034,32 @@ getPic(){
     }
     base.request(params);
   },
+  //  搜索
+search(className){
+  var that=this;
+  var myLat = wx.getStorageSync('latitude');
+  var myLng = wx.getStorageSync('longitude');
+  var params = {
+    url: '/app/head/listHeadInfo',
+    method: 'POST',
+    data: {
+      'pageIndex':that.data.currentPage,
+      'pageSize':that.data.size,
+      'searchName':className,
+        myLat:myLat,
+        myLng:myLng,
+    },
+    sCallBack: function (data) {   
+      wx.setStorage({
+        data: data.data.result.datas[0],
+        key: 'shop',
+      })    
+   },
+    eCallBack: function () {
+    }
+  }
+  base.request(params);
+},
   radioChange(e) {
     console.log(e)    
   },

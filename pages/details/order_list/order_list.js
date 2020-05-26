@@ -907,10 +907,30 @@ Page({
     }
     base.request(params);
   },
-  // 备货中取消订单
-  // cancel_bh(){
+  // 备货中取消订单e
+  cancel_bh(e){
+    var that = this;
+    console.log(e)
+    var params = {
+      url: '/app/order/updateCommodityOrderInfoUserAfter',
+      method: 'GET',
+      data: {
+        'id': e.currentTarget.dataset.id, //订单id
+      },
+      sCallBack: function (data) {
+        if (data.data.errorCode == "0") {
+          wx.showToast({
+            title: data.data.result,
 
-  // },
+          })
+          that.Allorder()
+          that.bhz()
+        }
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+  },
   // 去付款
   Topay(e) {
     console.log(e)

@@ -329,7 +329,7 @@ Component({
       // 声明一个变量接收数组列表price
       let total = 0;
       let nums = 0;
-      console.log(list)
+      // console.log(list)
       // 循环列表得到每个数据
       for (let i = 0; i < list.length; i++) {
         // 判断选中计算价格
