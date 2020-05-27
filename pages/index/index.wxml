@@ -249,11 +249,11 @@
 	</view>
 </view>
 <!-- 分享 -->
-<button open-type="share" class="share">
+<!-- <button open-type="share" class="share">
 	<view class="item">
 		<image src="/img/new/fx.png" mode="widthFix"></image>
 	</view>
-</button>
+</button> -->
 <!-- 回到顶部 -->
 <view class="back" hidden='{{!floorstatus}}' bindtap="goTop">
 	<image src="/img/new/fhdb.png" mode="widthFix"></image>
@@ -270,7 +270,7 @@
 	</block>
 </swiper>
 <!-- 切换店铺 -->
-<!-- <view class="qhdp">
+<view class="qhdp" wx:if="{{dpShow}}">
 	<text>温馨提示</text>
 	<text>请选择您的自提点</text>
 	<view class="radios">
@@ -290,4 +290,4 @@
 		</radio-group>
 	</view>
 	<button bindtap="sure_zt">确定</button>
-</view> -->
+</view>

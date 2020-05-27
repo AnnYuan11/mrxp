@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/topay/pay_success",
     "pages/my/my",
     "pages/details/tzsq/tzsq",
     "pages/details/sqtx/sqtx",
@@ -33,8 +34,7 @@
     "pages/details/h/h",
     "pages/details/address_edit/address_edit",
     "pages/details/jfmx/jfmx",
-    "pages/details/notice_details/notice_details",
-    "pages/details/topay/pay_success"
+    "pages/details/notice_details/notice_details"
   ],
   "window": {
     "backgroundTextStyle": "light",

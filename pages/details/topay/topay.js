@@ -89,9 +89,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    // onShareAppMessage: function() {
 
-    },
+    // },
     // 支付方式
     radioChange: function(e) {
         console.log(e)
@@ -288,9 +288,14 @@ Page({
                         success: function() {
                             setTimeout(function() {
                                 wx.redirectTo({
-                                    url: '/pages/details/order_list/order_list',
+                                    url: 'pay_success?orderId=' + that.data.message.id,
                                 })
                             }, 2000);
+                            // setTimeout(function() {
+                            //     wx.redirectTo({
+                            //         url: '/pages/details/order_list/order_list',
+                            //     })
+                            // }, 2000);
 
                         }
                     })

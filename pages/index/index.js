@@ -26,6 +26,7 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
+    dpShow:false//店铺显示
   },
 
   /**
@@ -49,6 +50,15 @@ Page({
       qhdzid: options.zdtid,
       options:options
     })
+    // var zdtid = wx.getStorageSync('zdtid')
+    // if(that.data.qhdzid!=undefined){
+    //   if(zdtid!=that.data.qhdzid){
+    //     that.setData({
+    //       dpShow:true
+    //     })
+    //   }
+    // }
+    
    
     // 获取设备高度
     wx.getSystemInfo({
@@ -60,9 +70,9 @@ Page({
       }
     });
     // 分享
-    wx.showShareMenu({
-      withShareTicket: true
-    })
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // })
   
   },
 
@@ -162,9 +172,9 @@ Page({
       }else{
         that.search(that.data.options.shopName)
       }
-      that.setData({
-        shopName:that.data.options.shopName
-      })
+      // that.setData({
+      //   shopName:that.data.options.shopName
+      // })
       // var zdtid = wx.getStorageSync('zdtid')
       // console.log(zdtid)
       // console.log(that.data.qhdzid)
@@ -246,18 +256,18 @@ console.log(that.data.qhdzid)
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    var that=this;
-    var zdtid = wx.getStorageSync('zdtid')
+  // onShareAppMessage: function () {
+  //   var that=this;
+  //   var zdtid = wx.getStorageSync('zdtid')
   
-    console.log(that.data.shopName)
-    return {
-      title: that.data.shopShareTitle,
-      imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
-      // desc: '分享页面的内容',
-      path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
-    }
-  },
+  //   console.log(that.data.shopName)
+  //   return {
+  //     title: that.data.shopShareTitle,
+  //     imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
+  //     // desc: '分享页面的内容',
+  //     path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
+  //   }
+  // },
   // 获取分享图片
 getPic(){
   var that = this;
@@ -1027,6 +1037,10 @@ getPic(){
         }
       },
       sCallBack: function (data) {
+        wx.setStorage({
+          data: 0,
+          key: 'aa',
+        })
         that.query()
 
       },
@@ -1053,7 +1067,10 @@ search(className){
       wx.setStorage({
         data: data.data.result.datas[0],
         key: 'shop',
-      })    
+      })
+      that.setData({
+        shopName:data.data.result.datas[0].shopName
+      })  
    },
     eCallBack: function () {
     }

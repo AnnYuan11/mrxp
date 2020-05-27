@@ -340,6 +340,8 @@ Page({
             item.orderStatus = '已提货'
           } else if (item.orderStatus == '6') {
             item.orderStatus = '已完成'
+          } else if (item.orderStatus == '0') {
+            item.orderStatus = '失效订单'
           } 
            
     
@@ -884,29 +886,29 @@ Page({
     })
   },
   // 取消订单
-  cancel(e) {
-    var that = this;
-    console.log(e)
-    var params = {
-      url: '/app/order/deleteCommodityOrderInfo',
-      method: 'GET',
-      data: {
-        'id': e.currentTarget.dataset.id, //订单id
-      },
-      sCallBack: function (data) {
-        if (data.data.errorCode == "0") {
-          wx.showToast({
-            title: data.data.result,
+  // cancel(e) {
+  //   var that = this;
+  //   console.log(e)
+  //   var params = {
+  //     url: '/app/order/deleteCommodityOrderInfo',
+  //     method: 'GET',
+  //     data: {
+  //       'id': e.currentTarget.dataset.id, //订单id
+  //     },
+  //     sCallBack: function (data) {
+  //       if (data.data.errorCode == "0") {
+  //         wx.showToast({
+  //           title: data.data.result,
 
-          })
-          that.Allorder()
-          that.dfkorder()
-        }
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+  //         })
+  //         that.Allorder()
+  //         that.dfkorder()
+  //       }
+  //     },
+  //     eCallBack: function () {}
+  //   }
+  //   base.request(params);
+  // },
   // 备货中取消订单e
   cancel_bh(e){
     var that = this;
@@ -925,6 +927,12 @@ Page({
           })
           that.Allorder()
           that.bhz()
+        }else{
+          wx.showToast({
+            title: data.data.errorMsg,
+            icon:'none',
+            duration:2000
+          })
         }
       },
       eCallBack: function () {}

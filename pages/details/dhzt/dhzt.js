@@ -230,14 +230,14 @@ search(e){
             item.distance2 = item.distance * 1000
             item.distance = item.distance2.toFixed(2)
           }else{
-            item.distance = item.distance.toFixed(2)
+            item.distance = item.distance
           }
          }else{
             if (item.distance<1){
           item.distance2 = item.distance * 1000
           item.distance = item.distance2.toFixed(0)+'m'
         }else{
-          item.distance = item.distance.toFixed(2)+'km'
+          item.distance = item.distance+'km'
         }
          }
         console.log(typeof(item.distance))

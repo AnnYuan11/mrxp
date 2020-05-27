@@ -49,10 +49,11 @@
 <i-load-more tip="附近提货点" loading="{{ false }}" />
 <view class="box">
 <block wx:for="{{list}}">
-  <view class="list" catchtap="change" data-item="{{item}}">
+  <view class="list" catchtap="{{item.isDisable=='0'?'change':''}}" data-item="{{item}}">
     <view class="img_box">
-      <image src="{{col=='0'?imgUrls+'img/public/yingye.png':imgUrls+'img/public/xiuxi.png'}}" mode="widthFix"></image>
-      <text>营业中</text>
+      <image src="{{item.isDisable=='0'?imgUrls+'img/public/yingye.png':imgUrls+'img/public/xiuxi.png'}}" mode="widthFix"></image>
+      <text wx:if="{{item.isDisable=='0'}}">营业中</text>
+      <text wx:else>冻结中</text>
     </view>
     <text class="dm_name">{{item.shopName}}</text>
     <text class="address_detail">{{item.province}}{{item.city}}{{item.area}}{{item.street}}{{item.address}}    </text>

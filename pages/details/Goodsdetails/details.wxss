@@ -179,7 +179,7 @@ i{
   background: #E10004;
 }
 .icon_box{
-  width: 40%;
+  width:40%;
   float: left;
   display: flex;
   justify-content: space-between;
@@ -341,7 +341,7 @@ button:not([size='mini']) {
   width: 80%;
   height: 80%;
   position: fixed;
-  left: 0;
+  left: 65rpx;
   right: 0;
   top:0;
   bottom: 0;

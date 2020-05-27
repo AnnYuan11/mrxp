@@ -4,7 +4,8 @@
 	<view class="list">
 		<i></i>
 		<text>收货人：</text>
-		<open-data type="userNickName" style="font-size: 24rpx;"></open-data><text class="phone">{{phone}}</text>
+		<text>{{list.userInfo.nickName}}</text><text class="phone">{{list.userInfo.phone}}</text>
+		<!-- <open-data type="userNickName" style="font-size: 24rpx;"></open-data><text class="phone">{{phone}}</text> -->
 	</view>
 	<view class="list">
 		<i></i>

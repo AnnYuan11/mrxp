@@ -19,6 +19,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        console.log(options)
         var that = this; 
         wx.showShareMenu({ withShareTicket: true });
         var orderId = options.orderId;
@@ -79,14 +80,17 @@ Page({
         base.request(params);
     },
 
-    onShareAppMessage: function() {
+    onShareAppMessage: function(res) {
         var that = this;
-        return {
-            title: '老板，我是' + that.data.orderDetail.userInfo.nickName + ',刚在店里买的商品请接单！',
-            imageUrl: that.data.imgUrl + '/' + that.data.shopSharePhoto,
-            // desc: '分享页面的内容',
-            path: '/pages/details/orderDetailsck/ddxx?id=' + that.data.orderId // 路径，传递参数到指定页面。
-        }
+        if(res.from==='button'){
+            return {
+                title: '老板，我是' + that.data.orderDetail.userInfo.nickName + ',刚在店里买的商品请接单！',
+                imageUrl: that.data.imgUrl + '/' + that.data.shopSharePhoto,
+                // desc: '分享页面的内容',
+                path: '/pages/details/orderDetailsck/ddxx?id=' + that.data.orderId // 路径，传递参数到指定页面。
+            }
+          }
+       
     },
 
     /**
@@ -131,10 +135,5 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
+   
 })

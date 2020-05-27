@@ -78,7 +78,9 @@ Page({
           wx.clearStorageSync()
           wx.navigateBack({
             complete: (res) => {
-              delta: 1 
+              wx.switchTab({
+                url: '/pages/index/index',
+              }) 
             },
           })
         } else if (res.cancel) {

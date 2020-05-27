@@ -179,10 +179,13 @@ Page({
 
               that.wxlogin()
               setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
+                wx.switchTab({
+                  url: '/pages/index/index',
                 })
-              }, 2000)
+                // wx.navigateBack({
+                //   delta: 1
+                // })
+              }, 1000)
             },
             fail: function (res) {
               console.log(res);

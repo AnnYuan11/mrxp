@@ -151,10 +151,10 @@ Page({
   },
   getSiteData: function() {
     var that = this;
-    if(wx.getStorageSync("chinaData")){
-      var chinaData = wx.getStorageSync("chinaData");
-      that.initData(chinaData);
-    }else{
+    // if(wx.getStorageSync("chinaData")){
+    //   var chinaData = wx.getStorageSync("chinaData");
+    //   that.initData(chinaData);
+    // }else{
       wx.request({
         url: 'https://photo.zgmrxp.com/city.json',
         success: res=> {
@@ -167,7 +167,7 @@ Page({
           that.initData(chinaData);
         }
       })
-    }
+    // }
   
   },
   initData: function(chinaData){
@@ -236,7 +236,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          'address': res.name,
+          'address': res.address+res.name,
           'latitude':res.latitude,
           'longitude':res.longitude
         })
