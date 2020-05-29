@@ -54,12 +54,13 @@ Page({
    */
   onShow: function () {
     var that=this;
-    var aa=wx.getStorageSync('aa')
-    if(aa=='0'){
-      that.query()//查询用户切换店铺
-    }else {
-      that.list()
-    }
+    that.query()
+    // var aa=wx.getStorageSync('aa')
+    // if(aa=='0'){
+    //   that.query()//查询用户切换店铺
+    // }else {
+    //   that.list()
+    // }
     if(that.data.options.sendType=="快递到家"){
       that.selectDz()//查询用户地址
     }

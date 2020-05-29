@@ -48,14 +48,14 @@ Page({
         })
         console.log(that.data.productInfo)
         // if (that.data.productInfo.sendType == 1) {
-         
+          that.checkAddress()
           //查询用户是否切换店铺
-          var isCheck = wx.getStorageSync('aa')
-          if (isCheck == '0') {
-            that.checkAddress()
-          } else{
-            that.findShopAdress()
-          }
+          // var isCheck = wx.getStorageSync('aa')
+          // if (isCheck == '0') {
+          //   that.checkAddress()
+          // } else{
+          //   that.findShopAdress()
+          // }
         // } else if (that.data.productInfo.sendType == 2) {
           let dzid = wx.getStorageSync('dzid')
           that.setData({

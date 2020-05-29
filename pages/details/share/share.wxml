@@ -1,11 +1,10 @@
-<!--pages/details/orderDetailsck/ddxx.wxml-->
+<!--pages/details/share/share.wxml-->
 <!-- 自提点地址 -->
 <view class="section" wx:if="{{list.headInfo!=''&&list.orderSendType=='到店自提'}}">
 	<view class="list">
 		<i></i>
 		<text>收货人：</text>
 		<text>{{list.userInfo.nickName}}</text><text class="phone">{{list.userInfo.phone}}</text>
-		<!-- <open-data type="userNickName" style="font-size: 24rpx;"></open-data><text class="phone">{{phone}}</text> -->
 	</view>
 	<view class="list">
 		<i></i>
@@ -13,7 +12,7 @@
 	</view>
 	<view class="list">
 		<i></i>
-		<text space="ensp">地  址：{{list.headInfo.address}}</text>
+		<text space="ensp">地  址：{{list.headInfo.province}}{{list.headInfo.city}}{{list.headInfo.area}}{{list.headInfo.street}}{{list.headInfo.address}}</text>
 	</view>
 	<view class="list mdxx">
 		<text space="ensp">门店信息：{{list.headInfo.headName}}</text><text space="ensp" catchtap="phone" class="phone" data-phone="{{list.headInfo.phone}}">{{list.headInfo.phone}}</text>
@@ -51,41 +50,6 @@
 		</view>
 	</block>
 </view>
-<!-- 第三部分 -->
-<view class="section">
-	<view class="lis">
-		<text>下单时间：</text>
-		<text class="rig">{{list.orderTime}}</text>
-	</view>
-	<view class="lis">
-		<text>支付时间：</text>
-		<text class="rig">{{list.paymentTime}}</text>
-	</view>
-	<view class="lis" wx:if="{{list.orderStatus=='5'}}">
-		<text>提货时间：</text>
-		<text  class="rig">{{list.pickupTime}}</text>
-	</view>
-	<view class="lis">
-		<text>提货方式：</text>
-		<text  class="rig">{{list.orderSendType}}</text>
-	</view>
-	<view class="lis"  wx:if="{{list.deliverName!=''}}">
-		<text>物流单号：</text>
-		<text  class="rig">{{list.deliverName}}{{list.deliverNumber}}</text>
-	</view>
-</view>
-<!-- 第四部分 -->
-<view class="section">
-	<view class="lis">
-		<text>应付金额：</text>
-		<text class="rig">￥{{list.needMoney}}</text>
-	</view>
-	<view class="lis" wx:if="{{list.userCouponInfo!=''}}">
-		<text>优惠券：</text>
-		<text class="rig">{{list.userCouponInfo.couponInfo.money}}元</text>
-	</view>
-	<view class="lis">
-		<text>实付金额：</text>
-		<text  class="jine">￥{{list.paymentMoney}}</text>
-	</view>
-</view>
+<navigator url="/pages/index/index" open-type="switchTab" class="buy">
+ 去购物
+</navigator>

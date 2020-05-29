@@ -24,8 +24,8 @@
 					<image src="{{imgUrls}}img/public/logo.png" lazy-load='true' mode="widthFix"></image>
 				</view>
 				<view class="message" catchtap="selectTZ">
-					<text class="name" wx:if="{{defaultztd!=''}}">{{shopName}}</text>
-					<text class="name" wx:else>{{defaultztd.headInfo.shopName}}</text>
+					<text class="name">{{shopName}}</text>
+					<!-- <text class="name" wx:else>{{defaultztd.headInfo.shopName}}</text> -->
 					<view class="qhdz_box">
 						<text class="address">选择团长</text>
 					</view>
@@ -133,10 +133,10 @@
 										</view>
 										<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
 											<view class="box_figure">
-												<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<4}}" wx:for-item="itemName">
+												<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<8}}" wx:for-item="itemName">
 													<view class="figure">
 														<image src="{{itemName.photo}}"></image>
-														<text>{{itemName.nick_name}}</text>
+														<!-- <text>{{itemName.nick_name}}</text> -->
 													</view>
 												</block>
 											</view>
@@ -149,6 +149,7 @@
 							</navigator>
 						</block>
 					</scroll-view>
+					<view class="bot" wx:if="{{listToday.length==totalCount}}">~已经到底部了</view>
 				</view>
 				<view class="swiper_box" wx:if="{{currentTab=='1'}}">
 					<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
@@ -218,7 +219,7 @@
 						</block>
 					</scroll-view>
 				</view>
-
+			
 			</view>
 		</view>
 </scroll-view>
@@ -249,11 +250,11 @@
 	</view>
 </view>
 <!-- 分享 -->
-<!-- <button open-type="share" class="share">
+<button open-type="share" class="share">
 	<view class="item">
 		<image src="/img/new/fx.png" mode="widthFix"></image>
 	</view>
-</button> -->
+</button>
 <!-- 回到顶部 -->
 <view class="back" hidden='{{!floorstatus}}' bindtap="goTop">
 	<image src="/img/new/fhdb.png" mode="widthFix"></image>

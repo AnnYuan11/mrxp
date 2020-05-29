@@ -231,6 +231,48 @@ Page({
   
   },
 
+share(e){
+  var that=this;
+  console.log(e)
+  // that.setData({
+  //   ddID:e.currentTarget.dataset.id
+  // })
+  // that.getOrderDetail(e.currentTarget.dataset.id)
+},
+  // 分享
+  onShareAppMessage: function(res) {
+    var that = this;
+    var item=res.target.dataset.item
+    console.log(res.target.dataset.item)
+    var dditem=JSON.stringify(item)
+    var shareObj = {
+      title: '我是' + item.userInfo.nickName + ',刚在'+item.headInfo.shopName+'购物了',
+          imageUrl: that.data.imgUrl + '/' + item.commoditySubOrderInfoList[0].commodityInfo.productInfo.photo,
+          path: '/pages/details/share/share?id='+item.id, // 路径，传递参数到指定页面。,
+      success: function(res) {
+        // 转发成功之后的回调
+        if (res.errMsg == 'shareAppMessage:ok') {}
+      },
+      fail: function() {
+        // 转发失败之后的回调
+        if (res.errMsg == 'shareAppMessage:fail cancel') {
+          // 用户取消转发
+        } else if (res.errMsg == 'shareAppMessage:fail') {
+          // 转发失败，其中 detail message 为详细失败信息
+        }
+      },
+      complete:function(){
+          // 转发结束之后的回调（转发成不成功都会执行）
+      },
+    }
+    if(res.from==='button'){
+      console.log("11111111")
+      
+        return shareObj
+     
+        
+      }
+},
   /**
    * 生命周期函数--监听页面卸载
    */

@@ -2,7 +2,7 @@
 <!-- 头部 -->
 <view class="head_box">
 	<image src="{{imgUrls}}img/my/my_bg.png" mode="widthFix"></image>
-	<view class="head" wx:if="{{session==''||phone==''}}">
+	<view class="head" wx:if="{{session==''}}">
 		<view class="head_pic">
 			<image src="{{imgUrls}}img/my/head.png" mode="widthFix"></image>
 		</view>
@@ -99,9 +99,12 @@
 			</view>
 		</navigator>
 	</view>
-	<view class="zts">
+	<view class="zts" wx:if="{{shopName}}">
 		<text class="dp">{{shopName}}</text>
 		<text class="address">{{addressth}}</text>
+	</view>
+	<view class="zts" wx:else>
+		<text class="dp">请选择团长</text>
 	</view>
 </view>
 <!-- 第二部分 -->

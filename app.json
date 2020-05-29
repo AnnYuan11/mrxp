@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/share/share",
     "pages/details/topay/pay_success",
     "pages/my/my",
     "pages/details/tzsq/tzsq",

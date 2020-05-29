@@ -45,6 +45,7 @@ Page({
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
     that.shopList() 
+    that.query()
     that.setData({
       today: today,
       qhdzid: options.zdtid,
@@ -70,9 +71,9 @@ Page({
       }
     });
     // 分享
-    // wx.showShareMenu({
-    //   withShareTicket: true
-    // })
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   
   },
 
@@ -163,34 +164,23 @@ Page({
       }
     })
     var userId = wx.getStorageSync('userId')
-    console.log(userId)
-    if (that.data.qhdzid) {
+    console.log(that.data.qhdzid)
+    if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
       console.log(userId)
-     
       if(userId){
-        that.change()
+          that.change()
       }else{
         that.search(that.data.options.shopName)
       }
-      // that.setData({
-      //   shopName:that.data.options.shopName
-      // })
-      // var zdtid = wx.getStorageSync('zdtid')
-      // console.log(zdtid)
-      // console.log(that.data.qhdzid)
      
+    }else{
+      that.query() 
     }
-    var aa = wx.getStorageSync('aa')
-console.log(that.data.qhdzid)
-    if (aa == '0') {
-      that.query() //查询用户切换店铺
-    } else if(that.data.qhdzid==undefined){
-      that.list() //团长地址
-    }
+    
     app.getShopNum()
     that.order()
    
-    // that.djs()
+   
   },
 
   /**
@@ -226,10 +216,7 @@ console.log(that.data.qhdzid)
    */
   onUnload: function () {
     var that = this;
-    wx.removeStorage('aa')
-    that.setData({
-      aa: 1
-    })
+   
     clearInterval(interval);
   },
 
@@ -256,18 +243,18 @@ console.log(that.data.qhdzid)
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-  //   var that=this;
-  //   var zdtid = wx.getStorageSync('zdtid')
+  onShareAppMessage: function () {
+    var that=this;
+    var zdtid = wx.getStorageSync('zdtid')
   
-  //   console.log(that.data.shopName)
-  //   return {
-  //     title: that.data.shopShareTitle,
-  //     imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
-  //     // desc: '分享页面的内容',
-  //     path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
-  //   }
-  // },
+    console.log(that.data.shopName)
+    return {
+      title: that.data.shopShareTitle,
+      imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
+      // desc: '分享页面的内容',
+      path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
+    }
+  },
   // 获取分享图片
 getPic(){
   var that = this;
@@ -558,12 +545,12 @@ getPic(){
           key: "longitude",
           data: res.longitude
         });
-        var aa = wx.getStorageSync('aa')
-        if (aa == '0') {
-          that.query() //查询用户切换店铺
-        } else if(that.data.qhdzid==undefined){
-          that.list()
-        }
+        // var aa = wx.getStorageSync('aa')
+        // if (aa == '0') {
+        //   that.query() //查询用户切换店铺
+        // } else if(that.data.qhdzid==undefined){
+        //   that.list()
+        // }
 
       }
     })
@@ -605,64 +592,64 @@ getPic(){
     base.request(params);
   },
   // 团长地址
-  list() {
+  // list() {
 
-    var that = this;
-    var myLat = wx.getStorageSync('latitude');
-    var myLng = wx.getStorageSync('longitude');
-    var params = {
-      url: '/app/head/findAllHeadInfoByDistance',
-      method: 'POST',
-      data: {
-        myLat: myLat,
-        myLng: myLng,
-        'pageIndex': 1,
-        'pageSize': 1,
-      },
-      sCallBack: function (data) {
-        var list = data.data.result.datas;
-        if (list.length == 0) {
-          that.default()
-        }
-        that.setData({
-          shopName: list[0].shopName,
-          ztdid: list[0].id
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: list[0].id
-        })
+  //   var that = this;
+  //   var myLat = wx.getStorageSync('latitude');
+  //   var myLng = wx.getStorageSync('longitude');
+  //   var params = {
+  //     url: '/app/head/findAllHeadInfoByDistance',
+  //     method: 'POST',
+  //     data: {
+  //       myLat: myLat,
+  //       myLng: myLng,
+  //       'pageIndex': 1,
+  //       'pageSize': 1,
+  //     },
+  //     sCallBack: function (data) {
+  //       var list = data.data.result.datas;
+  //       if (list.length == 0) {
+  //         that.default()
+  //       }
+  //       that.setData({
+  //         shopName: list[0].shopName,
+  //         ztdid: list[0].id
+  //       })
+  //       wx.setStorage({
+  //         key: 'zdtid',
+  //         data: list[0].id
+  //       })
 
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+  //     },
+  //     eCallBack: function () {}
+  //   }
+  //   base.request(params);
+  // },
   // 默认自提点
-  default () {
-    var that = this;
-    var params = {
-      url: '/app/head/findHeadInfoProperty',
-      method: 'GET',
-      data: {
+  // default () {
+  //   var that = this;
+  //   var params = {
+  //     url: '/app/head/findHeadInfoProperty',
+  //     method: 'GET',
+  //     data: {
 
-      },
-      sCallBack: function (data) {
-        var list = data.data.result;
-        that.setData({
-          shopName: list.shopName,
-          ztdid: list.id,
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: list.id,
-        })
+  //     },
+  //     sCallBack: function (data) {
+  //       var list = data.data.result;
+  //       that.setData({
+  //         shopName: list.shopName,
+  //         ztdid: list.id,
+  //       })
+  //       wx.setStorage({
+  //         key: 'zdtid',
+  //         data: list.id,
+  //       })
 
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+  //     },
+  //     eCallBack: function () {}
+  //   }
+  //   base.request(params);
+  // },
   // 加入购物车
   joinGwc(e) {
     var that = this;
@@ -744,7 +731,7 @@ getPic(){
      
     } else {
       //没有更多数据
-      app.nomore_showToast();
+      // app.nomore_showToast();
     }
   },
   // 明日售卖下拉加载
@@ -1037,12 +1024,13 @@ getPic(){
         }
       },
       sCallBack: function (data) {
-        wx.setStorage({
-          data: 0,
-          key: 'aa',
-        })
+        wx.removeStorageSync('shop')
         that.query()
-
+        that.setData({
+          qhdzid:'111'
+        })
+        // that.options.qhdzid='111'
+        console.log('wangbo'+that.options.qhdzid)
       },
       eCallBack: function () {}
     }
@@ -1068,8 +1056,13 @@ search(className){
         data: data.data.result.datas[0],
         key: 'shop',
       })
+      wx.setStorage({
+        data: data.data.result.datas[0].province+data.data.result.datas[0].city+data.data.result.datas[0].area+data.data.result.datas[0].street+data.data.result.datas[0].address,
+        key: 'addressth',
+      })
       that.setData({
-        shopName:data.data.result.datas[0].shopName
+        shopName:data.data.result.datas[0].shopName,
+       
       })  
    },
     eCallBack: function () {

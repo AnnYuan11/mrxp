@@ -183,3 +183,10 @@
   font-size: 40rpx;
   margin-top: 20rpx;
 }
+.button_box{
+  display: flex;
+  width: 50%;
+}
+button.share{
+  width: 52%!important;
+}

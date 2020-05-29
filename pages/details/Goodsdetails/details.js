@@ -27,17 +27,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    // 分享
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     var that = this;
     if (options.scene) {
+      var code=options.scene.substring(0,6)
+      var phone=options.scene.substring(9,20)
       that.setData({
-        id:options.scene,
-        // scene:options.scene
+        code:code,
+        phone:phone
       })
+      that.shop2()
+      that.spxx()
     }else{
       that.setData({
         id:options.id,
-        // isBuy:options.isBuy,
-        personal:app.globalData.personal
+        personal:app.globalData.personal,
+        qhdzid: options.zdtid,
+      
       })
     }
     console.log(options)
@@ -85,18 +95,53 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var aa = wx.getStorageSync('aa')
-    
-    if (aa == '0') {
-      that.query()//查询用户切换店铺
-    } else {
-      that.list()//团长地址
+    var userId = wx.getStorageSync('userId')
+    console.log(that.data.qhdzid)
+    if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
+      console.log(userId)
+      if(userId){
+          that.change()
+      }else{
+        that.search(that.data.options.shopName)
+      }
+    }else{
+      that.query() 
     }
+    
     this.setData({
       ishow:false
     })
   },
-
+// 切换自提点
+change(e) {
+  console.log(e)
+  var that = this;
+  var userId = wx.getStorageSync('userId')
+  console.log(userId)
+  var params = {
+    url: '/app/user/addUserHeadInfo',
+    method: 'POST',
+    data: {
+      userInfo: {
+        'id': userId
+      },
+      headInfo: {
+        'id': that.data.qhdzid
+      }
+    },
+    sCallBack: function (data) {
+      wx.removeStorageSync('shop')
+      that.query()
+      that.setData({
+        qhdzid:'111'
+      })
+      // that.options.qhdzid='111'
+      console.log('wangbo'+that.options.qhdzid)
+    },
+    eCallBack: function () {}
+  }
+  base.request(params);
+},
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -130,9 +175,14 @@ Page({
    */
   onShareAppMessage: function (res) {
     console.log(res)
+    var that=this;
+    var zdtid = wx.getStorageSync('zdtid')
+    console.log(that.data.shopName)
+    console.log(zdtid)
     if(res.from==='button'){
       return {
         title: this.data.list.productInfo.commodityName,     
+        path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&shopName='+that.data.shopName+'&id='+that.data.id,
       }
     }
    
@@ -189,9 +239,93 @@ Page({
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
           list:data.data.result,
+          commodityCode:data.data.result.commodityCode,
           background:JSON.parse(data.data.result.bannerPhotoView)
         })
         
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 根据返回code调用商品信息
+  shop2(){
+    var that = this;
+    var params = {
+      url: '/app/commodity/findCommodityInfoByCode',
+      method: 'GET',
+      data: {
+        'commodityCode':that.data.code, 
+      },
+      sCallBack: function (data) {
+        console.log(data)
+        if(data.data.result.sendType==1){
+          data.data.result.sendType="到店自提"
+        }else{
+          data.data.result.sendType="快递到家"
+        }
+        if(data.data.result.pickDate==1){
+          that.getDateStr(null,0)
+          var date=that.data.tomorow
+          data.data.result.pickDate=date
+        }else if(data.data.result.pickDate==2){
+          that.getDateStr(null,1)
+          var tomorow=that.data.tomorow
+          data.data.result.pickDate=tomorow
+        }else{
+          that.getDateStr(null,2)
+          var ht=that.data.tomorow
+          data.data.result.pickDate=ht
+        }
+        if (data.data.result.isBuy == 2) {
+          data.data.result.isBuy = "提前加入购物车"
+        } else if (data.data.result.isBuy == 3) {
+          data.data.result.isBuy = "活动已结束"
+        } else if (data.data.result.isBuy == 4) {
+          data.data.result.isBuy = "已售罄"
+        }
+        var artice = data.data.result.productInfo.content;
+        WxParse.wxParse('artice', 'html', artice, that, 5);
+        that.setData({
+          list:data.data.result,
+          commodityCode:data.data.result.commodityCode,
+          background:JSON.parse(data.data.result.bannerPhotoView)
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 根据电话获取商铺信息
+  spxx() {
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/head/findHeadInfoByPhone',
+      method: 'GET',
+      data: {
+         'phone':that.data.phone 
+      },
+      sCallBack: function (data) {
+        that.setData({
+          shopName: data.data.result.shopName,
+          qhdzid: data.data.result.id,
+          headPhone: data.data.result.phone
+        })
+        console.log(that.data.qhdzid)
+        if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
+          console.log(userId)
+          if(userId){
+              that.change()
+          }else{
+            that.search(that.data.options.shopName)
+          }
+        }else{
+          that.query() 
+        }
       },
       eCallBack: function () {
       }
@@ -370,6 +504,12 @@ handleClickItem1 () {
 eventDraw () {
   var that=this;
   var path = that.data.imgUrl+that.data.background[0];
+  // var shopName = that.data.shopName;
+  var ztdid = that.data.ztdid;
+  var id=that.data.id
+  var messages=[ztdid,id]
+  var message=messages.join('&');    //1,2,3
+  console.log(message)
   wx.showLoading({
     title: '绘制分享图片中',
     mask: true
@@ -413,14 +553,22 @@ eventDraw () {
           width: 300,
           height: 300
         },
+        // {
+        //   type: 'image',
+        //   url: 'https://www.zgmrxp.com/app/getUserIdWxCommodityQr?commodityId='+message,
+        //   top: 470,
+        //   left: 50,
+        //   width: 70,
+        //   height: 70
+        // },
         {
-          type: 'image',
-          url: 'https://www.zgmrxp.com/app/getUserIdWxCommodityQr?commodityId='+that.data.id,
-          top: 470,
-          left: 50,
-          width: 70,
-          height: 70
-        },
+            type: 'image',
+            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+that.data.headPhone,
+            top: 470,
+            left: 50,
+            width: 70,
+            height: 70
+          },
         {
           type: 'text',
           content: that.data.list.productInfo.commodityName,
@@ -540,7 +688,8 @@ close(){
        
         that.setData({
           shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id
+          ztdid: data.data.result.headInfo.id,
+          headPhone: data.data.result.headInfo.phone
         })
 
       },
@@ -549,59 +698,7 @@ close(){
     }
     base.request(params);
   },
-  // 团长地址
-  list() {
-   
-    var that = this;
-    var myLat = wx.getStorageSync('latitude');
-    var myLng = wx.getStorageSync('longitude');
-    var params = {
-      url: '/app/head/findAllHeadInfoByDistance',
-      method: 'POST',
-      data: {
-        myLat: myLat,
-        myLng: myLng,
-        'pageIndex':1,
-        'pageSize':1,
-      },
-      sCallBack: function (data) {
-        var list = data.data.result.datas;
-        if (list.length == 0) {
-          that.default()
-        }
-        that.setData({
-          shopName: list[0].shopName,
-          ztdid: list[0].id
-        })
-
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  // 默认自提点
-  default() {
-    var that = this;
-    var params = {
-      url: '/app/head/findHeadInfoProperty',
-      method: 'GET',
-      data: {
-
-      },
-      sCallBack: function (data) {
-        var list = data.data.result;
-        that.setData({
-          shopName: list.shopName,
-          ztdid: list.id
-        })
-
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
+  
   // 购物指南
   gwzn(){
     var that=this;

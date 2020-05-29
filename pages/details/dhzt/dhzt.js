@@ -111,13 +111,13 @@ Page({
         }
       })
       that.list()//列表
-      var aa=wx.getStorageSync('aa')
-      console.log(aa)
-      if(aa=='0'){
-        that.query()//查询用户切换店铺
-      }else {
-        return
-      }
+      // var aa=wx.getStorageSync('aa')
+      // console.log(aa)
+      // if(aa=='0'){
+      //   that.query()//查询用户切换店铺
+      // }else {
+      //   return
+      // }
     }
   },
 // 定位授权
@@ -140,12 +140,13 @@ locations: function () {
         key: "longitude",
         data: res.longitude
       });
-      var aa = wx.getStorageSync('aa')
-      if (aa == '0') {
-        that.query() //查询用户切换店铺
-      } else {
-        that.list()
-      }
+      that.query() //查询用户切换店铺
+      // var aa = wx.getStorageSync('aa')
+      // if (aa == '0') {
+      //   that.query() //查询用户切换店铺
+      // } else {
+      //   that.list()
+      // }
 
     }
   })
@@ -290,10 +291,10 @@ list(){
       var address=list[0].province+list[0].city+list[0].area+list[0].street+list[0].address
       that.setData({
        list:list,
-       shopName:list[0].shopName,
-       address:address,
-       name:list[0].headName,
-       phone:list[0].phone
+      //  shopName:list[0].shopName,
+      //  address:address,
+      //  name:list[0].headName,
+      //  phone:list[0].phone
       })
       
     },
@@ -383,7 +384,8 @@ query(){
     sCallBack: function (data) {
       that.setData({
         defaultztd:data.data.result,
-        
+        shopName:data.data.result.headInfo.shopName,
+        address:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address
       })
       
     },
@@ -392,12 +394,4 @@ query(){
   }
   base.request(params);
 },
-// 拨打电话
-phone(e){
-  console.log(e)
-  var that=this;
-  wx.makePhoneCall({
-    phoneNumber: e.currentTarget.dataset.phone
-  })
-}
 })

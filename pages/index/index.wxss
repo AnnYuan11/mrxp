@@ -518,7 +518,7 @@ video {
 }
 
 .figure{
-  width: 150rpx;
+  width: 46rpx;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -541,6 +541,7 @@ video {
   font-size:24rpx;
   color:rgba(144,144,144,1);
   margin-top: 8rpx;
+  margin-left: 20rpx;
 }
 /* 返回顶部 */
 .back{
@@ -583,7 +584,7 @@ button:not([size='mini']) {
 .orderN{
   width: 70%;
   position: fixed;
-  top: 28%;
+  top: 24%;
   height: 100rpx;
   left: 28rpx;
 }
@@ -632,5 +633,10 @@ button:not([size='mini']) {
   bottom:0;
   left:0;
   right:0;
+
+}
+.bot{
+  text-align: center;
+  margin: 30rpx 0;
 
 }

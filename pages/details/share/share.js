@@ -1,4 +1,4 @@
-// pages/details/orderDetailsck/ddxx.js
+// pages/details/share/share.js
 import { Base } from "../../../utils/request/base.js";
 var base = new Base();
 var app = getApp();
@@ -17,11 +17,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    var phone=wx.getStorageSync('phone')
     var that=this;
     that.setData({
       options:options,
-      phone:phone
     })
     var that=this;
     that.details()
@@ -81,7 +79,7 @@ Page({
       url: '/app/order/findCommodityOrderInfo',
       method: 'GET',
       data: {
-        'id':that.data.options.id,
+        'id':'2c985f077254045a0172540649c4000f',
       },
       sCallBack: function (data) {
          console.log(data)
@@ -91,6 +89,7 @@ Page({
           }else if(list.orderSendType=='2'){
             list.orderSendType='配送订单'
           }
+          list.userInfo.phone=list.userInfo.phone.substring(0,3)+'****'+list.userInfo.phone.substring(8,11)
         
         that.setData({
           list:list
@@ -103,12 +102,4 @@ Page({
     }
     base.request(params);
   },
-  // 拨打电话
-phone(e){
-  console.log(e)
-  var that=this;
-  wx.makePhoneCall({
-    phoneNumber: e.currentTarget.dataset.phone
-  })
-}
 })

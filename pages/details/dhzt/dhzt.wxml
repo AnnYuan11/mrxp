@@ -1,5 +1,5 @@
 <!--pages/dhzt/dhzt.wxml-->
-<view class="title" wx:if="{{defaultztd==''}}">
+<!-- <view class="title" wx:if="{{defaultztd==''}}">
   <view class="top">
     <view class="img">
       <image src="{{imgUrls}}img/public/logo.png" lazy-load="{{true}}"wx:if="{{imgUrls}}" mode="widthFix"></image>
@@ -19,25 +19,25 @@
     <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle" lazy-load="{{true}}"></image>
     <text>团长：{{name}}</text>
   </view>
-</view>
-<view class="title" wx:else>
+</view> -->
+<view class="title" wx:if="{{defaultztd!=''}}">
   <view class="top">
     <view class="img">
       <image src="{{imgUrls}}img/public/logo.png" mode="widthFix"></image>
     </view>
     <view class="message">
       <text class="name">
-      {{defaultztd.headInfo.shopName}}
+      {{shopName}}
     </text>
       <view class="qhdz_box">
         <text class="qhdz">取货地址：</text>
-        <text class="address">{{defaultztd.headInfo.address}}</text>
+        <text class="address">{{address}}</text>
       </view>
     </view>
   </view>
 
-  <view class="phone" style="background:{{color}}" catchtap="phone" data-phone="{{defaultztd.headInfo.phone}}">
-    <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image>
+  <view class="phone" style="background:{{color}}">
+    <!-- <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image> -->
     <text>团长：{{defaultztd.headInfo.headName}}</text>
   </view>
 </view>

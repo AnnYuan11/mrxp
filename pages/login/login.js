@@ -185,7 +185,7 @@ Page({
                 // wx.navigateBack({
                 //   delta: 1
                 // })
-              }, 1000)
+              }, 500)
             },
             fail: function (res) {
               console.log(res);

@@ -1,4 +1,4 @@
-/* pages/details/orderDetailsck/ddxx.wxss */
+/* pages/details/share/share.wxss */
 .section{
   width: 92%;
   margin: 32rpx auto;
@@ -93,20 +93,12 @@
   font-size:28rpx;
   color:rgba(35,35,35,1);
 }
-/* 第三部分 */
-.lis{
-  display: flex;
-  justify-content: space-between;
-  height: 60rpx;
-}
-.lis text{
-  font-size:24rpx;
-  color:rgba(35,35,35,1);
-}
-.lis text.rig{
-  color: #909090;
-  margin-bottom: 20rpx;
-}
-.lis text.jine{
-  color: #E10B09;
+.buy{
+  width: 92%;
+  margin: 0 auto;
+  height: 80rpx;
+  line-height: 80rpx;
+  background:rgba(225,11,9,1);
+  color: #fff;
+  text-align: center;
 }

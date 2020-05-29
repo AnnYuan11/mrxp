@@ -17,7 +17,9 @@ Page({
    */
   onLoad: function (options) {
     var session=wx.getStorageSync('session')
-    this.query()//查询用户切换店铺
+    this.setData({
+      session:session,
+    })
   },
   
   /**
@@ -33,30 +35,21 @@ Page({
   onShow: function () {
     var  that=this;
     var userId=wx.getStorageSync('userId') 
+    // debugger
     console.log(userId)
-    var aa=wx.getStorageSync('aa')
-      if(aa=='0'){
-        that.query()//查询用户切换店铺
-      }else {
-        that.list()
-      }
-    // if(userId!=''){
-    //   console.log('有id')
-    //   var aa=wx.getStorageSync('aa')
-    //   if(aa=='0'){
-    //     that.query()//查询用户切换店铺
-    //   }else {
-    //     that.list()
-    //   }
-    // }else{
-    //   console.log('没有id')
-    //   var shop=wx.getStorageSync('shop')
-    //   console
-    //   that.setData({
-    //     shopName:shop.shopName,
-    //     addressth:shop.province+shop.city+shop.area+shop.street+shop.address
-    //   })
-    // }
+    this.query()//查询用户切换店铺
+    var shop=wx.getStorageSync('shop')
+    console.log(shop)
+    if(shop!=''){
+      var addressth=wx.getStorageSync('addressth')
+      that.setData({
+        shopName:shop.shopName,
+        addressth:addressth
+      })
+    }else{
+     
+      
+    }
     
     app.refresh()    
     var session=wx.getStorageSync('session')
