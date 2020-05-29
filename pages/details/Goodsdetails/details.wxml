@@ -68,7 +68,7 @@
 	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
 		<scroll-view scroll-y style="height: 100%">
 			<view class="gmjl_title">
-				<text>目前供</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
+				<text>目前共</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
 			</view>
 			<view class="gmjl_box">
@@ -142,7 +142,7 @@
 			<i-divider content="分享到"></i-divider>
 		</view>
 		<view class="wechat">
-		<button open-type="share"	>
+		<button open-type="share">
 			<view class="item">
 				<image	src="{{imgUrls}}img/details/dd3.png"></image>
 				<text style="margin-top:10rpx">微信好友</text>

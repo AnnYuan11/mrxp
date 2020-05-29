@@ -38,7 +38,7 @@
 
   <view class="phone" style="background:{{color}}">
     <!-- <image src="{{imgUrls}}img/public/phone.png" mode="widthFix" style="width:40rpx;vertical-align: middle"></image> -->
-    <text>团长：{{defaultztd.headInfo.headName}}</text>
+    <text>团长：{{defaultztd.headName}}</text>
   </view>
 </view>
  <!-- 搜索 -->

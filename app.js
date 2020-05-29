@@ -11,12 +11,14 @@ App({
   },
   onLaunch (options) {
     this.getOpenId()
-   this.autoUpdate()
+   
   },
   onShow: function (e) {
     this.getShopNum()
     this.refresh()
+    this.autoUpdate()
   },
+ 
   autoUpdate:function(){
     var self=this
     // 获取小程序更新机制兼容
@@ -75,7 +77,6 @@ App({
       })
     }
   },
-
      //获取openID
   getOpenId: function () {
     var that = this;
@@ -185,14 +186,14 @@ login(){
   getShopNum(){
     var that=this;
     var userId=wx.getStorageSync('userId')
-    var ztdid = wx.getStorageSync('zdtid')
+    var headInfo = wx.getStorageSync('headInfo')
     
     var arg={
       'userInfo':{
         'id':userId
       },
       'headInfo':{
-        'id':ztdid
+        'id':headInfo.id
       }
     }
     var params = {

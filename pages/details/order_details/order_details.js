@@ -13,7 +13,8 @@ Page({
     yhqmoney:'选择优惠券',
     payTypes:2,//默认微信支付
     yhje:0,
-    topay:false//订单信息
+    topay:false,//订单信息
+    isbut:true
   },
 
   /**
@@ -54,18 +55,20 @@ Page({
    */
   onShow: function () {
     var that=this;
-    that.query()
-    // var aa=wx.getStorageSync('aa')
-    // if(aa=='0'){
-    //   that.query()//查询用户切换店铺
-    // }else {
-    //   that.list()
-    // }
+    // that.query()
+    var headInfo=wx.getStorageSync('headInfo') 
+    var addressth= headInfo.province+headInfo.city+headInfo.area+headInfo.street+headInfo.address
+      that.setData({
+        shopName:headInfo.shopName,
+        ztdid:headInfo.id,
+        phones:headInfo.phone,
+        addressth:addressth,
+      })
     if(that.data.options.sendType=="快递到家"){
       that.selectDz()//查询用户地址
     }
    
-  
+    that.orderMoney()
     
    
   },
@@ -137,95 +140,118 @@ Page({
   // 添加商品
   orderMessage(){
     var that = this;
-    if(that.data.options.sendType=="快递到家"){
-      if(that.data.mrdz==''){
-        wx.showToast({
-          title: '请选择地址',
-          icon:'none',
-        })
-        return
-      }
+    if(that.data.isbut==false){
+      return
     }
-   
-    var userId=wx.getStorageSync('userId')
-    var ddid=that.data.ddid;
-    var sendType
-    if(that.data.options.sendType=="到店自提"){
-      that.data.dzid=''
-    }else if(that.data.dzid){
-      that.data.dzid=that.data.dzid
-    }
-    if(that.data.options.sendType=="到店自提"){
-      sendType='1'
-    }else{
-      sendType='2'
-    }
-    console.log(that.data.ztdid)
-    if(that.data.ztdid){
-      var ztdid=that.data.ztdid
-    }else{
-      var ztdid=that.data.ztdid2
-    }
-    
-    console.log(that.data.dzid)
-    var arg={
-      "commoditySubOrderInfoList":[{
-        'commodityNumber':that.data.options.commodityNumber,
-        "commodityInfo":{
-          "id":ddid
-        }
-      }],
-      "orderType":"1",
-      "userInfo":{
-        "id":userId//用户id
-      },
-      "userAddressInfo":{
-        "id":that.data.dzid//地址id
-      },
-      "userCouponInfo":{
-        "id":that.data.yhqid//优惠券id
-      },
-      "orderSendType":sendType,//配送方式
-      "headInfo":{
-        "id":ztdid//自提点id
-      }
-    }
-    console.log(JSON.stringify(arg))
-    var params = {
-      url: '/app/order/addCommodityOrderInfo',
-      method: 'POST',
-       
-      data: JSON.stringify(arg),
-      sCallBack: function (data) {
-        console.log(data)
-        that.setData({
-          message:data.data.result
-        })
-        if(data.data.errorCode=='0'){
+    that.setData({
+      isbut:false
+    })
+    wx.showLoading({
+      title:'加载中',                             
+      mask:true                                    
+    })
+    setTimeout(function(){ 
+      wx.hideLoading({
+        complete: (res) => {
+          if(that.data.options.sendType=="快递到家"){
+            if(that.data.mrdz==''){
+              wx.showToast({
+                title: '请选择地址',
+                icon:'none',
+              })
+              return
+            }
+          }
+          var userId=wx.getStorageSync('userId')
+          var ddid=that.data.ddid;
+          var sendType
           if(that.data.options.sendType=="到店自提"){
-            that.setData({
-              topay:true
-            })
+            that.data.dzid=''
+          }else if(that.data.dzid){
+            that.data.dzid=that.data.dzid
+          }
+          if(that.data.options.sendType=="到店自提"){
+            sendType='1'
           }else{
-            wx.navigateTo({
-              url: '/pages/details/topay/topay',
-            })
+            sendType='2'
+          }
+          console.log(that.data.ztdid)
+          if(that.data.ztdid){
+            var ztdid=that.data.ztdid
+          }else{
+            var ztdid=that.data.ztdid2
           }
           
-         
-        }else{
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon:'none'
-          })
-        }
-        
-        
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
+          console.log(that.data.dzid)
+          var arg={
+            "commoditySubOrderInfoList":[{
+              'commodityNumber':that.data.options.commodityNumber,
+              "commodityInfo":{
+                "id":ddid
+              }
+            }],
+            "orderType":"1",
+            "userInfo":{
+              "id":userId//用户id
+            },
+            "userAddressInfo":{
+              "id":that.data.dzid//地址id
+            },
+            "userCouponInfo":{
+              "id":that.data.yhqid//优惠券id
+            },
+            "orderSendType":sendType,//配送方式
+            "headInfo":{
+              "id":ztdid//自提点id
+            }
+          }
+          console.log(JSON.stringify(arg))
+          var params = {
+            url: '/app/order/addCommodityOrderInfo',
+            method: 'POST',
+             
+            data: JSON.stringify(arg),
+            sCallBack: function (data) {
+              that.setData({
+                isbut:true
+              })
+              console.log(data)
+              that.setData({
+                message:data.data.result
+              })
+              if(data.data.errorCode=='0'){
+                
+                if(that.data.options.sendType=="到店自提"){
+                  that.setData({
+                    topay:true
+                  })
+                }else{
+                  wx.navigateTo({
+                    url: '/pages/details/topay/topay',
+                  })
+                }
+                
+               
+              }else{
+                wx.showToast({
+                  title: data.data.errorMsg,
+                  icon:'none'
+                })
+              }
+              
+              
+            },
+            eCallBack: function () {
+            }
+          }
+          base.request(params);
+        },
+      })
+     },500);
+   
+   
+    
+    
   },
   // 订单金额查询
   orderMoney(){
@@ -376,63 +402,5 @@ query(){
   }
   base.request(params);
 },
-  // 团长地址
-  list(){
-    var that = this;
-    var myLat = wx.getStorageSync('latitude');
-    var myLng = wx.getStorageSync('longitude');
-    console.log(myLat)
-    var params = {
-      url: '/app/head/findAllHeadInfoByDistance',
-      method: 'POST',
-      data: {
-        myLat:myLat,
-        myLng:myLng,
-        'pageIndex':1,
-        'pageSize':1,
-      },
-      sCallBack: function (data) {
-        var list= data.data.result.datas;
-        if(list.length==0){
-          that.default()
-           
-        }
-        that.setData({
-         shopName:list[0].shopName,
-         phones:list[0].phone,
-         ztdid2:list[0].id,
-         addressth:list[0].province+list[0].city+list[0].area+list[0].street+list[0].address
-        })
-        that.orderMoney()
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  // 默认自提点
-  default(){
-    var that=this;
-    var params = {
-      url: '/app/head/findHeadInfoProperty',
-      method: 'GET',
-      data: {
-       
-      },
-      sCallBack: function (data) {
-        var list= data.data.result;
-        that.setData({
-          shopName:list.shopName,
-          phones:list.phone,
-          ztdid2:list.id,
-          addressth:list.address
-        })
-        
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
 
 })

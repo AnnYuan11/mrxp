@@ -746,9 +746,17 @@ share(e){
           } else if (item.orderStatus == '5') {
             item.orderStatus = '已提货'
           }
+          if(item.isAfterOrder=='1'){
+            
+          }
+          if(item.isAfterOrderOver=='1'){
+            item.orderStatus = '已完成'
+           
+          }
           // item.orderTime = item.orderTime.substring(0, 10)
         })
-
+        
+        
         var temlist = that.data.ythlist; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {

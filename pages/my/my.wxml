@@ -101,7 +101,7 @@
 	</view>
 	<view class="zts" wx:if="{{shopName}}">
 		<text class="dp">{{shopName}}</text>
-		<text class="address">{{addressth}}</text>
+		<text class="address" wx:if="{{addressth!=null}}">{{addressth}}</text>
 	</view>
 	<view class="zts" wx:else>
 		<text class="dp">请选择团长</text>

@@ -35,29 +35,18 @@ Page({
   onShow: function () {
     var  that=this;
     var userId=wx.getStorageSync('userId') 
-    // debugger
     console.log(userId)
-    this.query()//查询用户切换店铺
-    var shop=wx.getStorageSync('shop')
-    console.log(shop)
-    if(shop!=''){
-      var addressth=wx.getStorageSync('addressth')
-      that.setData({
-        shopName:shop.shopName,
-        addressth:addressth
-      })
-    }else{
-     
-      
-    }
-    
-    app.refresh()    
+    var headInfo=wx.getStorageSync('headInfo') 
     var session=wx.getStorageSync('session')
     console.log(session)
-    this.setData({
-      session:session,
-      phone:wx.getStorageSync('phone')
-    })
+    var addressth= headInfo.province+headInfo.city+headInfo.area+headInfo.street+headInfo.address
+      that.setData({
+        shopName:headInfo.shopName,
+        addressth:addressth,
+        session:session,
+        phone:wx.getStorageSync('phone')
+      })
+    app.refresh()    
     that.orderNum()
   },
 

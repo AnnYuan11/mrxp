@@ -53,16 +53,16 @@
 								<view class="sub buy" catchtap="Topay" data-item="{{item}}">去付款</view>
 							</view>
 							<view class="button" style="width:50%" wx:if="{{item.orderStatus=='已提货'}}">
-								<button open-type="share" data-item="{{item}}" class="sub buy share" catchtap="share">
+								<button open-type="share" data-item="{{item}}" class="sub buy share" catchtap="share" wx:if="{{item.isAfterOrder!='1'}}">
 									我要晒单
 								</button>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
-								<view class="sub buy" catchtap="sqsh">申请售后</view>
+								<view class="sub buy" catchtap="sqsh"  wx:if="{{item.isAfterOrder!='1'}}">申请售后</view>
 							</view>
 
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='备货中'}}">
-								<view class="sub buy" wx:if="{{item.isRefund=='1'}}" catchtap="cancel_bh">取消订单</view>
+								<view class="sub buy" wx:if="{{item.isAfterOrder=='0'&&item.isAfterOrderOver=='0'}}" catchtap="cancel_bh">取消订单</view>
 							</view>
 							<view class="button" wx:if="{{item.orderStatus=='待提货'}}">
 
@@ -317,11 +317,11 @@
 							</view>
 							<view class="button_box">
 
-								<button open-type="share" class="sub buy share" data-item="{{item}}" catchtap="share">
+								<button open-type="share" class="sub buy share" data-item="{{item}}" catchtap="share"  wx:if="{{item.isAfterOrder!='1'}}">
 									我要晒单
 								</button>
 
-								<view class="button">
+								<view class="button"  wx:if="{{item.isAfterOrder=='0'&&item.isAfterOrderOver=='0'}}">
 									<view class="sub buy" catchtap="sqsh">申请售后</view>
 								</view>
 							</view>

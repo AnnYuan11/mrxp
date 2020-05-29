@@ -47,8 +47,17 @@ Page({
           productInfo: res.data
         })
         console.log(that.data.productInfo)
+        var headInfo=wx.getStorageSync('headInfo') 
+        var addressth= headInfo.province+headInfo.city+headInfo.area+headInfo.street+headInfo.address
+          that.setData({
+            shopName:headInfo.shopName,
+            ztdid:headInfo.id,
+            phones:headInfo.phone,
+            addressth:addressth,
+          })
+          that.orderMoney()
         // if (that.data.productInfo.sendType == 1) {
-          that.checkAddress()
+          // that.checkAddress()
           //查询用户是否切换店铺
           // var isCheck = wx.getStorageSync('aa')
           // if (isCheck == '0') {
@@ -148,30 +157,7 @@ Page({
     }
     base.request(params);
   },
-  /**
-   * 获取默认自提点
-   */
-  defaultAddress() {
-    var that = this;
-    var params = {
-      url: '/app/head/findHeadInfoProperty',
-      method: 'GET',
-      data: {},
-      sCallBack: function (data) {
-        var list = data.data.result;
-        that.setData({
-          shopName: list.shopName,
-          phones: list.phone,
-          ztdid2: list.id,
-          addressth: list.address
-        })
-        that.orderMoney()
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
+ 
   /**
    * 获取切换后的自提点
    */

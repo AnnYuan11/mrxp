@@ -111,13 +111,7 @@ Page({
         }
       })
       that.list()//列表
-      // var aa=wx.getStorageSync('aa')
-      // console.log(aa)
-      // if(aa=='0'){
-      //   that.query()//查询用户切换店铺
-      // }else {
-      //   return
-      // }
+      that.query()
     }
   },
 // 定位授权
@@ -140,13 +134,8 @@ locations: function () {
         key: "longitude",
         data: res.longitude
       });
-      that.query() //查询用户切换店铺
-      // var aa = wx.getStorageSync('aa')
-      // if (aa == '0') {
-      //   that.query() //查询用户切换店铺
-      // } else {
-      //   that.list()
-      // }
+      that.list()
+     
 
     }
   })
@@ -375,6 +364,7 @@ change(e){
 query(){
   var that=this;
   var userId = wx.getStorageSync('userId')
+  var headInfo = wx.getStorageSync('headInfo')
   var params = {
     url: '/app/user/findUserHeadInfo',
     method: 'POST',
@@ -383,11 +373,14 @@ query(){
     },
     sCallBack: function (data) {
       that.setData({
-        defaultztd:data.data.result,
-        shopName:data.data.result.headInfo.shopName,
-        address:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address
+        defaultztd:headInfo,
+        shopName:headInfo.shopName,
+        address:headInfo.province+headInfo.city+headInfo.area+headInfo.street+headInfo.address
       })
-      
+      wx.setStorage({
+        key: 'headInfo',
+        data: data.data.result.headInfo
+      })
     },
     eCallBack: function () {
     }

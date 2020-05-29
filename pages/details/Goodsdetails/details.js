@@ -20,7 +20,8 @@ Page({
     duration: 500,
     ishow:false,
     maskHidden: false,
-    interval:3000
+    interval:3000,
+    topprice:true
   },
 
   /**
@@ -47,7 +48,7 @@ Page({
         id:options.id,
         personal:app.globalData.personal,
         qhdzid: options.zdtid,
-      
+        sharephone:options.sharephone
       })
     }
     console.log(options)
@@ -57,6 +58,7 @@ Page({
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
     that.gwzn()//购物指南
+    
   },
   // 获取日期
   getDateStr: function(today, addDayCount) {
@@ -96,18 +98,25 @@ Page({
     var that = this;
     var userId = wx.getStorageSync('userId')
     console.log(that.data.qhdzid)
-    if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
-      console.log(userId)
-      if(userId!=''){
-          that.change()
+    var headInfo = wx.getStorageSync('headInfo')
+    console.log(that.data.qhdzid)
+    if(that.data.qhdzid==undefined||that.data.qhdzid=='111'){
+      if(headInfo){
+        that.setData({
+          shopName: headInfo.shopName,
+          sharephone: headInfo.phone,
+          ztdid:headInfo.id,
+        })
       }else{
-        that.search(that.data.options.shopName)
+        that.query() 
       }
-    }else{
-      that.query() 
+      
+    }else{  
+      that.spxx2()
     }
+   
     
-    this.setData({
+    that.setData({
       ishow:false
     })
   },
@@ -180,12 +189,13 @@ change(e) {
     console.log(zdtid)
     if(res.from==='button'){
       return {
-        title: this.data.list.productInfo.commodityName,     
-        path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&shopName='+that.data.shopName+'&id='+that.data.id,
+        title: this.data.list.productInfo.commodityName,
+        path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&sharephone='+that.data.sharephone+'&id='+that.data.id,
       }
     }
    
   },
+
   // 详情切换
   swichNav: function (e) {
     var that = this;
@@ -241,7 +251,7 @@ change(e) {
           commodityCode:data.data.result.commodityCode,
           background:JSON.parse(data.data.result.bannerPhotoView)
         })
-        
+        // that.eventDraw2()
       },
       eCallBack: function () {
       }
@@ -301,7 +311,7 @@ change(e) {
     base.request(params);
   },
   // 根据电话获取商铺信息
-  spxx() {
+  spxx(){
     var that = this;
     var userId = wx.getStorageSync('userId')
     var params = {
@@ -314,19 +324,28 @@ change(e) {
         that.setData({
           shopName: data.data.result.shopName,
           qhdzid: data.data.result.id,
-          headPhone: data.data.result.phone
+          sharephone: data.data.result.phone,
+          ztdid:data.data.result.id,
+          qhdzid:'111'
         })
-        console.log(that.data.qhdzid)
-        if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
-          console.log(userId)
-          if(userId){
-              that.change()
-          }else{
-            that.search(that.data.options.shopName)
-          }
-        }else{
-          that.query() 
-        }
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.id
+        })
+        // if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
+        //   console.log(userId)
+        //   if(userId){
+        //       that.change()
+        //   }else{
+        //     that.search(that.data.options.shopName)
+        //   }
+        // }else{
+        //   that.query() 
+        // }
       },
       eCallBack: function () {
       }
@@ -507,10 +526,9 @@ eventDraw () {
   var path = that.data.imgUrl+that.data.background[0];
   // var shopName = that.data.shopName;
   var ztdid = that.data.ztdid;
-  var id=that.data.id
-  var messages=[ztdid,id]
-  var message=messages.join('&');    //1,2,3
-  console.log(message)
+  var id=that.data.id  
+  var headInfo=wx.getStorageSync('headInfo')
+  console.log(headInfo.phone)
   wx.showLoading({
     title: '绘制分享图片中',
     mask: true
@@ -554,17 +572,9 @@ eventDraw () {
           width: 300,
           height: 300
         },
-        // {
-        //   type: 'image',
-        //   url: 'https://www.zgmrxp.com/app/getUserIdWxCommodityQr?commodityId='+message,
-        //   top: 470,
-        //   left: 50,
-        //   width: 70,
-        //   height: 70
-        // },
         {
             type: 'image',
-            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+that.data.headPhone,
+            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
             top: 470,
             left: 50,
             width: 70,
@@ -643,8 +653,8 @@ eventDraw () {
     }
   })
 },
+
 eventGetImage (event) {
- 
   wx.hideLoading()
   const { tempFilePath, errMsg } = event.detail
   if (errMsg === 'canvasdrawer:ok') {
@@ -653,6 +663,7 @@ eventGetImage (event) {
     })
   }
 },
+
 // 保存图片
 eventSave () {
   wx.saveImageToPhotosAlbum({
@@ -686,13 +697,20 @@ close(){
         userInfo: { 'id': userId }
       },
       sCallBack: function (data) {
-       
         that.setData({
           shopName: data.data.result.headInfo.shopName,
           ztdid: data.data.result.headInfo.id,
-          headPhone: data.data.result.headInfo.phone
+          sharephone: data.data.result.headInfo.phone,
+          sharephone:data.data.result.headInfo.phone
         })
-
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result.headInfo
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.headInfo.id
+        })
       },
       eCallBack: function () {
       }
@@ -720,5 +738,123 @@ close(){
       }
     }
     base.request(params);
-  }
+  },
+  spxx2() {
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/head/findHeadInfoByPhone',
+      method: 'GET',
+      data: {
+         'phone':that.data.sharephone 
+      },
+      sCallBack: function (data) {
+        that.setData({
+          shopName: data.data.result.shopName,
+          qhdzid: data.data.result.id,
+          sharephone: data.data.result.phone,
+          ztdid:data.data.result.id,
+          qhdzid:'111'
+        })
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.id
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  eventDraw2 () {
+    var that=this;
+    var path = that.data.imgUrl+that.data.background[0];
+    this.setData({
+      painting: {
+        width: 500,
+        height: 400,
+        clear: true,
+        views: [
+          {
+            type: 'rect',
+            background:'#fff',
+            top: 0,
+            left: 0,
+            width: 500,
+            height: 400
+          },
+          
+          {
+            type: 'image',
+            url: path,
+            top: 90,
+            left: 38,
+            width: 300,
+            height: 300
+          },
+          
+          
+          {
+            type: 'text',
+            content: '￥'+that.data.list.price,
+            fontSize: 19,
+            color: '#E62004',
+            textAlign: 'left',
+            top: 445,
+            left: 44.5,
+            bolder: true
+          },
+          {
+            type: 'text',
+            content: '￥'+that.data.list.crossedPrice,
+            fontSize: 13,
+            color: '#7E7E8B',
+            textAlign: 'left',
+            top: 450,
+            left: 115,
+            textDecoration: 'line-through'
+          },
+         
+        ]
+      }
+    })
+    that.eventGetImage2()
+  },
+  eventGetImage2 (event) {
+    console.log(event)
+    
+    const { tempFilePath, errMsg } = event.detail
+    if (errMsg === 'canvasdrawer:ok') {
+      this.setData({
+        shareImage: tempFilePath
+      })
+    }
+    console.log()
+    this.draw_uploadFile(this.data.shareImage)
+  },
+  draw_uploadFile: function (tempFilePath) { //wx.uploadFile 将本地资源上传到开发者服务器
+    let that = this;
+    wx.uploadFile({
+      url: 'https://www.zgmrxp.com/app/fileUploadLocal', //线上接口
+      filePath: tempFilePath,
+      name: 'imgFile',
+      success: function (res) {
+        console.log(res);
+        if(res.statusCode==200){
+          res.data = JSON.parse(res.data);
+          let imgsrc = res.data.data.src;
+          that.setData({
+            imgPath: imgsrc
+          });
+        }else{
+          console.log('失败')
+        }
+      },
+    })
+  },
 })
