@@ -170,6 +170,9 @@ Page({
       if(userId){
           that.change()
       }else{
+        that.setData({
+          shopName:options.shopName
+        })
         that.search(that.data.options.shopName)
       }
      
@@ -1073,7 +1076,4 @@ search(className){
   radioChange(e) {
     console.log(e)    
   },
-  sure_zt(){
-    
-  }
 })

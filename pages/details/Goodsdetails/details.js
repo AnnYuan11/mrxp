@@ -56,7 +56,6 @@ Page({
     that.shop();//商品内容
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
-    
     that.gwzn()//购物指南
   },
   // 获取日期
@@ -99,7 +98,7 @@ Page({
     console.log(that.data.qhdzid)
     if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
       console.log(userId)
-      if(userId){
+      if(userId!=''){
           that.change()
       }else{
         that.search(that.data.options.shopName)
@@ -289,9 +288,11 @@ change(e) {
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
           list:data.data.result,
+          id:data.data.result.id,
           commodityCode:data.data.result.commodityCode,
           background:JSON.parse(data.data.result.bannerPhotoView)
         })
+       that.buyRecord()
         
       },
       eCallBack: function () {
