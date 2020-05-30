@@ -177,7 +177,7 @@
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/b2.png" />
 					</i-grid-icon>
-					<i-grid-label>商家入驻</i-grid-label>
+					<i-grid-label>商家合作</i-grid-label>
 				</i-grid-item>
 			</navigator>
 		</i-grid>
