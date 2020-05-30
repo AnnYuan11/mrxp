@@ -141,6 +141,10 @@ Page({
   orderMessage(){
     var that = this;
     if(that.data.isbut==false){
+      wx.showToast({
+        title: '亲！请不要频繁点击哦~',
+        icon:'none'
+      })
       return
     }
     that.setData({
@@ -150,6 +154,12 @@ Page({
       title:'加载中',                             
       mask:true                                    
     })
+   
+    setTimeout(function(){ 
+      that.setData({
+        isbut:true
+      })
+    },5000)
     setTimeout(function(){ 
       wx.hideLoading({
         complete: (res) => {
@@ -212,9 +222,7 @@ Page({
              
             data: JSON.stringify(arg),
             sCallBack: function (data) {
-              that.setData({
-                isbut:true
-              })
+             
               console.log(data)
               that.setData({
                 message:data.data.result

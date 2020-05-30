@@ -21,7 +21,8 @@ Page({
     ishow:false,
     maskHidden: false,
     interval:3000,
-    topprice:true
+    topprice:true,
+    iscanvas:true
   },
 
   /**
@@ -114,8 +115,7 @@ Page({
     }else{  
       that.spxx2()
     }
-   
-    
+
     that.setData({
       ishow:false
     })
@@ -187,12 +187,16 @@ change(e) {
     var zdtid = wx.getStorageSync('zdtid')
     console.log(that.data.shopName)
     console.log(zdtid)
-    if(res.from==='button'){
+    if(that.data.imgPath!=''||that.data.imgPath!=undefined){
+      
+    }
+    // if(res.from==='button'){
       return {
+        imageUrl: that.data.imgUrl+'/'+that.data.imgPath,
         title: this.data.list.productInfo.commodityName,
         path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&sharephone='+that.data.sharephone+'&id='+that.data.id,
       }
-    }
+  // }
    
   },
 
@@ -211,6 +215,9 @@ change(e) {
   // 商品内容
   shop(){
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var params = {
       url: '/app/commodity/findCommodityInfo',
       method: 'GET',
@@ -251,7 +258,7 @@ change(e) {
           commodityCode:data.data.result.commodityCode,
           background:JSON.parse(data.data.result.bannerPhotoView)
         })
-        // that.eventDraw2()
+        that.eventDraw2()
       },
       eCallBack: function () {
       }
@@ -503,25 +510,29 @@ handleCancel () {
 // 生成海报
 handleClickItem1 () {
   var that = this;
-  this.setData({
-    maskHidden: false
+  that.setData({
+    maskHidden: false,
+    iscanvas:false
   });
+  console.log(that.data.iscanvas)
   // wx.showToast({
   //   title: '海报生成中...',
   //   icon: 'loading',
   //   duration: 1000
   // });
-  setTimeout(function () {
-    // that.ewm()
     that.eventDraw();
     that.setData({
       maskHidden: true,
-      ishow:false
+      ishow:false,
+      // iscanvas:true
     });
-  }, 1000)
+  // setTimeout(function () {
+    
+  // }, 100)
 },
 
 eventDraw () {
+  
   var that=this;
   var path = that.data.imgUrl+that.data.background[0];
   // var shopName = that.data.shopName;
@@ -650,7 +661,8 @@ eventDraw () {
           width: 170
         }
       ]
-    }
+    },
+   
   })
 },
 
@@ -684,40 +696,7 @@ close(){
     maskHidden:false
   })
 },
-// 获取当前店铺
 
-  query() {
-   
-    var that = this;
-    var userId = wx.getStorageSync('userId')
-    var params = {
-      url: '/app/user/findUserHeadInfo',
-      method: 'POST',
-      data: {
-        userInfo: { 'id': userId }
-      },
-      sCallBack: function (data) {
-        that.setData({
-          shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id,
-          sharephone: data.data.result.headInfo.phone,
-          sharephone:data.data.result.headInfo.phone
-        })
-        wx.setStorage({
-          key: 'headInfo',
-          data: data.data.result.headInfo
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: data.data.result.headInfo.id
-        })
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  
   // 购物指南
   gwzn(){
     var that=this;
@@ -775,9 +754,9 @@ close(){
     var that=this;
     var path = that.data.imgUrl+that.data.background[0];
     this.setData({
-      painting: {
+      painting2: {
         width: 500,
-        height: 400,
+        height: 550,
         clear: true,
         views: [
           {
@@ -788,42 +767,61 @@ close(){
             width: 500,
             height: 400
           },
-          
+          // {
+          //   type: 'text',
+          //   content: that.data.list.productInfo.commodityName,
+          //   fontSize: 20,
+          //   lineHeight: 30,
+          //   color: '#383549',
+          //   textAlign: 'left',
+          //   top: 0,
+          //   left: 44,
+          //   width: 287,
+          //   MaxLineNumber: 2,
+          //   breakWord: true,
+          //   bolder: true
+          // },
           {
             type: 'image',
             url: path,
-            top: 90,
+            top: 0,
             left: 38,
-            width: 300,
-            height: 300
+            width: 400,
+            height: 330
           },
-          
-          
           {
             type: 'text',
-            content: '￥'+that.data.list.price,
-            fontSize: 19,
+            content: '价格￥'+that.data.list.price,
+            fontSize: 30,
             color: '#E62004',
             textAlign: 'left',
-            top: 445,
-            left: 44.5,
+            top: 365,
+            left: 0,
             bolder: true
           },
           {
             type: 'text',
             content: '￥'+that.data.list.crossedPrice,
-            fontSize: 13,
+            fontSize: 26,
             color: '#7E7E8B',
             textAlign: 'left',
-            top: 450,
-            left: 115,
+            top: 370,
+            left: 165,
             textDecoration: 'line-through'
+          },
+          {
+            type: 'text',
+            content: '到货:'+that.data.list.pickDate,
+            fontSize: 24,
+            color: '#7E7E8B',
+            textAlign: 'left',
+            top: 370,
+            left: 270
           },
          
         ]
       }
     })
-    that.eventGetImage2()
   },
   eventGetImage2 (event) {
     console.log(event)
@@ -831,23 +829,27 @@ close(){
     const { tempFilePath, errMsg } = event.detail
     if (errMsg === 'canvasdrawer:ok') {
       this.setData({
-        shareImage: tempFilePath
+        shareImage2: tempFilePath
       })
     }
-    console.log()
-    this.draw_uploadFile(this.data.shareImage)
+    this.draw_uploadFile(this.data.shareImage2)
   },
   draw_uploadFile: function (tempFilePath) { //wx.uploadFile 将本地资源上传到开发者服务器
     let that = this;
+    console.log(tempFilePath)
     wx.uploadFile({
       url: 'https://www.zgmrxp.com/app/fileUploadLocal', //线上接口
       filePath: tempFilePath,
-      name: 'imgFile',
+      name: 'file',
       success: function (res) {
         console.log(res);
         if(res.statusCode==200){
+          wx.hideLoading({
+            complete: (res) => {},
+          })
           res.data = JSON.parse(res.data);
-          let imgsrc = res.data.data.src;
+          console.log(res.data)
+          let imgsrc = res.data.result.path[0];
           that.setData({
             imgPath: imgsrc
           });

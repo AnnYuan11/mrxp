@@ -356,6 +356,9 @@ share(e){
   // 全部订单
   Allorder() {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
@@ -368,6 +371,9 @@ share(e){
         }
       },
       sCallBack: function (data) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         var Alllist = data.data.result.datas;
         Alllist.forEach((item,i) => {
           if (item.orderStatus == '1') {
@@ -447,6 +453,9 @@ share(e){
   // 待付款
   dfkorder() {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
@@ -460,6 +469,9 @@ share(e){
         }
       },
       sCallBack: function (data) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         var dfklist = data.data.result.datas;
         dfklist.forEach(item => {
           if (item.orderStatus == '1') {
@@ -513,6 +525,9 @@ share(e){
   // 备货中
   bhz() {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
@@ -526,6 +541,9 @@ share(e){
         'orderStatus': 2,
       },
       sCallBack: function (data) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         var bhzlist = data.data.result.datas;
         bhzlist.forEach(item => {
           if (item.orderStatus == '1') {
@@ -578,6 +596,9 @@ share(e){
   },
   // 配送中
   psz() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
@@ -592,6 +613,9 @@ share(e){
         'orderStatus': 3,
       },
       sCallBack: function (data) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         var phzlist = data.data.result.datas;
         phzlist.forEach(item => {
           if (item.orderStatus == '1') {
@@ -644,6 +668,9 @@ share(e){
   },
   // 待提货
   dth() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     var id = wx.getStorageSync('userId')
     var params = {
@@ -658,7 +685,9 @@ share(e){
         'orderStatus': 4,
       },
       sCallBack: function (data) {
-       
+       wx.hideLoading({
+         complete: (res) => {},
+       })
         var dthlist = data.data.result.datas;
         dthlist.forEach((item,i) => {
           if (item.orderStatus == '1') {
@@ -720,6 +749,9 @@ share(e){
   // 已提货
   yth() {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var id = wx.getStorageSync('userId')
     var params = {
       url: '/app/order/listCommodityOrderInfo',
@@ -733,6 +765,9 @@ share(e){
         'orderStatus': 5,
       },
       sCallBack: function (data) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         var ythlist = data.data.result.datas;
         ythlist.forEach(item => {
           if (item.orderStatus == '1') {

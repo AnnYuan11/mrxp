@@ -65,6 +65,12 @@
 					"pathName": "pages/details/topay/pay_success",
 					"query": "orderId=2c985f097247c1df017248e03e300e53",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"scene": null
 				}
 			]
 		}

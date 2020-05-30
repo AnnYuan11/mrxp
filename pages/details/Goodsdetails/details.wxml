@@ -163,3 +163,6 @@
   <image  src="{{imgUrls}}img/details/close.png" mode="widthFix" style="width:40rpx" class="close" bindtap="close"></image>
 </view>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
+
+<canvasdrawer painting="{{painting2}}" style="display:{{iscanvas ? 'block':'none'}}" bind:getImage="eventGetImage2"/>
+
