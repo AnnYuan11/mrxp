@@ -164,14 +164,26 @@
 					<i-grid-label>客服中心</i-grid-label>
 				</i-grid-item>
 			</navigator>
-			<!-- <navigator url="/pages/details/tzsq/tzsq" hover-class="none">
+			<navigator url="/pages/details/tzsq/tzsq" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/b1.png" />
 					</i-grid-icon>
 					<i-grid-label>团长申请</i-grid-label>
 				</i-grid-item>
-			</navigator> -->
+			</navigator>
+			<navigator url="/pages/details/sjrz/sjrz" hover-class="none">
+				<i-grid-item>
+					<i-grid-icon>
+						<image src="{{imgUrls}}img/my/b2.png" />
+					</i-grid-icon>
+					<i-grid-label>商家合作</i-grid-label>
+				</i-grid-item>
+			</navigator>
+		</i-grid>
+	</view>
+		<view class="icon_box">
+		<i-grid>	
 			<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10343&name=加盟商合作" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
@@ -186,28 +198,6 @@
 						<image src="{{imgUrls}}img/my/a8.png" />
 					</i-grid-icon>
 					<i-grid-label>系统设置</i-grid-label>
-				</i-grid-item>
-			</navigator>
-			<!-- <navigator url="/pages/details/sjrz/sjrz" hover-class="none">
-				<i-grid-item>
-					<i-grid-icon>
-						<image src="{{imgUrls}}img/my/b2.png" />
-					</i-grid-icon>
-					<i-grid-label>商家合作</i-grid-label>
-				</i-grid-item>
-			</navigator> -->
-		</i-grid>
-	</view>
-		<view class="icon_box">
-		<i-grid>	
-			
-		
-			<navigator url="#" style="opacity:0" hover-class="none">
-				<i-grid-item>
-					<i-grid-icon>
-						<image src="{{imgUrls}}img/my/a6.png" />
-					</i-grid-icon>
-					<i-grid-label>积分商城</i-grid-label>
 				</i-grid-item>
 			</navigator>
 			<navigator url="#" style="opacity:0" hover-class="none">

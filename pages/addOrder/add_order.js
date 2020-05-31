@@ -18,7 +18,8 @@ Page({
     ztdid: '', // 自提地址id
     couponsId: '',
     addressId: '',
-    topay:false
+    topay:false,
+    isbut:true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -276,39 +277,65 @@ Page({
    * 订单提交
    */
   orderSubmit() {
-    const that = this;
-    that.getParams()
-    const params = {
-      url: '/app/order/addCommodityOrderInfo',
-      method: 'POST',
-      data: JSON.stringify(that.data.params),
-      sCallBack: function (data) {
-        that.setData({
-          message: data.data.result
-        })
-        if(data.data.errorCode=='0'){
-          if(that.data.productInfo.sendType=="1"){
-            that.setData({
-              topay:true
-            })
-          }else{
-            wx.navigateTo({
-              url: '/pages/details/topay/topay',
-            })
-          }
-         
-        }else{
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon:'none'
-          })
-        }
-
-      },
-      eCallBack: function () {
-      }
+    var that = this;
+    if(that.data.isbut==false){
+      wx.showToast({
+        title: '亲！请不要频繁点击哦~',
+        icon:'none'
+      })
+      return
     }
-    base.request(params);
+    that.setData({
+      isbut:false
+    })
+    wx.showLoading({
+      title:'加载中',                             
+      mask:true                                    
+    })
+    setTimeout(function(){ 
+      that.setData({
+        isbut:true
+      })
+    },5000)
+    that.getParams()
+    setTimeout(function(){
+      wx.hideLoading({
+        complete: (res) => {
+          const params = {
+            url: '/app/order/addCommodityOrderInfo',
+            method: 'POST',
+            data: JSON.stringify(that.data.params),
+            sCallBack: function (data) {
+              that.setData({
+                message: data.data.result
+              })
+              if(data.data.errorCode=='0'){
+                if(that.data.productInfo.sendType=="1"){
+                  that.setData({
+                    topay:true
+                  })
+                }else{
+                  wx.navigateTo({
+                    url: '/pages/details/topay/topay',
+                  })
+                }
+               
+              }else{
+                wx.showToast({
+                  title: data.data.errorMsg,
+                  icon:'none'
+                })
+              }
+      
+            },
+            eCallBack: function () {
+            }
+          }
+          base.request(params);
+        },
+      })
+      },500)
+   
   },
  
   /**

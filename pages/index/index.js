@@ -26,7 +26,8 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
-    dpShow:false//店铺显示
+    dpShow:false,//店铺显示
+    isloading:true
   },
 
   /**
@@ -44,7 +45,8 @@ Page({
     that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
-    that.shopList() 
+    that.shopList()
+    that.city(); //获取所在城市名
     // that.query()
     that.setData({
       today: today,
@@ -156,7 +158,7 @@ Page({
   } catch (e) {
       console.log(e)
   }
-    that.city(); //获取所在城市名
+    
     
     var userId = wx.getStorageSync('userId')
     var headInfo = wx.getStorageSync('headInfo')
@@ -334,9 +336,12 @@ getPic(){
   // 今日售卖列表
   shopList(className) {
     var that = this;
-    wx.showLoading({
-      title: '加载中',
+    that.setData({
+      isloading:true
     })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     var params = {
       url: '/app/commodity/listCommodityInfoForNative',
       method: 'POST',
@@ -353,9 +358,9 @@ getPic(){
         //   that.shopList()
         // }
         if(listToday){
-          wx.hideLoading({
-            complete: (res) => {},
-          })
+          // that.setData({
+          //   isloading:false
+          // })
         }
         
         if (listToday != '') {
@@ -907,7 +912,7 @@ getPic(){
         longitude: longitude
       },
       success: function (addressRes) {
-     
+        console.log(addressRes)
         that.weather(addressRes.result.ad_info.city)
       },
       fail: function (error) {

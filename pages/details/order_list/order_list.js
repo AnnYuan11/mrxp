@@ -336,6 +336,11 @@ share(e){
         that.data.totalCount = 0, //总是数据条数
         that.data.pagecount = 0, //总的页数
         that.yth() //已提货
+    }else if (e.target.dataset.current == '6') {
+      that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0, //总的页数
+        that.yjs() //已提货
     }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -384,9 +389,9 @@ share(e){
             item.orderStatus = '配送中'
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
-          } else if (item.orderStatus == '5') {
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='0') {
             item.orderStatus = '已提货'
-          } else if (item.orderStatus == '6') {
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1') {
             item.orderStatus = '已完成'
           } else if (item.orderStatus == '0') {
             item.orderStatus = '失效订单'
@@ -762,6 +767,7 @@ share(e){
         'userInfo': {
           'id': id
         },
+        'isAfterOrderOver':0,
         'orderStatus': 5,
       },
       sCallBack: function (data) {
@@ -778,17 +784,15 @@ share(e){
             item.orderStatus = '配送中'
           } else if (item.orderStatus == '4') {
             item.orderStatus = '待提货'
-          } else if (item.orderStatus == '5') {
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='0') {
             item.orderStatus = '已提货'
           }
-          if(item.isAfterOrder=='1'){
-            
-          }
-          if(item.isAfterOrderOver=='1'){
-            item.orderStatus = '已完成'
+
+          // if(item.isAfterOrderOver=='1'){
+          //   item.orderStatus = '已完成'
            
-          }
-          // item.orderTime = item.orderTime.substring(0, 10)
+          // }
+         
         })
         
         
@@ -826,7 +830,7 @@ share(e){
       app.nomore_showToast();
     }
   },
-  // // 售后中
+  //  退货关闭
   // shz(){
   //   var that=this;
   //   var id = wx.getStorageSync('userId')
@@ -882,7 +886,7 @@ share(e){
   //   }
   //   base.request(params);
   // },
-  //  // 售后中加载更多
+  //  // 退货关闭加载更多
   // shzmore(){
   //   if (this.data.currentPage < this.data.pagecount) {
   //     this.data.currentPage++;
@@ -892,74 +896,66 @@ share(e){
   //     app.nomore_showToast();
   //   }
   // },
-  // // 已结束
-  // yjs(){
-  //   var that=this;
-  //   var id = wx.getStorageSync('userId')
-  //   var params = {
-  //     url: '/app/order/listCommodityOrderInfo',
-  //     method: 'POST',
-  //     data: {
-  //       'pageIndex':that.data.currentPage,
-  //       'pageSize':that.data.size,
-  //       'userInfo.id':id,
-  //       'orderStatus':6,
-  //     },
-  //     sCallBack: function (data) {
-  //        var yjslist=data.data.result.datas;
-  //        yjslist.forEach(item=>{
-  //         if(item.orderStatus=='1'){
-  //           item.orderStatus='待支付'
-  //         }else if(item.orderStatus=='2'){
-  //           item.orderStatus='备货中'
-  //         }else if(item.orderStatus=='3'){
-  //           item.orderStatus='配送中'
-  //         }else if(item.orderStatus=='4'){
-  //           item.orderStatus='待提货'
-  //         }else if(item.orderStatus=='5'){
-  //           item.orderStatus='已提货'
-  //         }else if(item.orderStatus=='6'){
-  //           item.orderStatus='已结束'
-  //         }
-  //         item.orderTime=item.orderTime.substring(0,10)
-  //       })
+  // 已完成
+  yjs(){
+    var that=this;
+    var id = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/order/listCommodityOrderInfo',
+      method: 'POST',
+      data: {
+        'pageIndex':that.data.currentPage,
+        'pageSize':that.data.size,
+        'userInfo': {
+          'id': id
+        },
+        'isAfterOrderOver':1,
+        'orderStatus':5
+      },
+      sCallBack: function (data) {
+         var yjslist=data.data.result.datas;
+         yjslist.forEach(item=>{
+          if(item.orderStatus=='5'&&item.isAfterOrderOver=='1'){
+            item.orderStatus='已完成'
+          }
+        })
 
-  //       var temlist = that.data.yjslist; //原始的数据集合
-  //       var currentPage = that.data.currentPage; //获取当前页码
-  //       if (currentPage == 1) {
-  //           temlist = data.data.result.datas; //初始化数据列表
-  //           currentPage = 1;
-  //       }
-  //       else {
-  //           temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
-  //           // currentPage = currentPage + 1;
-  //         }
-  //         that.setData({
-  //           currentPage: currentPage,
-  //           yjslist: temlist,
-  //           totalCount: data.data.result.rowCount, //总的数据条数
-  //           pagecount: data.data.result.totalPages //总页数
-  //         })
-  //         console.log(that.data.pagecount)
+        var temlist = that.data.yjslist; //原始的数据集合
+        var currentPage = that.data.currentPage; //获取当前页码
+        if (currentPage == 1) {
+            temlist = data.data.result.datas; //初始化数据列表
+            currentPage = 1;
+        }
+        else {
+            temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+            // currentPage = currentPage + 1;
+          }
+          that.setData({
+            currentPage: currentPage,
+            yjslist: temlist,
+            totalCount: data.data.result.rowCount, //总的数据条数
+            pagecount: data.data.result.totalPages //总页数
+          })
+          console.log(that.data.pagecount)
 
 
 
-  //     },
-  //     eCallBack: function () {
-  //     }
-  //   }
-  //   base.request(params);
-  // },
-  // // 已结束加载更多
-  // yjsmore(){
-  //   if (this.data.currentPage < this.data.pagecount) {
-  //     this.data.currentPage++;
-  //     this.yjs();
-  //   } else {
-  //     //没有更多数据
-  //     app.nomore_showToast();
-  //   }
-  // },
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  // 已完成加载更多
+  yjsmore(){
+    if (this.data.currentPage < this.data.pagecount) {
+      this.data.currentPage++;
+      this.yjs();
+    } else {
+      //没有更多数据
+      app.nomore_showToast();
+    }
+  },
 
 
 
@@ -994,7 +990,7 @@ share(e){
   //   }
   //   base.request(params);
   // },
-  // 备货中取消订单e
+  // 备货中取消订单
   cancel_bh(e){
     var that = this;
     console.log(e)
