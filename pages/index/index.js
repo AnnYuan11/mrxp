@@ -354,6 +354,8 @@ getPic(){
       sCallBack: function (data) {
        
         var listToday = data.data.result
+        console.log(that.data.currentPage)
+        console.log(that.data.pagecount)
         // if(listToday.length=='0'){
         //   that.shopList()
         // }

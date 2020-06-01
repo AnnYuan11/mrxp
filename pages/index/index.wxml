@@ -144,7 +144,7 @@
 						</navigator>
 					</block>
 				</scroll-view>
-				<view class="bot" wx:if="{{listToday.length!=totalCount}}">
+				<view class="bot" wx:if="{{currentPage!=pagecount}}">
 					<i-grid>
 						<i-grid-item i-class="item">
 							<i-spin custom>
@@ -154,7 +154,7 @@
 						</i-grid-item>
 					</i-grid>
 				</view>
-				<view class="bot" wx:if="{{listToday.length==totalCount}}">~已经到底部了</view>
+				<view class="bot" wx:if="{{currentPage==pagecount}}">~已经到底部了</view>
 			</view>
 			<view class="swiper_box" wx:if="{{currentTab=='1'}}">
 				<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">

@@ -226,6 +226,9 @@ change(e) {
       },
       sCallBack: function (data) {
         console.log(data)
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         if(data.data.result.sendType==1){
           data.data.result.sendType="到店自提"
         }else{
@@ -844,9 +847,7 @@ close(){
       success: function (res) {
         console.log(res);
         if(res.statusCode==200){
-          wx.hideLoading({
-            complete: (res) => {},
-          })
+          
           res.data = JSON.parse(res.data);
           console.log(res.data)
           let imgsrc = res.data.result.path[0];

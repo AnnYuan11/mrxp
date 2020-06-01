@@ -67,10 +67,10 @@
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
 		<scroll-view scroll-y style="height: 100%">
-			<view class="gmjl_title">
+			<!-- <view class="gmjl_title">
 				<text>目前共</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
-			</view>
+			</view> -->
 			<view class="gmjl_box">
 				<block wx:for="{{orderList}}" wx:if="{{index<20}}">
 					<view class="gmjl_list">
@@ -84,7 +84,7 @@
 						</view>
 					</view>
 				</block>
-				<view class="gmjl" wx:if="{{orderList.length>20}}">购买人数太多，显示不下了</view>
+				<view class="gmjl" wx:if="{{orderList.length>20||orderList.length==RecordList.commodityNumbers}}">购买人数太多，显示不下了</view>
 			</view>
 		</scroll-view>
 	</view>

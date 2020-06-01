@@ -12,6 +12,7 @@ Page({
         imgUrls: app.globalData.imgUrls,
         color: app.globalData.color,
         payTypes: 2, //默认微信支付
+        isbut:true
     },
 
     /**
@@ -127,6 +128,21 @@ Page({
     // 去付款
     Recharge() {
         var that = this;
+        if(that.data.isbut==false){
+            wx.showToast({
+              title: '亲！请不要频繁点击哦~',
+              icon:'none'
+            })
+            return
+          }
+          that.setData({
+            isbut:false
+          })         
+          setTimeout(function(){ 
+            that.setData({
+              isbut:true
+            })
+          },5000)
         that.subTap()
             // if(that.data.payTypes=='2'){
             //   that.pay()
@@ -149,72 +165,74 @@ Page({
             openId: openId
         }
         console.log(JSON.stringify(arg))
-        var params = {
-            url: '/app/payment/getOrderStr',
-            method: 'POST',
-            data: arg,
-            sCallBack: function(data) {
-                console.log(data)
+        setTimeout(function(){ 
+            var params = {
+                url: '/app/payment/getOrderStr',
+                method: 'POST',
+                data: arg,
+                sCallBack: function(data) {
+                    console.log(data)
 
-                wx.hideLoading({
-                    complete: (res) => {},
-                })
-                if (data.data.errorCode == '0') {
-                    wx.requestPayment({
-                        appId: 'wx874be472f0a6147b',
-                        timeStamp: data.data.result['timeStamp'],
-                        nonceStr: data.data.result['nonceStr'],
-                        package: data.data.result['packageValue'],
-                        signType: 'MD5',
-                        paySign: data.data.result['paySign'],
-                        'success': function(res) {
-                            console.log(res)
-                            that.delItem()
-                            wx.showToast({
-                                title: '已支付成功！',
-                                icon: 'none',
-                                duration: 2000,
-                                success: function() {
-                                    setTimeout(function() {
-                                        wx.redirectTo({
-                                            url: 'pay_success?orderId=' + that.data.message.id,
-                                        })
-                                    }, 2000);
-                                    // setTimeout(function () {
-                                    //   wx.redirectTo({
-                                    //     url: '/pages/details/order_list/order_list',
-                                    //   })
-                                    // }, 2000);
-
-                                }
-                            })
-                        },
-                        fail: function(e) {
-                            console.log(e)
-                        }
+                    wx.hideLoading({
+                        complete: (res) => {},
                     })
-                } else {
-                    wx.showToast({
-                        title: data.data.errorMsg,
-                        icon: 'none',
-                        duration: 2000,
-                        success: function() {
-                            setTimeout(function() {
-                                wx.navigateBack({
+                    if (data.data.errorCode == '0') {
+                        wx.requestPayment({
+                            appId: 'wx874be472f0a6147b',
+                            timeStamp: data.data.result['timeStamp'],
+                            nonceStr: data.data.result['nonceStr'],
+                            package: data.data.result['packageValue'],
+                            signType: 'MD5',
+                            paySign: data.data.result['paySign'],
+                            'success': function(res) {
+                                console.log(res)
+                                that.delItem()
+                                wx.showToast({
+                                    title: '已支付成功！',
+                                    icon: 'none',
+                                    duration: 2000,
+                                    success: function() {
+                                        setTimeout(function() {
+                                            wx.redirectTo({
+                                                url: 'pay_success?orderId=' + that.data.message.id,
+                                            })
+                                        }, 2000);
+                                        // setTimeout(function () {
+                                        //   wx.redirectTo({
+                                        //     url: '/pages/details/order_list/order_list',
+                                        //   })
+                                        // }, 2000);
 
-                                    delta: 2
-
+                                    }
                                 })
-                            }, 2000);
+                            },
+                            fail: function(e) {
+                                console.log(e)
+                            }
+                        })
+                    } else {
+                        wx.showToast({
+                            title: data.data.errorMsg,
+                            icon: 'none',
+                            duration: 2000,
+                            success: function() {
+                                setTimeout(function() {
+                                    wx.navigateBack({
 
-                        }
-                    })
-                }
+                                        delta: 2
 
-            },
-            eCallBack: function() {}
-        }
-        base.request(params);
+                                    })
+                                }, 2000);
+
+                            }
+                        })
+                    }
+
+                },
+                eCallBack: function() {}
+            }
+            base.request(params);
+        },500)
     },
     delItem(id) {
         var idslist = wx.getStorageSync('productInfo')
