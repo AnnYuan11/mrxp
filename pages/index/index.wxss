@@ -317,7 +317,7 @@ swiper image{
 }
 
 .thsj .left text.rq{
-  color: rgba(255,217,54,1);
+  color: rgb(26, 66, 243);
 }
 .thsj .right text{
   font-size:28rpx;

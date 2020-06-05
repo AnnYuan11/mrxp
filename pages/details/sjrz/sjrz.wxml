@@ -1,8 +1,8 @@
 <!--pages/sjrz/sjrz.wxml-->
 <view class="box">
   <view class="section">
-    <view class="title">商家入驻规则</view>
-    <text class="con">商城将会对每个账号的使用者每个协议有效期收取若干人民币的开店费。协议有效期为两年。协议到期后，如须续签协议，商城将再次对店铺/账号使用者收取开店费（按当时政策）。开店费一经收取不予退还。</text>
+    <view class="title">供应商需知</view>
+    <text class="con">供应商须具备营业执照、食品生产经营许可证、产品检验报告、开户许可证等正规资质。提供给我方相应资质的复印件（加盖公章），授权委托书及受托人身份证复印件。经相关部门审核无误后，方可入驻我方平台。</text>
   </view>
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="sqr">

@@ -211,7 +211,7 @@ Page({
           }
           that.setData({
             money: data.data.result,
-            yhje: data.data.result.fullReductionInfo.fullMoney
+            yhje: data.data.result.fullReductionInfo.name
           })
         }else{
           wx.showToast({
@@ -253,6 +253,9 @@ Page({
       }
       commoditySubOrderInfoList.push(order)
     })
+    if(that.data.couponsId==undefined){
+      that.data.couponsId=''
+    }
     that.setData({
       "params": {
         "commoditySubOrderInfoList": commoditySubOrderInfoList,
@@ -301,6 +304,7 @@ Page({
     setTimeout(function(){
       wx.hideLoading({
         complete: (res) => {
+          console.log(that.data.params)
           const params = {
             url: '/app/order/addCommodityOrderInfo',
             method: 'POST',

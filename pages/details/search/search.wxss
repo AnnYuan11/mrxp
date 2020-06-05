@@ -109,7 +109,7 @@
 }
 
 .thsj .left text.rq{
-  color: green;
+  color: rgb(26, 66, 243);
 }
 .thsj .right text{
   font-size:28rpx;
@@ -176,7 +176,7 @@ video {
 }
 .search_left{
   width:80%;
-  background:rgba(243,243,243,1);
+  background:rgb(231, 231, 231);
   border-radius:32px;
   padding: 20rpx 32rpx;
   box-sizing: border-box;
@@ -188,7 +188,7 @@ video {
 }
 .serch{
   font-size:24rpx;
-  color:rgba(194,194,194,1);
+  color:rgb(170, 170, 170);
 }
 .search_left input{
   margin-left: 20rpx;
@@ -227,7 +227,7 @@ video {
 }
 
 .figure{
-  width: 150rpx;
+  width: 46rpx;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;

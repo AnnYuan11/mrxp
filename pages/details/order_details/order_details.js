@@ -325,12 +325,12 @@ Page({
       data: JSON.stringify(arg),
       sCallBack: function (data) {
         console.log(data)
-        if(data.data.result.fullMoney==''){
-          data.data.result.fullMoney=0
+        if(data.data.result.fullReductionInfo.name==''){
+          data.data.result.fullReductionInfo.name=0
         }
         that.setData({
           money:data.data.result,
-          yhje:data.data.result.fullMoney
+          yhje: data.data.result.fullReductionInfo.name
         })
         
       },

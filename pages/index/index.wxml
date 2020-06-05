@@ -85,7 +85,9 @@
 									<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
 									<image src="{{imgUrl}}{{item.photo}}" wx:if="{{item.videoUrl==''}}"></image>
 									<!-- 显示状态图 -->
-									<image src="/img/new/1.png" style="width:128rpx" mode="widthFix" class="zt"></image>
+									<image src="/img/new/1.png" style="width:128rpx" mode="widthFix" wx:if="{{item.saleTag=='1'}}" class="zt"></image>
+									<image src="/img/new/2.png" wx:if="{{item.saleTag=='2'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
+									<image src="/img/new/3.png" wx:if="{{item.saleTag=='3'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
 									<view class="subtitle" wx:if="{{item.subTitle!=''}}">{{item.subTitle}}</view>
 									<video catchtap="aa" id="myVideo" wx:if="{{item.videoUrl!=''}}" src="{{imgUrl}}{{item.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.photo}}" controls></video>
 									<!-- 已售罄 -->

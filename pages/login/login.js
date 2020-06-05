@@ -135,15 +135,16 @@ Page({
   },
   getPhoneNumber: function (e) {
     app.getOpenId()
-    var sessionId = wx.getStorageSync('sessionId')
-    console.log(e)
+    
     var that = this;
     // debugger
     wx.checkSession({
       success: function () {
         var ency = e.detail.encryptedData;
         var iv = e.detail.iv;
-        var sessionk = sessionId;
+        
+        var sessionk = wx.getStorageSync('sessionId')
+        console.log(sessionk)
         if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
           wx.showToast({
             title: '未授权',

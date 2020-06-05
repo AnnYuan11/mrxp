@@ -75,7 +75,18 @@ Page({
       content: '确认退出吗',
       success (res) {
         if (res.confirm) {
-          wx.clearStorageSync()
+          // wx.clearStorageSync()
+          // wx.removeStorageSync('sessionId')
+          wx.removeStorageSync('openId')
+          wx.removeStorageSync('phone')
+          wx.removeStorageSync('session')
+          wx.removeStorageSync('userId')
+          wx.removeStorageSync('loginData')
+          wx.removeStorageSync('latitude')
+          wx.removeStorageSync('longitude')
+          wx.removeStorageSync('zdtid')
+          wx.removeStorageSync('sharephone')
+          wx.removeStorageSync('headInfo')
           wx.navigateBack({
             complete: (res) => {
               wx.switchTab({

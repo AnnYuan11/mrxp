@@ -10,12 +10,13 @@ App({
     color: '#E10004',
   },
   onLaunch (options) {
-    this.getOpenId()
+    // this.getOpenId()
    
   },
   onShow: function (e) {
     this.getShopNum()
     this.refresh()
+    this.getOpenId()
   },
  
      //获取openID
