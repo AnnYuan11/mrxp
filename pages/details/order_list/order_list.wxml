@@ -426,7 +426,7 @@
 </swiper>
 <view class="thm_box" wx:if="{{showThm}}" bindtap="closeThm">
 	<view class="img_box">
-		<image src="https://www.zgmrxp.com/app/order/getOrderIdQr?orderId={{orderId}}"></image>
+		<image src="http://39.101.190.182:8080/app/order/getOrderIdQr?orderId={{orderId}}"></image>
 		<text>提货码：{{pickcode}}</text>
 	</view>
 

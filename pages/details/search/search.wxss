@@ -102,14 +102,14 @@
   display:block;
   height:50rpx;
   line-height: 50rpx;
-  font-size:24rpx;
+  font-size:28rpx;
   color:#000;
   text-align: center;
   /* margin-bottom: 10rpx; */
 }
 
 .thsj .left text.rq{
-  color: rgb(26, 66, 243);
+  color:#469bf8;
 }
 .thsj .right text{
   font-size:28rpx;

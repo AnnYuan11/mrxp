@@ -2,7 +2,7 @@
 import {
   Base
 } from "../../utils/request/base.js";
-var baseUrl = "https://www.zgmrxp.com";
+var baseUrl = "http://39.101.190.182:8080";
 var util = require('../../utils/cache.js');
 var app = getApp();
 var base = new Base();

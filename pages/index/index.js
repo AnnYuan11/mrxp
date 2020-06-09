@@ -36,16 +36,16 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that = this;
-    // that.shopList() //今日售卖列表
+    
     that.lunbo() //轮播图
     that.notice() //公告
-    that.yhqList() //优惠券列表
+   
     that.getPic()//获取分享店铺
     // that.fans() //头部粉丝数
     that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
-    that.shopList()
+    // that.shopList()
     that.city(); //获取所在城市名
     // that.query()
     that.setData({
@@ -114,6 +114,8 @@ Page({
    */
   onShow: function () {
     var that = this;
+    that.shopList() //今日售卖列表
+    that.yhqList() //优惠券列表
     try {
       //使用更新对象之前判断是否可用
       if (wx.canIUse('getUpdateManager')) {
@@ -336,6 +338,7 @@ getPic(){
   // 今日售卖列表
   shopList(className) {
     var that = this;
+    var headInfo = wx.getStorageSync('headInfo')
     that.setData({
       isloading:true
     })
@@ -349,7 +352,8 @@ getPic(){
         'name': className,
         'pageIndex': that.data.currentPage,
         'pageSize': that.data.size,
-        'sendType':'1'
+        'sendType':'1',
+        'franchiseeId':headInfo.franchiseeInfo.id
       },
       sCallBack: function (data) {
        

@@ -61,6 +61,12 @@
         "text": "购物车"
       },
       {
+        "selectedIconPath": "img/tabbaricon/3_select.png",
+        "iconPath": "img/tabbaricon/3.png",
+        "pagePath": "pages/classify/classify",
+        "text": "分类"
+      },
+      {
         "selectedIconPath": "img/tabbaricon/4_select.png",
         "iconPath": "img/tabbaricon/4.png",
         "pagePath": "pages/my/my",

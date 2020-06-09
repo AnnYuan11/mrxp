@@ -588,7 +588,7 @@ eventDraw () {
         },
         {
             type: 'image',
-            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
+            url: 'http://39.101.190.182:8080/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
             top: 470,
             left: 50,
             width: 70,
@@ -841,7 +841,7 @@ close(){
     let that = this;
     console.log(tempFilePath)
     wx.uploadFile({
-      url: 'https://www.zgmrxp.com/app/fileUploadLocal', //线上接口
+      url: 'http://39.101.190.182:8080/app/fileUploadLocal', //线上接口
       filePath: tempFilePath,
       name: 'file',
       success: function (res) {

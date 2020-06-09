@@ -76,6 +76,7 @@ Page({
   // 搜索
   search: function (e) {
     var that = this;
+    var headInfo = wx.getStorageSync('headInfo')
     var className = e.detail.value
     var that = this;
     var params = {
@@ -85,12 +86,16 @@ Page({
         'name': className,
         'pageIndex': 1,
         'pageSize': 1000,
+        'franchiseeId':headInfo.franchiseeInfo.id
       },
       sCallBack: function (data) {
         var listToday = data.data.result.datas
+        
         if (listToday != '') {
           listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+            
 
             if (item.sendType == 1) {
               item.sendType = "到店自提"

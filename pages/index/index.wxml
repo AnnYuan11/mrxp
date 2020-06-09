@@ -111,7 +111,7 @@
 
 									<view class="thsj">
 										<view class="left">
-											<text>预售时间:{{item.startTime}}</text>
+											<text class="rq">预售时间:{{item.startTime}}</text>
 											<text class="rq">提货时间:{{item.pickDate}}</text>
 										</view>
 										<view class="right" style="line-height:50rpx;text-align:right;">
