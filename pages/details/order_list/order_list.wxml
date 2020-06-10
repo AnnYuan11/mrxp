@@ -7,8 +7,8 @@
 	<view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">配送中</view>
 	<view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">待提货</view>
 	<view class="swiper-tab-list {{currentTab==5 ? 'on' : ''}}" data-current="5" bindtap="swichNav">已提货</view>
-	<!-- <view class="swiper-tab-list {{currentTab==6 ? 'on' : ''}}" data-current="6" bindtap="swichNav">售后中</view>
-	<view class="swiper-tab-list {{currentTab==7 ? 'on' : ''}}" data-current="7" bindtap="swichNav">已结束</view> -->
+	<!-- <view class="swiper-tab-list {{currentTab==6 ? 'on' : ''}}" data-current="6" bindtap="swichNav">退货关闭</view> -->
+	<view class="swiper-tab-list {{currentTab==6 ? 'on' : ''}}" data-current="6" bindtap="swichNav">已完成</view>
 
 </scroll-view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 40}}px" bindchange="bindChange">
@@ -53,16 +53,16 @@
 								<view class="sub buy" catchtap="Topay" data-item="{{item}}">去付款</view>
 							</view>
 							<view class="button" style="width:50%" wx:if="{{item.orderStatus=='已提货'}}">
-								<button open-type="share" data-item="{{item}}" class="sub buy share" catchtap="share">
+								<button open-type="share" data-item="{{item}}" class="sub buy share" catchtap="share" wx:if="{{item.isAfterOrder!='1'}}">
 									我要晒单
 								</button>
 							</view>
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='已提货'}}">
-								<view class="sub buy" catchtap="sqsh">申请售后</view>
+								<view class="sub buy" catchtap="sqsh"  wx:if="{{item.isAfterOrder!='1'}}">申请售后</view>
 							</view>
 
 							<view class="button" style="width:30%" wx:if="{{item.orderStatus=='备货中'}}">
-								<view class="sub buy" wx:if="{{item.isRefund=='1'}}" catchtap="cancel_bh">取消订单</view>
+								<view class="sub buy" wx:if="{{item.isAfterOrder=='0'&&item.isAfterOrderOver=='0'}}" catchtap="cancel_bh" data-id="{{item.id}}">取消订单</view>
 							</view>
 							<view class="button" wx:if="{{item.orderStatus=='待提货'}}">
 
@@ -317,11 +317,11 @@
 							</view>
 							<view class="button_box">
 
-								<button open-type="share" class="sub buy share" data-item="{{item}}" catchtap="share">
+								<button open-type="share" class="sub buy share" data-item="{{item}}" catchtap="share"  wx:if="{{item.isAfterOrder!='1'}}">
 									我要晒单
 								</button>
 
-								<view class="button">
+								<view class="button"  wx:if="{{item.isAfterOrder=='0'&&item.isAfterOrderOver=='0'}}">
 									<view class="sub buy" catchtap="sqsh">申请售后</view>
 								</view>
 							</view>
@@ -332,7 +332,7 @@
 			</block>
 		</scroll-view>
 	</swiper-item>
-	<!-- 售后中 -->
+	<!-- 退货关闭 -->
 	<!-- <swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="shzmore">
 			<block wx:for="{{shzlist}}">
@@ -380,8 +380,8 @@
 			</block>
 		</scroll-view>
 	</swiper-item> -->
-	<!-- 已结束 -->
-	<!-- <swiper-item>
+	<!-- 已完成 -->
+	<swiper-item>
 		<scroll-view scroll-y style="height: 100%" bindscrolltolower="yjsmore">
 			<block wx:for="{{yjslist}}">
 				<view class="box">
@@ -416,23 +416,17 @@
 								<text> 合计：</text>
 								<text class="state">￥{{item.paymentMoney}}</text>
 							</view>
-							<view class="button" style="width:30%">
-								<view class="sub buy" bindtap="cancel">取消订单</view>
-							</view>
-							<view class="button" style="width:30%">
-								<view class="sub buy" bindtap="gopj">去付款</view>
-							</view>
 						</view>
 					</view>
 				</view>
 			</block>
 		</scroll-view>
-	</swiper-item> -->
+	</swiper-item>
 
 </swiper>
 <view class="thm_box" wx:if="{{showThm}}" bindtap="closeThm">
 	<view class="img_box">
-		<image src="https://www.zgmrxp.com/app/order/getOrderIdQr?orderId={{orderId}}"></image>
+		<image src="http://39.101.190.182:8080/app/order/getOrderIdQr?orderId={{orderId}}"></image>
 		<text>提货码：{{pickcode}}</text>
 	</view>
 

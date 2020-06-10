@@ -31,12 +31,12 @@ Page({
    */
   onShow: function () {
     var that=this;
-    var aa = wx.getStorageSync('aa')
-    if (aa == '0') {
-      that.query() //查询用户切换店铺
-    } else {
-      that.list() //团长地址
-    }
+    // var aa = wx.getStorageSync('aa')
+    // if (aa == '0') {
+    //   that.query() //查询用户切换店铺
+    // } else {
+    //   that.list() //团长地址
+    // }
   },
 
   /**
@@ -76,6 +76,7 @@ Page({
   // 搜索
   search: function (e) {
     var that = this;
+    var headInfo = wx.getStorageSync('headInfo')
     var className = e.detail.value
     var that = this;
     var params = {
@@ -85,12 +86,16 @@ Page({
         'name': className,
         'pageIndex': 1,
         'pageSize': 1000,
+        'franchiseeId':headInfo.franchiseeInfo.id
       },
       sCallBack: function (data) {
         var listToday = data.data.result.datas
+        
         if (listToday != '') {
           listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+            
 
             if (item.sendType == 1) {
               item.sendType = "到店自提"
@@ -162,6 +167,7 @@ Page({
     var that = this;
     var session = wx.getStorageSync('session')
     var userId = wx.getStorageSync('userId')
+    var headInfo = wx.getStorageSync('headInfo')
     // if (session == '') {
     //   wx.navigateTo({
     //     url: '/pages/login/login',
@@ -187,7 +193,7 @@ Page({
             'id': userId
           },
           "headInfo": {
-            "id": that.data.ztdid //自提点id
+            "id": headInfo.id //自提点id
           }
 
         },
@@ -223,93 +229,5 @@ Page({
     // }
 
   },
-   // 查询用户切换店铺
-
-   query() {
-    var that = this;
-    var userId = wx.getStorageSync('userId')
-    var params = {
-      url: '/app/user/findUserHeadInfo',
-      method: 'POST',
-      data: {
-        userInfo: {
-          'id': userId
-        }
-      },
-      sCallBack: function (data) {
-
-        that.setData({
-          defaultztd: data.data.result,
-          shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: data.data.result.headInfo.id
-        })
-
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
-  // 团长地址
-  list() {
-
-    var that = this;
-    var myLat = wx.getStorageSync('latitude');
-    var myLng = wx.getStorageSync('longitude');
-    var params = {
-      url: '/app/head/findAllHeadInfoByDistance',
-      method: 'POST',
-      data: {
-        myLat: myLat,
-        myLng: myLng,
-        'pageIndex': 1,
-        'pageSize': 1,
-      },
-      sCallBack: function (data) {
-        var list = data.data.result.datas;
-        if (list.length == 0) {
-          that.default()
-        }
-        that.setData({
-          shopName: list[0].shopName,
-          ztdid: list[0].id
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: list[0].id
-        })
-
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
-  // 默认自提点
-  default () {
-    var that = this;
-    var params = {
-      url: '/app/head/findHeadInfoProperty',
-      method: 'GET',
-      data: {
-
-      },
-      sCallBack: function (data) {
-        var list = data.data.result;
-        that.setData({
-          shopName: list.shopName,
-          ztdid: list.id,
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: list.id,
-        })
-
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+ 
 })

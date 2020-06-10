@@ -26,7 +26,8 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
-    dpShow:false//店铺显示
+    dpShow:false,//店铺显示
+    isloading:true
   },
 
   /**
@@ -35,20 +36,22 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that = this;
-    // that.shopList() //今日售卖列表
+    
     that.lunbo() //轮播图
     that.notice() //公告
-    that.yhqList() //优惠券列表
+   
     that.getPic()//获取分享店铺
-    that.fans() //头部粉丝数
+    // that.fans() //头部粉丝数
     that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
-    that.shopList() 
-    that.query()
+    // that.shopList()
+    that.city(); //获取所在城市名
+    // that.query()
     that.setData({
       today: today,
       qhdzid: options.zdtid,
+      sharephone:options.sharephone,
       options:options
     })
     // var zdtid = wx.getStorageSync('zdtid')
@@ -59,7 +62,7 @@ Page({
     //     })
     //   }
     // }
-    
+   
    
     // 获取设备高度
     wx.getSystemInfo({
@@ -111,81 +114,76 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.city(); //获取所在城市名
-    wx.getSetting({
-      success: (res) => {
-
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) { //非初始化进入该页面,且未授权
-          wx.showModal({
-            title: '是否授权当前位置',
-            content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
-            success: function (res) {
-
-              if (res.cancel) {
-                wx.showToast({
-                  title: '拒绝授权',
-                  icon: 'none',
-                  duration: 1000
-                })
-
-              } else if (res.confirm) {
-
-                wx.openSetting({
-                  success: function (data) {
-
-                    if (data.authSetting["scope.userLocation"] == true) {
-
-                      that.locations();
-
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 5000
+    that.shopList() //今日售卖列表
+    that.yhqList() //优惠券列表
+    try {
+      //使用更新对象之前判断是否可用
+      if (wx.canIUse('getUpdateManager')) {
+          const updateManager = wx.getUpdateManager()
+          updateManager.onCheckForUpdate(function(res) {
+              // 请求完新版本信息的回调
+              if (res.hasUpdate) {
+                  updateManager.onUpdateReady(function() {
+                      wx.showModal({
+                          title: '更新提示',
+                          content: '新版本已经准备好，是否重启当前应用？',
+                          success(res) {
+                              if (res.confirm) {
+                                  // 新的版本已经下载好，调用applyUpdate应用新版本并重启
+                                  updateManager.applyUpdate()
+                              }else if (res.cancel) {
+                                  updateManager.applyUpdate()
+                              }
+                          },
+                          fail(res) {
+                              console.log(res)
+                          }
                       })
-                      //再次授权，调用getLocationt的API
-
-                    } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'success',
-                        duration: 5000
+                  })
+                  // 新版本下载失败时执行
+                  updateManager.onUpdateFailed(function() {
+                      wx.showModal({
+                          title: '发现新版本',
+                          content: '请删除当前小程序，重新搜索打开...',
                       })
-                    }
-                  }
-                })
+                  })
               }
-            }
           })
-        } else if (res.authSetting['scope.userLocation'] == undefined || res.authSetting['scope.userLocation'] == true) { //初始化进入
+      } else {
 
-          that.locations();
-
-        }
+          //如果小程序需要在最新的微信版本体验，如下提示
+          wx.showModal({
+              title: '更新提示',
+              content: '当前微信版本过低，请升级到最新微信版本后重试。'
+          })
       }
-    })
-    var userId = wx.getStorageSync('userId')
-    console.log(that.data.qhdzid)
-    if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
-      console.log(userId)
-      if(userId){
-          that.change()
-      }else{
-        that.setData({
-          shopName:options.shopName
-        })
-        that.search(that.data.options.shopName)
-      }
-     
-    }else{
-      that.query() 
-    }
+  } catch (e) {
+      console.log(e)
+  }
     
+    
+    var userId = wx.getStorageSync('userId')
+    var headInfo = wx.getStorageSync('headInfo')
+    console.log(that.data.qhdzid)
+    if(that.data.qhdzid==undefined||that.data.qhdzid=='111'){
+      if(headInfo){
+        that.setData({
+          shopName: headInfo.shopName,
+          sharephone: headInfo.phone,
+          ztdid:headInfo.id,
+        })
+      }else{
+        that.query() 
+      }
+      
+    }else{  
+      that.spxx()
+    }    
     app.getShopNum()
     that.order()
-   
-   
+    that.fans()
   },
-
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -249,13 +247,13 @@ Page({
   onShareAppMessage: function () {
     var that=this;
     var zdtid = wx.getStorageSync('zdtid')
-  
-    console.log(that.data.shopName)
+    var sharephone = wx.getStorageSync('sharephone')
+    console.log(that.data.sharephone)
     return {
       title: that.data.shopShareTitle,
       imageUrl: that.data.imgUrl+'/'+that.data.shopSharePhoto,  
       // desc: '分享页面的内容',
-      path: '/pages/index/index?zdtid=' + zdtid+'&shopName='+that.data.shopName // 路径，传递参数到指定页面。
+      path: '/pages/index/index?zdtid=' + zdtid+'&sharephone='+that.data.sharephone // 路径，传递参数到指定页面。
     }
   },
   // 获取分享图片
@@ -340,9 +338,13 @@ getPic(){
   // 今日售卖列表
   shopList(className) {
     var that = this;
-    wx.showLoading({
-      title: '加载中',
+    var headInfo = wx.getStorageSync('headInfo')
+    that.setData({
+      isloading:true
     })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     var params = {
       url: '/app/commodity/listCommodityInfoForNative',
       method: 'POST',
@@ -350,18 +352,21 @@ getPic(){
         'name': className,
         'pageIndex': that.data.currentPage,
         'pageSize': that.data.size,
-        'sendType':'1'
+        'sendType':'1',
+        'franchiseeId':headInfo.franchiseeInfo.id
       },
       sCallBack: function (data) {
        
         var listToday = data.data.result
+        console.log(that.data.currentPage)
+        console.log(that.data.pagecount)
         // if(listToday.length=='0'){
         //   that.shopList()
         // }
         if(listToday){
-          wx.hideLoading({
-            complete: (res) => {},
-          })
+          // that.setData({
+          //   isloading:false
+          // })
         }
         
         if (listToday != '') {
@@ -528,36 +533,7 @@ getPic(){
     }
     base.request(params);
   },
-  // 定位授权
-  locations: function () {
-    let that = this;
-    //1、获取当前位置坐标
-    wx.getLocation({
-      type: 'gcj02',
-      success: function (res) {
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
 
-        wx.setStorage({
-          key: "latitude",
-          data: res.latitude
-        });
-        wx.setStorage({
-          key: "longitude",
-          data: res.longitude
-        });
-        // var aa = wx.getStorageSync('aa')
-        // if (aa == '0') {
-        //   that.query() //查询用户切换店铺
-        // } else if(that.data.qhdzid==undefined){
-        //   that.list()
-        // }
-
-      }
-    })
-  },
   // 选择团长
   selectTZ() {
     wx.navigateTo({
@@ -582,11 +558,20 @@ getPic(){
         that.setData({
           defaultztd: data.data.result,
           shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id
+          ztdid: data.data.result.headInfo.id,
+          sharephone:data.data.result.headInfo.phone
         })
         wx.setStorage({
           key: 'zdtid',
           data: data.data.result.headInfo.id
+        })
+        wx.setStorage({
+          key: 'sharephone',
+          data: data.data.result.headInfo.phone
+        })
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result.headInfo
         })
 
       },
@@ -933,7 +918,7 @@ getPic(){
         longitude: longitude
       },
       success: function (addressRes) {
-     
+        console.log(addressRes)
         that.weather(addressRes.result.ad_info.city)
       },
       fail: function (error) {
@@ -947,13 +932,13 @@ getPic(){
   // 头部粉丝数
   fans() {
     var that = this;
-    var zdtid = wx.getStorageSync('zdtid')
+    var headInfo = wx.getStorageSync('headInfo')
     var params = {
       url: '/app/head/listHeadUserNumbers',
       method: 'POST',
       data: {
         'headInfo': {
-          'id': zdtid
+          'id': headInfo.id
         }
       },
       sCallBack: function (data) {
@@ -976,11 +961,6 @@ getPic(){
       },
       sCallBack: function (data) {
         that.setData({
-          // contents:[{
-          //   "nickName": "小朋友小朋友小朋友小朋友小朋友小朋友1",
-          //   "photo": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKEmop1ZibxCuo7HjU0PoQkzjic9xK73FbF5sTK1z9DsY2QRN2s18u9AkFI3aFBXibCKZ5SsVPtnLnicg/132",
-          //   "times": 3
-          // },]
           contents: data.data.result
         })
         if (that.data.contents.length == 1) {
@@ -1039,41 +1019,44 @@ getPic(){
     }
     base.request(params);
   },
-  //  搜索
-search(className){
-  var that=this;
-  var myLat = wx.getStorageSync('latitude');
-  var myLng = wx.getStorageSync('longitude');
-  var params = {
-    url: '/app/head/listHeadInfo',
-    method: 'POST',
-    data: {
-      'pageIndex':that.data.currentPage,
-      'pageSize':that.data.size,
-      'searchName':className,
-        myLat:myLat,
-        myLng:myLng,
-    },
-    sCallBack: function (data) {   
-      wx.setStorage({
-        data: data.data.result.datas[0],
-        key: 'shop',
-      })
-      wx.setStorage({
-        data: data.data.result.datas[0].province+data.data.result.datas[0].city+data.data.result.datas[0].area+data.data.result.datas[0].street+data.data.result.datas[0].address,
-        key: 'addressth',
-      })
-      that.setData({
-        shopName:data.data.result.datas[0].shopName,
-       
-      })  
-   },
-    eCallBack: function () {
-    }
-  }
-  base.request(params);
-},
+
   radioChange(e) {
     console.log(e)    
+  },
+  spxx() {
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/head/findHeadInfoByPhone',
+      method: 'GET',
+      data: {
+         'phone':that.data.sharephone 
+      },
+      sCallBack: function (data) {
+        that.setData({
+          shopName: data.data.result.shopName,
+          qhdzid: data.data.result.id,
+          sharephone: data.data.result.phone,
+          ztdid:data.data.result.id,
+          qhdzid:'111'
+        })
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.id
+        })
+        // wx.setStorage({
+        //   key: 'sharephone',
+        //   data: data.data.result.phone
+        // })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
   },
 })

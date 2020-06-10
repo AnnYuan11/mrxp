@@ -1,7 +1,7 @@
 // pages/details/tzsq/tzsq.js
 import WxValidate from '../../../utils/WxValidate'
 import { Base } from "../../../utils/request/base.js";
-var url='https://www.zgmrxp.com'
+var url='http://39.101.190.182:8080'
 var app = getApp();
 var base = new Base();
 Page({
@@ -394,12 +394,13 @@ Page({
     for (var i = 0; i < that.data.imgArr.length; i++) {
         var filePath = that.data.imgArr[i];
         wx.uploadFile({
-            url: url + '/https://resource.zgmrxp.com/city.json',
+            url: 'http://39.101.190.182:8080/app/fileUploadLocal', //线上接口
             filePath: filePath,
             name: 'file',
             formData: {},
             header: { Cookie: that.data.loginData },
             success: function (res) {
+              console.log(res)
               var data = res.data
               var datas = JSON.parse(data)
               that.setData({

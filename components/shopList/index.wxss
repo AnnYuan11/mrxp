@@ -21,9 +21,9 @@
 }
 /* 编辑 */
 .edit{
-  width:72rpx;
-  height:32rpx;
-  line-height: 32rpx;
+  width:100rpx;
+  height:50rpx;
+  line-height: 50rpx;
   background:rgba(255,255,255,1);
   border:1px solid rgba(255,63,49,1);
   border-radius:4rpx;

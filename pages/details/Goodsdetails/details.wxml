@@ -67,12 +67,13 @@
 	</view>
 	<view class="swiper-box" wx:if="{{currentTab=='1'}}">
 		<scroll-view scroll-y style="height: 100%">
-			<view class="gmjl_title">
-				<text>目前供</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
+			<!-- <view class="gmjl_title">
+				<text>目前共</text><text class="gmjl_num">{{RecordList.userNumbers}}</text><text>人参与购买，商品共销售</text>
 				<text class="gmjl_num">{{RecordList.commodityNumbers}}</text><text>份</text>
-			</view>
+			</view> -->
 			<view class="gmjl_box">
-				<block wx:for="{{orderList}}" wx:if="{{index<20}}">
+		
+				<block wx:for="{{orderList}}" wx:if="{{index<5}}">
 					<view class="gmjl_list">
 						<image src="{{item.photo}}" mode="widthFix"></image>
 						<view class="gmjl_mess">
@@ -84,7 +85,7 @@
 						</view>
 					</view>
 				</block>
-				<view class="gmjl" wx:if="{{orderList.length>20}}">购买人数太多，显示不下了</view>
+				<view class="gmjl" wx:if="{{orderList.length>5||orderList.length==RecordList.userNumbers&&orderList.length!='0'}}">购买人数太多，显示不下了</view>
 			</view>
 		</scroll-view>
 	</view>
@@ -142,7 +143,7 @@
 			<i-divider content="分享到"></i-divider>
 		</view>
 		<view class="wechat">
-		<button open-type="share"	>
+		<button open-type="share">
 			<view class="item">
 				<image	src="{{imgUrls}}img/details/dd3.png"></image>
 				<text style="margin-top:10rpx">微信好友</text>
@@ -163,3 +164,6 @@
   <image  src="{{imgUrls}}img/details/close.png" mode="widthFix" style="width:40rpx" class="close" bindtap="close"></image>
 </view>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
+
+<canvasdrawer painting="{{painting2}}" style="display:{{iscanvas ? 'block':'none'}}" bind:getImage="eventGetImage2"/>
+

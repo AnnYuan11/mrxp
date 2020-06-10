@@ -2,7 +2,7 @@
 import {
   Base
 } from "../../utils/request/base.js";
-var baseUrl = "https://www.zgmrxp.com";
+var baseUrl = "http://39.101.190.182:8080";
 var util = require('../../utils/cache.js');
 var app = getApp();
 var base = new Base();
@@ -135,15 +135,16 @@ Page({
   },
   getPhoneNumber: function (e) {
     app.getOpenId()
-    var sessionId = wx.getStorageSync('sessionId')
-    console.log(e)
+    
     var that = this;
     // debugger
     wx.checkSession({
       success: function () {
         var ency = e.detail.encryptedData;
         var iv = e.detail.iv;
-        var sessionk = sessionId;
+        
+        var sessionk = wx.getStorageSync('sessionId')
+        console.log(sessionk)
         if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
           wx.showToast({
             title: '未授权',

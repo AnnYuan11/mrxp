@@ -310,14 +310,14 @@ swiper image{
   display:block;
   height:50rpx;
   line-height: 50rpx;
-  font-size:30rpx;
+  font-size:28rpx;
   color:#000;
   text-align: center;
   /* margin-bottom: 10rpx; */
 }
 
 .thsj .left text.rq{
-  color: rgba(255,217,54,1);
+  color: #469bf8;
 }
 .thsj .right text{
   font-size:28rpx;
@@ -445,7 +445,7 @@ video {
 .yhq .right{
   position: absolute;
   top: 25%;
-  right: 20%;
+  left: 40%;
   line-height: 48rpx;
 }
 .yhq .right text{
@@ -639,4 +639,12 @@ button:not([size='mini']) {
   text-align: center;
   margin: 30rpx 0;
 
+}
+@keyframes ani-demo-spin {
+  from { transform: rotate(0deg);}
+  50%  { transform: rotate(180deg);}
+  to   { transform: rotate(360deg);}
+}
+.icon-load{
+  animation: ani-demo-spin 1s linear infinite;
 }

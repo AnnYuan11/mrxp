@@ -101,7 +101,7 @@
 	</view>
 	<view class="zts" wx:if="{{shopName}}">
 		<text class="dp">{{shopName}}</text>
-		<text class="address">{{addressth}}</text>
+		<text class="address" wx:if="{{addressth!=null}}">{{addressth}}</text>
 	</view>
 	<view class="zts" wx:else>
 		<text class="dp">请选择团长</text>
@@ -127,14 +127,22 @@
 					<i-grid-label>我的余额</i-grid-label>
 				</i-grid-item>
 			</navigator>
-			<navigator url="/pages/details/chongzhi/chongzhi">
+			<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10345&name=客服中心" hover-class="none">
+				<i-grid-item>
+					<i-grid-icon>
+						<image src="{{imgUrls}}img/my/a7.png" />
+					</i-grid-icon>
+					<i-grid-label>客服中心</i-grid-label>
+				</i-grid-item>
+			</navigator>
+			<!-- <navigator url="/pages/details/chongzhi/chongzhi">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/a3.png" />
 					</i-grid-icon>
 					<i-grid-label>我要充值</i-grid-label>
 				</i-grid-item>
-			</navigator>
+			</navigator> -->
 			<!-- <navigator url="/pages/details/address_list/addressList" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
@@ -156,14 +164,7 @@
 					<i-grid-label>积分商城</i-grid-label>
 				</i-grid-item>
 			</navigator> -->
-			<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10345&name=客服中心" hover-class="none">
-				<i-grid-item>
-					<i-grid-icon>
-						<image src="{{imgUrls}}img/my/a7.png" />
-					</i-grid-icon>
-					<i-grid-label>客服中心</i-grid-label>
-				</i-grid-item>
-			</navigator>
+		
 			<navigator url="/pages/details/tzsq/tzsq" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
@@ -177,22 +178,31 @@
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/b2.png" />
 					</i-grid-icon>
-					<i-grid-label>商家入驻</i-grid-label>
+					<i-grid-label>供应商合作</i-grid-label>
 				</i-grid-item>
 			</navigator>
-		</i-grid>
-	</view>
-		<view class="icon_box">
-		<i-grid>	
-			<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10343&name=加盟商合作" hover-class="none">
+			<navigator url="/pages/details/setting/setting" hover-class="none">
+				<i-grid-item>
+					<i-grid-icon>
+						<image src="{{imgUrls}}img/my/a8.png" />
+					</i-grid-icon>
+					<i-grid-label>系统设置</i-grid-label>
+				</i-grid-item>
+			</navigator>
+			<!-- <navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10343&name=加盟商合作" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/b4.png" />
 					</i-grid-icon>
 					<i-grid-label>加盟商合作</i-grid-label>
 				</i-grid-item>
-			</navigator>
-			<navigator url="/pages/details/setting/setting" hover-class="none">
+			</navigator> -->
+		</i-grid>
+	</view>
+		<view class="icon_box">
+		<i-grid>	
+		
+			<!-- <navigator url="/pages/details/setting/setting" hover-class="none">
 				<i-grid-item>
 					<i-grid-icon>
 						<image src="{{imgUrls}}img/my/a8.png" />
@@ -208,6 +218,14 @@
 					<i-grid-label>积分商城</i-grid-label>
 				</i-grid-item>
 			</navigator>
+				<navigator url="#" style="opacity:0" hover-class="none">
+				<i-grid-item>
+					<i-grid-icon>
+						<image src="{{imgUrls}}img/my/a6.png" />
+					</i-grid-icon>
+					<i-grid-label>积分商城</i-grid-label>
+				</i-grid-item>
+			</navigator> -->
 		</i-grid>
 	</view>
 </view>

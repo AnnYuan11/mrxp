@@ -20,7 +20,9 @@ Page({
     duration: 500,
     ishow:false,
     maskHidden: false,
-    interval:3000
+    interval:3000,
+    topprice:true,
+    iscanvas:true
   },
 
   /**
@@ -47,7 +49,7 @@ Page({
         id:options.id,
         personal:app.globalData.personal,
         qhdzid: options.zdtid,
-      
+        sharephone:options.sharephone
       })
     }
     console.log(options)
@@ -57,6 +59,7 @@ Page({
     that.buyRecord()//购买记录
     that.fanNum()//修改粉丝数
     that.gwzn()//购物指南
+    
   },
   // 获取日期
   getDateStr: function(today, addDayCount) {
@@ -96,18 +99,24 @@ Page({
     var that = this;
     var userId = wx.getStorageSync('userId')
     console.log(that.data.qhdzid)
-    if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
-      console.log(userId)
-      if(userId!=''){
-          that.change()
+    var headInfo = wx.getStorageSync('headInfo')
+    console.log(that.data.qhdzid)
+    if(that.data.qhdzid==undefined||that.data.qhdzid=='111'){
+      if(headInfo){
+        that.setData({
+          shopName: headInfo.shopName,
+          sharephone: headInfo.phone,
+          ztdid:headInfo.id,
+        })
       }else{
-        that.search(that.data.options.shopName)
+        that.query() 
       }
-    }else{
-      that.query() 
+      
+    }else{  
+      that.spxx2()
     }
-    
-    this.setData({
+
+    that.setData({
       ishow:false
     })
   },
@@ -178,14 +187,19 @@ change(e) {
     var zdtid = wx.getStorageSync('zdtid')
     console.log(that.data.shopName)
     console.log(zdtid)
-    if(res.from==='button'){
-      return {
-        title: this.data.list.productInfo.commodityName,     
-        path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&shopName='+that.data.shopName+'&id='+that.data.id,
-      }
+    if(that.data.imgPath!=''||that.data.imgPath!=undefined){
+      
     }
+    // if(res.from==='button'){
+      return {
+        imageUrl: that.data.imgUrl+'/'+that.data.imgPath,
+        title: this.data.list.productInfo.commodityName,
+        path: '/pages/details/Goodsdetails/details?zdtid=' + zdtid+'&sharephone='+that.data.sharephone+'&id='+that.data.id,
+      }
+  // }
    
   },
+
   // 详情切换
   swichNav: function (e) {
     var that = this;
@@ -201,6 +215,9 @@ change(e) {
   // 商品内容
   shop(){
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     var params = {
       url: '/app/commodity/findCommodityInfo',
       method: 'GET',
@@ -209,6 +226,9 @@ change(e) {
       },
       sCallBack: function (data) {
         console.log(data)
+        wx.hideLoading({
+          complete: (res) => {},
+        })
         if(data.data.result.sendType==1){
           data.data.result.sendType="到店自提"
         }else{
@@ -241,7 +261,7 @@ change(e) {
           commodityCode:data.data.result.commodityCode,
           background:JSON.parse(data.data.result.bannerPhotoView)
         })
-        
+        that.eventDraw2()
       },
       eCallBack: function () {
       }
@@ -301,7 +321,7 @@ change(e) {
     base.request(params);
   },
   // 根据电话获取商铺信息
-  spxx() {
+  spxx(){
     var that = this;
     var userId = wx.getStorageSync('userId')
     var params = {
@@ -314,19 +334,28 @@ change(e) {
         that.setData({
           shopName: data.data.result.shopName,
           qhdzid: data.data.result.id,
-          headPhone: data.data.result.phone
+          sharephone: data.data.result.phone,
+          ztdid:data.data.result.id,
+          qhdzid:'111'
         })
-        console.log(that.data.qhdzid)
-        if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
-          console.log(userId)
-          if(userId){
-              that.change()
-          }else{
-            that.search(that.data.options.shopName)
-          }
-        }else{
-          that.query() 
-        }
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.id
+        })
+        // if (that.data.qhdzid!=undefined&&that.data.qhdzid!='111') {
+        //   console.log(userId)
+        //   if(userId){
+        //       that.change()
+        //   }else{
+        //     that.search(that.data.options.shopName)
+        //   }
+        // }else{
+        //   that.query() 
+        // }
       },
       eCallBack: function () {
       }
@@ -484,33 +513,36 @@ handleCancel () {
 // 生成海报
 handleClickItem1 () {
   var that = this;
-  this.setData({
-    maskHidden: false
+  that.setData({
+    maskHidden: false,
+    iscanvas:false
   });
+  console.log(that.data.iscanvas)
   // wx.showToast({
   //   title: '海报生成中...',
   //   icon: 'loading',
   //   duration: 1000
   // });
-  setTimeout(function () {
-    // that.ewm()
     that.eventDraw();
     that.setData({
       maskHidden: true,
-      ishow:false
+      ishow:false,
+      // iscanvas:true
     });
-  }, 1000)
+  // setTimeout(function () {
+    
+  // }, 100)
 },
 
 eventDraw () {
+  
   var that=this;
   var path = that.data.imgUrl+that.data.background[0];
   // var shopName = that.data.shopName;
   var ztdid = that.data.ztdid;
-  var id=that.data.id
-  var messages=[ztdid,id]
-  var message=messages.join('&');    //1,2,3
-  console.log(that.data.headPhone)
+  var id=that.data.id  
+  var headInfo=wx.getStorageSync('headInfo')
+  console.log(headInfo.phone)
   wx.showLoading({
     title: '绘制分享图片中',
     mask: true
@@ -554,17 +586,9 @@ eventDraw () {
           width: 300,
           height: 300
         },
-        // {
-        //   type: 'image',
-        //   url: 'https://www.zgmrxp.com/app/getUserIdWxCommodityQr?commodityId='+message,
-        //   top: 470,
-        //   left: 50,
-        //   width: 70,
-        //   height: 70
-        // },
         {
             type: 'image',
-            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+that.data.headPhone,
+            url: 'http://39.101.190.182:8080/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
             top: 470,
             left: 50,
             width: 70,
@@ -640,11 +664,12 @@ eventDraw () {
           width: 170
         }
       ]
-    }
+    },
+   
   })
 },
+
 eventGetImage (event) {
- 
   wx.hideLoading()
   const { tempFilePath, errMsg } = event.detail
   if (errMsg === 'canvasdrawer:ok') {
@@ -653,6 +678,7 @@ eventGetImage (event) {
     })
   }
 },
+
 // 保存图片
 eventSave () {
   wx.saveImageToPhotosAlbum({
@@ -673,33 +699,7 @@ close(){
     maskHidden:false
   })
 },
-// 获取当前店铺
 
-  query() {
-   
-    var that = this;
-    var userId = wx.getStorageSync('userId')
-    var params = {
-      url: '/app/user/findUserHeadInfo',
-      method: 'POST',
-      data: {
-        userInfo: { 'id': userId }
-      },
-      sCallBack: function (data) {
-       
-        that.setData({
-          shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id,
-          headPhone: data.data.result.headInfo.phone
-        })
-
-      },
-      eCallBack: function () {
-      }
-    }
-    base.request(params);
-  },
-  
   // 购物指南
   gwzn(){
     var that=this;
@@ -720,5 +720,144 @@ close(){
       }
     }
     base.request(params);
-  }
+  },
+  spxx2() {
+    var that = this;
+    var userId = wx.getStorageSync('userId')
+    var params = {
+      url: '/app/head/findHeadInfoByPhone',
+      method: 'GET',
+      data: {
+         'phone':that.data.sharephone 
+      },
+      sCallBack: function (data) {
+        that.setData({
+          shopName: data.data.result.shopName,
+          qhdzid: data.data.result.id,
+          sharephone: data.data.result.phone,
+          ztdid:data.data.result.id,
+          qhdzid:'111'
+        })
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
+        wx.setStorage({
+          key: 'zdtid',
+          data: data.data.result.id
+        })
+        
+      },
+      eCallBack: function () {
+      }
+    }
+    base.request(params);
+  },
+  eventDraw2 () {
+    var that=this;
+    var path = that.data.imgUrl+that.data.background[0];
+    this.setData({
+      painting2: {
+        width: 500,
+        height: 550,
+        clear: true,
+        views: [
+          {
+            type: 'rect',
+            background:'#fff',
+            top: 0,
+            left: 0,
+            width: 500,
+            height: 400
+          },
+          // {
+          //   type: 'text',
+          //   content: that.data.list.productInfo.commodityName,
+          //   fontSize: 20,
+          //   lineHeight: 30,
+          //   color: '#383549',
+          //   textAlign: 'left',
+          //   top: 0,
+          //   left: 44,
+          //   width: 287,
+          //   MaxLineNumber: 2,
+          //   breakWord: true,
+          //   bolder: true
+          // },
+          {
+            type: 'image',
+            url: path,
+            top: 0,
+            left: 38,
+            width: 400,
+            height: 330
+          },
+          {
+            type: 'text',
+            content: '价格￥'+that.data.list.price,
+            fontSize: 30,
+            color: '#E62004',
+            textAlign: 'left',
+            top: 365,
+            left: 0,
+            bolder: true
+          },
+          {
+            type: 'text',
+            content: '￥'+that.data.list.crossedPrice,
+            fontSize: 26,
+            color: '#7E7E8B',
+            textAlign: 'left',
+            top: 370,
+            left: 165,
+            textDecoration: 'line-through'
+          },
+          {
+            type: 'text',
+            content: '到货:'+that.data.list.pickDate,
+            fontSize: 24,
+            color: '#7E7E8B',
+            textAlign: 'left',
+            top: 370,
+            left: 270
+          },
+         
+        ]
+      }
+    })
+  },
+  eventGetImage2 (event) {
+    console.log(event)
+    
+    const { tempFilePath, errMsg } = event.detail
+    if (errMsg === 'canvasdrawer:ok') {
+      this.setData({
+        shareImage2: tempFilePath
+      })
+    }
+    this.draw_uploadFile(this.data.shareImage2)
+  },
+  draw_uploadFile: function (tempFilePath) { //wx.uploadFile 将本地资源上传到开发者服务器
+    let that = this;
+    console.log(tempFilePath)
+    wx.uploadFile({
+      url: 'http://39.101.190.182:8080/app/fileUploadLocal', //线上接口
+      filePath: tempFilePath,
+      name: 'file',
+      success: function (res) {
+        console.log(res);
+        if(res.statusCode==200){
+          
+          res.data = JSON.parse(res.data);
+          console.log(res.data)
+          let imgsrc = res.data.result.path[0];
+          that.setData({
+            imgPath: imgsrc
+          });
+        }else{
+          console.log('失败')
+        }
+      },
+    })
+  },
 })

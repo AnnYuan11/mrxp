@@ -5,6 +5,7 @@
     "pages/details/topay/pay_success",
     "pages/my/my",
     "pages/details/tzsq/tzsq",
+    "pages/details/sjrz/sjrz",
     "pages/details/sqtx/sqtx",
     "pages/dizhi/dizhi",
     "pages/details/ghszz/ghszz",
@@ -13,7 +14,6 @@
     "pages/details/selectAddress/selectAddress",
     "pages/details/message/message",
     "pages/details/txjl/txjl",
-    "pages/details/sjrz/sjrz",
     "pages/details/order_details/order_details",
     "pages/details/Goodsdetails/details",
     "pages/details/order_list/order_list",
@@ -59,6 +59,12 @@
         "iconPath": "img/tabbaricon/2.png",
         "pagePath": "pages/gwc/gwc",
         "text": "购物车"
+      },
+      {
+        "selectedIconPath": "img/tabbaricon/3_select.png",
+        "iconPath": "img/tabbaricon/3.png",
+        "pagePath": "pages/classify/classify",
+        "text": "分类"
       },
       {
         "selectedIconPath": "img/tabbaricon/4_select.png",

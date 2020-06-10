@@ -79,7 +79,7 @@ Page({
       url: '/app/order/findCommodityOrderInfo',
       method: 'GET',
       data: {
-        'id':'2c985f077254045a0172540649c4000f',
+        'id':that.data.options.id,
       },
       sCallBack: function (data) {
          console.log(data)

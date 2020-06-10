@@ -129,10 +129,10 @@ Page({
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
-      suppliecontactName:{
+      supplieName:{
         required: '请填写供应商名称',
       },
-      name: {
+      contactName: {
         required: '请填写申请人姓名'
       },
       phone: {

@@ -404,8 +404,8 @@ Component({
         title: '加载中',
       })
       var id = wx.getStorageSync('userId')
-      var ztdid = wx.getStorageSync('zdtid')
-      console.log(ztdid)
+      var headInfo = wx.getStorageSync('headInfo')
+     
       console.log(id)
       var params = {
         url: '/app/commodity/listShoppingCartInfo',
@@ -418,7 +418,7 @@ Component({
           },
           'shoppingCarType': shoppingType,
           'headInfo': {
-            'id': ztdid
+            'id': headInfo.id
           }
         },
         sCallBack: function (data) {
