@@ -510,7 +510,7 @@ eventDraw () {
   var id=that.data.id
   var messages=[ztdid,id]
   var message=messages.join('&');    //1,2,3
-  console.log(message)
+  console.log(that.data.headPhone)
   wx.showLoading({
     title: '绘制分享图片中',
     mask: true

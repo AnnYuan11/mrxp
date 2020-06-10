@@ -394,7 +394,7 @@ Page({
     for (var i = 0; i < that.data.imgArr.length; i++) {
         var filePath = that.data.imgArr[i];
         wx.uploadFile({
-            url: url + '/app/fileUploadLocal',
+            url: url + '/https://resource.zgmrxp.com/city.json',
             filePath: filePath,
             name: 'file',
             formData: {},
