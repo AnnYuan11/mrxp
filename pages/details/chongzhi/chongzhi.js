@@ -173,7 +173,7 @@ surePay(){
     sCallBack: function (data) {
       console.log(data)  
       wx.requestPayment({
-        appId: 'wx874be472f0a6147b',
+        appId: 'wx806b47b81b69c8bd',
         timeStamp: data.data.result['timeStamp'],
         nonceStr: data.data.result['nonceStr'],
         package: data.data.result['packageValue'],

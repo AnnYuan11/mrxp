@@ -89,14 +89,14 @@
 }
 
 .rule_text{
-  width: 84%;
+  width: 90%;
   font-size: 28rpx;
   color: #fff;
-  position: absolute;
-  top: 22%;
-  left: 0;
-  right: 0;
-  margin: auto;
+  margin: 20rpx auto;
+  background-image: linear-gradient(#ff4336, #E10004);
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
 
 }
 .rule_text text{
@@ -108,6 +108,7 @@
 .rule_text .con{
   font-size: 24rpx;
   margin-top: 18rpx;
+  line-height: 42rpx;
 }
 .qxz{
   font-size:28rpx;

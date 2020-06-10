@@ -27,10 +27,14 @@
 <!-- 充值规则 -->
 <view class="box">
 	<view class="rules">
-		<image src="{{imgUrls}}img/details/wycz.png" mode="widthFix"></image>
+		<!-- <image src="{{imgUrls}}img/details/wycz.png" style="width:100%;height:500rpx"></image> -->
     <view class="rule_text">
-      <text class="rules_title">您的账户享受如下规则</text>
-      <text class="con">您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则您的账户享受如下规则</text>
+      <text class="rules_title">充值活动规则</text>
+      <text class="con">尊敬的用户，为保障您的合法权益，请您完整仔细地阅读本协议。如您已参加充值返现活动，即视为您已阅读、理解本协议，并同意按本协议规定执行。
+    1. 充值金额只限于天天每一天平台使用。
+    2. 因充值存在赠送金额，故充值后禁止提现。
+    3. 账户金额使用不设有效期，不得转移、转赠。
+    4. 充值活动无法开具发票。</text>
     </view>
 	</view>
   <view class="qxz">请选择充值套餐</view>

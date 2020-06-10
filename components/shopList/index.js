@@ -288,7 +288,7 @@ Component({
     setNum(spid, commodityNumber, sendtype) {
       let that = this;
       var userId = wx.getStorageSync('userId')
-      var ztdid = wx.getStorageSync('zdtid')
+      var headInfo = wx.getStorageSync('headInfo')
       var params = {
         url: '/app/commodity/addShoppingCartInfo',
         method: 'POST',
@@ -302,7 +302,7 @@ Component({
             'id': userId
           },
           "headInfo": {
-            "id": ztdid //自提点id
+            "id": headInfo.id //自提点id
           }
         },
         sCallBack: function (data) {
