@@ -172,6 +172,10 @@ Page({
           sharephone: headInfo.phone,
           ztdid:headInfo.id,
         })
+        wx.setStorage({
+          key: 'zdtid',
+          data: headInfo.id,
+        })
       }else{
         that.query() 
       }
@@ -360,6 +364,7 @@ getPic(){
         var listToday = data.data.result
         console.log(that.data.currentPage)
         console.log(that.data.pagecount)
+        console.log(listToday.length)
         // if(listToday.length=='0'){
         //   that.shopList()
         // }
@@ -420,7 +425,7 @@ getPic(){
           totalCount: data.data.result[0].rowCount, //总的数据条数
           pagecount: data.data.result[0].totalPages //总页数
         })
-        // console.log(that.data.listToday)
+       
 
       },
       eCallBack: function () {}

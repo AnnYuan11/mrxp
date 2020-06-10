@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
     "pages/details/topay/pay_success",
     "pages/my/my",
@@ -20,7 +21,6 @@
     "pages/login/login",
     "pages/details/setting/setting",
     "pages/details/Integral/Integral",
-    "pages/details/chongzhi/chongzhi",
     "pages/details/orderDetailsck/ddxx",
     "pages/details/sppj/sppj",
     "pages/gwc/gwc",
