@@ -496,7 +496,7 @@ Component({
 
         for (let i = 0; i < list.length; i++) {
           // debugger
-          if (list[i].selected&&list[i].isBuy!='4'){
+          if (list[i].selected&&list[i].isBuy!='4'&&list[i].isBuy!='2'){
             const productItem = {};
             productItem['id'] = list[i].commodityInfo.id
             productItem['name'] = list[i].commodityInfo.productInfo.commodityName

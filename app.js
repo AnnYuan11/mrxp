@@ -28,7 +28,7 @@ App({
             if (res.code) {
                 // 发起网络请求
                 wx.request({
-                    url: 'http://39.101.190.182:8080/app/getOpenId?code=' + res.code,
+                    url: 'https://www.zgmrxp.com/app/getOpenId?code=' + res.code,
                     success: function (data) {
                        
                         wx.setStorage({
@@ -146,12 +146,12 @@ login(){
        if (data.data.result != 0) {
         //  debugger
               wx.setTabBarBadge({
-                index: 1,
+                index: 2,
                 text: String(data.data.result)
               })
             } else {
               wx.removeTabBarBadge({
-                index: 1,
+                index: 2,
                 text: ''
               })
             }

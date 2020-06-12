@@ -12,8 +12,6 @@
 	<view class='lefts'>
 		<block wx:for="{{classfiyList}}">
 			<view class="{{active==index ?'selected':'normal'}}" id="{{index}}" data-cid="{{item.id}}" bindtap='switchNav'>{{item.className}}</view>
-			<!-- <view class="{{active==1?'selected':'normal'}}" id="1" bindtap='switchNav'>生疏水果</view>
-		<view class="{{active==2?'selected':'normal'}}" id="2" bindtap='switchNav'>手机</view> -->
 		</block>
 
 	</view>
@@ -22,7 +20,7 @@
 		<view class='type'>
 			<!-- current:当前所在滑块的 index -->
 			<!-- vertical:滑动方向是否为纵向 -->
-			<swiper current='{{currentTab}}' vertical='{{true}}'>
+			<swiper current='{{currentTab}}' vertical='{{true}}' bindchange="bindchange">
 				<!-- catchtouchmove 阻止弹窗后滚动穿透 -->
 				 <block wx:for="{{classfiyList}}">
 					<swiper-item catchtouchmove="false">

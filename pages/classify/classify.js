@@ -80,9 +80,9 @@ Page({
     that.setData({
       isloading:true
     })
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
+    wx.showLoading({
+      title: '加载中',
+    })
     var params = {
       url: '/app/commodity/listCommodityInfo',
       method: 'POST',
@@ -95,7 +95,9 @@ Page({
         
       },
       sCallBack: function (data) {
-       
+       wx.hideLoading({
+         complete: (res) => {},
+       })
         var listToday = data.data.result.datas
         // if(listToday.length=='0'){
         //   that.shopList()
@@ -262,4 +264,7 @@ Page({
     // }
 
   },
+  bindchange(e){
+    console.log(e)
+  }
  })

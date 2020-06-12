@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/flcs/flcs",
     "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
     "pages/details/topay/pay_success",
@@ -55,16 +56,16 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "img/tabbaricon/222.png",
-        "iconPath": "img/tabbaricon/2.png",
-        "pagePath": "pages/gwc/gwc",
-        "text": "购物车"
-      },
-      {
         "selectedIconPath": "img/tabbaricon/3_select.png",
         "iconPath": "img/tabbaricon/3.png",
         "pagePath": "pages/classify/classify",
         "text": "分类"
+      },
+      {
+        "selectedIconPath": "img/tabbaricon/222.png",
+        "iconPath": "img/tabbaricon/2.png",
+        "pagePath": "pages/gwc/gwc",
+        "text": "购物车"
       },
       {
         "selectedIconPath": "img/tabbaricon/4_select.png",

@@ -1,7 +1,7 @@
 // pages/details/tzsq/tzsq.js
 import WxValidate from '../../../utils/WxValidate'
 import { Base } from "../../../utils/request/base.js";
-var url='http://39.101.190.182:8080'
+var url='https://www.zgmrxp.com'
 var app = getApp();
 var base = new Base();
 Page({
@@ -394,7 +394,7 @@ Page({
     for (var i = 0; i < that.data.imgArr.length; i++) {
         var filePath = that.data.imgArr[i];
         wx.uploadFile({
-            url: 'http://39.101.190.182:8080/app/fileUploadLocal', //线上接口
+            url: 'https://www.zgmrxp.com/app/fileUploadLocal', //线上接口
             filePath: filePath,
             name: 'file',
             formData: {},

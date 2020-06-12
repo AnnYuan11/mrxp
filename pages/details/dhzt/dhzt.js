@@ -111,8 +111,14 @@ Page({
         }
       })
       that.list()//列表
-      that.query()
+      // that.query()
     }
+    var headInfo = wx.getStorageSync('headInfo')
+    that.setData({
+      defaultztd:headInfo,
+      shopName:headInfo.shopName,
+      address:headInfo.province+headInfo.city+headInfo.area+headInfo.street+headInfo.address
+    })
   },
 // 定位授权
 locations: function () {
