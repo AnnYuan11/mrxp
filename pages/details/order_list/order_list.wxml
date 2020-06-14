@@ -352,7 +352,7 @@
 									<view class="mess">
 										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
 										<view class="price">
-											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="jg">￥{{dditem.commodityInfo.price}}</text>
 											<text class="num">×{{dditem.commodityNumber}}</text>
 										</view>
 									</view>
@@ -400,7 +400,7 @@
 									<view class="mess">
 										<text>{{dditem.commodityInfo.productInfo.commodityName}}</text>
 										<view class="price">
-											<text class="jg">￥{{dditem.commodityInfo.productInfo.price}}</text>
+											<text class="jg">￥{{dditem.commodityInfo.price}}</text>
 											<text class="num">×{{dditem.commodityNumber}}</text>
 										</view>
 									</view>

@@ -637,7 +637,8 @@ getPic(){
           data: data.data.result
         })
         that.setData({
-          shopName:data.data.result.shopName
+          shopName:data.data.result.shopName,
+          ztdid:data.data.result.id,
         })
         var params = {
           url: '/app/commodity/listCommodityInfoForNative',
@@ -723,7 +724,7 @@ getPic(){
         base.request(params);
         // that.setData({
         //   shopName: list.shopName,
-        //   ztdid: list.id,
+        //   
         // })
         // wx.setStorage({
         //   key: 'zdtid',
