@@ -146,12 +146,22 @@
 						</navigator>
 					</block>
 				</scroll-view>
-				<view class="bot" wx:if="{{currentPage!=pagecount}}">
+				<view class="bot" wx:if="{{currentPage!=pagecount&&listToday.length!='0'}}">
 					<i-grid>
 						<i-grid-item i-class="item">
 							<i-spin custom>
 								<i-icon type="refresh" color="rgba(144,144,144,1)" size="20" i-class="icon-load"></i-icon>
 								<view style="color:rgba(144,144,144,1)">加载中</view>
+							</i-spin>
+						</i-grid-item>
+					</i-grid>
+				</view>
+				<view class="bot" wx:if="{{listToday.length=='0'}}">
+					<i-grid>
+						<i-grid-item i-class="item">
+							<i-spin custom>
+	
+								<view style="color:rgba(144,144,144,1)">暂无数据</view>
 							</i-spin>
 						</i-grid-item>
 					</i-grid>

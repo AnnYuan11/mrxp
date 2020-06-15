@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/classify/classify",
     "pages/flcs/flcs",
     "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
@@ -26,7 +27,6 @@
     "pages/details/sppj/sppj",
     "pages/gwc/gwc",
     "pages/addOrder/add_order",
-    "pages/classify/classify",
     "pages/details/orderdetails_jf/jfddxx",
     "pages/details/Goodsdetails_jf/jfdh",
     "pages/details/address_list/addressList",

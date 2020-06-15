@@ -24,7 +24,7 @@
 				<!-- catchtouchmove 阻止弹窗后滚动穿透 -->
 				 <block wx:for="{{classfiyList}}">
 					<swiper-item catchtouchmove="false">
-						<scroll-view scroll-y style="height: 100%" data-cid="{{item.id}}" bindscrolltolower="bindscrolltolower">
+						<scroll-view scroll-y style="height: 100%" lower-threshold="{{toplav}}" data-cid="{{item.id}}" bindscrolltolower="bindscrolltolower">
 							<block wx:for="{{listToday}}">
 								<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
 									<view class="list_box">

@@ -12,15 +12,19 @@ Page({
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
+    toplav:30,
   },
   switchNav: function (e) {
     console.log(e)
     var page = this;
+    page.setData({
+      listToday:[]
+    })
     page.data.currentPage = 1,
     page.data.totalCount = 0, //总是数据条数
     page.data.pagecount = 0, //总的页数
     page.shopList(e.currentTarget.dataset.cid)
-    var id = e.target.id;
+    var id = parseInt(e.target.id);
     if (this.data.currentTab == id) {
       return false;
     } else {
@@ -29,7 +33,8 @@ Page({
       });
     }
     page.setData({
-      active: id
+      active: id,
+      indexc:id+1
     });
    
   },
@@ -37,15 +42,15 @@ Page({
     console.log(111)
    },
    onLoad: function (options) {
-    
-    
-   },
-   onShow:function(){
-     var that=this;
+    var that=this;
      that.setData({
       active:0,
      })
      that.classfiy()
+    
+   },
+   onShow:function(){
+     
    
    },
    getDateStr: function (today, addDayCount) {
@@ -170,13 +175,39 @@ Page({
   bindscrolltolower: function (e) {
    console.log(e)
     var that=this
-    console.log(that.data.currentTab)
+    console.log(that.data.indexc)
+    
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
         this.shopList(e.currentTarget.dataset.cid)     
     } else {
-      //没有更多数据
-      // app.nomore_showToast();
+      setTimeout(function(){
+        console.log("没有更多")
+        
+        if(that.data.indexc>=that.data.classfiyList.length){
+          return ;
+        }
+        that.setData({
+          listToday:[]
+        })
+        that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0 //总的页数
+       
+        var id = parseInt(that.data.currentTab);
+          that.setData({
+            currentTab: id+1,
+            active: id+1,
+            indexc:id+2
+          });
+          console.log(that.data.indexc)
+          console.log(that.data.classfiyList.length)
+          
+        that.shopList(that.data.classfiyList[id+1].id)
+
+      },1500)
+   
+    
     }
   },
   // 查询分类
