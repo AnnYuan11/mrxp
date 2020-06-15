@@ -353,6 +353,7 @@ share(e){
 
   bindChange: function (e) {
     var that = this;
+    console.log(e)
     that.setData({
       currentTab: e.detail.current
     });

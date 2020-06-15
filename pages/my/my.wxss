@@ -103,3 +103,9 @@
  color: #ed3f14;
  font-weight: 600;
 }
+.support{
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding: 0 0 20rpx 0;
+}

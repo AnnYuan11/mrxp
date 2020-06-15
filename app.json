@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/tab/tab",
     "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
     "pages/details/topay/pay_success",

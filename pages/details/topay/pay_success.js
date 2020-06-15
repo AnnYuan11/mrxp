@@ -21,12 +21,15 @@ Page({
     onLoad: function(options) {
         console.log(options)
         var that = this; 
+        let pages = getCurrentPages(); //获取当前页面pages里的所有信息。
+        let prevPage = pages[pages.length - 2];
         wx.showShareMenu({ withShareTicket: true });
         var orderId = options.orderId;
         that.setData({
-            orderId: orderId
+            orderId: orderId,
+            message:prevPage.data.message
         })
-        that.getPic();
+        // that.getPic();
         that.getOrderDetail(orderId);
 
     },
@@ -85,7 +88,8 @@ Page({
         if(res.from==='button'){
             return {
                 title: '老板，我是' + that.data.orderDetail.userInfo.nickName + ',刚在店里买的商品请接单！',
-                imageUrl: that.data.imgUrl + '/' + that.data.shopSharePhoto,
+                // imageUrl: that.data.imgUrl + '/' + that.data.shopSharePhoto,
+                imageUrl: that.data.imgUrl + '/' + that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.photo,
                 // desc: '分享页面的内容',
                 path: '/pages/details/orderDetailsck/ddxx?id=' + that.data.orderId // 路径，传递参数到指定页面。
             }

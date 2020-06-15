@@ -375,7 +375,7 @@ cancel(){
 Tofk(){
   var that=this;
   wx.navigateTo({
-    url: '/pages/details/topay/topay',
+    url: '/pages/details/topay/topay?',
   })
   that.setData({
     topay:false//订单信息

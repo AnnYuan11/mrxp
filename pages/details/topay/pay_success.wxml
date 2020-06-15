@@ -8,10 +8,10 @@
          <view class="text_3 bold text-center pay_success_text">订单支付成功!</view>
           <view class="pay_button_box text-center">
               <button type="button" class="text_red border_red" style="width: 300rpx;margin: 10rpx 20rpx;" bindtap="jumpIndex">继续购物</button>
-              <button class="text_white red_back" style="width: 300rpx;margin: 10rpx 20rpx;"  open-type="share">购买的商品</button>
+              <button class="text_white red_back" style="width: 300rpx;margin: 10rpx 20rpx;"  open-type="share">提醒团长接单</button>
           </view>
           <view class="tip_success text-left text_3 font_sm">
-              点击上面的 <text class="text_red">"购买的商品"</text>按钮，将提醒消息发送到本店微信群。
+              点击上面的 <text class="text_red">"提醒团长接单"</text>按钮，将提醒消息发送到本店微信群。
           </view>
           <view class="tip_success text-left text_8 font safe_tip">
               <text class="text_red">安全提醒：</text>天天每一天不会以任何理由要求您提供银行卡信息或支付额外费用，请谨防钓safe_tip鱼链接或诈骗电话。

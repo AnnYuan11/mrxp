@@ -114,8 +114,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.shopList() //今日售卖列表
-    that.yhqList() //优惠券列表
+   
     try {
       //使用更新对象之前判断是否可用
       if (wx.canIUse('getUpdateManager')) {
@@ -186,6 +185,8 @@ Page({
     app.getShopNum()
     that.order()
     that.fans()
+    that.shopList() //今日售卖列表
+    that.yhqList() //优惠券列表
   },
   
   /**
@@ -559,7 +560,9 @@ getPic(){
         }
       },
       sCallBack: function (data) {
-
+        if(data.data.errorCode=='-1'){
+          that.default()
+        }
         that.setData({
           defaultztd: data.data.result,
           shopName: data.data.result.headInfo.shopName,
@@ -619,30 +622,35 @@ getPic(){
   //   base.request(params);
   // },
   // 默认自提点
-  // default () {
-  //   var that = this;
-  //   var params = {
-  //     url: '/app/head/findHeadInfoProperty',
-  //     method: 'GET',
-  //     data: {
+  default () {
+    var that = this;
+    var params = {
+      url: '/app/head/findHeadInfoProperty',
+      method: 'GET',
+      data: {
 
-  //     },
-  //     sCallBack: function (data) {
-  //       var list = data.data.result;
-  //       that.setData({
-  //         shopName: list.shopName,
-  //         ztdid: list.id,
-  //       })
-  //       wx.setStorage({
-  //         key: 'zdtid',
-  //         data: list.id,
-  //       })
+      },
+      sCallBack: function (data) {
+        var list = data.data.result;
+        wx.setStorage({
+          key: 'headInfo',
+          data: data.data.result
+        })
 
-  //     },
-  //     eCallBack: function () {}
-  //   }
-  //   base.request(params);
-  // },
+        // that.setData({
+        //   shopName: list.shopName,
+        //   ztdid: list.id,
+        // })
+        // wx.setStorage({
+        //   key: 'zdtid',
+        //   data: list.id,
+        // })
+
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+  },
   // 加入购物车
   joinGwc(e) {
     var that = this;
