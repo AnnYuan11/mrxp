@@ -22,12 +22,13 @@ Page({
     imgUrl: app.globalData.imgUrl,
     imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
-    size: 10, //每页数据条数
+    size: 30, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
     dpShow:false,//店铺显示
-    isloading:true
+    isloading:true,
+
   },
 
   /**
@@ -69,8 +70,10 @@ Page({
       success: function (res) {
         that.setData({
           winWidth: res.windowWidth,
-          winHeight: res.windowHeight
+          winHeight: res.windowHeight,
+          bottom:500
         });
+        console.log(that.data.bottom)
       }
     });
     // 分享
