@@ -259,8 +259,14 @@ change(e) {
         that.setData({
           list:data.data.result,
           commodityCode:data.data.result.commodityCode,
-          background:JSON.parse(data.data.result.bannerPhotoView)
+          // background:JSON.parse(data.data.result.bannerPhotoView)
         })
+        if(data.data.result.bannerPhotoView!=''){
+          that.setData({
+           
+            background:JSON.parse(data.data.result.bannerPhotoView)
+          })
+        }
         that.eventDraw2()
       },
       eCallBack: function () {

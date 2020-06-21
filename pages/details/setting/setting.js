@@ -86,7 +86,7 @@ Page({
           wx.removeStorageSync('longitude')
           wx.removeStorageSync('zdtid')
           wx.removeStorageSync('sharephone')
-          wx.removeStorageSync('headInfo')
+          // wx.removeStorageSync('headInfo')
           wx.navigateBack({
             complete: (res) => {
               wx.switchTab({

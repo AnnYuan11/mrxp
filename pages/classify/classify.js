@@ -12,15 +12,19 @@ Page({
     size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
+    toplav:30,
   },
   switchNav: function (e) {
     console.log(e)
     var page = this;
+    page.setData({
+      listToday:[]
+    })
     page.data.currentPage = 1,
     page.data.totalCount = 0, //总是数据条数
     page.data.pagecount = 0, //总的页数
     page.shopList(e.currentTarget.dataset.cid)
-    var id = e.target.id;
+    var id = parseInt(e.target.id);
     if (this.data.currentTab == id) {
       return false;
     } else {
@@ -29,7 +33,8 @@ Page({
       });
     }
     page.setData({
-      active: id
+      active: id,
+      indexc:id+1
     });
    
   },
@@ -37,15 +42,15 @@ Page({
     console.log(111)
    },
    onLoad: function (options) {
-    
-    
-   },
-   onShow:function(){
-     var that=this;
+    var that=this;
      that.setData({
       active:0,
      })
      that.classfiy()
+    
+   },
+   onShow:function(){
+     
    
    },
    getDateStr: function (today, addDayCount) {
@@ -80,11 +85,11 @@ Page({
     that.setData({
       isloading:true
     })
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
+    wx.showLoading({
+      title: '加载中',
+    })
     var params = {
-      url: '/app/commodity/listCommodityInfo',
+      url: '/app/commodity/listCommodityInfoForAppNativeClass',
       method: 'POST',
       data: {
         'pageIndex': that.data.currentPage,
@@ -95,8 +100,10 @@ Page({
         
       },
       sCallBack: function (data) {
-       
-        var listToday = data.data.result.datas
+       wx.hideLoading({
+         complete: (res) => {},
+       })
+        var listToday = data.data.result
         // if(listToday.length=='0'){
         //   that.shopList()
         // }
@@ -145,10 +152,10 @@ Page({
         var temlist = that.data.listToday; //原始的数据集合
         var currentPage = that.data.currentPage; //获取当前页码
         if (currentPage == 1) {
-          temlist = data.data.result.datas; //初始化数据列表
+          temlist = data.data.result; //初始化数据列表
           currentPage = 1;
         } else {
-          temlist = temlist.concat(data.data.result.datas); //请求的数据追加到原始数据集合里
+          temlist = temlist.concat(data.data.result); //请求的数据追加到原始数据集合里
           // currentPage = currentPage + 1;
         }
         that.setData({
@@ -168,13 +175,39 @@ Page({
   bindscrolltolower: function (e) {
    console.log(e)
     var that=this
-    console.log(that.data.currentTab)
+    console.log(that.data.indexc)
+    
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
         this.shopList(e.currentTarget.dataset.cid)     
     } else {
-      //没有更多数据
-      // app.nomore_showToast();
+      setTimeout(function(){
+        console.log("没有更多")
+        
+        if(that.data.indexc>=that.data.classfiyList.length){
+          return ;
+        }
+        that.setData({
+          listToday:[]
+        })
+        that.data.currentPage = 1,
+        that.data.totalCount = 0, //总是数据条数
+        that.data.pagecount = 0 //总的页数
+       
+        var id = parseInt(that.data.currentTab);
+          that.setData({
+            currentTab: id+1,
+            active: id+1,
+            indexc:id+2
+          });
+          console.log(that.data.indexc)
+          console.log(that.data.classfiyList.length)
+          
+        that.shopList(that.data.classfiyList[id+1].id)
+
+      },1500)
+   
+    
     }
   },
   // 查询分类
@@ -262,4 +295,7 @@ Page({
     // }
 
   },
+  bindchange(e){
+    console.log(e)
+  }
  })

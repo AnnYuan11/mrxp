@@ -146,12 +146,12 @@ login(){
        if (data.data.result != 0) {
         //  debugger
               wx.setTabBarBadge({
-                index: 1,
+                index: 2,
                 text: String(data.data.result)
               })
             } else {
               wx.removeTabBarBadge({
-                index: 1,
+                index: 2,
                 text: ''
               })
             }

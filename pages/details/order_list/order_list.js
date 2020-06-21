@@ -392,9 +392,14 @@ share(e){
             item.orderStatus = '待提货'
           } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='0') {
             item.orderStatus = '已提货'
-          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1') {
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='0') {
             item.orderStatus = '已完成'
-          } else if (item.orderStatus == '0') {
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='1') {
+            item.orderStatus = '已退款'
+          }  else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='2') {
+            item.orderStatus = '已拒绝'
+          }  
+          else if (item.orderStatus == '0') {
             item.orderStatus = '失效订单'
           } 
            
@@ -916,9 +921,13 @@ share(e){
       sCallBack: function (data) {
          var yjslist=data.data.result.datas;
          yjslist.forEach(item=>{
-          if(item.orderStatus=='5'&&item.isAfterOrderOver=='1'){
-            item.orderStatus='已完成'
-          }
+          if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='0') {
+            item.orderStatus = '已完成'
+          } else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='1') {
+            item.orderStatus = '已退款'
+          }  else if (item.orderStatus == '5'&&item.isAfterOrderOver=='1'&&item.afterOrderStatus=='2') {
+            item.orderStatus = '已拒绝'
+          }  
         })
 
         var temlist = that.data.yjslist; //原始的数据集合

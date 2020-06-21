@@ -22,7 +22,7 @@ Page({
     imgUrl: app.globalData.imgUrl,
     imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
-    size: 10, //每页数据条数
+    size: 30, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
@@ -636,10 +636,95 @@ getPic(){
           key: 'headInfo',
           data: data.data.result
         })
-
+        that.setData({
+          shopName:data.data.result.shopName,
+          ztdid:data.data.result.id,
+        })
+        var params = {
+          url: '/app/commodity/listCommodityInfoForNative',
+          method: 'POST',
+          data: {
+            'name': '',
+            'pageIndex': that.data.currentPage,
+            'pageSize': that.data.size,
+            'sendType':'1',
+            'franchiseeId':list.franchiseeInfo.id
+          },
+          sCallBack: function (data) {
+           
+            var listToday = data.data.result
+            console.log(that.data.currentPage)
+            console.log(that.data.pagecount)
+            console.log(listToday.length)
+            // if(listToday.length=='0'){
+            //   that.shopList()
+            // }
+            if(listToday){
+              // that.setData({
+              //   isloading:false
+              // })
+            }
+            
+            if (listToday != '') {
+              listToday.forEach((item, index) => {
+                item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
+                item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+                
+                if (item.sendType == 1) {
+                  item.sendType = "到店自提"
+                } else {
+                  item.sendType = "快递到家"
+                }
+                if (item.pickDate == 1) {
+                  that.getDateStr(null, 0)
+                  item.pickDate = that.data.tomorow
+                } else if (item.pickDate == 2) {
+                  that.getDateStr(null, 1)
+                  var tomorows = that.data.tomorow
+                  item.pickDate = tomorows
+                } else {
+                  that.getDateStr(null, 2)
+                  var ht = that.data.tomorow
+                  item.pickDate = ht
+                }
+                if (item.isBuy == 2) {
+                  item.isBuy = "提前加入购物车"
+    
+                }else if(item.isBuy == 1) {
+                  item.isBuy = "加入购物车"
+                }
+                else if (item.isBuy == 3) {
+                  item.isBuy = "活动已结束"
+                } else if (item.isBuy == 4) {
+                  item.isBuy = "已售罄"
+                }
+    
+              })
+            }
+            var temlist = that.data.listToday; //原始的数据集合
+            var currentPage = that.data.currentPage; //获取当前页码
+            if (currentPage == 1) {
+              temlist = data.data.result; //初始化数据列表
+              currentPage = 1;
+            } else {
+              temlist = temlist.concat(data.data.result); //请求的数据追加到原始数据集合里
+              // currentPage = currentPage + 1;
+            }
+            that.setData({
+              currentPage: currentPage,
+              listToday: temlist,
+              totalCount: data.data.result[0].rowCount, //总的数据条数
+              pagecount: data.data.result[0].totalPages //总页数
+            })
+           
+    
+          },
+          eCallBack: function () {}
+        }
+        base.request(params);
         // that.setData({
         //   shopName: list.shopName,
-        //   ztdid: list.id,
+        //   
         // })
         // wx.setStorage({
         //   key: 'zdtid',
