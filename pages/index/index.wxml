@@ -11,7 +11,7 @@
 		</view>
 	</view>
 </view>
-<scroll-view scroll-y class="boxB" scroll-top='{{topNum}}' style="height:{{winHeight - 125}}px" bindscroll="scoll" scroll-with-animation="true" bindscroll="bindscrolltolower" lower-threshold="150" refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="white" refresher-background="rgba(243,243,243,1)" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh">
+<scroll-view scroll-y class="boxB" scroll-top='{{topNum}}' style="height:{{winHeight - 125}}px"  scroll-with-animation="true" bindscroll="bindscrolltolower" lower-threshold="150" refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="white" refresher-background="rgba(243,243,243,1)" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh">
 	<view class="box">
 		<view class="top">
 			<view class="img">
@@ -77,7 +77,7 @@
 			
 		<view class="swiperBox">
 			<view class="swiper_box" wx:if="{{currentTab=='0'}}">
-				<scroll-view scroll-y style="height: 100%">
+				<scroll-view  style="height: 100%">
 					<block wx:for="{{listToday}}">
 						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
 							<view class="list_box">
@@ -146,7 +146,7 @@
 						</navigator>
 					</block>
 				</scroll-view>
-				<!-- <view class="bot" wx:if="{{currentPage!=pagecount&&listToday.length!='0'}}">
+				<view class="bot" wx:if="{{currentPage!=pagecount&&listToday.length!='0'}}">
 					<i-grid>
 						<i-grid-item i-class="item">
 							<i-spin custom>
@@ -155,7 +155,7 @@
 							</i-spin>
 						</i-grid-item>
 					</i-grid>
-				</view> -->
+				</view>
 				<view class="bot" wx:if="{{listToday.length=='0'}}">
 					<i-grid>
 						<i-grid-item i-class="item">

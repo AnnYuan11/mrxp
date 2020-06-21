@@ -46,7 +46,6 @@ Page({
     that.hourReport();//定时刷新
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
-    // that.shopList()
     that.city(); //获取所在城市名
     // that.query()
     that.setData({
@@ -63,7 +62,13 @@ Page({
     //     })
     //   }
     // }
-   
+    // setInterval(function(){ 
+    //   that.setData({
+    //     currentPage:'1',
+    //     size:'1000'
+    //   })
+    //   that.shopList()
+    // }, 3000);
    
     // 获取设备高度
     wx.getSystemInfo({
@@ -265,26 +270,26 @@ Page({
     }
   },
   // 获取分享图片
-getPic(){
-  var that = this;
-  var params = {
-    url: '/app/findHeadInfoProperty',
-    method: 'GET',
-    data: {
-      
-    },
-    sCallBack: function (data) {
-      that.setData({
-        shopShareTitle:data.data.result.shopShareTitle,
-        shopSharePhoto:data.data.result.shopSharePhoto
-      })
+  getPic(){
+    var that = this;
+    var params = {
+      url: '/app/findHeadInfoProperty',
+      method: 'GET',
+      data: {
+        
+      },
+      sCallBack: function (data) {
+        that.setData({
+          shopShareTitle:data.data.result.shopShareTitle,
+          shopSharePhoto:data.data.result.shopSharePhoto
+        })
 
-    },
-    eCallBack: function () {}
-  }
-  base.request(params);
-},
-  
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+  },
+    
   // 商品切换
   swichNav: function (e) {
     var that = this;
@@ -806,9 +811,19 @@ getPic(){
 
   },
   // 今日售卖下拉加载
-  bindscrolltolower: function () {
+  bindscrolltolower: function (e) {
     // debugger
     var that=this
+     console.log(e.detail.scrollTop)
+    if (e.detail.scrollTop >10) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
     console.log(that.data.currentTab)
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
@@ -957,17 +972,19 @@ getPic(){
     base.request(params);
   },
   // 获取滚动条当前位置
-  scoll: function (e) {
-    if (e.detail.scrollTop > 100) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
-  },
+  // scoll: function (e) {
+
+  //  console.log(e.detail.scrollTop)
+  //   if (e.detail.scrollTop ==0) {
+  //     this.setData({
+  //       floorstatus: true
+  //     });
+  //   } else {
+  //     this.setData({
+  //       floorstatus: false
+  //     });
+  //   }
+  // },
 
   //回到顶部
   goTop: function (e) { // 一键回到顶部

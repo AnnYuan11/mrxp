@@ -13,6 +13,7 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     toplav:30,
+    isloading:true
   },
   switchNav: function (e) {
     console.log(e)
@@ -85,9 +86,7 @@ Page({
     that.setData({
       isloading:true
     })
-    wx.showLoading({
-      title: '加载中',
-    })
+    
     var params = {
       url: '/app/commodity/listCommodityInfo',
       method: 'POST',
@@ -100,17 +99,15 @@ Page({
         
       },
       sCallBack: function (data) {
-       wx.hideLoading({
-         complete: (res) => {},
-       })
+       
         var listToday = data.data.result.datas
         // if(listToday.length=='0'){
         //   that.shopList()
         // }
         if(listToday){
-          // that.setData({
-          //   isloading:false
-          // })
+          that.setData({
+            isloading:false
+          })
         }
         
         if (listToday != '') {
