@@ -100,7 +100,7 @@ Page({
       },
       sCallBack: function (data) {
        
-        var listToday = data.data.result.datas
+        var listToday = data.data.result
         // if(listToday.length=='0'){
         //   that.shopList()
         // }
