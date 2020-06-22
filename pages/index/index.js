@@ -47,28 +47,15 @@ Page({
     var date = new Date();
     var today = date.getMonth() + 1 + '月' + date.getDate() + '日'
     that.city(); //获取所在城市名
-    // that.query()
     that.setData({
       today: today,
       qhdzid: options.zdtid,
       sharephone:options.sharephone,
       options:options
     })
-    // var zdtid = wx.getStorageSync('zdtid')
-    // if(that.data.qhdzid!=undefined){
-    //   if(zdtid!=that.data.qhdzid){
-    //     that.setData({
-    //       dpShow:true
-    //     })
-    //   }
-    // }
-    // setInterval(function(){ 
-    //   that.setData({
-    //     currentPage:'1',
-    //     size:'1000'
-    //   })
-    //   that.shopList()
-    // }, 3000);
+   
+    // setInterval(
+    //   this.refesh, 3000);
    
     // 获取设备高度
     wx.getSystemInfo({
@@ -87,7 +74,71 @@ Page({
     })
   
   },
+refesh(){
+  var that = this;
+    var headInfo = wx.getStorageSync('headInfo')
+    var params = {
+      url: '/app/commodity/listCommodityInfoForNative',
+      method: 'POST',
+      data: {
+        'name':'',
+        'pageIndex': 1,
+        'pageSize': 30,
+        'sendType':'1',
+        'franchiseeId':headInfo.franchiseeInfo.id
+      },
+      sCallBack: function (data) {
 
+        var listToday = data.data.result        
+        if (listToday != '') {
+          listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
+            item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+            
+            if (item.sendType == 1) {
+              item.sendType = "到店自提"
+            } else {
+              item.sendType = "快递到家"
+            }
+            if (item.pickDate == 1) {
+              that.getDateStr(null, 0)
+              item.pickDate = that.data.tomorow
+            } else if (item.pickDate == 2) {
+              that.getDateStr(null, 1)
+              var tomorows = that.data.tomorow
+              item.pickDate = tomorows
+            } else {
+              that.getDateStr(null, 2)
+              var ht = that.data.tomorow
+              item.pickDate = ht
+            }
+            if (item.isBuy == 2) {
+              item.isBuy = "提前加入购物车"
+
+            }else if(item.isBuy == 1) {
+              item.isBuy = "加入购物车"
+            }
+            else if (item.isBuy == 3) {
+              item.isBuy = "活动已结束"
+            } else if (item.isBuy == 4) {
+              item.isBuy = "已售罄"
+            }
+
+          })
+        }
+        var temlist = that.data.listToday; //原始的数据集合
+        
+       
+        that.setData({
+          listToday: temlist,
+        })
+       
+
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -355,9 +406,14 @@ Page({
     that.setData({
       isloading:true
     })
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
+    console.log(headInfo)
+    // debugger
+    var headInfoId
+    if(headInfo==''){
+      headInfoId='2c9a273471dea2f30171deb093740001'
+    }else{
+      headInfoId=headInfo.franchiseeInfo.id
+    }
     var params = {
       url: '/app/commodity/listCommodityInfoForNative',
       method: 'POST',
@@ -366,7 +422,7 @@ Page({
         'pageIndex': that.data.currentPage,
         'pageSize': that.data.size,
         'sendType':'1',
-        'franchiseeId':headInfo.franchiseeInfo.id
+        'franchiseeId':headInfoId
       },
       sCallBack: function (data) {
        
@@ -569,66 +625,50 @@ Page({
       },
       sCallBack: function (data) {
         if(data.data.errorCode=='-1'){
-          that.default()
+          
+          // that.default()
         }
-        that.setData({
-          defaultztd: data.data.result,
-          shopName: data.data.result.headInfo.shopName,
-          ztdid: data.data.result.headInfo.id,
-          sharephone:data.data.result.headInfo.phone
-        })
-        wx.setStorage({
-          key: 'zdtid',
-          data: data.data.result.headInfo.id
-        })
-        wx.setStorage({
-          key: 'sharephone',
-          data: data.data.result.headInfo.phone
-        })
-        wx.setStorage({
-          key: 'headInfo',
-          data: data.data.result.headInfo
-        })
-
+        if(data.data.errorCode!='-1'&&data.data.result==''){
+          wx.showModal({
+            content: '请选择您的自提点',
+            showCancel:false,
+            success (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/details/dhzt/dhzt',
+                })
+              } 
+            }
+          })
+        }else if(data.data.errorCode=='0'){
+          that.setData({
+            defaultztd: data.data.result,
+            shopName: data.data.result.headInfo.shopName,
+            ztdid: data.data.result.headInfo.id,
+            sharephone:data.data.result.headInfo.phone
+          })
+          wx.setStorage({
+            key: 'zdtid',
+            data: data.data.result.headInfo.id
+          })
+          wx.setStorage({
+            key: 'sharephone',
+            data: data.data.result.headInfo.phone
+          })
+          wx.setStorage({
+            key: 'headInfo',
+            data: data.data.result.headInfo
+          })
+  
+        }
+       
+       
       },
       eCallBack: function () {}
     }
     base.request(params);
   },
-  // 团长地址
-  // list() {
-
-  //   var that = this;
-  //   var myLat = wx.getStorageSync('latitude');
-  //   var myLng = wx.getStorageSync('longitude');
-  //   var params = {
-  //     url: '/app/head/findAllHeadInfoByDistance',
-  //     method: 'POST',
-  //     data: {
-  //       myLat: myLat,
-  //       myLng: myLng,
-  //       'pageIndex': 1,
-  //       'pageSize': 1,
-  //     },
-  //     sCallBack: function (data) {
-  //       var list = data.data.result.datas;
-  //       if (list.length == 0) {
-  //         that.default()
-  //       }
-  //       that.setData({
-  //         shopName: list[0].shopName,
-  //         ztdid: list[0].id
-  //       })
-  //       wx.setStorage({
-  //         key: 'zdtid',
-  //         data: list[0].id
-  //       })
-
-  //     },
-  //     eCallBack: function () {}
-  //   }
-  //   base.request(params);
-  // },
+  
   // 默认自提点
   default () {
     var that = this;
@@ -1107,36 +1147,7 @@ Page({
 
     }
   },
-  // 切换自提点
-  change(e) {
-    console.log(e)
-    var that = this;
-    var userId = wx.getStorageSync('userId')
-    console.log(userId)
-    var params = {
-      url: '/app/user/addUserHeadInfo',
-      method: 'POST',
-      data: {
-        userInfo: {
-          'id': userId
-        },
-        headInfo: {
-          'id': that.data.qhdzid
-        }
-      },
-      sCallBack: function (data) {
-        wx.removeStorageSync('shop')
-        that.query()
-        that.setData({
-          qhdzid:'111'
-        })
-        // that.options.qhdzid='111'
-        console.log('wangbo'+that.options.qhdzid)
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-  },
+
 
   radioChange(e) {
     console.log(e)    
