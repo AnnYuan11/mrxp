@@ -32,7 +32,10 @@ Page({
     console.log(options)
     // 分享
     wx.showShareMenu({
-      withShareTicket: true
+      withShareTicket: true,
+      complete: function(res) {
+        console.log("11111111")
+      }
     })
     var that = this;
     if (options.scene) {
