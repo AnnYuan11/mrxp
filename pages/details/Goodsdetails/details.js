@@ -767,8 +767,8 @@ close(){
     var path = that.data.imgUrl+that.data.background[0];
     this.setData({
       painting2: {
-        width: 500,
-        height: 550,
+        width: 200,
+        height: 150,
         clear: true,
         views: [
           {
@@ -776,8 +776,8 @@ close(){
             background:'#fff',
             top: 0,
             left: 0,
-            width: 500,
-            height: 400
+            width: 200,
+            height: 150
           },
           // {
           //   type: 'text',
@@ -797,38 +797,38 @@ close(){
             type: 'image',
             url: path,
             top: 0,
-            left: 38,
-            width: 400,
-            height: 330
+            left: 18,
+            width: 150,
+            height: 100
           },
           {
             type: 'text',
             content: '价格￥'+that.data.list.price,
-            fontSize: 30,
+            fontSize: 14,
             color: '#E62004',
             textAlign: 'left',
-            top: 365,
+            top: 130,
             left: 0,
             bolder: true
           },
           {
             type: 'text',
             content: '￥'+that.data.list.crossedPrice,
-            fontSize: 26,
+            fontSize: 12,
             color: '#7E7E8B',
             textAlign: 'left',
-            top: 370,
-            left: 165,
+            top: 132,
+            left: 80,
             textDecoration: 'line-through'
           },
           {
             type: 'text',
             content: '到货:'+that.data.list.pickDate,
-            fontSize: 24,
+            fontSize: 12,
             color: '#7E7E8B',
             textAlign: 'left',
-            top: 370,
-            left: 270
+            top: 132,
+            left: 120
           },
          
         ]

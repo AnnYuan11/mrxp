@@ -1,4 +1,5 @@
 /* pages/my/my.wxss */
+
 /* 头部 */
 .head_box{
   width: 100%;
