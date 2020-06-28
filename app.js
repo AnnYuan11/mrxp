@@ -106,7 +106,7 @@ login(){
            
             util.put('loginData', value)
           }else{
-            wx.removeStorageSync('session')
+            // wx.removeStorageSync('session')
           }
         
         
