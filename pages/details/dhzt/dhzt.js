@@ -339,6 +339,10 @@ change(e){
           data: 0,
           key: 'aa',
         })
+        wx.setStorage({
+          data: 0,
+          key: 'bb',
+        })
         var params = {
           url: '/app/user/addUserHeadInfo',
           method: 'POST',

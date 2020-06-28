@@ -639,7 +639,7 @@ eventDraw () {
         },
         {
           type: 'text',
-          content: '预约时间：' + that.data.list.startTime.substring(5, 7) + '月' + that.data.list.startTime.substring(8, 10) + '日',
+          content: '预售时间：' + that.data.list.startTime.substring(5, 7) + '月' + that.data.list.startTime.substring(8, 10) + '日',
           fontSize: 13,
           color: '#7E7E8B',
           textAlign: 'left',

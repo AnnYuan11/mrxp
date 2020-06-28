@@ -51,8 +51,15 @@ Page({
     
    },
    onShow:function(){
-     
-   
+    var that=this;
+    var bb = wx.getStorageSync('bb')
+    that.data.currentPage = 1,
+    that.data.totalCount = 0, //总是数据条数
+    that.data.pagecount = 0, //总的页数
+    console.log(bb)
+    if(bb=='0'){
+      that.onLoad()
+    }
    },
    getDateStr: function (today, addDayCount) {
     var date;
@@ -99,7 +106,7 @@ Page({
         
       },
       sCallBack: function (data) {
-       
+        wx.removeStorageSync('bb')
         var listToday = data.data.result.datas
         // if(listToday.length=='0'){
         //   that.shopList()
@@ -143,7 +150,6 @@ Page({
             } else if (item.isBuy == 4) {
               item.isBuy = "已售罄"
             }
-
           })
         }
         var temlist = that.data.listToday; //原始的数据集合
@@ -210,6 +216,7 @@ Page({
   // 查询分类
   classfiy(){
     var that = this;
+    console.log("11111")
     var params = {
       url: '/app/commodity/findAllCommodityInfoClassChildren',
       method: 'GET',
