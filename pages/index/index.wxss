@@ -1,4 +1,10 @@
 /* pages/index/index.wxss */
+/* page{
+  background-image:url(https://photo.zgmrxp.com/img/public/fc.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+  background-position: center;
+} */
 /* 头部 */
 .headBox{
   width: 100%;
@@ -26,6 +32,8 @@
   background: #fff;
   padding: 32rpx;
   box-sizing: border-box;
+ 
+
 }
 .date{
   display: flex;
@@ -371,6 +379,11 @@ swiper image{
   padding: 10rpx;
   box-sizing: border-box;
   margin-bottom: 32rpx;
+
+}
+.zhan{
+  height: 200px;
+  background: rgba(0,0,0,0.6);
 }
 
 /* 视频 */

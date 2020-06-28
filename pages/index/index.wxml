@@ -78,6 +78,7 @@
 		<view class="swiperBox">
 			<view class="swiper_box" wx:if="{{currentTab=='0'}}">
 				<scroll-view  style="height: 100%">
+				 
 					<block wx:for="{{listToday}}">
 						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
 							<view class="list_box">
@@ -143,8 +144,11 @@
 								</view>
 
 							</view>
+						
 						</navigator>
+						<!-- <view class="zhan" wx:if="{{zw}}">加载中~~~~~</view> -->
 					</block>
+					
 				</scroll-view>
 				<view class="bot" wx:if="{{currentPage!=pagecount&&listToday.length!='0'}}">
 					<i-grid>
@@ -168,6 +172,7 @@
 				</view>
 				<view class="bot" wx:if="{{currentPage==pagecount}}">~已经到底部了</view>
 			</view>
+			
 			<view class="swiper_box" wx:if="{{currentTab=='1'}}">
 				<scroll-view scroll-y style="height: 100%" bindscrolltolower="bindscrolltolower">
 					<block wx:for="{{listTomorow}}">
