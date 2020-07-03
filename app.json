@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/classify/classify",
     "pages/flcs/flcs",
+    "pages/classify/classify",
     "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
     "pages/details/topay/pay_success",

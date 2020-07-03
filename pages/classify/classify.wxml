@@ -30,13 +30,13 @@
 									<view class="list_box">
 										<view class="img_goods">
 											<view class="{{item.sendType=='到店自提'?'type1':'type2'}}">{{item.sendType}}</view>
-											<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}" mode="widthFix"></image>
+											<image src="{{imgUrl}}{{item.photo}}" wx:if="{{item.videoUrl==''}}" mode="widthFix"></image>
 											<!-- 显示状态图 -->
 											<image src="/img/new/1.png" style="width:128rpx" mode="widthFix" wx:if="{{item.saleTag=='1'}}" class="zt"></image>
 											<image src="/img/new/2.png" wx:if="{{item.saleTag=='2'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
 											<image src="/img/new/3.png" wx:if="{{item.saleTag=='3'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
-											<view class="subtitle" wx:if="{{item.productInfo.subTitle!=''}}">{{item.productInfo.subTitle}}</view>
-											<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
+											<view class="subtitle" wx:if="{{item.subTitle!=''}}">{{item.subTitle}}</view>
+											<video catchtap="aa" id="myVideo" wx:if="{{item.videoUrl!=''}}" src="{{imgUrl}}{{item.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.photo}}" controls></video>
 											<!-- 已售罄 -->
 											<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
 												<image src="{{imgUrls}}img/public/fc.png" mode="widthFix"></image>
@@ -49,7 +49,7 @@
 
 										<view class="bottom_box">
 											<view class="thsj" style="border-bottom:1px solid #E2E2E2;padding-bottom:10rpx">
-												<text class="spmc">{{item.productInfo.commodityName}}</text>
+												<text class="spmc">{{item.commodityName}}</text>
 												<view class="right fsgz">
 													<text class="limited">{{item.viewNumber}}</text>
 													<text>粉丝关注</text>

@@ -28,7 +28,7 @@ Page({
     triggered: false,//下拉刷新
     dpShow:false,//店铺显示
     isloading:true,
-
+    // isscroll:true
   },
 
   /**
@@ -406,7 +406,6 @@ refesh(){
     that.setData({
       isloading:true
     })
-    console.log(headInfo)
     // debugger
     var headInfoId
     if(headInfo==''){
@@ -414,6 +413,7 @@ refesh(){
     }else{
       headInfoId=headInfo.franchiseeInfo.id
     }
+    
     var params = {
       url: '/app/commodity/listCommodityInfoForNative',
       method: 'POST',
@@ -488,10 +488,10 @@ refesh(){
           currentPage: currentPage,
           listToday: temlist,
           totalCount: data.data.result[0].rowCount, //总的数据条数
-          pagecount: data.data.result[0].totalPages //总页数
+          pagecount: data.data.result[0].totalPages, //总页数
         })
        
-
+        
       },
       eCallBack: function () {}
     }
@@ -854,7 +854,7 @@ refesh(){
   bindscrolltolower: function (e) {
     // debugger
     var that=this
-     console.log(e.detail.scrollTop)
+    //  console.log(e.detail.scrollTop)
     if (e.detail.scrollTop >10) {
       this.setData({
         floorstatus: true
@@ -864,11 +864,15 @@ refesh(){
         floorstatus: false
       });
     }
-    console.log(that.data.currentTab)
+    console.log(that.data.currentPage)
     if (this.data.currentPage < this.data.pagecount) {
-      this.data.currentPage++;
+      // if(that.data.isscroll==true){
+        this.data.currentPage++;
+      // }
+     
       if (that.data.currentTab == '0') {
         this.shopList();
+        
       } else {
         // this.shopListM();
       }
@@ -1012,19 +1016,19 @@ refesh(){
     base.request(params);
   },
   // 获取滚动条当前位置
-  // scoll: function (e) {
+  scrolltoupper: function (e) {
 
-  //  console.log(e.detail.scrollTop)
-  //   if (e.detail.scrollTop ==0) {
-  //     this.setData({
-  //       floorstatus: true
-  //     });
-  //   } else {
-  //     this.setData({
-  //       floorstatus: false
-  //     });
-  //   }
-  // },
+   console.log(e.detail.scrollTop)
+    if (e.detail.scrollTop >20) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
 
   //回到顶部
   goTop: function (e) { // 一键回到顶部
@@ -1032,8 +1036,8 @@ refesh(){
       topNum: this.data.topNum = 0
     });
   },
+  
 
-  // 定时器
   djs() {
     var that = this;
     var times = 4;

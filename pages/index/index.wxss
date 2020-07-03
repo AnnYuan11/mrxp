@@ -5,6 +5,7 @@
   background-size: 100%;
   background-position: center;
 } */
+
 /* 头部 */
 .headBox{
   width: 100%;
@@ -660,4 +661,7 @@ button:not([size='mini']) {
 }
 .icon-load{
   animation: ani-demo-spin 1s linear infinite;
+}
+.button-hover{
+  background: transparent;
 }
