@@ -80,8 +80,8 @@
 				<scroll-view  style="height: 100%">
 				 
 					<block wx:for="{{listToday}}">
-						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
-							<view class="list_box">
+						<!-- <navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none"> -->
+							<view class="list_box"  wx:for="{{item}}" bindtap="Todetails" data-id="{{item.id}}" data-isBuy="{{item.isBuy}}">
 								<view class="img_goods">
 									<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
 									<image src="{{imgUrl}}{{item.photo}}" wx:if="{{item.videoUrl==''}}"></image>
@@ -145,8 +145,8 @@
 
 							</view>
 						
-						</navigator>
-						<!-- <view class="zhan" wx:if="{{zw}}">加载中~~~~~</view> -->
+						<!-- </navigator> -->
+						<!-- <view class="zhan" wx:if="{{zw}}">加载中~~~~~</view> --> 
 					</block>
 					
 				</scroll-view>

@@ -28,7 +28,7 @@ Page({
     triggered: false,//下拉刷新
     dpShow:false,//店铺显示
     isloading:true,
-    // isscroll:true
+    isscroll:false
   },
 
   /**
@@ -54,8 +54,7 @@ Page({
       options:options
     })
    
-    // setInterval(
-    //   this.refesh, 3000);
+   
    
     // 获取设备高度
     wx.getSystemInfo({
@@ -70,75 +69,12 @@ Page({
     });
     // 分享
     wx.showShareMenu({
-      withShareTicket: true
+      withShareTicket: false
     })
-  
+    // that.shopList() //今日售卖列表
+    that.listArray()
   },
-refesh(){
-  var that = this;
-    var headInfo = wx.getStorageSync('headInfo')
-    var params = {
-      url: '/app/commodity/listCommodityInfoForNative',
-      method: 'POST',
-      data: {
-        'name':'',
-        'pageIndex': 1,
-        'pageSize': 30,
-        'sendType':'1',
-        'franchiseeId':headInfo.franchiseeInfo.id
-      },
-      sCallBack: function (data) {
 
-        var listToday = data.data.result        
-        if (listToday != '') {
-          listToday.forEach((item, index) => {
-            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
-            item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-            
-            if (item.sendType == 1) {
-              item.sendType = "到店自提"
-            } else {
-              item.sendType = "快递到家"
-            }
-            if (item.pickDate == 1) {
-              that.getDateStr(null, 0)
-              item.pickDate = that.data.tomorow
-            } else if (item.pickDate == 2) {
-              that.getDateStr(null, 1)
-              var tomorows = that.data.tomorow
-              item.pickDate = tomorows
-            } else {
-              that.getDateStr(null, 2)
-              var ht = that.data.tomorow
-              item.pickDate = ht
-            }
-            if (item.isBuy == 2) {
-              item.isBuy = "提前加入购物车"
-
-            }else if(item.isBuy == 1) {
-              item.isBuy = "加入购物车"
-            }
-            else if (item.isBuy == 3) {
-              item.isBuy = "活动已结束"
-            } else if (item.isBuy == 4) {
-              item.isBuy = "已售罄"
-            }
-
-          })
-        }
-        var temlist = that.data.listToday; //原始的数据集合
-        
-       
-        that.setData({
-          listToday: temlist,
-        })
-       
-
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
-},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -156,8 +92,8 @@ refesh(){
     that.data.currentPage = 1,
     that.data.totalCount = 0, //总是数据条数
     that.data.pagecount = 0, //总的页数
-    that.shopList() //已使用
-    
+    // that.shopList() //已使用
+    that.listArray()
     if (this._freshing) return
     this._freshing = true
     setTimeout(() => {
@@ -244,7 +180,7 @@ refesh(){
     app.getShopNum()
     that.order()
     that.fans()
-    that.shopList() //今日售卖列表
+  
     that.yhqList() //优惠券列表
   },
   
@@ -273,7 +209,8 @@ refesh(){
     }, next)
     //整点报时，因为第一次进来mins可能不为0所以要判断
     if (mins == 0) {
-        that.shopList()
+        // that.shopList()
+        that.listArray()
     }
   },
   /**
@@ -497,6 +434,106 @@ refesh(){
     }
     base.request(params);
   },
+
+
+  // 列表数组
+  listArray(className){
+    var that = this;
+    var headInfo = wx.getStorageSync('headInfo')
+    var headInfoId
+    if(headInfo==''){
+      headInfoId='2c9a273471dea2f30171deb093740001'
+    }else{
+      headInfoId=headInfo.franchiseeInfo.id
+    }
+    this.setData({
+      isscroll:false
+    })
+    var params = {
+      url: '/app/commodity/listCommodityInfoForNative',
+      method: 'POST',
+      data: {
+        'name': className,
+        'pageIndex': that.data.currentPage,
+        'pageSize': that.data.size,
+        'sendType':'1',
+        'franchiseeId':headInfoId
+      },
+      sCallBack: function (data) {
+       
+        var listToday = data.data.result
+       
+        
+        if (listToday != '') {
+          listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
+            item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+            
+            if (item.sendType == 1) {
+              item.sendType = "到店自提"
+            } else {
+              item.sendType = "快递到家"
+            }
+            if (item.pickDate == 1) {
+              that.getDateStr(null, 0)
+              item.pickDate = that.data.tomorow
+            } else if (item.pickDate == 2) {
+              that.getDateStr(null, 1)
+              var tomorows = that.data.tomorow
+              item.pickDate = tomorows
+            } else {
+              that.getDateStr(null, 2)
+              var ht = that.data.tomorow
+              item.pickDate = ht
+            }
+            if (item.isBuy == 2) {
+              item.isBuy = "提前加入购物车"
+
+            }else if(item.isBuy == 1) {
+              item.isBuy = "加入购物车"
+            }
+            else if (item.isBuy == 3) {
+              item.isBuy = "活动已结束"
+            } else if (item.isBuy == 4) {
+              item.isBuy = "已售罄"
+            }
+
+          })
+          var currentPage = that.data.currentPage; //获取当前页码
+          that.setData({
+            currentPage: currentPage,
+            ['listToday[' + (currentPage-1) + ']']:data.data.result,
+            totalCount: data.data.result[0].rowCount, //总的数据条数
+            pagecount: data.data.result[0].totalPages, //总页数
+            isscroll:true
+          })
+          console.log(that.data.listToday)
+        }else{
+         
+        }
+       
+        
+       
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // 快递到家
   shopListM(className) {
     var that = this;
@@ -855,6 +892,7 @@ refesh(){
     // debugger
     var that=this
     //  console.log(e.detail.scrollTop)
+    
     if (e.detail.scrollTop >10) {
       this.setData({
         floorstatus: true
@@ -865,22 +903,26 @@ refesh(){
       });
     }
     console.log(that.data.currentPage)
-    if (this.data.currentPage < this.data.pagecount) {
-      // if(that.data.isscroll==true){
-        this.data.currentPage++;
-      // }
-     
-      if (that.data.currentTab == '0') {
-        this.shopList();
-        
+    if(that.data.isscroll==true){
+      if (this.data.currentPage < this.data.pagecount) {
+        // if(that.data.isscroll==true){
+          this.data.currentPage++;
+        // }
+       
+        if (that.data.currentTab == '0') {
+          // this.shopList();
+          this.listArray()
+        } else {
+          // this.shopListM();
+        }
+       
       } else {
-        // this.shopListM();
+        //没有更多数据
+        // app.nomore_showToast();
+        
       }
-     
-    } else {
-      //没有更多数据
-      // app.nomore_showToast();
     }
+    
   },
   // 明日售卖下拉加载
   // bindscrolltolower2: function () {
@@ -1017,8 +1059,6 @@ refesh(){
   },
   // 获取滚动条当前位置
   scrolltoupper: function (e) {
-
-   console.log(e.detail.scrollTop)
     if (e.detail.scrollTop >20) {
       this.setData({
         floorstatus: true
@@ -1192,4 +1232,11 @@ refesh(){
     }
     base.request(params);
   },
+  Todetails(e){
+    // var that=this;
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/details/Goodsdetails/details?id='+e.currentTarget.dataset.id+'&isBuy='+e.currentTarget.dataset.isBuy,
+    })
+  }
 })
