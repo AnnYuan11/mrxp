@@ -314,3 +314,10 @@
 	</view>
 	<button bindtap="sure_zt">确定</button>
 </view>
+<!-- 新用户选择提货点 -->
+<view class="flow" wx:if="{{ischoose}}">
+	 <view class="choose_box">
+	 		<text>欢迎来到天天每一天社区平台逛逛</text>
+			 <navigator url="/pages/details/dhzt/dhzt" class="toChoose">去选择提货点</navigator>
+	 </view>
+</view>

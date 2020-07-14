@@ -28,7 +28,8 @@ Page({
     triggered: false,//下拉刷新
     dpShow:false,//店铺显示
     isloading:true,
-    isscroll:false
+    isscroll:false,
+    ischoose:false
   },
 
   /**
@@ -182,6 +183,15 @@ Page({
     that.fans()
   
     that.yhqList() //优惠券列表
+    if(that.data.ischoose==true){
+      wx.hideTabBar({
+        animation: false,
+      })
+    }else{
+      wx.showTabBar({
+        animation: false,
+      })
+    }
   },
   
   /**
@@ -662,21 +672,29 @@ Page({
       },
       sCallBack: function (data) {
         if(data.data.errorCode=='-1'){
-          
-          // that.default()
+          //新用户没有登录且没有选择提货点
+          that.setData({
+            ischoose:true
+          })
+        }else{
+          that.setData({
+            ischoose:false
+          })
         }
         if(data.data.errorCode!='-1'&&data.data.result==''){
-          wx.showModal({
-            content: '请选择您的自提点',
-            showCancel:false,
-            success (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/details/dhzt/dhzt',
-                })
-              } 
-            }
-          })
+        
+         
+          // wx.showModal({
+          //   content: '请选择您的自提点',
+          //   showCancel:false,
+          //   success (res) {
+          //     if (res.confirm) {
+          //       wx.navigateTo({
+          //         url: '/pages/details/dhzt/dhzt',
+          //       })
+          //     } 
+          //   }
+          // })
         }else if(data.data.errorCode=='0'){
           that.setData({
             defaultztd: data.data.result,
