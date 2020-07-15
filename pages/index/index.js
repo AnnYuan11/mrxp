@@ -680,6 +680,9 @@ Page({
           that.setData({
             ischoose:false
           })
+          wx.showTabBar({
+            animation: false,
+          })
         }
         if(data.data.errorCode!='-1'&&data.data.result==''){
         
