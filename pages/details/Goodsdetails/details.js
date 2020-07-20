@@ -32,7 +32,7 @@ Page({
     console.log(options)
     // 分享
     wx.showShareMenu({
-      withShareTicket: true,
+      withShareTicket: false,
       complete: function(res) {
         console.log("11111111")
       }
@@ -189,10 +189,10 @@ change(e) {
     var that=this;
     var zdtid = wx.getStorageSync('zdtid')
     console.log(that.data.shopName)
-    console.log(zdtid)
-    if(that.data.imgPath!=''||that.data.imgPath!=undefined){
+    console.log(that.data.imgUrl+'/'+that.data.imgPath)
+    // if(that.data.imgPath!=''||that.data.imgPath!=undefined){
       
-    }
+    // }
     // if(res.from==='button'){
       return {
         imageUrl: that.data.imgUrl+'/'+that.data.imgPath,

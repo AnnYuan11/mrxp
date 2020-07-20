@@ -11,7 +11,7 @@
 		</view>
 	</view>
 </view>
-<scroll-view scroll-y class="boxB" scroll-top='{{topNum}}' style="height:{{winHeight - 125}}px"  scroll-with-animation="true" bindscroll="bindscrolltolower" lower-threshold="150" refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="white" refresher-background="rgba(243,243,243,1)" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh">
+<scroll-view scroll-y class="boxB"  scroll-top='{{topNum}}' bindscroll="scrolltoupper" style="height:{{winHeight - 125}}px"  scroll-with-animation="true" bindscrolltolower="bindscrolltolower" lower-threshold="150" refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="white" refresher-background="rgba(243,243,243,1)" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh">
 	<view class="box">
 		<view class="top">
 			<view class="img">
@@ -80,8 +80,8 @@
 				<scroll-view  style="height: 100%">
 				 
 					<block wx:for="{{listToday}}">
-						<navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none">
-							<view class="list_box">
+						<!-- <navigator url="/pages/details/Goodsdetails/details?id={{item.id}}&isBuy={{item.isBuy}}" hover-class="none"> -->
+							<view class="list_box"  wx:for="{{item}}" bindtap="Todetails" data-id="{{item.id}}" data-isBuy="{{item.isBuy}}">
 								<view class="img_goods">
 									<view class="{{item.sendType=='到店自提'?'type':'type2'}}">{{item.sendType}}</view>
 									<image src="{{imgUrl}}{{item.photo}}" wx:if="{{item.videoUrl==''}}"></image>
@@ -145,8 +145,8 @@
 
 							</view>
 						
-						</navigator>
-						<!-- <view class="zhan" wx:if="{{zw}}">加载中~~~~~</view> -->
+						<!-- </navigator> -->
+						<!-- <view class="zhan" wx:if="{{zw}}">加载中~~~~~</view> --> 
 					</block>
 					
 				</scroll-view>
@@ -313,4 +313,11 @@
 		</radio-group>
 	</view>
 	<button bindtap="sure_zt">确定</button>
+</view>
+<!-- 新用户选择提货点 -->
+<view class="flow" wx:if="{{ischoose}}">
+	 <view class="choose_box">
+	 		<text>欢迎来到天天每一天社区平台逛逛</text>
+			 <navigator url="/pages/details/dhzt/dhzt" class="toChoose">去选择提货点</navigator>
+	 </view>
 </view>

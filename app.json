@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/classify/classify",
     "pages/flcs/flcs",
+    "pages/classify/classify",
     "pages/details/chongzhi/chongzhi",
     "pages/details/share/share",
     "pages/details/topay/pay_success",
@@ -36,7 +36,8 @@
     "pages/details/h/h",
     "pages/details/address_edit/address_edit",
     "pages/details/jfmx/jfmx",
-    "pages/details/notice_details/notice_details"
+    "pages/details/notice_details/notice_details",
+    "pages/details/orderDetailscks/ddxqs"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -5,6 +5,7 @@
   background-size: 100%;
   background-position: center;
 } */
+
 /* 头部 */
 .headBox{
   width: 100%;
@@ -660,4 +661,25 @@ button:not([size='mini']) {
 }
 .icon-load{
   animation: ani-demo-spin 1s linear infinite;
+}
+.button-hover{
+  background: transparent;
+}
+/* 新用户选择提货点 */
+.choose_box{
+  width: 80%;
+  margin: 0 auto;
+  background: #fff;
+  text-align: center;
+  margin-top: 50%;
+  padding: 10% 0;
+  box-sizing: border-box;
+}
+.toChoose{
+  width: 60%;
+  margin:0 auto;
+  color: #fff;
+  padding: 20rpx 0;
+  background: #E10004;
+  margin-top: 15%;
 }

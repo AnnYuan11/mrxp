@@ -1004,31 +1004,40 @@ share(e){
   cancel_bh(e){
     var that = this;
     console.log(e)
-    var params = {
-      url: '/app/order/updateCommodityOrderInfoUserAfter',
-      method: 'GET',
-      data: {
-        'id': e.currentTarget.dataset.id, //订单id
-      },
-      sCallBack: function (data) {
-        if (data.data.errorCode == "0") {
-          wx.showToast({
-            title: data.data.result,
-
-          })
-          that.Allorder()
-          that.bhz()
-        }else{
-          wx.showToast({
-            title: data.data.errorMsg,
-            icon:'none',
-            duration:2000
-          })
+    wx.showModal({
+      title: '提示',
+        content: '亲，您确定取消订单？',
+        success(res) {
+          if (res.confirm) {
+            var params = {
+              url: '/app/order/updateCommodityOrderInfoUserAfter',
+              method: 'GET',
+              data: {
+                'id': e.currentTarget.dataset.id, //订单id
+              },
+              sCallBack: function (data) {
+                if (data.data.errorCode == "0") {
+                  wx.showToast({
+                    title: data.data.result,
+        
+                  })
+                  that.Allorder()
+                  that.bhz()
+                }else{
+                  wx.showToast({
+                    title: data.data.errorMsg,
+                    icon:'none',
+                    duration:2000
+                  })
+                }
+              },
+              eCallBack: function () {}
+            }
+            base.request(params);
+          }
         }
-      },
-      eCallBack: function () {}
-    }
-    base.request(params);
+    })
+   
   },
   // 去付款
   Topay(e) {

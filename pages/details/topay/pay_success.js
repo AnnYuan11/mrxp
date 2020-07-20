@@ -91,7 +91,7 @@ Page({
                 // imageUrl: that.data.imgUrl + '/' + that.data.shopSharePhoto,
                 imageUrl: that.data.imgUrl + '/' + that.data.message.commoditySubOrderInfoList[0].commodityInfo.productInfo.photo,
                 // desc: '分享页面的内容',
-                path: '/pages/details/orderDetailsck/ddxx?id=' + that.data.orderId // 路径，传递参数到指定页面。
+                path: '/pages/details/orderDetailscks/ddxxs?id=' + that.data.orderId // 路径，传递参数到指定页面。
             }
           }
        
