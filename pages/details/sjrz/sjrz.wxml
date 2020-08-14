@@ -3,6 +3,7 @@
   <view class="section">
     <view class="title">供应商需知</view>
     <text class="con">供应商须具备营业执照、食品生产经营许可证、产品检验报告、开户许可证等正规资质。提供给我方相应资质的复印件（加盖公章），授权委托书及受托人身份证复印件。经相关部门审核无误后，方可入驻我方平台。</text>
+    <text class="con" style="display:block">联系电话：029-81118000</text>
   </view>
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="sqr">

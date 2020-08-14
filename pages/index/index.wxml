@@ -155,7 +155,7 @@
 						<i-grid-item i-class="item">
 							<i-spin custom>
 								<i-icon type="refresh" color="rgba(144,144,144,1)" size="20" i-class="icon-load"></i-icon>
-								<view style="color:rgba(144,144,144,1)">加载中</view>
+								<view style="color:rgba(144,144,144,1)">客官请稍等...</view>
 							</i-spin>
 						</i-grid-item>
 					</i-grid>

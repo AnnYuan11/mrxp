@@ -251,3 +251,29 @@ video {
   color:rgba(144,144,144,1);
   margin-top: 8rpx;
 }
+.search_icon{
+  width: 16%;
+  height: 70rpx;
+  background: #E10004;
+  color: #fff;
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+
+}
+.nodata{
+  text-align: center;
+  margin-top: 55%;
+}
+.nodata text{
+  display: block;
+}
+.noxg{
+  font-size: 32rpx;
+  color: #8d8d8d;
+}
+.hyg{
+  font-size: 28rpx;
+  color: #cfcfcf;
+  margin-top: 10rpx;
+}

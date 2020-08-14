@@ -1,10 +1,11 @@
 <!--pages/details/search/search.wxml-->
 <view class="search_Box">
-    <view class="search_left">
-      <image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
-      <input placeholder="搜索商品名称" placeholder-class="serch" bindconfirm="search"></input>
-    </view>
-  </view>
+	<view class="search_left">
+		<image src="{{imgUrls}}img/details/search.png" mode="widthFix"></image>
+		<input placeholder="搜索商品名称" placeholder-class="serch" bindinput="sousuo"></input>
+	</view>
+	<view class="search_icon" bindtap="search">搜索</view>
+</view>
 <view class="swiperBox">
 	<view class="swiper_box">
 		<scroll-view scroll-y style="height: 100%">
@@ -16,8 +17,8 @@
 							<image src="{{imgUrl}}{{item.productInfo.photo}}" wx:if="{{item.productInfo.videoUrl==''}}"></image>
 							<!-- 显示状态图 -->
 							<image src="/img/new/1.png" style="width:128rpx" mode="widthFix" wx:if="{{item.saleTag=='1'}}" class="zt"></image>
-									<image src="/img/new/2.png" wx:if="{{item.saleTag=='2'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
-									<image src="/img/new/3.png" wx:if="{{item.saleTag=='3'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
+							<image src="/img/new/2.png" wx:if="{{item.saleTag=='2'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
+							<image src="/img/new/3.png" wx:if="{{item.saleTag=='3'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
 							<view class="subtitle" wx:if="{{item.productInfo.subTitle!=''}}">{{item.productInfo.subTitle}}</view>
 							<video catchtap="aa" id="myVideo" wx:if="{{item.productInfo.videoUrl!=''}}" src="{{imgUrl}}{{item.productInfo.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.productInfo.photo}}" controls></video>
 							<!-- 已售罄 -->
@@ -45,10 +46,10 @@
 									<text class="rq">提货时间:{{item.pickDate}}</text>
 								</view>
 								<view class="right" style="line-height:50rpx;text-align:right;">
-										<text class="weight" wx:if="{{item.isBuy!='提前加入购物车'}}">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
-										<text class="limited">限量{{item.limitBuyNumbers}}份</text>
-										<text class="limited" wx:if="{{item.isBuy=='提前加入购物车'}}">{{item.startTime2}}开售</text>
-									</view>
+									<text class="weight" wx:if="{{item.isBuy!='提前加入购物车'}}">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
+									<text class="limited">限量{{item.limitBuyNumbers}}份</text>
+									<text class="limited" wx:if="{{item.isBuy=='提前加入购物车'}}">{{item.startTime2}}开售</text>
+								</view>
 							</view>
 							<view class="price_box">
 								<view class="price">
@@ -61,11 +62,11 @@
 							<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
 								<view class="box_figure">
 									<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<8}}" wx:for-item="itemName">
-												<view class="figure">
-													<image src="{{itemName.photo}}"></image>
-													<!-- <text>{{itemName.nick_name}}</text> -->
-												</view>
-											</block>
+										<view class="figure">
+											<image src="{{itemName.photo}}"></image>
+											<!-- <text>{{itemName.nick_name}}</text> -->
+										</view>
+									</block>
 								</view>
 
 								<text class="so">等购买了此产品</text>
@@ -75,6 +76,10 @@
 					</view>
 				</navigator>
 			</block>
+			<view wx:if="{{listToday.length=='0'}}" class="nodata">
+				<text class="noxg">抱歉！未搜索到"{{className}}"相关的商品</text>
+				<text class="hyg">换一个关键词试试</text>
+			</view>
 		</scroll-view>
 	</view>
 

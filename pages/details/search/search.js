@@ -73,11 +73,18 @@ Page({
   onShareAppMessage: function () {
 
   },
+  sousuo(e){
+    this.setData({
+      className:e.detail.value
+    })
+    // console.log(e.detail.value)
+  },
   // 搜索
   search: function (e) {
+    console.log(e)
     var that = this;
     var headInfo = wx.getStorageSync('headInfo')
-    var className = e.detail.value
+    var className =that.data.className
     var that = this;
     var params = {
       url: '/app/commodity/listCommodityInfo',

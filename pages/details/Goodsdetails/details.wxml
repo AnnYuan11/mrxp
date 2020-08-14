@@ -117,15 +117,15 @@
 <view class="bottom">
 	<view class="icon_box">
 		<view class="index" catchtap="toIndex">
-			<image src="{{imgUrls}}img/details/sy.png" mode="widthFix"></image>
+			<image src="/img/new/sy.jpg" mode="widthFix"></image>
 			<text>首页</text>
 		</view>
 		<view class="index" catchtap="toGwc">
-			<image src="{{imgUrls}}img/details/gwc.png" mode="widthFix"></image>
+			<image src="/img/new/gwc.jpg" mode="widthFix"></image>
 			<text>购物车</text>
 		</view>
 		<view class="index" catchtap="handleOpen1">
-			<image src="{{imgUrls}}img/details/share.png" mode="widthFix"></image>
+			<image src="/img/new/share.jpg" mode="widthFix"></image>
 			<text>分享</text>
 		</view>
 	</view>

@@ -13,7 +13,8 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     toplav:30,
-    isloading:true
+    // isloading:true,
+    // nodata:false
   },
   switchNav: function (e) {
     console.log(e)
@@ -106,16 +107,20 @@ Page({
           
         },
         sCallBack: function (data) {
+          // debugger
           wx.removeStorageSync('bb')
           var listToday = data.data.result
           // if(listToday.length=='0'){
           //   that.shopList()
           // }
-          if(listToday){
+          // if(listToday){
             that.setData({
               isloading:false
             })
-          }
+            that.setData({
+              nodata:false
+            })
+          // }
           
           if (listToday != '') {
             listToday.forEach((item, index) => {
@@ -150,6 +155,10 @@ Page({
               } else if (item.isBuy == 4) {
                 item.isBuy = "已售罄"
               }
+            })
+          }else{
+            that.setData({
+              nodata:true
             })
           }
           var temlist = that.data.listToday; //原始的数据集合

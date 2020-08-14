@@ -190,3 +190,25 @@
 button.share{
   width: 52%!important;
 }
+.nodata{
+  text-align: center;
+  margin-top: 55%;
+}
+.nodata text{
+  display: block;
+}
+.noxg{
+  font-size: 32rpx;
+  color: #8d8d8d;
+}
+.togw{
+  color: #fff;
+  background: #E10004;
+  width: 210rpx;
+  height: 90rpx;
+  margin: 0 auto;
+  line-height: 90rpx;
+  margin-top: 34rpx;
+  border-radius: 10rpx;
+
+}

@@ -2,7 +2,7 @@
 <view class="box">
 	<text class="order">订单金额</text>
 	<text class="money">￥{{money}}</text>
-	<text class="detail">订单提交成功，请在10分钟内完成支付。</text>
+	<text class="detail">订单提交成功，请在5分钟内完成支付。</text>
 	<view class="pay">
 		<radio-group class="radio-group" bindchange="radioChange">
 			<view class="payType">

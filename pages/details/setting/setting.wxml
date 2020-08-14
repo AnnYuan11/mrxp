@@ -18,7 +18,7 @@
 		<image src="{{imgUrls}}img/public/point.png" mode="widthFix" class="point"></image>
 	</view>
 </navigator>
-<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10243&name=隐藏政策" hover-class="none">
+<navigator url="/pages/details/h/h?id=ff8080817191c7db017196507ef10243&name=隐私政策" hover-class="none">
   <view class="list">
 		<view class="left">
 			<image src="{{imgUrls}}img/details/yczc.png" mode="widthFix"></image>

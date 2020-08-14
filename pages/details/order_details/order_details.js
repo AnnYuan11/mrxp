@@ -61,7 +61,7 @@ Page({
       that.setData({
         shopName:headInfo.shopName,
         ztdid:headInfo.id,
-        phones:headInfo.phone,
+        phones:headInfo.phone.substring(0,3)+"****"+headInfo.phone.substring(7,11),
         addressth:addressth,
       })
     if(that.data.options.sendType=="快递到家"){
@@ -400,7 +400,7 @@ query(){
         addressth:data.data.result.headInfo.province+data.data.result.headInfo.city+data.data.result.headInfo.area+data.data.result.headInfo.street+data.data.result.headInfo.address,
         shopName:data.data.result.headInfo.shopName,
         ztdid:data.data.result.headInfo.id,
-        phones:data.data.result.headInfo.phone
+        phones:data.data.result.headInfo.phone.substring(0,3)+"****"+ data.data.result.headInfo.phone.substring(7,11),
       })
       that.orderMoney()
       

@@ -40,17 +40,18 @@
   line-height: 50rpx;
 }
 .message .name{
-  font-size:30rpx;
+  font-size:38rpx;
   font-weight:bold;
-  color:rgba(35,35,35,1);
+  color:rgba(225,11,9,1)
 }
 .qhdz_box .phone{
   color: #909090;
-  font-size: 24rpx;
+  font-size: 28rpx;
 }
 .bottom view{
-  font-size:24rpx;
-  color:rgba(35,35,35,1);
+  font-size:30rpx;
+  color:rgba(225,11,9,1);
+  font-weight:bold;
 }
 
 /* 订单 */
@@ -139,6 +140,34 @@
   display: flex;
   justify-content: space-between;
 }
+radio-group text {
+  font-size: 24rpx;
+  color: #232323;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border-color: #f0302f !important;
+  background: #f0302f !important;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
 .instructions{
   margin-top: 32rpx;
 }
@@ -188,12 +217,16 @@
   left: 0;
 }
 .sureMessageBox{
-  width: 100%;
+  width: 90%;
   background: #fff;
   height: 600rpx;
-  border-radius:10px 10px 0px 0px;
-  bottom: 0;
+  /* border-radius: 10px 10px 0px 0px; */
+  top: 20%;
   position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+
 }
 .topImg{
   margin-top: -15rpx;

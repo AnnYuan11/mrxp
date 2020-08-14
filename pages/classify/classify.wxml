@@ -75,18 +75,18 @@
 												<view class="jrgec {{item.isBuy=='提前加入购物车'? 'overs':''}}" catchtap="joinGwc" data-spid="{{item.id}}" data-sendType="{{item.sendType}}" wx:if="{{item.isBuy=='加入购物车'|| item.isBuy=='提前加入购物车'}}">{{item.isBuy}}</view>
 												<view class="jrgec over" wx:else>{{item.isBuy}}</view>
 											</view>
-											<view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
+											<!-- <view class="buy_box" wx:if="{{item.orderRecord.orderList!=''}}">
 												<view class="box_figure">
 													<block wx:for="{{item.orderRecord.orderList}}" wx:if="{{index<8}}" wx:for-item="itemName">
 														<view class="figure">
 															<image src="{{itemName.photo}}"></image>
-															<!-- <text>{{itemName.nick_name}}</text> -->
+															
 														</view>
 													</block>
 												</view>
 
 												<text class="so">等购买了此产品</text>
-											</view>
+											</view> -->
 										</view>
 
 									</view>
@@ -102,6 +102,16 @@
 									</i-grid-item>
 								</i-grid>
 							</view>
+								<view class="bot" wx:if="{{nodata}}" style="margin-top:50%">
+									<i-grid>
+										<i-grid-item i-class="item">
+											<i-spin custom>
+												<image src="/img/new/noshop.png" mode="widthFix" style="width:120rpx"></image>
+												<view style="color:rgba(144,144,144,1);margin-top:20rpx">暂无商品</view>
+											</i-spin>
+										</i-grid-item>
+									</i-grid>
+								</view>
 						</scroll-view>
 						
 					</swiper-item>

@@ -244,3 +244,13 @@
 .gray{
   opacity: 0.6;
 }
+.togw{
+  color: #fff;
+  background: #E10004;
+  width: 170rpx;
+  height: 90rpx;
+  margin: 0 auto;
+  line-height: 90rpx;
+  margin-top: 34rpx;
+
+}

@@ -74,6 +74,7 @@
 	<view wx:else>
 		<view class="list_none" wx:if="{{shoppingType==1}}">
 			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx;margin-top: -11rpx;vertical-align: middle;"></image><text style="margin-left: 18rpx">购物车是空的哦~</text>
+			<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">去购物</navigator>
 		</view>
 		<view class="list_none" wx:if="{{shoppingType==2}}">
 			<image src="/img/tabbaricon/2.png" mode="widthFix" style="width:40rpx;margin-top: -11rpx;vertical-align: middle;"></image><text style="margin-left: 18rpx">快递配送系统正在努力开发中~</text>

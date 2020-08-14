@@ -81,8 +81,12 @@
 					</view>
 				</view>
 			</block>
-
+			<view wx:if="{{Alllist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
+		
 	</swiper-item>
 	<!-- 待付款 -->
 	<swiper-item>
@@ -130,6 +134,10 @@
 					</view>
 				</view>
 			</block>
+			<view wx:if="{{dfklist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 	<!-- 备货中 -->
@@ -175,6 +183,10 @@
 					</view>
 				</view>
 			</block>
+			<view wx:if="{{bhzlist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 	<!-- 配送中 -->
@@ -219,6 +231,10 @@
 				</view>
 
 			</block>
+			<view wx:if="{{phzlist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 	<!-- 待提货 -->
@@ -276,7 +292,10 @@
 					</view>
 				</view>
 			</block>
-
+			<view wx:if="{{dthlist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 	<!-- 已提货 -->
@@ -330,6 +349,10 @@
 					</view>
 				</view>
 			</block>
+			<view wx:if="{{ythlist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 	<!-- 退货关闭 -->
@@ -420,13 +443,17 @@
 					</view>
 				</view>
 			</block>
+			<view wx:if="{{yjslist.length=='0'}}" class="nodata">
+				<text class="noxg">您还没有相关订单</text>
+				<navigator url="/pages/index/index" class="togw" hover-class="none" open-type="switchTab">马上去购物</navigator>
+			</view>
 		</scroll-view>
 	</swiper-item>
 
 </swiper>
 <view class="thm_box" wx:if="{{showThm}}" bindtap="closeThm">
 	<view class="img_box">
-		<image src="http://39.101.190.182:8080/app/order/getOrderIdQr?orderId={{orderId}}"></image>
+		<image src="https://www.zgmrxp.com/app/order/getOrderIdQr?orderId={{orderId}}"></image>
 		<text>提货码：{{pickcode}}</text>
 	</view>
 

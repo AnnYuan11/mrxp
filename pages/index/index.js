@@ -73,7 +73,7 @@ Page({
       withShareTicket: false
     })
     // that.shopList() //今日售卖列表
-    that.listArray()
+    
   },
 
   /**
@@ -199,6 +199,7 @@ Page({
         animation: false,
       })
     }
+    that.listArray()
   },
   
   /**
@@ -479,8 +480,7 @@ Page({
       sCallBack: function (data) {
        
         var listToday = data.data.result
-       
-        
+        console.log(listToday.length)
         if (listToday != '') {
           listToday.forEach((item, index) => {
             item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
@@ -526,7 +526,9 @@ Page({
           })
           console.log(that.data.listToday)
         }else{
-         
+          that.setData({
+            listToday:listToday
+          })
         }
        
         
@@ -682,6 +684,9 @@ Page({
           //新用户没有登录且没有选择提货点
           that.setData({
             ischoose:true
+          })
+          wx.hideTabBar({
+            animation: false,
           })
         }else{
           that.setData({
