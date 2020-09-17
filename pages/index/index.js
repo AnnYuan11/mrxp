@@ -22,7 +22,7 @@ Page({
     imgUrl: app.globalData.imgUrl,
     imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
-    size: 30, //每页数据条数
+    size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     triggered: false,//下拉刷新
@@ -398,7 +398,7 @@ Page({
           listToday.forEach((item, index) => {
             item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-            
+            item.pickDateTime = item.pickDateTime.substring(5, 7) + '月' + item.pickDateTime.substring(8, 10) + '日'
             if (item.sendType == 1) {
               item.sendType = "到店自提"
             } else {
@@ -485,7 +485,7 @@ Page({
           listToday.forEach((item, index) => {
             item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-            
+            item.pickDateTime = item.pickDateTime.substring(5, 7) + '月' + item.pickDateTime.substring(8, 10) + '日'
             if (item.sendType == 1) {
               item.sendType = "到店自提"
             } else {

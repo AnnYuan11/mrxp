@@ -28,7 +28,7 @@ App({
             if (res.code) {
                 // 发起网络请求
                 wx.request({
-                    url: 'https://www.zgmrxp.com/app/getOpenId?code=' + res.code,
+                    url: 'http://39.101.190.182:8080/app/getOpenId?code=' + res.code,
                     success: function (data) {
                        
                         wx.setStorage({

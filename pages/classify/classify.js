@@ -13,6 +13,7 @@ Page({
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     toplav:30,
+    nodatas:false
     // isloading:true,
     // nodata:false
   },
@@ -33,10 +34,12 @@ Page({
       page.setData({
         currentTab: id
       });
+      
     }
     page.setData({
       active: id,
-      indexc:id+1
+      indexc:id+1,
+      nodatas:false
     });
    
   },
@@ -126,7 +129,7 @@ Page({
             listToday.forEach((item, index) => {
               item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
               item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-              
+              item.pickDateTime = item.pickDateTime.substring(5, 7) + '月' + item.pickDateTime.substring(8, 10) + '日'
               if (item.sendType == 1) {
                 item.sendType = "到店自提"
               } else {
@@ -188,39 +191,43 @@ Page({
    console.log(e)
     var that=this
     console.log(that.data.indexc)
-    
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
         this.shopList(e.currentTarget.dataset.cid)     
-    } else {
-      setTimeout(function(){
-        console.log("没有更多")
+    }else{
+      that.setData({
+        nodatas:true
+      })
+    }
+    //  else {
+    //   setTimeout(function(){
+    //     console.log("没有更多")
         
-        if(that.data.indexc>=that.data.classfiyList.length){
-          return ;
-        }
-        that.setData({
-          listToday:[]
-        })
-        that.data.currentPage = 1,
-        that.data.totalCount = 0, //总是数据条数
-        that.data.pagecount = 0 //总的页数
+    //     if(that.data.indexc>=that.data.classfiyList.length){
+    //       return ;
+    //     }
+    //     that.setData({
+    //       listToday:[]
+    //     })
+    //     that.data.currentPage = 1,
+    //     that.data.totalCount = 0, //总是数据条数
+    //     that.data.pagecount = 0 //总的页数
        
-        var id = parseInt(that.data.currentTab);
-          that.setData({
-            currentTab: id+1,
-            active: id+1,
-            indexc:id+2
-          });
-          console.log(that.data.indexc)
-          console.log(that.data.classfiyList.length)
+    //     var id = parseInt(that.data.currentTab);
+    //       that.setData({
+    //         currentTab: id+1,
+    //         active: id+1,
+    //         indexc:id+2
+    //       });
+    //       console.log(that.data.indexc)
+    //       console.log(that.data.classfiyList.length)
           
-        that.shopList(that.data.classfiyList[id+1].id)
+    //     that.shopList(that.data.classfiyList[id+1].id)
 
-      },1500)
+    //   },1500)
    
     
-    }
+    // }
   },
   // 查询分类
   classfiy(){

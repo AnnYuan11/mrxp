@@ -16,7 +16,7 @@
 		<text style="text-decoration: line-through;">￥{{list.crossedPrice}}</text>
 	</view>
 	<view class="top_right">
-		<text class="font">{{list.pickDate}}</text>
+		<text class="font">{{list.pickDateTime}}</text>
 		<text class="font_sm">{{list.sendType}}</text>
 	</view>
 	<view class="info_top">

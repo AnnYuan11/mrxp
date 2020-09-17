@@ -36,7 +36,10 @@
 											<image src="/img/new/2.png" wx:if="{{item.saleTag=='2'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
 											<image src="/img/new/3.png" wx:if="{{item.saleTag=='3'}}" style="width:128rpx" mode="widthFix" class="zt"></image>
 											<view class="subtitle" wx:if="{{item.subTitle!=''}}">{{item.subTitle}}</view>
-											<video catchtap="aa" id="myVideo" wx:if="{{item.videoUrl!=''}}" src="{{imgUrl}}{{item.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.photo}}" controls></video>
+											<block wx:if="{{item.videoUrl!=''}}">
+													<video catchtap="aa" id="myVideo"  src="{{imgUrl}}{{item.videoUrl}}" object-fit="cover" poster="{{imgUrl}}{{item.photo}}" controls></video>
+											
+											</block>
 											<!-- 已售罄 -->
 											<view class="supernatant" wx:if="{{item.isBuy=='已售罄'}}">
 												<image src="{{imgUrls}}img/public/fc.png" mode="widthFix"></image>
@@ -59,13 +62,16 @@
 											<view class="thsj">
 												<view class="left">
 													<text>预售时间:{{item.startTime}}</text>
-													<text class="rq">提货时间:{{item.pickDate}}</text>
+													<text class="rq">提货时间:{{item.pickDateTime}}</text>
 												</view>
 												<view class="right" style="line-height:50rpx;text-align:right;">
 													<text class="weight" wx:if="{{item.isBuy!='提前加入购物车'}}">今日已售<text class="num">{{item.salesNumber}}</text>份</text>
 													<text class="limited">限量{{item.limitBuyNumbers}}份</text>
-													<text class="limited" wx:if="{{item.isBuy=='提前加入购物车'}}">{{item.startTime2}}开售</text>
+												
 												</view>
+											</view>
+											<view>
+													<text class="limited" style="color: green;">{{item.startTime2}}开售</text>
 											</view>
 											<view class="price_box">
 												<view class="price">
@@ -91,7 +97,9 @@
 
 									</view>
 								</navigator>
+							
 							</block>
+							<!-- <view wx:if="{{nodatas}}" style="text-align:center">该分类下没有更多商品了~</view> -->
 							<view class="bot" wx:if="{{isloading}}">
 								<i-grid>
 									<i-grid-item i-class="item">

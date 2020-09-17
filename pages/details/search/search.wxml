@@ -43,7 +43,7 @@
 							<view class="thsj">
 								<view class="left">
 									<text class="rq">预售时间:{{item.startTime}}</text>
-									<text class="rq">提货时间:{{item.pickDate}}</text>
+									<text class="rq">提货时间:{{item.pickDateTime}}</text>
 								</view>
 								<view class="right" style="line-height:50rpx;text-align:right;">
 									<text class="weight" wx:if="{{item.isBuy!='提前加入购物车'}}">今日已售<text class="num">{{item.salesNumber}}</text>份</text>

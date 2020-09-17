@@ -102,7 +102,7 @@ Page({
           listToday.forEach((item, index) => {
             item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
             item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
-            
+            item.pickDateTime = item.pickDateTime.substring(5, 7) + '月' + item.pickDateTime.substring(8, 10) + '日'
 
             if (item.sendType == 1) {
               item.sendType = "到店自提"

@@ -257,6 +257,7 @@ change(e) {
         } else if (data.data.result.isBuy == 4) {
           data.data.result.isBuy = "已售罄"
         }
+        data.data.result.pickDateTime = data.data.result.pickDateTime.substring(5, 7) + '月' + data.data.result.pickDateTime.substring(8, 10) + '日'
         var artice = data.data.result.productInfo.content;
         WxParse.wxParse('artice', 'html', artice, that, 5);
         that.setData({
@@ -597,7 +598,7 @@ eventDraw () {
         },
         {
             type: 'image',
-            url: 'https://www.zgmrxp.com/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
+            url: 'http://39.101.190.182:8080/app/getCommodityCodeAndHeadPhoneWxQr?commodityCode='+that.data.commodityCode+'&headPhone='+headInfo.phone,
             top: 470,
             left: 50,
             width: 70,
@@ -823,12 +824,12 @@ close(){
           },
           {
             type: 'text',
-            content: '到货:'+that.data.list.pickDate,
+            content: '到货:'+that.data.list.pickDateTime,
             fontSize: 12,
             color: '#7E7E8B',
             textAlign: 'left',
             top: 132,
-            left: 120
+            left: 110
           },
          
         ]
@@ -850,7 +851,7 @@ close(){
     let that = this;
     console.log(tempFilePath)
     wx.uploadFile({
-      url: 'https://www.zgmrxp.com/app/fileUploadLocal', //线上接口
+      url: 'http://39.101.190.182:8080/app/fileUploadLocal', //线上接口
       filePath: tempFilePath,
       name: 'file',
       success: function (res) {
