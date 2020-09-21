@@ -26,7 +26,7 @@ Component({
     list: [],
     temlist: [],
     show_edit: "block",
-    edit_name: "编辑",
+    edit_name: "删除",
     edit_show: "none",
     ischoose:true,
     nums: '0',
@@ -130,7 +130,7 @@ Component({
       } else {
         that.setData({
           edit_show: "none",
-          edit_name: "编辑",
+          edit_name: "删除",
           show_edit: "block",
           submitBtn: '提交订单',
           isBool: true,

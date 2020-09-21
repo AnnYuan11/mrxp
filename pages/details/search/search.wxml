@@ -6,6 +6,20 @@
 	</view>
 	<view class="search_icon" bindtap="search">搜索</view>
 </view>
+<!-- 搜索历史 -->
+<block  wx:if="{{StorageFlag}}">
+	<view class="history">历史搜索</view>
+	<view wx:for="{{sercherStorage}}" class="list">
+		<view class="liclass" style="color:#9E9E9E;font-size:26rpx;" bindtap="tapSercherStorage" data-name="{{item}}">
+			<text style="width:100rpx">{{item}}</text>
+		</view>
+	</view>
+	<!-- 清除历史 -->
+	<view wx:if="{{sercherStorage.length!==0}}" style="text-align:center;" bindtap="clearSearchStorage">
+		<view class="history-span">清除历史记录</view>
+	</view>
+</block>
+
 <view class="swiperBox">
 	<view class="swiper_box">
 		<scroll-view scroll-y style="height: 100%">

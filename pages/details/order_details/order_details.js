@@ -14,7 +14,8 @@ Page({
     payTypes:2,//默认微信支付
     yhje:0,
     topay:false,//订单信息
-    isbut:true
+    isbut:true,
+    shopNum:1
   },
 
   /**
@@ -195,7 +196,8 @@ Page({
           console.log(that.data.dzid)
           var arg={
             "commoditySubOrderInfoList":[{
-              'commodityNumber':that.data.options.commodityNumber,
+              // 'commodityNumber':that.data.options.commodityNumber,
+              'commodityNumber':that.data.shopNum,
               "commodityInfo":{
                 "id":ddid
               }
@@ -297,7 +299,8 @@ Page({
     console.log(that.data.dzid)
     var arg={
       "commoditySubOrderInfoList":[{
-        'commodityNumber':that.data.options.commodityNumber,
+        // 'commodityNumber':that.data.options.commodityNumber,
+        'commodityNumber':that.data.shopNum,
         "commodityInfo":{
           "id":ddid
         }
@@ -411,4 +414,31 @@ query(){
   base.request(params);
 },
 
+btn_minus(e) {
+  var that=this
+  let num = that.data.shopNum;
+  if (num <= 1) {
+    return false;
+  }
+  num = num - 1;
+  // 渲染页面
+  this.setData({
+    shopNum: num,
+    
+  });
+  // 调用计算金额方法
+  // this.count_price();
+  // this.setNum(id, num, this.data.shoppingType);
+},
+btn_add(e) {
+  var that=this;
+  let num = that.data.shopNum;
+  num = num + 1;
+  that.setData({
+    shopNum: num
+  });
+  // 计算金额方法
+ that.orderMoney()
+  // this.setNum(id, num, this.data.shoppingType);
+},
 })

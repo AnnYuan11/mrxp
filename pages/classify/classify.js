@@ -9,7 +9,7 @@ Page({
     imgUrl: app.globalData.imgUrl,
     imgUrls: app.globalData.imgUrls,
     currentPage: 1, //请求数据的页码
-    size: 30, //每页数据条数
+    size: 10, //每页数据条数
     totalCount: 0, //总是数据条数
     pagecount: 0, //总的页数
     toplav:30,
@@ -176,10 +176,10 @@ Page({
           that.setData({
             currentPage: currentPage,
             listToday: temlist,
-            totalCount: data.data.result.rowCount, //总的数据条数
-            pagecount: data.data.result.totalPages //总页数
+            totalCount: data.data.result[0].rowCount, //总的数据条数
+            pagecount: data.data.result[0].totalPages //总页数
           })
-          // console.log(that.data.listToday)
+          console.log(that.data.pagecount)
   
         },
         eCallBack: function () {}
@@ -189,8 +189,9 @@ Page({
   // 今日售卖下拉加载
   bindscrolltolower: function (e) {
    console.log(e)
+  //  debugger
     var that=this
-    console.log(that.data.indexc)
+    console.log(that.data.pagecount)
     if (this.data.currentPage < this.data.pagecount) {
       this.data.currentPage++;
         this.shopList(e.currentTarget.dataset.cid)     

@@ -277,3 +277,43 @@ video {
   color: #cfcfcf;
   margin-top: 10rpx;
 }
+/*搜索历史列表外部容器样式*/
+.ddclass { 
+  position: absolute; 
+  width: 100%; 
+  margin-top: 10px; 
+  left: 0; 
+  
+ } 
+  
+ /*搜索历史普通样式*/
+  .history-span{
+    border:1px solid #ccc;
+    width: 250rpx;
+    padding: 10rpx 0;
+    margin: 0 auto;
+    margin-top: 40rpx;
+    color:rgb(128, 126, 126);
+  }
+  .list{
+    display: inline-block;
+    margin:0 20rpx;
+  }
+  .liclass { 
+    font-size: 14px; 
+    line-height: 34px; 
+    height: 34px; 
+    display: block; 
+    padding: 8rpx 10rpx;
+    border: 1px solid #ccc;
+    border-radius: 8rpx;
+ } 
+ .liclass text{
+  color:#000 
+ }
+ .history{
+  font-size: 34rpx;
+  color: #000;
+  margin: 20rpx;
+  font-weight: 600;  
+ }

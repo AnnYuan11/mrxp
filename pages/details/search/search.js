@@ -10,6 +10,8 @@ Page({
   data: {
     imgUrl:app.globalData.imgUrl,
     imgUrls: app.globalData.imgUrls,
+    sercherStorage: [],
+    StorageFlag: false ,//显示搜索记录标志位
   },
 
   /**
@@ -31,6 +33,7 @@ Page({
    */
   onShow: function () {
     var that=this;
+    this.openLocationsercher()
     // var aa = wx.getStorageSync('aa')
     // if (aa == '0') {
     //   that.query() //查询用户切换店铺
@@ -81,10 +84,98 @@ Page({
   },
   // 搜索
   search: function (e) {
-    console.log(e)
     var that = this;
     var headInfo = wx.getStorageSync('headInfo')
     var className =that.data.className
+    var that = this;
+    // debugger
+    if(that.data.className.length == 0){
+      return;
+    }
+    
+    
+     //控制搜索历史
+     if (this.data.className != '') {
+      //将搜索记录更新到缓存
+      if(that.data.sercherStorage.includes(that.data.className)==true){
+        
+      }else{
+        var searchData = that.data.sercherStorage;
+        searchData.push( that.data.className
+        //   {
+        //   id: searchData.length,
+        //   name: that.data.className
+        // }
+        )
+        wx.setStorageSync('searchData', searchData);
+        that.setData({ StorageFlag: false, })
+      }
+     
+     }
+    var params = {
+      url: '/app/commodity/listCommodityInfo',
+      method: 'POST',
+      data: {
+        'name': className,
+        'pageIndex': 1,
+        'pageSize': 1000,
+        'franchiseeId':headInfo.franchiseeInfo.id
+      },
+      sCallBack: function (data) {
+        var listToday = data.data.result.datas
+        
+        if (listToday != '') {
+          listToday.forEach((item, index) => {
+            item.startTime2 = item.startTime.substring(5, 7) + '月' +  item.startTime.substring(8, 10) + '日'+ item.startTime.substring(10, 19)
+            item.startTime = item.startTime.substring(5, 7) + '月' + item.startTime.substring(8, 10) + '日'
+            item.pickDateTime = item.pickDateTime.substring(5, 7) + '月' + item.pickDateTime.substring(8, 10) + '日'
+
+            if (item.sendType == 1) {
+              item.sendType = "到店自提"
+            } else {
+              item.sendType = "快递到家"
+            }
+            if (item.pickDate == 1) {
+              that.getDateStr(null, 0)
+              item.pickDate = that.data.tomorow
+            } else if (item.pickDate == 2) {
+              that.getDateStr(null, 1)
+              var tomorow = that.data.tomorow
+              item.pickDate = tomorow
+            } else {
+              that.getDateStr(null, 2)
+              var ht = that.data.tomorow
+              item.pickDate = ht
+            }
+            if (item.isBuy == 2) {
+              item.isBuy = "提前加入购物车"
+            } else if(item.isBuy == 1) {
+              item.isBuy = "加入购物车"
+            }
+            else if (item.isBuy == 3) {
+              item.isBuy = "活动已结束"
+            } else if (item.isBuy == 4) {
+              item.isBuy = "已售罄"
+            }
+
+          })
+        }
+        that.setData({
+          listToday: listToday,
+          currentPage: 10000,
+          StorageFlag:false
+        })
+
+      },
+      eCallBack: function () {}
+    }
+    base.request(params);
+  },
+  tapSercherStorage(e){
+    var that = this;
+    console.log(e)
+    var headInfo = wx.getStorageSync('headInfo')
+    var className =e.currentTarget.dataset.name
     var that = this;
     var params = {
       url: '/app/commodity/listCommodityInfo',
@@ -136,7 +227,8 @@ Page({
         }
         that.setData({
           listToday: listToday,
-          currentPage: 10000
+          currentPage: 10000,
+          StorageFlag:false
         })
 
       },
@@ -236,5 +328,20 @@ Page({
     // }
 
   },
- 
+  //清除缓存历史
+ clearSearchStorage: function () {
+  wx.removeStorageSync('searchData')
+  this.setData({
+  sercherStorage: [],
+  StorageFlag: false,
+  })
+  },
+  //打开历史记录列表
+  openLocationsercher: function () {
+  this.setData({
+  sercherStorage: wx.getStorageSync('searchData') || [], 
+  StorageFlag: true,
+  listFlag: true,
+  })
+  }
 })

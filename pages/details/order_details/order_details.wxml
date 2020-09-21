@@ -44,7 +44,8 @@
 				<text>{{options.ddname}}</text>
 				<view class="price">
 					<text class="jg">￥{{options.ddjg}}</text>
-					<text class="num">×{{options.commodityNumber}}</text>
+					<!-- <text class="num">×{{options.commodityNumber}}</text> -->
+					<text class="num">×{{shopNum}}</text>
 				</view>
 			</view>
 		</view>
@@ -60,13 +61,32 @@
 				<image src="{{imgUrls}}img/public/right.png" mode="widthFix"></image>
 			</view>
 		</view>
-		<view class="yhq">
+		<view class="yhq yhqs">
 			<view class="left">
 				<image src="{{imgUrls}}img/details/dd2.png" mode="widthFix"></image>
 				<text>满减优惠</text>
 			</view>
 			<view class="right">
 				<text class="pri">优惠￥{{yhje}}</text>
+			</view>
+		</view>
+		<view class="yhq">
+			<view class="left">
+				<image src="/img/new/sum.png" mode="widthFix"></image>
+				<text>购买数量</text>
+			</view>
+			<view class="right">
+				<lable class="minus" bindtap="btn_minus" data-obj="{{obj}}" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
+								<image src='{{imgUrls}}img/public/jian.png' style="width:52rpx;height:52rpx"></image>
+							</lable>
+							<!-- 文本框值 -->
+							<label class="view_text_center" bindinput='input_num' data-index="{{index}}">
+								{{shopNum}}
+							</label>
+							<!-- 加按钮 -->
+							<lable class="plus" bindtap="btn_add" data-index="{{index}}" data-id='{{item.commodityInfo.id}}'>
+								<image src='{{imgUrls}}img/public/add.png' style="width:52rpx;height:52rpx"></image>
+							</lable>
 			</view>
 		</view>
 	</view>

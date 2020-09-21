@@ -99,7 +99,7 @@
 								</navigator>
 							
 							</block>
-							<!-- <view wx:if="{{nodatas}}" style="text-align:center">该分类下没有更多商品了~</view> -->
+							<view wx:if="{{nodatas}}" style="text-align:center">该分类下没有更多商品了~</view>
 							<view class="bot" wx:if="{{isloading}}">
 								<i-grid>
 									<i-grid-item i-class="item">
