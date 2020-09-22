@@ -316,4 +316,5 @@ video {
   color: #000;
   margin: 20rpx;
   font-weight: 600;  
+  margin-top: 30rpx;
  }

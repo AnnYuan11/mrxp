@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/test/test",
     "pages/flcs/flcs",
     "pages/classify/classify",
     "pages/details/chongzhi/chongzhi",

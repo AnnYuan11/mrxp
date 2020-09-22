@@ -89,7 +89,12 @@ Page({
     var className =that.data.className
     var that = this;
     // debugger
-    if(that.data.className.length == 0){
+    console.log(that.data.className)
+    if(that.data.className==undefined){
+      wx.showToast({
+        title: '请输入关键字',
+        icon:'none'
+      })
       return;
     }
     
@@ -338,10 +343,16 @@ Page({
   },
   //打开历史记录列表
   openLocationsercher: function () {
-  this.setData({
-  sercherStorage: wx.getStorageSync('searchData') || [], 
-  StorageFlag: true,
-  listFlag: true,
-  })
+    
+    this.setData({
+    sercherStorage: wx.getStorageSync('searchData') || [], 
+    
+    listFlag: true,
+    })
+    if(this.data.sercherStorage!=''){
+      this.setData({
+        StorageFlag: true,
+      })
+    }
   }
 })

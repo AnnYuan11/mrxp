@@ -29,7 +29,7 @@ Page({
     dpShow:false,//店铺显示
     isloading:true,
     isscroll:false,
-    ischoose:false
+    ischoose:true
   },
 
   /**

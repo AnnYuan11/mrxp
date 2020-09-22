@@ -1,0 +1,11 @@
+<!--pages/test/test.wxml-->
+<view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:for="{{list}}" wx:key>
+	　　<view class="content">
+		　　　　<view style="{{item.txtStyle}}" class='item' data-index='{{index}}' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchE">
+			　　　　<view class='title'>{{item.title}}</view>
+			　　　　<text>{{item.create_time}}</text>
+			　　</view>
+	</view>
+
+	<view class="del" data-id="{{item.id}}" catchtap="delBtn" data-index="{{index}}">删除</view>
+</view>

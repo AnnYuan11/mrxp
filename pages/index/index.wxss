@@ -395,12 +395,16 @@ video {
 /* 弹窗 */
 .flow{
   width: 100%;
-  height: 100vh;
+  height: 100rpx;
   background:rgba(0,0,0,0.6);
   position: fixed;
   left: 0;
-  top: 0;
+  bottom: 0;
   z-index: 99999999;
+  line-height: 100rpx;
+  color: #fff;
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
 .img_box{
   width: 87%;
@@ -667,19 +671,24 @@ button:not([size='mini']) {
 }
 /* 新用户选择提货点 */
 .choose_box{
-  width: 80%;
+  /* width: 80%;
   margin: 0 auto;
   background: #fff;
   text-align: center;
   margin-top: 50%;
   padding: 10% 0;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 }
 .toChoose{
-  width: 60%;
-  margin:0 auto;
   color: #fff;
-  padding: 20rpx 0;
-  background: #E10004;
-  margin-top: 15%;
+  display: inline-block;
+  float: right;
+  background: red;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 14rpx;
+  width: 154rpx;
+  text-align: center;
+  margin-top: 10rpx;
+
 }
